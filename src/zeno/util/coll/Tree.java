@@ -153,8 +153,12 @@ public class Tree implements Copyable<Tree>
 		 */
 		public Tracker(Tree t)
 		{
-			size = t.Root().NodeCount();
 			tree = t;
+			if(!t.isEmpty())
+			{
+				Branch root = t.Root();
+				size = root.NodeCount();
+			}
 		}
 		
 		/**
@@ -221,6 +225,15 @@ public class Tree implements Copyable<Tree>
 
 	private Branch root;
 	private Tracker tracker;
+	
+	/**
+	 * Creates a new {@code Tree}.
+	 */
+	public Tree()
+	{
+		tracker = new Tracker(this);
+	}
+	
 	
 	/**
 	 * Checks if the {@code Tree}'s empty.
