@@ -6,17 +6,18 @@ import zeno.util.geom.tools.bounds.Bounded2D;
 /**
  * The {@code Grid2D} class divides a surface into equally sized rectangles.
  * 
- * @param <O>  the type of objects in the grid
- * @param <T>  the type of tiles in the grid
  * 
  * @since Mar 31, 2017
  * @author Zeno
+ * 
+ * 
+ * @param <T>  the type of tiles in the grid
  * 
  * @see Bounded2D
  * @see Space2D
  * @see Grid
  */
-public abstract class Grid2D<T extends Grid2D.Tile, O extends Bounded2D> extends Grid<T, O> implements Space2D<O>
+public abstract class Grid2D<T extends Grid2D.Tile> extends Grid<T> implements Space2D<T>
 {
 	/**
 	 * The {@code Tile} interface defines a single tile in a {@link Grid2D}.
@@ -24,9 +25,10 @@ public abstract class Grid2D<T extends Grid2D.Tile, O extends Bounded2D> extends
 	 * @since Mar 31, 2017
 	 * @author Zeno
 	 * 
+	 * @see Bounded2D
 	 * @see Grid2D
 	 */
-	public static interface Tile extends Grid.Tile
+	public static interface Tile extends Grid.Tile, Bounded2D
 	{
 		/**
 		 * Returns the row of the {@code Tile}.

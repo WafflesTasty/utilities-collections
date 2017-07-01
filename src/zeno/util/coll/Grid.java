@@ -8,7 +8,6 @@ import zeno.util.tools.generic.properties.Copyable;
 /**
  * The {@code Grid} class divides a space into equally sized cuboids.
  * 
- * @param <O>  the type of objects in the grid
  * @param <T>  the type of tiles in the grid
  *  
  * @since Mar 30, 2017
@@ -19,7 +18,7 @@ import zeno.util.tools.generic.properties.Copyable;
  * @see Space
  * @see Tile
  */
-public abstract class Grid<T extends Grid.Tile, O extends Bounded> implements Copyable<Grid<T,O>>, Space<O>
+public abstract class Grid<T extends Grid.Tile> implements Copyable<Grid<T>>, Space<T>
 {
 	/**
 	 * The {@code Tile} interface defines a single tile in a {@link Grid}.
@@ -28,9 +27,10 @@ public abstract class Grid<T extends Grid.Tile, O extends Bounded> implements Co
 	 * @author Zeno
 	 * 
 	 * @see Copyable
+	 * @see Bounded
 	 * @see Grid
 	 */
-	public static interface Tile extends Copyable<Tile>
+	public static interface Tile extends Bounded, Copyable<Tile>
 	{
 		/**
 		 * Returns the coördinates of the {@code Tile}.
@@ -169,9 +169,9 @@ public abstract class Grid<T extends Grid.Tile, O extends Bounded> implements Co
 
 	
 	@Override
-	public Grid<T, O> copy()
+	public Grid<T> copy()
 	{
-		Grid<T, O> grid = Copyable.super.copy();
+		Grid<T> grid = Copyable.super.copy();
 		for(int i = 0; i < TileCount(); i++)
 		{
 			grid.set((T) tiles[i].copy());
