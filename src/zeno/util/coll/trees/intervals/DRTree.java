@@ -41,8 +41,8 @@ public class DRTree extends BiTree<Cut>
 		DRNode max = create(ival.max(), Extreme.MIN);
 	
 		// Find the surrounding nodes in the tree.
-		DRNode prev = lowerbound(ival.min());
-		DRNode next = upperbound(ival.max());
+		DRNode prev = strictLowerBound(ival.min());
+		DRNode next = strictUpperBound(ival.max());
 
 		// If the interval has no lower bound...
 		if(prev == null)
@@ -196,8 +196,8 @@ public class DRTree extends BiTree<Cut>
 
 		
 		// Find the surrounding nodes in the tree.
-		DRNode prev = lowerbound(ival.min());
-		DRNode next = upperbound(ival.max());
+		DRNode prev = strictLowerBound(ival.min());
+		DRNode next = strictUpperBound(ival.max());
 
 		// If the interval has no lower bound...
 		if(prev == null)
@@ -373,8 +373,8 @@ public class DRTree extends BiTree<Cut>
 		
 		
 		// Find the surrounding nodes in the tree.
-		DRNode prev = lowerbound(ival.min());
-		DRNode next = upperbound(ival.max());
+		DRNode prev = lowerBound(ival.min());
+		DRNode next = upperBound(ival.max());
 
 		// If the interval has no lower bound...
 		if(prev == null)
@@ -448,7 +448,7 @@ public class DRTree extends BiTree<Cut>
 	 * @return  a lower bound
 	 * @see DRNode
 	 */
-	public DRNode lowerbound(Cut cut)
+	public DRNode lowerBound(Cut cut)
 	{
 		DRNode lower = search(cut);
 		if(compare(cut, lower.Object()) < 0)
@@ -460,13 +460,49 @@ public class DRTree extends BiTree<Cut>
 	}
 	
 	/**
+	 * Returns the strict lower bound of a cut in the {@code DRTree}.
+	 * 
+	 * @param cut  a cut to search
+	 * @return  a lower bound
+	 * @see DRNode
+	 */
+	public DRNode strictLowerBound(Cut cut)
+	{
+		DRNode lower = search(cut);
+		if(compare(cut, lower.Object()) <= 0)
+		{
+			return lower.prev();
+		}
+		
+		return lower;
+	}
+	
+	/**
+	 * Returns the strict upper bound of a cut in the {@code DRTree}.
+	 * 
+	 * @param cut  a cut to search
+	 * @return  an upper bound
+	 * @see DRNode
+	 */
+	public DRNode strictUpperBound(Cut cut)
+	{
+		DRNode upper = search(cut);
+		if(compare(cut, upper.Object()) >= 0)
+		{
+			return upper.next();
+		}
+		
+		return upper;
+	}
+	
+	/**
 	 * Returns the upper bound of a cut in the {@code DRTree}.
 	 * 
 	 * @param cut  a cut to search
 	 * @return  an upper bound
 	 * @see DRNode
 	 */
-	public DRNode upperbound(Cut cut)
+	public DRNode upperBound(Cut cut)
 	{
 		DRNode upper = search(cut);
 		if(compare(cut, upper.Object()) > 0)
@@ -539,6 +575,11 @@ public class DRTree extends BiTree<Cut>
 	@Override
 	public String toString()
 	{
+		if(isEmpty())
+		{
+			return "[0.0, 0.0)";
+		}
+		
 		String text = "";
 		for(BiNode<Cut> node : inorder())
 		{
