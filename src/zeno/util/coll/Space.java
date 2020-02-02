@@ -1,27 +1,30 @@
 package zeno.util.coll;
 
-import zeno.util.algebra.tensors.vectors.Vector;
-import zeno.util.geom.shapes.ICuboid;
-import zeno.util.geom.tools.bounds.Bounded;
+import zeno.util.algebra.linear.vector.Vector;
+import zeno.util.geom.collidables.bounds.IBounded;
+import zeno.util.geom.collidables.geometry.generic.ICuboid;
 
 /**
- * The {@code Space} interface defines queries handled by spatial collections.
+ * The {@code Space} interface defines a collection that handles spatial queries.
  * 
- * @param <O>  the type of objects in the space
- *  
- * @since Mar 29, 2017
  * @author Zeno
+ * @since Mar 29, 2017
+ * @version 1.0
  *
- * @see Iterable
- * @see Bounded
+ * 
+ * @param <O>  an object type to contain
+ * @see Collection
+ * @see IBounded
  */
-public interface Space<O extends Bounded> extends Bounded, Iterable<O>
+public interface Space<O extends IBounded> extends Collection<O>, IBounded
 {
 	/**
 	 * Queries the {@code Space} in a specified cuboid.
 	 * 
 	 * @param c  a cuboid to query
-	 * @return  a list of possible results
+	 * @return  a set of possible results
+	 * 
+	 * 
 	 * @see Iterable
 	 * @see ICuboid
 	 */
@@ -31,7 +34,9 @@ public interface Space<O extends Bounded> extends Bounded, Iterable<O>
 	 * Queries the {@code Space} at a specified point.
 	 * 
 	 * @param v  a point to query
-	 * @return  a list of possible results
+	 * @return  a set of possible results
+	 * 
+	 * 
 	 * @see Iterable
 	 * @see Vector
 	 */
