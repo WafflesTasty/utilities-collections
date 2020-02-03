@@ -1,4 +1,4 @@
-package zeno.util.coll.iterators;
+package zeno.util.coll.utilities.iterators;
 
 import java.util.Iterator;
 
@@ -17,7 +17,7 @@ import zeno.util.coll.Dictionary.Pair;
  * @param <V>  a dictionary value type
  * @see Iterator
  */
-public class KeyIterator<K, V> implements Iterator<K>
+public class ValueIterator<K, V> implements Iterator<V>
 {
 	private Iterator<Pair<K, V>> source;
 	
@@ -29,7 +29,7 @@ public class KeyIterator<K, V> implements Iterator<K>
 	 * 
 	 * @see Dictionary
 	 */
-	public KeyIterator(Dictionary<K, V> dic)
+	public ValueIterator(Dictionary<K, V> dic)
 	{
 		source = dic.iterator();
 	}
@@ -42,8 +42,8 @@ public class KeyIterator<K, V> implements Iterator<K>
 	}
 
 	@Override
-	public K next()
+	public V next()
 	{
-		return source.next().Key();
+		return source.next().Value();
 	}
 }

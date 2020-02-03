@@ -1,7 +1,7 @@
 package zeno.util.coll;
 
-import zeno.util.coll.iterators.KeyIterator;
-import zeno.util.coll.iterators.ValueIterator;
+import zeno.util.coll.utilities.iterators.KeyIterator;
+import zeno.util.coll.utilities.iterators.ValueIterator;
 
 /**
  * The {@code Dictionary} interface defines a set organized in key-value pairs.

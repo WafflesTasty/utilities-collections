@@ -1,4 +1,4 @@
-package zeno.util.coll.relations;
+package zeno.util.coll.utilities.relations;
 
 import zeno.util.tools.helper.Array;
 import zeno.util.tools.helper.Iterables;
