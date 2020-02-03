@@ -1,4 +1,4 @@
-package zeno.util.coll.wrapped;
+package zeno.util.coll.hashed.dict;
 
 import java.util.HashMap;
 import java.util.Iterator;

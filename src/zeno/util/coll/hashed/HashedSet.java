@@ -1,4 +1,4 @@
-package zeno.util.coll.wrapped;
+package zeno.util.coll.hashed;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -39,14 +39,20 @@ public class HashedSet<O> implements Collection<O>
 	{
 		data = new HashSet<>();
 	}
+
 	
+	@Override
+	public int hashCode()
+	{
+		return data.hashCode();
+	}
 	
 	@Override
 	public Iterator<O> iterator()
 	{
 		return data.iterator();
 	}
-
+	
 	@Override
 	public boolean equals(Object obj)
 	{

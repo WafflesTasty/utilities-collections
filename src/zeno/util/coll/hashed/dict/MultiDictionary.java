@@ -1,8 +1,9 @@
-package zeno.util.coll.wrapped;
+package zeno.util.coll.hashed.dict;
 
 import java.util.Iterator;
 
 import zeno.util.coll.Dictionary;
+import zeno.util.coll.hashed.HashedSet;
 
 /**
  * The {@code MultiDictionary} class defines a dictionary with variable key dimensions.
