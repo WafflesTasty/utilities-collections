@@ -2,7 +2,7 @@ package zeno.util.coll.utilities.iterators;
 
 import java.util.Iterator;
 
-import zeno.util.coll.arrays.Grid;
+import zeno.util.coll.grids.GridArray;
 
 /**
  * The {@code GridIterator} class iterates over all elements in a {@code Grid}.
@@ -26,9 +26,9 @@ public class GridIterator<V> implements Iterator<V>
 	 * @param grid  a target grid
 	 * 
 	 * 
-	 * @see Grid
+	 * @see GridArray
 	 */
-	public GridIterator(Grid<V> grid)
+	public GridIterator(GridArray<V> grid)
 	{
 		source = grid.Array();
 	}

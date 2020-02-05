@@ -1,6 +1,7 @@
-package zeno.util.coll;
+package zeno.util.coll.spatial;
 
 import zeno.util.algebra.linear.vector.Vector;
+import zeno.util.coll.Collection;
 import zeno.util.geom.collidables.bounds.IBounded;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
 
