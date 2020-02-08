@@ -28,12 +28,12 @@ public class GridArray<V> implements Grid<V>
 	 */
 	public GridArray(int... dim)
 	{
-		source = new Object[Count()];
 		dimension = dim;
+		source = new Object[Count()];
 	}
-	
+		
 	/**
-	 * Returns the source {@code Array}.
+	 * Returns the source of the {@code GridArray}.
 	 * 
 	 * @return  a grid array
 	 */
@@ -54,7 +54,39 @@ public class GridArray<V> implements Grid<V>
 	{
 		return new GridIterator<>(this);
 	}
+
+	
+	private int toIndex(int... coords)
+	{
+		int index = 0;
+		for(int i = 0; i < Order(); i++)
+		{
+			index *= dimension[i];
+			if(i < coords.length)
+			{
+				index += coords[i];
+			}
+		}
+
+		return index;
+	}
+
+	@Override
+	public boolean contains(int... coords)
+	{
+		// If coordinates exceed the grid order...
+		for(int i = Order(); i < coords.length; i++)
+		{
+			// The remainder have to be zero.
+			if(coords[i] != 0)
+			{
+				return false;
+			}
+		}
 		
+		int index = toIndex(coords);
+		return 0 <= index && index < dimension.length;
+	}
 	
 	@Override
 	public V put(V val, int... coords)
@@ -69,18 +101,5 @@ public class GridArray<V> implements Grid<V>
 	public V get(int... coords)
 	{
 		return (V) source[toIndex(coords)];
-	}
-	
-	
-	int toIndex(int... coords)
-	{
-		int index = 0;
-		for(int i = 0; i < Order(); i++)
-		{
-			index *= dimension[i];
-			index += coords[i];
-		}
-
-		return index;
 	}
 }

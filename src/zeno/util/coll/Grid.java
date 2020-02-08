@@ -33,6 +33,14 @@ public interface Grid<V> extends Iterable<V>
 	public abstract V put(V val, int... coords);
 	
 	/**
+	 * Checks a coordinate in the {@code Grid}.
+	 * 
+	 * @param coords  a coordinate to check
+	 * @return  {@code true} if the coordinate is allowed
+	 */
+	public abstract boolean contains(int... coords);
+	
+	/**
 	 * Removes a value from the {@code Grid}.
 	 * 
 	 * @param coords  grid coordinates
