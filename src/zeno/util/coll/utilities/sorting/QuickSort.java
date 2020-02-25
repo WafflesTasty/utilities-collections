@@ -10,7 +10,7 @@ import zeno.util.coll.utilities.AbstractSort;
  * The {@code QuickSort} class defines a quick sorting method.
  * 
  * <ul>
- * 	<li> This algorithm has a worst-case complexity of O(n�).
+ * 	<li> This algorithm has a worst-case complexity of O(n^2).
  * 	<li> This algorithm has an average complexity of O(n log n).
  * 	<li> This algorithm has a best-case complexity of O(n log n).
  * </ul>

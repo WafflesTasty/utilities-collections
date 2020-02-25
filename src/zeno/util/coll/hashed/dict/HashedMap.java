@@ -30,7 +30,7 @@ public class HashedMap<K, V> implements Dictionary<K, V>
 			set = data.entrySet().iterator();
 		}
 		
-		
+				
 		@Override
 		public boolean hasNext()
 		{
@@ -48,6 +48,11 @@ public class HashedMap<K, V> implements Dictionary<K, V>
 			return new Pair<>(key, val);
 		}
 		
+		@Override
+		public void remove()
+		{
+			set.remove();
+		}
 	}
 	
 	
