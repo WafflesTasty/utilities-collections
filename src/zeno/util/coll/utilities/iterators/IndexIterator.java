@@ -2,7 +2,7 @@ package zeno.util.coll.utilities.iterators;
 
 import java.util.Iterator;
 
-import zeno.util.coll.grids.ArrayIndex;
+import zeno.util.coll.indices.ArrayIndex;
 
 /**
  * The {@code IndexIterator} class iterates over all elements in a {@code Index}.

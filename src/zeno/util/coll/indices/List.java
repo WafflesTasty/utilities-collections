@@ -1,4 +1,4 @@
-package zeno.util.coll.grids;
+package zeno.util.coll.indices;
 
 import java.util.ArrayList;
 import java.util.Iterator;
