@@ -2,38 +2,38 @@ package zeno.util.coll.grids;
 
 import java.util.Iterator;
 
-import zeno.util.coll.Grid;
-import zeno.util.coll.utilities.iterators.GridIterator;
+import zeno.util.coll.Index;
+import zeno.util.coll.utilities.iterators.IndexIterator;
 
 /**
- * The {@code GridArray} class implements a {@code Grid} with an internal array storage.
+ * The {@code ArrayIndex} class implements a {@code Index} with an internal array storage.
  *
  * @author Zeno
  * @since Feb 03, 2020
  * @version 1.0
  * 
  * 
- * @param <V>  a grid value type
- * @see Grid
+ * @param <V>  an index value type
+ * @see Index
  */
-public class GridArray<V> implements Grid<V>
+public class ArrayIndex<V> implements Index<V>
 {
 	private Object[] source;
 	private int[] dimension;
 	
 	/**
-	 * Creates a new {@code GridArray}.
+	 * Creates a new {@code ArrayIndex}.
 	 * 
 	 * @param dim  a grid dimension
 	 */
-	public GridArray(int... dim)
+	public ArrayIndex(int... dim)
 	{
 		dimension = dim;
 		source = new Object[Count()];
 	}
 		
 	/**
-	 * Returns the source of the {@code GridArray}.
+	 * Returns the source of the {@code ArrayIndex}.
 	 * 
 	 * @return  a grid array
 	 */
@@ -52,7 +52,7 @@ public class GridArray<V> implements Grid<V>
 	@Override
 	public Iterator<V> iterator()
 	{
-		return new GridIterator<>(this);
+		return new IndexIterator<>(this);
 	}
 
 	

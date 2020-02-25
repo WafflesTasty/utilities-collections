@@ -3,7 +3,7 @@ package zeno.util.coll;
 import zeno.util.tools.helper.Array;
 
 /**
- * The {@code Grid} interface defines a collection maintained in a discrete grid layout.
+ * The {@code Index} interface defines a collection maintained in a discrete index.
  *
  * @author Zeno
  * @since Feb 03, 2020
@@ -13,10 +13,10 @@ import zeno.util.tools.helper.Array;
  * @param <V>  a grid value type
  * @see Iterable
  */
-public interface Grid<V> extends Iterable<V>
+public interface Index<V> extends Iterable<V>
 {
 	/**
-	 * Returns a value from the {@code Grid}.
+	 * Returns a value from the {@code Index}.
 	 * 
 	 * @param coords  grid coordinates
 	 * @return  a current grid value
@@ -24,7 +24,7 @@ public interface Grid<V> extends Iterable<V>
 	public abstract V get(int... coords);
 	
 	/**
-	 * Changes a value from the {@code Grid}.
+	 * Changes a value from the {@code Index}.
 	 * 
 	 * @param val  a grid value
 	 * @param coords  grid coordinates
@@ -33,7 +33,7 @@ public interface Grid<V> extends Iterable<V>
 	public abstract V put(V val, int... coords);
 	
 	/**
-	 * Checks a coordinate in the {@code Grid}.
+	 * Checks a coordinate in the {@code Index}.
 	 * 
 	 * @param coords  a coordinate to check
 	 * @return  {@code true} if the coordinate is allowed
@@ -41,7 +41,7 @@ public interface Grid<V> extends Iterable<V>
 	public abstract boolean contains(int... coords);
 	
 	/**
-	 * Removes a value from the {@code Grid}.
+	 * Removes a value from the {@code Index}.
 	 * 
 	 * @param coords  grid coordinates
 	 * @return  a previous grid value
@@ -53,14 +53,14 @@ public interface Grid<V> extends Iterable<V>
 	
 	
 	/**
-	 * Returns the dimension of the {@code Grid}.
+	 * Returns the dimension of the {@code Index}.
 	 * 
 	 * @return  a grid dimension
 	 */
 	public abstract int[] Dimensions();
 	
 	/**
-	 * Returns the tile count of the {@code Grid}.
+	 * Returns the tile count of the {@code Index}.
 	 * 
 	 * @return  a grid tile count
 	 */
@@ -70,7 +70,7 @@ public interface Grid<V> extends Iterable<V>
 	}
 
 	/**
-	 * Returns the order of the {@code Grid}.
+	 * Returns the order of the {@code Index}.
 	 * 
 	 * @return  a grid order
 	 */

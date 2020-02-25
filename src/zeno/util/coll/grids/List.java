@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 import zeno.util.coll.Collection;
-import zeno.util.coll.Grid;
+import zeno.util.coll.Index;
 
 /**
  * The {@code List} class defines a one-dimensional collection backed by an {@code ArrayList}.
@@ -16,9 +16,9 @@ import zeno.util.coll.Grid;
  * 
  * @param <V>  a collection object type
  * @see Collection
- * @see Grid
+ * @see Index
  */
-public class List<V> implements Collection<V>, Grid<V>
+public class List<V> implements Collection<V>, Index<V>
 {
 	private ArrayList<V> source;
 	
