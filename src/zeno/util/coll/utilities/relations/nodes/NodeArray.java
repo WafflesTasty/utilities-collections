@@ -1,10 +1,8 @@
-package zeno.util.coll.utilities.relations;
+package zeno.util.coll.utilities.relations.nodes;
 
+import zeno.util.coll.utilities.relations.IRelatable;
 import zeno.util.tools.helper.Array;
 import zeno.util.tools.helper.Iterables;
-import zeno.util.tools.patterns.IRelatable;
-import zeno.util.tools.patterns.relations.INodal;
-import zeno.util.tools.patterns.relations.INode;
 
 /**
  * The {@code NodeArray} defines parent-child relations with explicit references in an array.

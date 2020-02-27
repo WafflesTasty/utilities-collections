@@ -1,7 +1,6 @@
 package zeno.util.coll.spatial;
 
-import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.coll.Collection;
+import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.IBounded;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
 
@@ -13,11 +12,10 @@ import zeno.util.geom.collidables.geometry.generic.ICuboid;
  * @version 1.0
  *
  * 
- * @param <O>  an object type to contain
- * @see Collection
+ * @param <O>  a space object type
  * @see IBounded
  */
-public interface Space<O extends IBounded> extends Collection<O>, IBounded
+public interface Space<O extends IBounded> extends IBounded
 {
 	/**
 	 * Queries the {@code Space} in a specified cuboid.
@@ -34,12 +32,12 @@ public interface Space<O extends IBounded> extends Collection<O>, IBounded
 	/**
 	 * Queries the {@code Space} at a specified point.
 	 * 
-	 * @param v  a point to query
+	 * @param p  a point to query
 	 * @return  a set of possible results
 	 * 
 	 * 
 	 * @see Iterable
-	 * @see Vector
+	 * @see Point
 	 */
-	public abstract Iterable<O> query(Vector v);
+	public abstract Iterable<O> query(Point p);
 }

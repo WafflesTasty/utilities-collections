@@ -10,27 +10,27 @@ import zeno.util.tools.helper.Array;
  * @version 1.0
  * 
  * 
- * @param <V>  a grid value type
+ * @param <T>  an index type
  * @see Iterable
  */
-public interface Index<V> extends Iterable<V>
-{
+public interface Index<T> extends Iterable<T>
+{		
 	/**
 	 * Returns a value from the {@code Index}.
 	 * 
-	 * @param coords  grid coordinates
-	 * @return  a current grid value
+	 * @param coords  index coordinates
+	 * @return  a current index value
 	 */
-	public abstract V get(int... coords);
+	public abstract T get(int... coords);
 	
 	/**
 	 * Changes a value from the {@code Index}.
 	 * 
-	 * @param val  a grid value
-	 * @param coords  grid coordinates
-	 * @return  a previous grid value
+	 * @param val  an index value
+	 * @param coords  index coordinates
+	 * @return  a previous index value
 	 */
-	public abstract V put(V val, int... coords);
+	public abstract T put(T val, int... coords);
 	
 	/**
 	 * Checks a coordinate in the {@code Index}.
@@ -43,10 +43,10 @@ public interface Index<V> extends Iterable<V>
 	/**
 	 * Removes a value from the {@code Index}.
 	 * 
-	 * @param coords  grid coordinates
-	 * @return  a previous grid value
+	 * @param coords  index coordinates
+	 * @return  a previous index value
 	 */
-	public default V remove(int... coords)
+	public default T remove(int... coords)
 	{
 		return put(null, coords);
 	}
@@ -55,14 +55,14 @@ public interface Index<V> extends Iterable<V>
 	/**
 	 * Returns the dimension of the {@code Index}.
 	 * 
-	 * @return  a grid dimension
+	 * @return  an index dimension
 	 */
 	public abstract int[] Dimensions();
 	
 	/**
 	 * Returns the tile count of the {@code Index}.
 	 * 
-	 * @return  a grid tile count
+	 * @return  an index tile count
 	 */
 	public default int Count()
 	{
@@ -72,7 +72,7 @@ public interface Index<V> extends Iterable<V>
 	/**
 	 * Returns the order of the {@code Index}.
 	 * 
-	 * @return  a grid order
+	 * @return  an index order
 	 */
 	public default int Order()
 	{

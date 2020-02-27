@@ -3,7 +3,7 @@ package zeno.util.coll.indices;
 import java.util.Iterator;
 
 import zeno.util.coll.Index;
-import zeno.util.coll.utilities.iterators.IndexIterator;
+import zeno.util.tools.helper.iterators.ArrayIterator;
 
 /**
  * The {@code ArrayIndex} class implements a {@code Index} with an internal array storage.
@@ -13,7 +13,7 @@ import zeno.util.coll.utilities.iterators.IndexIterator;
  * @version 1.0
  * 
  * 
- * @param <V>  an index value type
+ * @param <V>  an index type
  * @see Index
  */
 public class ArrayIndex<V> implements Index<V>
@@ -31,7 +31,7 @@ public class ArrayIndex<V> implements Index<V>
 		dimension = dim;
 		source = new Object[Count()];
 	}
-		
+			
 	/**
 	 * Returns the source of the {@code ArrayIndex}.
 	 * 
@@ -40,6 +40,38 @@ public class ArrayIndex<V> implements Index<V>
 	public Object[] Array()
 	{
 		return source;
+	}
+	
+	/**
+	 * Returns the minimum of the {@code ArrayIndex}.
+	 * 
+	 * @return  an index minimum
+	 */
+	public int[] Minimum()
+	{
+		int[] min = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			min[i] = 0;
+		}
+		
+		return min;
+	}
+	
+	/**
+	 * Returns the maximum of the {@code ArrayIndex}.
+	 * 
+	 * @return  an index maximum
+	 */
+	public int[] Maximum()
+	{
+		int[] max = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			max[i] = Dimensions()[i] - 1;
+		}
+		
+		return max;
 	}
 	
 	
@@ -52,7 +84,7 @@ public class ArrayIndex<V> implements Index<V>
 	@Override
 	public Iterator<V> iterator()
 	{
-		return new IndexIterator<>(this);
+		return new ArrayIterator<>(source);
 	}
 
 	
