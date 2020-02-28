@@ -41,39 +41,7 @@ public class ArrayIndex<V> implements Index<V>
 	{
 		return source;
 	}
-	
-	/**
-	 * Returns the minimum of the {@code ArrayIndex}.
-	 * 
-	 * @return  an index minimum
-	 */
-	public int[] Minimum()
-	{
-		int[] min = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			min[i] = 0;
-		}
 		
-		return min;
-	}
-	
-	/**
-	 * Returns the maximum of the {@code ArrayIndex}.
-	 * 
-	 * @return  an index maximum
-	 */
-	public int[] Maximum()
-	{
-		int[] max = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			max[i] = Dimensions()[i] - 1;
-		}
-		
-		return max;
-	}
-	
 	
 	@Override
 	public int[] Dimensions()
@@ -106,18 +74,26 @@ public class ArrayIndex<V> implements Index<V>
 	@Override
 	public boolean contains(int... coords)
 	{
-		// If coordinates exceed the grid order...
-		for(int i = Order(); i < coords.length; i++)
+		for(int i = 0; i < coords.length; i++)
 		{
-			// The remainder have to be zero.
-			if(coords[i] != 0)
+			// If coordinates exceed the index order...
+			if(Order() <= i)
+			{
+				// The remainder have to be zero.
+				if(coords[i] != 0)
+				{
+					return false;
+				}
+			}
+			
+			// Otherwise, check the coordinate bounds.
+			if(coords[i] < 0 || dimension[i] <= coords[i])
 			{
 				return false;
 			}
 		}
 		
-		int index = toIndex(coords);
-		return 0 <= index && index < dimension.length;
+		return true;
 	}
 	
 	@Override

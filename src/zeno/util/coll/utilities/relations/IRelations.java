@@ -1,6 +1,6 @@
 package zeno.util.coll.utilities.relations;
 
-import zeno.util.tools.helper.Iterables;
+import zeno.util.tools.patterns.Decorator;
 
 /**
  * The {@code IRelations} interface governs the behavior of an {@code IRelatable}.
@@ -10,9 +10,10 @@ import zeno.util.tools.helper.Iterables;
  * @version 1.0
  * 
  * 
- * @see IConnections
+ * @see IRelatable
+ * @see Decorator
  */
-public interface IRelations extends IConnections
+public interface IRelations extends Decorator<IRelatable>
 {	
 	/**
 	 * The {@code Orphan} class defines an empty {@code IRelations}.
@@ -22,11 +23,12 @@ public interface IRelations extends IConnections
 	 * @version 1.0
 	 * 
 	 * 
-	 * @see IConnections
 	 * @see IRelations
 	 */
-	public static class Orphan extends IConnections.Orphan implements IRelations
+	public static class Orphan implements IRelations
 	{		
+		private IRelatable target;
+		
 		/**
 		 * Creates a new {@code Orphan}.
 		 * 
@@ -37,7 +39,7 @@ public interface IRelations extends IConnections
 		 */
 		public Orphan(IRelatable tgt)
 		{
-			super(tgt);
+			target = tgt;
 		}
 		
 		
@@ -50,18 +52,8 @@ public interface IRelations extends IConnections
 		@Override
 		public IRelatable Delegate()
 		{
-			return (IRelatable) super.Delegate();
+			return (IRelatable) target;
 		}
-	}
-	
-	
-	@Override
-	public abstract IRelatable Delegate();
-	
-	@Override
-	public default <R extends IConnected> Iterable<R> Neighbors()
-	{
-		return Iterables.singleton(Parent());
 	}
 	
 	

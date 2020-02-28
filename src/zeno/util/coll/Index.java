@@ -60,6 +60,38 @@ public interface Index<T> extends Iterable<T>
 	public abstract int[] Dimensions();
 	
 	/**
+	 * Returns the minimum coordinate of the {@code Index}.
+	 * 
+	 * @return  a minimum coordinate
+	 */
+	public default int[] Minimum()
+	{
+		int[] min = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			min[i] = 0;
+		}
+		
+		return min;
+	}
+	
+	/**
+	 * Returns the maximum coordinate of the {@code Index}.
+	 * 
+	 * @return  a maximum coordinate
+	 */
+	public default int[] Maximum()
+	{
+		int[] max = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			max[i] = Dimensions()[i] - 1;
+		}
+		
+		return max;
+	}
+	
+	/**
 	 * Returns the tile count of the {@code Index}.
 	 * 
 	 * @return  an index tile count

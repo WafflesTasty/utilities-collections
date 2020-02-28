@@ -6,12 +6,16 @@ package zeno.util.coll.utilities.relations;
  * @author Zeno
  * @since Mar 5, 2016
  * @version 1.0
- * 
- * 
- * @see IConnected
  */
-public interface IRelatable extends IConnected
+public interface IRelatable
 {		
-	@Override
+	/**
+	 * Returns the relations of the {@code IRelatable}.
+	 * 
+	 * @return  a relations property
+	 * 
+	 * 
+	 * @see IRelations
+	 */
 	public abstract IRelations Relations();
 }

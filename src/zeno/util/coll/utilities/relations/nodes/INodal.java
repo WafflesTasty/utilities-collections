@@ -1,6 +1,5 @@
 package zeno.util.coll.utilities.relations.nodes;
 
-import zeno.util.coll.utilities.relations.IConnected;
 import zeno.util.coll.utilities.relations.IRelations;
 import zeno.util.tools.Integers;
 import zeno.util.tools.helper.Iterables;
@@ -60,17 +59,7 @@ public interface INodal extends IRelations
 	
 	@Override
 	public abstract INode Delegate();
-	
-	@Override
-	public default <R extends IConnected> Iterable<R> Neighbors()
-	{
-		Iterable<R> children = (Iterable<R>) Children();
-		Iterable<R> parent = IRelations.super.Neighbors();
-		
-		return (Iterable<R>) Iterables.compose(parent, children);
-	}
-	
-	
+
 	/**
 	 * Returns the children of the {@code INodal}.
 	 * 
