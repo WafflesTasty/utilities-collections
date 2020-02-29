@@ -53,6 +53,14 @@ public interface Index<T> extends Iterable<T>
 	
 	
 	/**
+	 * Returns a coordinate in the {@code Index}.
+	 * 
+	 * @param val  a target value
+	 * @return  a value coordinate
+	 */
+	public abstract int[] indexOf(T val);
+	
+	/**
 	 * Returns the dimension of the {@code Index}.
 	 * 
 	 * @return  an index dimension

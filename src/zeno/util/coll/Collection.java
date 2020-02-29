@@ -14,6 +14,23 @@ package zeno.util.coll;
 public interface Collection<O> extends Iterable<O>
 {
 	/**
+	 * Adds a set of objects to the {@code Collection}.
+	 * 
+	 * @param vals  an object set
+	 * 
+	 * 
+	 * @see Collection
+	 */
+	public default void add(Collection<O> vals)
+	{
+		for(O obj : vals)
+		{
+			add(obj);
+		}
+	}
+	
+	
+	/**
 	 * Checks if an object is contained in the {@code Collection}.
 	 * 
 	 * @param obj  an object to check

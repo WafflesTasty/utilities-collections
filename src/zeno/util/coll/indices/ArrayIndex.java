@@ -55,6 +55,34 @@ public class ArrayIndex<V> implements Index<V>
 		return new ArrayIterator<>(source);
 	}
 
+	@Override
+	public int[] indexOf(V val)
+	{
+		for(int i = 0; i < source.length; i++)
+		{
+			if(source == val)
+			{
+				return toCoord(i);
+			}
+		}
+
+		return null;
+	}
+	
+	
+	private int[] toCoord(int index)
+	{
+		int[] coord = new int[Order()];
+		
+		int mod = index;
+		for(int i = Order() - 1; i >= 0; i--)
+		{
+			coord[i] = mod % dimension[i];
+			mod = (mod - coord[i]) / dimension[i];
+		}
+		
+		return coord;
+	}
 	
 	private int toIndex(int... coords)
 	{

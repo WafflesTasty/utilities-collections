@@ -24,6 +24,16 @@ public class List<V> implements Collection<V>, Index<V>
 	
 	/**
 	 * Creates a new {@code List}.
+	 * 
+	 * @param cap  an initial capacity
+	 */
+	public List(int cap)
+	{
+		source = new ArrayList<>(cap);
+	}
+	
+	/**
+	 * Creates a new {@code List}.
 	 */
 	public List()
 	{
@@ -83,6 +93,12 @@ public class List<V> implements Collection<V>, Index<V>
 		return null;
 	}
 
+	
+	@Override
+	public int[] indexOf(V val)
+	{
+		return new int[]{source.indexOf(val)};
+	}
 	
 	@Override
 	public Iterator<V> iterator()
