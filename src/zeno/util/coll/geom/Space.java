@@ -1,4 +1,4 @@
-package zeno.util.coll.spatial;
+package zeno.util.coll.geom;
 
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.IBounded;
