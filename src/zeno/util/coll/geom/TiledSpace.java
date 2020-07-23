@@ -7,9 +7,9 @@ import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.coll.indices.ArrayIndex;
 import zeno.util.geom.ITransformation;
 import zeno.util.geom.collidables.IGeometrical;
-import zeno.util.geom.collidables.IGeometry;
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.Bounds;
+import zeno.util.geom.collidables.geometry.generic.ICube;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
 import zeno.util.geom.utilities.Geometries;
 import zeno.util.tools.helper.Iterables;
@@ -21,14 +21,15 @@ import zeno.util.tools.helper.Iterables;
  * @since 28 Feb 2020
  * @version 1.0
  *
+ *
  * @param <T>  a tile type
  * @see ArrayIndex
  * @see Space
  */
-public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements Space<T>
+public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> implements Space<T>
 {		
 	/**
-	 * The {@code Tile} interface defines a single element of a {@code TiledSpace}.
+	 * The {@code Tile} class defines a single element of a {@code TiledSpace}.
 	 *
 	 * @author Zeno
 	 * @since 26 Feb 2020
@@ -37,7 +38,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 	 * 
 	 * @see IGeometrical
 	 */
-	public interface Tile extends IGeometrical
+	public class Tile implements IGeometrical
 	{
 		/**
 		 * The {@code Transform} interface defines the transformation of a {@code Tile}.
@@ -49,25 +50,14 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 		 * 
 		 * @see ITransformation
 		 */
-		@FunctionalInterface
-		public static interface Transform extends ITransformation
+		public class Transform implements ITransformation
 		{
-			/**
-			 * Returns the tile of the {@code Map}.
-			 * 
-			 * @return  a target tile
-			 * 
-			 * 
-			 * @see Tile
-			 */
-			public abstract Tile Tile();
-
-			
 			@Override
-			public default Matrix Matrix(int dim)
+			public Matrix Matrix(int dim)
 			{
-				int ord = Tile().Parent().Order();
-				float size = Tile().Parent().TileSize();
+				Tile t = Tile.this;
+				int ord = t.Parent().Order();
+				float size = t.Parent().TileSize();
 				
 				Matrix mat = Matrices.create(dim + 1, dim + 1);
 				for(int i = 0; i <= dim; i++)
@@ -76,7 +66,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 						mat.set(1f, i, i);
 					else
 					{
-						int ci = Tile().Coordinates()[i];
+						int ci = t.Coordinates()[i];
 						
 						mat.set(size * (ci + 0.5f), i, dim);
 						mat.set(size / 2, i, i);
@@ -87,10 +77,11 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 			}
 			
 			@Override
-			public default Matrix Inverse(int dim)
+			public Matrix Inverse(int dim)
 			{
-				int ord = Tile().Parent().Order();
-				float size = Tile().Parent().TileSize();
+				Tile t = Tile.this;
+				int ord = t.Parent().Order();
+				float size = t.Parent().TileSize();
 				
 				Matrix inv = Matrices.create(dim + 1, dim + 1);
 				for(int i = 0; i <= dim; i++)
@@ -99,7 +90,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 						inv.set(1f, i, i);
 					else
 					{
-						int ci = Tile().Coordinates()[i];
+						int ci = t.Coordinates()[i];
 						
 						inv.set(- (2 * ci + 1), i, dim);
 						inv.set(2 / size, i, i);
@@ -111,12 +102,27 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 		}
 		
 		
+		private int[] coords;
+		
+		/**
+		 * Creates a new {@code Tile}.
+		 * 
+		 * @param coords  a coordinate set
+		 */
+		public Tile(int... coords)
+		{
+			this.coords = coords;
+		}
+		
 		/**
 		 * Returns the coordinates of the {@code Tile}.
 		 * 
 		 * @return  a coordinate set
 		 */
-		public abstract int[] Coordinates();
+		public int[] Coordinates()
+		{
+			return coords;
+		}
 		
 		/**
 		 * Returns the parent space of the {@code Tile}.
@@ -126,20 +132,20 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 		 * 
 		 * @see TiledSpace
 		 */
-		public abstract TiledSpace<?> Parent();
+		public TiledSpace<?> Parent()
+		{
+			return TiledSpace.this;
+		}
 		
 		
 		@Override
-		public default Transform Transform()
+		public Transform Transform()
 		{
-			return () ->
-			{
-				return this;
-			};
+			return new Transform();
 		}
 
 		@Override
-		public default IGeometry Shape()
+		public ICube Shape()
 		{
 			Vector o = Vectors.create(Parent().Order());
 			return Geometries.cube(o, 2f);
