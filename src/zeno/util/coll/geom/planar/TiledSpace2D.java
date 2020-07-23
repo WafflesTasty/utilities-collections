@@ -4,6 +4,7 @@ import zeno.util.coll.geom.TiledSpace;
 import zeno.util.geom.collidables.IGeometrical2D;
 import zeno.util.geom.collidables.bounds.Bounds2D;
 import zeno.util.geom.collidables.geometry.planar.Square;
+import zeno.util.geom.utilities.cardinal.Cardinal2D;
 
 /**
  * The {@code TiledSpace2D} class defines a space partitioned into squares of equal size.
@@ -44,6 +45,23 @@ public class TiledSpace2D<T extends TiledSpace2D<T>.Tile2D> extends TiledSpace<T
 		}
 		
 		/**
+		 * Returns a neighbor of the {@code Tile2D}.
+		 * 
+		 * @param c  a cardinal direcion
+		 * @return  a neighboring tile
+		 * 
+		 * 
+		 * @see Cardinal2D
+		 */
+		public T Neighbor(Cardinal2D c)
+		{
+			int row = (int) (Row() + c.Y());
+			int col = (int) (Column() + c.X());
+			
+			return Parent().get(col, row);
+		}
+		
+		/**
 		 * Returns the column of the {@code Tile2D}.
 		 * 
 		 * @return  a column coordinate
@@ -65,9 +83,9 @@ public class TiledSpace2D<T extends TiledSpace2D<T>.Tile2D> extends TiledSpace<T
 		
 		
 		@Override
-		public TiledSpace2D<?> Parent()
+		public TiledSpace2D<T> Parent()
 		{
-			return (TiledSpace2D<?>) super.Parent();
+			return (TiledSpace2D<T>) super.Parent();
 		}
 		
 		@Override

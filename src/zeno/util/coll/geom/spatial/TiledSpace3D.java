@@ -4,6 +4,7 @@ import zeno.util.coll.geom.TiledSpace;
 import zeno.util.geom.collidables.IGeometrical3D;
 import zeno.util.geom.collidables.bounds.Bounds3D;
 import zeno.util.geom.collidables.geometry.spatial.Cube;
+import zeno.util.geom.utilities.cardinal.Cardinal3D;
 
 /**
  * The {@code TiledSpace3D} class defines a space partitioned into cubes of equal size.
@@ -45,6 +46,24 @@ public class TiledSpace3D<T extends TiledSpace3D<T>.Tile3D> extends TiledSpace<T
 		}
 		
 		/**
+		 * Returns a neighbor of the {@code Tile3D}.
+		 * 
+		 * @param c  a cardinal direcion
+		 * @return  a neighboring tile
+		 * 
+		 * 
+		 * @see Cardinal3D
+		 */
+		public T Neighbor(Cardinal3D c)
+		{
+			int row = (int) (Row() + c.Y());
+			int col = (int) (Column() + c.X());
+			int ais = (int) (Aisle() + c.Z());
+			
+			return Parent().get(col, row, ais);
+		}
+		
+		/**
 		 * Returns the column of the {@code Tile3D}.
 		 * 
 		 * @return  a column coordinate
@@ -76,9 +95,9 @@ public class TiledSpace3D<T extends TiledSpace3D<T>.Tile3D> extends TiledSpace<T
 		
 		
 		@Override
-		public TiledSpace3D<?> Parent()
+		public TiledSpace3D<T> Parent()
 		{
-			return (TiledSpace3D<?>) super.Parent();
+			return (TiledSpace3D<T>) super.Parent();
 		}
 		
 		@Override
@@ -100,6 +119,7 @@ public class TiledSpace3D<T extends TiledSpace3D<T>.Tile3D> extends TiledSpace<T
 	{
 		super(cols, rows, aisl);
 	}
+	
 	
 	/**
 	 * Returns the columns of the {@code TiledSpace3D}.

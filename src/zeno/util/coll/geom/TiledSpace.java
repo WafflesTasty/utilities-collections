@@ -132,7 +132,7 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 		 * 
 		 * @see TiledSpace
 		 */
-		public TiledSpace<?> Parent()
+		public TiledSpace<T> Parent()
 		{
 			return TiledSpace.this;
 		}
