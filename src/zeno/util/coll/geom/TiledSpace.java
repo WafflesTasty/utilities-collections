@@ -26,10 +26,10 @@ import zeno.util.tools.helper.Iterables;
  * @see ArrayIndex
  * @see Space
  */
-public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> implements Space<T>
+public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements Space<T>
 {		
 	/**
-	 * The {@code Tile} class defines a single element of a {@code TiledSpace}.
+	 * The {@code Tile} interface defines a single element of a {@code TiledSpace}.
 	 *
 	 * @author Zeno
 	 * @since 26 Feb 2020
@@ -38,7 +38,7 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 	 * 
 	 * @see IGeometrical
 	 */
-	public class Tile implements IGeometrical
+	public static interface Tile extends IGeometrical
 	{
 		/**
 		 * The {@code Transform} interface defines the transformation of a {@code Tile}.
@@ -50,14 +50,29 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 		 * 
 		 * @see ITransformation
 		 */
-		public class Transform implements ITransformation
+		public static class Transform implements ITransformation
 		{
+			private Tile target;
+			
+			/**
+			 * Creates a new {@code Transform}.
+			 * 
+			 * @param t  a target tile
+			 * 
+			 * 
+			 * @see Tile
+			 */
+			public Transform(Tile t)
+			{
+				target = t;
+			}
+			
+			
 			@Override
 			public Matrix Matrix(int dim)
 			{
-				Tile t = Tile.this;
-				int ord = t.Parent().Order();
-				float size = t.Parent().TileSize();
+				int ord = target.Parent().Order();
+				float size = target.Parent().TileSize();
 				
 				Matrix mat = Matrices.create(dim + 1, dim + 1);
 				for(int i = 0; i <= dim; i++)
@@ -66,7 +81,7 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 						mat.set(1f, i, i);
 					else
 					{
-						int ci = t.Coordinates()[i];
+						int ci = target.Coordinates()[i];
 						
 						mat.set(size * (ci + 0.5f), i, dim);
 						mat.set(size / 2, i, i);
@@ -79,9 +94,8 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 			@Override
 			public Matrix Inverse(int dim)
 			{
-				Tile t = Tile.this;
-				int ord = t.Parent().Order();
-				float size = t.Parent().TileSize();
+				int ord = target.Parent().Order();
+				float size = target.Parent().TileSize();
 				
 				Matrix inv = Matrices.create(dim + 1, dim + 1);
 				for(int i = 0; i <= dim; i++)
@@ -90,7 +104,7 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 						inv.set(1f, i, i);
 					else
 					{
-						int ci = t.Coordinates()[i];
+						int ci = target.Coordinates()[i];
 						
 						inv.set(- (2 * ci + 1), i, dim);
 						inv.set(2 / size, i, i);
@@ -102,27 +116,12 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 		}
 		
 		
-		private int[] coords;
-		
-		/**
-		 * Creates a new {@code Tile}.
-		 * 
-		 * @param coords  a coordinate set
-		 */
-		public Tile(int... coords)
-		{
-			this.coords = coords;
-		}
-		
 		/**
 		 * Returns the coordinates of the {@code Tile}.
 		 * 
 		 * @return  a coordinate set
 		 */
-		public int[] Coordinates()
-		{
-			return coords;
-		}
+		public abstract int[] Coordinates();
 		
 		/**
 		 * Returns the parent space of the {@code Tile}.
@@ -132,20 +131,17 @@ public class TiledSpace<T extends TiledSpace<T>.Tile> extends ArrayIndex<T> impl
 		 * 
 		 * @see TiledSpace
 		 */
-		public TiledSpace<T> Parent()
-		{
-			return TiledSpace.this;
-		}
+		public abstract TiledSpace<?> Parent();
 		
 		
 		@Override
-		public Transform Transform()
+		public default Transform Transform()
 		{
-			return new Transform();
+			return new Transform(this);
 		}
 
 		@Override
-		public ICube Shape()
+		public default ICube Shape()
 		{
 			Vector o = Vectors.create(Parent().Order());
 			return Geometries.cube(o, 2f);

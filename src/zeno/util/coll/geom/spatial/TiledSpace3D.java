@@ -18,7 +18,7 @@ import zeno.util.geom.utilities.cardinal.Cardinal3D;
  * @see TiledSpace
  * @see Space3D
  */
-public class TiledSpace3D<T extends TiledSpace3D<T>.Tile3D> extends TiledSpace<T> implements Space3D<T>
+public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> implements Space3D<T>
 {
 	/**
 	 * The {@code Tile3D} class defines a single element of a {@code TiledSpace3D}.
@@ -31,20 +31,30 @@ public class TiledSpace3D<T extends TiledSpace3D<T>.Tile3D> extends TiledSpace<T
 	 * @see IGeometrical3D
 	 * @see TiledSpace
 	 */
-	public class Tile3D extends TiledSpace<T>.Tile implements IGeometrical3D
+	public static interface Tile3D extends TiledSpace.Tile, IGeometrical3D
 	{		
 		/**
-		 * Creates a new {@code Tile3D}.
+		 * Returns the row of the {@code Tile3D}.
 		 * 
-		 * @param col  a column coordinate
-		 * @param row  a row coordinate
-		 * @param ais  an aisle coordinate
+		 * @return  a row coordinate
 		 */
-		public Tile3D(int col, int row, int ais)
-		{
-			super(col, row, ais);
-		}
+		public abstract int Row();
 		
+		/**
+		 * Returns the aisle of the {@code Tile3D}.
+		 * 
+		 * @return  an aisle coordinate
+		 */
+		public abstract int Aisle();
+		
+		/**
+		 * Returns the column of the {@code Tile3D}.
+		 * 
+		 * @return  a column coordinate
+		 */
+		public abstract int Column();
+		
+	
 		/**
 		 * Returns a neighbor of the {@code Tile3D}.
 		 * 
@@ -54,7 +64,7 @@ public class TiledSpace3D<T extends TiledSpace3D<T>.Tile3D> extends TiledSpace<T
 		 * 
 		 * @see Cardinal3D
 		 */
-		public T Neighbor(Cardinal3D c)
+		public default Tile3D Neighbor(Cardinal3D c)
 		{
 			int row = (int) (Row() + c.Y());
 			int col = (int) (Column() + c.X());
@@ -62,48 +72,21 @@ public class TiledSpace3D<T extends TiledSpace3D<T>.Tile3D> extends TiledSpace<T
 			
 			return Parent().get(col, row, ais);
 		}
-		
-		/**
-		 * Returns the column of the {@code Tile3D}.
-		 * 
-		 * @return  a column coordinate
-		 */
-		public int Column()
-		{
-			return Coordinates()[0];
-		}
-		
-		/**
-		 * Returns the aisle of the {@code Tile3D}.
-		 * 
-		 * @return  an aisle coordinate
-		 */
-		public int Aisle()
-		{
-			return Coordinates()[2];
-		}
-		
-		/**
-		 * Returns the row of the {@code Tile3D}.
-		 * 
-		 * @return  a row coordinate
-		 */
-		public int Row()
-		{
-			return Coordinates()[1];
-		}
-		
+
 		
 		@Override
-		public TiledSpace3D<T> Parent()
+		public abstract TiledSpace3D<?> Parent();
+		
+		@Override
+		public default int[] Coordinates()
 		{
-			return (TiledSpace3D<T>) super.Parent();
+			return new int[]{Row(), Column(), Aisle()};
 		}
 		
 		@Override
-		public Cube Shape()
+		public default Cube Shape()
 		{
-			return (Cube) super.Shape();
+			return (Cube) Tile.super.Shape();
 		}
 	}
 
