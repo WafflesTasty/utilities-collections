@@ -111,4 +111,11 @@ public class List<V> implements Collection<V>, Index<V>
 	{
 		return new int[]{source.size()};
 	}
+	
+
+	@Override
+	public int Count()
+	{
+		return source.size();
+	}
 }

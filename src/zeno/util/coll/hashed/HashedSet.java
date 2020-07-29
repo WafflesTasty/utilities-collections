@@ -81,4 +81,10 @@ public class HashedSet<O> implements Collection<O>
 	{
 		data.add(obj);
 	}
+
+	@Override
+	public int Count()
+	{
+		return data.size();
+	}
 }
