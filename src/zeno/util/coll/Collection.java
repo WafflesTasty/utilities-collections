@@ -8,7 +8,7 @@ package zeno.util.coll;
  * @version 1.0
  * 
  * 
- * @param <O>  a collection object type
+ * @param <O>  an object type
  * @see Iterable
  */
 public interface Collection<O> extends Iterable<O>

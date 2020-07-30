@@ -1,6 +1,7 @@
 package zeno.util.coll.indices;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Iterator;
 
 import zeno.util.coll.Collection;
@@ -25,11 +26,11 @@ public class List<V> implements Collection<V>, Index<V>
 	/**
 	 * Creates a new {@code List}.
 	 * 
-	 * @param cap  an initial capacity
+	 * @param set  a data set
 	 */
-	public List(int cap)
+	public List(V... set)
 	{
-		source = new ArrayList<>(cap);
+		source = new ArrayList<>(Arrays.asList(set));
 	}
 	
 	/**
@@ -112,7 +113,6 @@ public class List<V> implements Collection<V>, Index<V>
 		return new int[]{source.size()};
 	}
 	
-
 	@Override
 	public int Count()
 	{

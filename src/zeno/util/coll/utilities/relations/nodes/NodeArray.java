@@ -120,7 +120,7 @@ public class NodeArray implements INodal
 	 */
 	public void clearChildren()
 	{
-		children = null;
+		children = new INode[0];
 	}
 	
 	
