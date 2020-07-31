@@ -112,6 +112,26 @@ public interface INodal extends IRelations
 	}
 
 	/**
+	 * Returns the child count of the {@code INode}.
+	 * </br> This only counts direct descendants of the node.
+	 * 
+	 * @return  a nodal child count
+	 */
+	public default int ChildCount()
+	{
+		int count = 0;
+		for(INode child : Children())
+		{
+			if(child != null)
+			{
+				count++;
+			}
+		}
+		
+		return count;
+	}
+	
+	/**
 	 * Returns the node height of the {@code INode}.
 	 * </br> This indicates the relative depth of the deepest child node.
 	 * 

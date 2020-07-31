@@ -1,8 +1,8 @@
-package zeno.util.coll.utilities.relations.nodes;
+package zeno.util.coll.utilities.relations.nodes.array;
 
 import zeno.util.coll.utilities.relations.IRelatable;
+import zeno.util.coll.utilities.relations.nodes.INode;
 import zeno.util.tools.helper.Array;
-import zeno.util.tools.helper.Iterables;
 
 /**
  * The {@code NodeArray} defines parent-child relations with explicit references in an array.
@@ -12,9 +12,9 @@ import zeno.util.tools.helper.Iterables;
  * @version 1.0
  * 
  * 
- * @see INodal
+ * @see INodeArray
  */
-public class NodeArray implements INodal
+public class NodeArray implements INodeArray
 {
 	private INode target, parent;
 	private INode[] children;
@@ -79,7 +79,7 @@ public class NodeArray implements INodal
 	}
 	
 	/**
-	 * Changes a child in the {@code NodeArray}.
+	 * Changes a child inside the {@code NodeArray}.
 	 * 
 	 * @param i  a child index
 	 * @param child  a new child
@@ -116,87 +116,24 @@ public class NodeArray implements INodal
 	}
 		
 	/**
-	 * Clears all children from the {@code NodeArray}.
+	 * Clears children from the {@code NodeArray}.
 	 */
 	public void clearChildren()
 	{
 		children = new INode[0];
 	}
-	
-	
-	/**
-	 * Returns a child from the {@code NodeArray}.
-	 * 
-	 * @param i  a child node index
-	 * @return  a child node
-	 * 
-	 * 
-	 * @see INode
-	 */
-	public <N extends INode> N Child(int i)
-	{
-		if(children != null 
-		&& children.length > i)
-		{
-			return (N) children[i];
-		}
-		
-		return null;
-	}
-	
-	/**
-	 * Returns the child count of the {@code NodeArray}.
-	 * </br> This only counts direct descendants of the node.
-	 * 
-	 * @return  a nodal child count
-	 */
-	public int ChildCount()
-	{
-		int count = 0;
-		
-		NodeArray rel = (NodeArray) target.Relations();
-		for(INode child : rel.Children())
-		{
-			if(child != null)
-			{
-				count++;
-			}
-		}
-		
-		return count;
-	}
-	
-	/**
-	 * Returns the index of the {@code NodeArray}.
-	 * </br> This is the index of the node as a child of its parent.
-	 * 
-	 * @return  a nodal index
-	 */
-	public int Index()
-	{
-		int index = 0;
-		// Assumes the iterator starts at zero.
-		for(INode child : parent.Relations().Children())
-		{
-			if(child == this)
-				return index;
-			index++;
-		}
-		
-		return -1;
-	}
 
+	
+	@Override
+	public INode[] Array()
+	{
+		return children;
+	}
 	
 	@Override
 	public <R extends IRelatable> R Parent()
 	{
 		return (R) parent;
-	}
-	
-	@Override
-	public <N extends INode> Iterable<N> Children()
-	{
-		return Iterables.of(children);
 	}
 	
 	@Override
