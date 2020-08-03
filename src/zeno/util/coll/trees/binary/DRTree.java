@@ -688,6 +688,8 @@ public class DRTree extends BSTree<Cut>
 	
 	void mergeAbove(DRNode min)
 	{
+		if(min.isRoot()) return;
+		
 		if(min.Index() == 1)
 		{
 			mergeAbove(min.Parent());
@@ -701,6 +703,8 @@ public class DRTree extends BSTree<Cut>
 	
 	void mergeBelow(DRNode max)
 	{
+		if(max.isRoot()) return;
+		
 		if(max.Index() == 0)
 		{
 			mergeBelow(max.Parent());
