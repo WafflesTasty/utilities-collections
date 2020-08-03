@@ -23,7 +23,7 @@ import zeno.util.tools.Integers;
  * @see <a href="https://en.wikipedia.org/wiki/Scapegoat_tree">Wikipedia - Scapegoat Tree</a>
  * @see BSTree
  */
-public class ScapeGoat<O> implements BSTree.Tracker<O>
+public class ScapeGoat<O> implements Tracker<O>
 {
 	private float alpha;
 	private int size, max;
@@ -72,6 +72,16 @@ public class ScapeGoat<O> implements BSTree.Tracker<O>
 			   && s2 <= alpha * (s1 + s2 + 1));
 			
 			rebalance(curr);
+		}
+	}
+	
+	@Override
+	public void onUpdate(BSTree<O> tree)
+	{
+		size = max = tree.Count();
+		if(tree.Root() != null)
+		{
+			rebalance(tree.Root());
 		}
 	}
 	

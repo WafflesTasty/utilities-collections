@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import zeno.util.coll.Collection;
+import zeno.util.coll.trees.binary.trackers.Tracker;
 import zeno.util.tools.helper.iterators.EmptyIterator;
 
 /**
@@ -19,9 +20,10 @@ import zeno.util.tools.helper.iterators.EmptyIterator;
  * @param <V>  a value type
  * @see Collection
  * @see Comparator
+ * @see Tracker
  * @see BiTree
  */
-public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>
+public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, Tracker<V>
 {
 	/**
 	 * The {@code Values} class iterates over all values in a {@code BSTree}.
@@ -47,45 +49,6 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>
 		public V next()
 		{
 			return iNodes.next().Value();
-		}
-	}
-	
-	/**
-	 * The {@code Tracker} interface handles changes to a {@code BSTree}.
-	 *
-	 * @author Zeno
-	 * @since 02 Aug 2020
-	 * @version 1.0
-	 * 
-	 * 
-	 * @param <O>  an object type
-	 */
-	public static interface Tracker<O>
-	{
-		/**
-		 * An event raised when a node is deleted.
-		 * 
-		 * @param node  a target node
-		 * 
-		 * 
-		 * @see BSNode
-		 */
-		public default void onDelete(BSNode<O> node)
-		{
-			// NOT APPLICABLE
-		}
-		
-		/**
-		 * An event raised when a node is inserted.
-		 * 
-		 * @param node  a target node
-		 * 
-		 * 
-		 * @see BSNode
-		 */
-		public default void onInsert(BSNode<O> node)
-		{
-			// NOT APPLICABLE
 		}
 	}
 	
@@ -144,6 +107,56 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>
 	}
 
 	
+	protected BSNode<V> search(V obj)
+	{
+		// No null refs allowed.
+		if(obj == null)
+		{
+			return null;
+		}
+				
+		BSNode<V> node = Root();
+		// Start checking from root...
+		while(true)
+		{
+			int comp = compare(obj, node.Value());
+			
+			// The value has been found.
+			if(comp == 0)
+			{
+				return node;
+			}
+			
+			// The value is lower than the node...
+			if(comp < 0)
+			{
+				// ...but it's the closest one found.
+				if(node.LChild() == null)
+				{
+					return node;
+				}
+				
+				// ...so continue with its left child.
+				node = node.LChild();
+				continue;
+			}
+			
+			// The value is higher than the node...
+			if(comp > 0)
+			{
+				// ...but it's the closest one found.
+				if(node.RChild() == null)
+				{
+					return node;
+				}
+				
+				// ...so continue with its right child.
+				node = node.RChild();
+				continue;
+			}
+		}
+	}
+	
 	@Override
 	public Iterable<BSNode<V>> inorder()
 	{
@@ -162,13 +175,57 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>
 		return super.preorder();
 	}
 	
-
 	@Override
 	public Iterator<V> iterator()
 	{
 		if(Root() == null)
 			return new EmptyIterator<>();
 		return new Values();
+	}
+	
+	@Override
+	public BSNode<V> Root()
+	{
+		return (BSNode<V>) super.Root();
+	}
+
+	
+	@Override
+	public int compare(V o1, V o2)
+	{
+		if(compare != null)
+		{
+			return compare.compare(o1, o2);
+		}
+		
+		return ((Comparable<V>) o1).compareTo(o2);
+	}
+	
+	@Override
+	public void onDelete(BSNode<V> node)
+	{
+		if(tracker != null)
+		{
+			tracker.onDelete(node);
+		}
+	}
+	
+	@Override
+	public void onInsert(BSNode<V> node)
+	{
+		if(tracker != null)
+		{
+			tracker.onInsert(node);
+		}
+	}
+	
+	@Override
+	public void onUpdate(BSTree<V> tree)
+	{
+		if(tracker != null)
+		{
+			tracker.onUpdate(tree);
+		}
 	}
 	
 	@Override
@@ -227,78 +284,10 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>
 		}
 	}
 
-	
-	@Override
-	public BSNode<V> Root()
-	{
-		return (BSNode<V>) super.Root();
-	}
-	
-	private BSNode<V> search(V obj)
-	{
-		// No null refs allowed.
-		if(obj == null)
-		{
-			return null;
-		}
-				
-		BSNode<V> node = Root();
-		// Start checking from root...
-		while(true)
-		{
-			int comp = compare(obj, node.Value());
-			
-			// The value has been found.
-			if(comp == 0)
-			{
-				return node;
-			}
-			
-			// The value is lower than the node...
-			if(comp < 0)
-			{
-				// ...but it's the closest one found.
-				if(node.LChild() == null)
-				{
-					return node;
-				}
-				
-				// ...so continue with its left child.
-				node = node.LChild();
-				continue;
-			}
-			
-			// The value is higher than the node...
-			if(comp > 0)
-			{
-				// ...but it's the closest one found.
-				if(node.RChild() == null)
-				{
-					return node;
-				}
-				
-				// ...so continue with its right child.
-				node = node.RChild();
-				continue;
-			}
-		}
-	}
-
-	@Override
-	public int compare(V o1, V o2)
-	{
-		if(compare != null)
-		{
-			return compare.compare(o1, o2);
-		}
-		
-		return ((Comparable<V>) o1).compareTo(o2);
-	}
-	
 	@Override
 	public int Count()
 	{
 		if(Root() == null) return 0;
 		return Root().Size();
-	}
+	}	
 }
