@@ -7,8 +7,8 @@ import zeno.util.coll.Queue;
 import zeno.util.coll.indices.List;
 import zeno.util.coll.space.Space;
 import zeno.util.coll.trees.Tree;
-import zeno.util.geom.collidables.IGeometrical;
 import zeno.util.geom.collidables.affine.Point;
+import zeno.util.geom.collidables.bounds.IBounded;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
 import zeno.util.tools.Integers;
 
@@ -21,12 +21,12 @@ import zeno.util.tools.Integers;
  * 
  * 
  * @param <O>  an object type
- * @see IGeometrical
+ * @see IBounded
  * @see OrtNode
  * @see Space
  * @see Tree
  */
-public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space<O>, Tree
+public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>, Tree
 {		
 	/**
 	 * The {@code PointSearch} class searches for potential collision detection with a point.
@@ -269,7 +269,7 @@ public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space
 	@Override
 	public boolean contains(O obj)
 	{
-		if(!Bounds().contains(obj))
+		if(!Bounds().contains(obj.Bounds().Box()))
 			return Objects().contains(obj);
 		else
 			return super.contains(obj);
@@ -278,7 +278,7 @@ public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space
 	@Override
 	public void remove(O obj)
 	{
-		if(!Bounds().contains(obj))
+		if(!Bounds().contains(obj.Bounds().Box()))
 			Objects().remove(obj);
 		else
 			super.remove(obj);
@@ -287,7 +287,7 @@ public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space
 	@Override
 	public void add(O obj)
 	{
-		if(!Bounds().contains(obj))
+		if(!Bounds().contains(obj.Bounds().Box()))
 			Objects().add(obj);
 		else
 			super.add(obj);
