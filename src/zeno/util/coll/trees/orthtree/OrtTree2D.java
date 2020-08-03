@@ -1,4 +1,4 @@
-package zeno.util.coll.trees.ortho;
+package zeno.util.coll.trees.orthtree;
 
 import zeno.util.algebra.linear.vector.fixed.Vector2;
 import zeno.util.coll.space.planar.Space2D;

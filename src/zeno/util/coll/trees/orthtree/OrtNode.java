@@ -1,4 +1,4 @@
-package zeno.util.coll.trees.ortho;
+package zeno.util.coll.trees.orthtree;
 
 import java.util.Iterator;
 
