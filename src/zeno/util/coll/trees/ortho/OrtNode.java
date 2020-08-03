@@ -7,7 +7,6 @@ import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.coll.Collection;
 import zeno.util.coll.dictionary.maps.HashedSet;
 import zeno.util.coll.trees.Tree;
-import zeno.util.coll.trees.Tree.Node;
 import zeno.util.coll.trees.traversal.BreadthFirst;
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.IBounded;
