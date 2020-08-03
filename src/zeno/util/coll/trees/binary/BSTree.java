@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import zeno.util.coll.Collection;
-import zeno.util.coll.trees.BiTree;
 import zeno.util.tools.helper.iterators.EmptyIterator;
 
 /**

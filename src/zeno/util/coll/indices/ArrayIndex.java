@@ -2,7 +2,6 @@ package zeno.util.coll.indices;
 
 import java.util.Iterator;
 
-import zeno.util.coll.Index;
 import zeno.util.tools.helper.iterators.ArrayIterator;
 
 /**

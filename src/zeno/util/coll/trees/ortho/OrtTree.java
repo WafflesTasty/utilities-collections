@@ -1,12 +1,12 @@
-package zeno.util.coll.trees;
+package zeno.util.coll.trees.ortho;
 
 import java.util.Iterator;
 
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.coll.Queue;
-import zeno.util.coll.Tree;
-import zeno.util.coll.geom.Space;
 import zeno.util.coll.indices.List;
+import zeno.util.coll.space.Space;
+import zeno.util.coll.trees.Tree;
 import zeno.util.geom.collidables.IGeometrical;
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;

@@ -4,7 +4,7 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
-import zeno.util.coll.trees.BiNode;
+import zeno.util.coll.trees.binary.BiNode;
 
 /**
  * The {@code InOrder} class defines an in-order iterator for a binary tree.

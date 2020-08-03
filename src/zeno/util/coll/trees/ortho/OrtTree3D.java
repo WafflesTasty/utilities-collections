@@ -1,8 +1,7 @@
 package zeno.util.coll.trees.ortho;
 
 import zeno.util.algebra.linear.vector.fixed.Vector3;
-import zeno.util.coll.geom.spatial.Space3D;
-import zeno.util.coll.trees.OrtTree;
+import zeno.util.coll.space.spatial.Space3D;
 import zeno.util.geom.collidables.IGeometrical3D;
 import zeno.util.geom.collidables.geometry.spatial.Cuboid;
 

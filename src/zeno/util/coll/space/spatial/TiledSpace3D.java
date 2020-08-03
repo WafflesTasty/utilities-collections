@@ -1,6 +1,6 @@
-package zeno.util.coll.geom.spatial;
+package zeno.util.coll.space.spatial;
 
-import zeno.util.coll.geom.TiledSpace;
+import zeno.util.coll.space.TiledSpace;
 import zeno.util.geom.collidables.IGeometrical3D;
 import zeno.util.geom.collidables.bounds.Bounds3D;
 import zeno.util.geom.collidables.geometry.spatial.Cube;

@@ -1,7 +1,7 @@
 package zeno.util.coll.utilities;
 
-import zeno.util.coll.Index;
-import zeno.util.coll.trees.BiNode;
+import zeno.util.coll.indices.Index;
+import zeno.util.coll.trees.binary.BiNode;
 import zeno.util.coll.trees.traversal.binary.InOrder;
 import zeno.util.coll.trees.traversal.binary.PostOrder;
 import zeno.util.coll.trees.traversal.binary.PreOrder;

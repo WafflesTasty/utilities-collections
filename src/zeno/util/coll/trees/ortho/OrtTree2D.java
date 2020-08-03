@@ -1,8 +1,7 @@
 package zeno.util.coll.trees.ortho;
 
 import zeno.util.algebra.linear.vector.fixed.Vector2;
-import zeno.util.coll.geom.planar.Space2D;
-import zeno.util.coll.trees.OrtTree;
+import zeno.util.coll.space.planar.Space2D;
 import zeno.util.geom.collidables.IGeometrical2D;
 import zeno.util.geom.collidables.geometry.planar.Rectangle;
 

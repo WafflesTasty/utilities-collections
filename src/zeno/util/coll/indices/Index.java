@@ -1,4 +1,4 @@
-package zeno.util.coll;
+package zeno.util.coll.indices;
 
 import zeno.util.tools.helper.Array;
 

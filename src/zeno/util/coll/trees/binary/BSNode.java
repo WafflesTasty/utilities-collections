@@ -1,6 +1,5 @@
 package zeno.util.coll.trees.binary;
 
-import zeno.util.coll.trees.BiNode;
 import zeno.util.tools.patterns.properties.Valuable;
 
 /**

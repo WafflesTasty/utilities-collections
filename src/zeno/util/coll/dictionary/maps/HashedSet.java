@@ -1,4 +1,4 @@
-package zeno.util.coll.hashed;
+package zeno.util.coll.dictionary.maps;
 
 import java.util.Arrays;
 import java.util.HashSet;
@@ -15,7 +15,7 @@ import zeno.util.coll.Collection;
  * @version 1.0
  * 
  * 
- * @param <O>  a collection object type
+ * @param <O>  an object type
  * @see Collection
  */
 public class HashedSet<O> implements Collection<O>

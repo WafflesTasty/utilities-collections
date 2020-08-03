@@ -1,4 +1,4 @@
-package zeno.util.coll.geom;
+package zeno.util.coll.space;
 
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;

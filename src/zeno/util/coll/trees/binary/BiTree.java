@@ -1,6 +1,6 @@
-package zeno.util.coll.trees;
+package zeno.util.coll.trees.binary;
 
-import zeno.util.coll.Tree;
+import zeno.util.coll.trees.Tree;
 import zeno.util.coll.trees.traversal.binary.InOrder;
 import zeno.util.coll.trees.traversal.binary.PostOrder;
 import zeno.util.coll.trees.traversal.binary.PreOrder;

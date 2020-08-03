@@ -1,4 +1,4 @@
-package zeno.util.coll;
+package zeno.util.coll.dictionary;
 
 import zeno.util.coll.utilities.iterators.KeyIterator;
 import zeno.util.coll.utilities.iterators.ValueIterator;

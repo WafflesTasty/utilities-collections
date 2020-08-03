@@ -2,8 +2,8 @@ package zeno.util.coll.utilities.iterators;
 
 import java.util.Iterator;
 
-import zeno.util.coll.Dictionary;
-import zeno.util.coll.Dictionary.Pair;
+import zeno.util.coll.dictionary.Dictionary;
+import zeno.util.coll.dictionary.Dictionary.Pair;
 
 /**
  * The {@code KeyIterator} defines an iterator over {@code Dictionary} keys.

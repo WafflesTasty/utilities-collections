@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import zeno.util.coll.Collection;
-import zeno.util.coll.Index;
 
 /**
  * The {@code List} class defines a one-dimensional collection backed by an {@code ArrayList}.

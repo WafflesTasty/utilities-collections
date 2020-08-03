@@ -1,6 +1,6 @@
-package zeno.util.coll.geom.planar;
+package zeno.util.coll.space.planar;
 
-import zeno.util.coll.geom.TiledSpace;
+import zeno.util.coll.space.TiledSpace;
 import zeno.util.geom.collidables.IGeometrical2D;
 import zeno.util.geom.collidables.bounds.Bounds2D;
 import zeno.util.geom.collidables.geometry.planar.Square;

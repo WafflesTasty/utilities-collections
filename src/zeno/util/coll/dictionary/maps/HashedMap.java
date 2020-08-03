@@ -1,11 +1,11 @@
-package zeno.util.coll.hashed.dict;
+package zeno.util.coll.dictionary.maps;
 
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import zeno.util.coll.Dictionary;
+import zeno.util.coll.dictionary.Dictionary;
 
 /**
  * The {@code HashedMap} class defines a basic dictionary backed by a hash.

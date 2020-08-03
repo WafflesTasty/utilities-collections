@@ -1,4 +1,4 @@
-package zeno.util.coll;
+package zeno.util.coll.trees;
 
 import zeno.util.coll.trees.traversal.BreadthFirst;
 import zeno.util.coll.trees.traversal.DepthFirst;
