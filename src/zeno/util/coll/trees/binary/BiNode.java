@@ -1,7 +1,6 @@
 package zeno.util.coll.trees.binary;
 
 import zeno.util.coll.trees.Tree;
-import zeno.util.coll.trees.Tree.Node;
 
 /**
  * The {@code BiNode} class defines a generic binary tree node.
