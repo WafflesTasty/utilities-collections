@@ -5,8 +5,9 @@ import java.util.Iterator;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.coll.Collection;
-import zeno.util.coll.Node;
+import zeno.util.coll.Tree;
 import zeno.util.coll.hashed.HashedSet;
+import zeno.util.coll.trees.traversal.BreadthFirst;
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.IBounded;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
@@ -26,9 +27,9 @@ import zeno.util.tools.Integers;
  * @param <O>  an object type
  * @see Collection
  * @see IBounded
- * @see Node
+ * @see Tree
  */
-public class OrtNode<O extends IBounded> extends Node implements Collection<O>, IBounded
+public class OrtNode<O extends IBounded> extends Tree.Node implements Collection<O>, IBounded
 {		
 	/**
 	 * The {@code ObjectIterator} class iterates over all objects in a {@code OrtNode}.
@@ -133,19 +134,7 @@ public class OrtNode<O extends IBounded> extends Node implements Collection<O>, 
 	{
 		return super.Children();
 	}
-	
-	@Override
-	public Iterable<OrtNode<O>> BFSearch()
-	{
-		return super.BFSearch();
-	}
-	
-	@Override
-	public Iterable<OrtNode<O>> DFSearch()
-	{
-		return super.DFSearch();
-	}
-	
+		
 	@Override
 	public Iterator<O> iterator()
 	{
@@ -169,7 +158,7 @@ public class OrtNode<O extends IBounded> extends Node implements Collection<O>, 
 		{
 			if(ChildCount() == 0)
 			{
-				splitNode();
+				split();
 			}
 
 			Child(index).add(obj);
@@ -223,6 +212,11 @@ public class OrtNode<O extends IBounded> extends Node implements Collection<O>, 
 	}
 	
 	
+	private Iterable<OrtNode<O>> BFSearch()
+	{
+		return () -> new BreadthFirst<>(this);
+	}
+	
 	private int search(O obj)
 	{
 		Point min = new Point(obj.Bounds().Minimum(), 1f);
@@ -247,7 +241,7 @@ public class OrtNode<O extends IBounded> extends Node implements Collection<O>, 
 		return index;
 	}
 	
-	private void splitNode()
+	private void split()
 	{
 		Vector c = Bounds().Center();
 		Vector s = Bounds().Size().times(0.5f);

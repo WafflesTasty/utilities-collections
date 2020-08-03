@@ -1,6 +1,10 @@
 package zeno.util.coll.utilities;
 
 import zeno.util.coll.Index;
+import zeno.util.coll.trees.BiNode;
+import zeno.util.coll.trees.traversal.binary.InOrder;
+import zeno.util.coll.trees.traversal.binary.PostOrder;
+import zeno.util.coll.trees.traversal.binary.PreOrder;
 import zeno.util.coll.utilities.iterators.IndexIterator;
 
 /**
@@ -27,6 +31,55 @@ public final class Iterables
 	public static <V> Iterable<V> index(Index<V> index, int[] min, int[] max)
 	{
 		return () -> new IndexIterator<>(index, min, max);
+	}
+	
+	
+	/**
+	 * Returns an in-order iterable over a {@code BiNode}.
+	 * 
+	 * @param <N>  a node type
+	 * @param base  a base node
+	 * @return  an in-order iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see BiNode
+	 */
+	public static <N extends BiNode> Iterable<N> inorder(N base)
+	{
+		return () -> new InOrder<>(base);
+	}
+	
+	/**
+	 * Returns a post-order iterable over a {@code BiNode}.
+	 * 
+	 * @param <N>  a node type
+	 * @param base  a base node
+	 * @return  a post-order iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see BiNode
+	 */
+	public static <N extends BiNode> Iterable<N> postorder(N base)
+	{
+		return () -> new PostOrder<>(base);
+	}
+	
+	/**
+	 * Returns a pre-order iterable over a {@code BiNode}.
+	 * 
+	 * @param <N>  a node type
+	 * @param base  a base node
+	 * @return  a pre-order iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see BiNode
+	 */
+	public static <N extends BiNode> Iterable<N> preorder(N base)
+	{
+		return () -> new PreOrder<>(base);
 	}
 	
 	

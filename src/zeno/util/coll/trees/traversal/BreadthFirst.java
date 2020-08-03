@@ -41,11 +41,14 @@ public class BreadthFirst<N extends INode> implements Iterator<N>
 
 	@Override
 	public N next()
-	{
+	{		
 		INode next = queue.popFirst();
 		for(INode child : next.Relations().Children())
 		{
-			queue.pushLast(child);
+			if(child != null)
+			{
+				queue.pushLast(child);
+			}
 		}
 		
 		return (N) next;

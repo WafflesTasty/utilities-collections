@@ -74,7 +74,7 @@ public interface INodal extends IRelations
 	
 	
 	/**
-	 * Checks whether this {@code INode} is a leaf.
+	 * Checks whether this is a leaf {@code INode}.
 	 * 
 	 * @return  {@code true} if the node is a leaf
 	 */
@@ -91,26 +91,6 @@ public interface INodal extends IRelations
 		return true;
 	}
 		
-	/**
-	 * Returns the descendant count of the {@code INode}.
-	 * </br> This indicates the amount of nodes under this node plus one.
-	 * 
-	 * @return  a descendant count
-	 */
-	public default int Descendants()
-	{
-		int count = 1;
-		for(INode child : Children())
-		{
-			if(child != null)
-			{
-				count += child.Relations().Descendants();
-			}
-		}
-		
-		return count;
-	}
-
 	/**
 	 * Returns the child count of the {@code INode}.
 	 * </br> This only counts direct descendants of the node.
@@ -151,5 +131,25 @@ public interface INodal extends IRelations
 		}
 		
 		return 0;
+	}
+
+	/**
+	 * Returns the size of the {@code INode}.
+	 * </br> This indicates the amount of nodes under this node plus one.
+	 * 
+	 * @return  a node size
+	 */
+	public default int Size()
+	{
+		int count = 1;
+		for(INode child : Children())
+		{
+			if(child != null)
+			{
+				count += child.Relations().Size();
+			}
+		}
+		
+		return count;
 	}
 }

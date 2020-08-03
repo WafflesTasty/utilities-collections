@@ -45,7 +45,10 @@ public class DepthFirst<N extends INode> implements Iterator<N>
 		INode next = queue.popFirst();
 		for(INode child : next.Relations().Children())
 		{
-			queue.pushFirst(child);
+			if(child != null)
+			{
+				queue.pushFirst(child);
+			}
 		}
 		
 		return (N) next;

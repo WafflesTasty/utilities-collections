@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.coll.Queue;
+import zeno.util.coll.Tree;
 import zeno.util.coll.geom.Space;
 import zeno.util.coll.indices.List;
 import zeno.util.geom.collidables.IGeometrical;
@@ -23,8 +24,9 @@ import zeno.util.tools.Integers;
  * @see IGeometrical
  * @see OrtNode
  * @see Space
+ * @see Tree
  */
-public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space<O>
+public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space<O>, Tree
 {		
 	/**
 	 * The {@code PointSearch} class searches for potential collision detection with a point.
@@ -221,7 +223,19 @@ public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space
 	{
 		super(c, s);
 	}
-		
+
+	
+	@Override
+	public Iterable<OrtNode<O>> BFSearch()
+	{
+		return Tree.super.BFSearch();
+	}
+	
+	@Override
+	public Iterable<OrtNode<O>> DFSearch()
+	{
+		return Tree.super.DFSearch();
+	}
 
 	@Override
 	public Iterable<O> query(ICuboid c)
@@ -245,6 +259,12 @@ public class OrtTree<O extends IGeometrical> extends OrtNode<O> implements Space
 		}
 	}
 
+	@Override
+	public OrtNode<O> Root()
+	{
+		return this;
+	}
+	
 	
 	@Override
 	public boolean contains(O obj)
