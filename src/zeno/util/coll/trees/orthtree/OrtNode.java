@@ -55,7 +55,7 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 			iNodes = BFSearch().iterator();
 			iNodes.next();
 		}
-		
+				
 		@Override
 		public boolean hasNext()
 		{
@@ -68,6 +68,12 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 			}
 			
 			return false;
+		}
+		
+		@Override
+		public void remove()
+		{
+			iObjects.remove();
 		}
 
 		@Override
