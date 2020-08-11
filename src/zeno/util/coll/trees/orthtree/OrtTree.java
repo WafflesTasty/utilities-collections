@@ -258,14 +258,14 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 			return () -> new PointSearch(p);
 		}
 	}
-
+	
 	@Override
 	public OrtNode<O> Root()
 	{
 		return this;
 	}
-	
-	
+
+		
 	@Override
 	public boolean contains(O obj)
 	{

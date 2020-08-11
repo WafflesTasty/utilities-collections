@@ -137,6 +137,14 @@ public interface Tree
 		return () -> new DepthFirst<>((N) Root());
 	}
 
+	
+	/**
+	 * Checks if there is data in the {@code Tree}.
+	 * 
+	 * @return  {@code true} if the tree is empty
+	 */
+	public abstract boolean isEmpty();
+	
 	/**
 	 * Returns the root of the {@code Tree}.
 	 * 

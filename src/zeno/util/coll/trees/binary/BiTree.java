@@ -76,6 +76,12 @@ public class BiTree implements Tree
 		
 	
 	@Override
+	public boolean isEmpty()
+	{
+		return root == null;
+	}
+	
+	@Override
 	public BiNode Root()
 	{
 		return root;

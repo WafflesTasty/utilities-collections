@@ -115,8 +115,9 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 		this(Geometries.cuboid(c, s));
 	}
 	
+	
 	/**
-	 * Returns the node's objects.
+	 * Returns the data in the {@code OrtNode}.
 	 * 
 	 * @return  an object set
 	 * 
@@ -126,6 +127,25 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 	public HashedSet<O> Objects()
 	{
 		return set;
+	}
+	
+	/**
+	 * Checks the data in the {@code OrtNode}.
+	 * 
+	 * @return  {@code true} if the node is empty
+	 */
+	public boolean isEmpty()
+	{
+		if(set.Count() > 0) return false;
+		for(OrtNode<O> child : Children())
+		{
+			if(!child.isEmpty())
+			{
+				return false;
+			}
+		}
+		
+		return true;
 	}
 	
 		
