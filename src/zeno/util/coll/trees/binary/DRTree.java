@@ -1,5 +1,7 @@
 package zeno.util.coll.trees.binary;
 
+import java.util.Iterator;
+
 import zeno.util.algebra.intervals.Cut;
 import zeno.util.algebra.intervals.Interval;
 import zeno.util.calc.constants.Extreme;
@@ -20,6 +22,37 @@ import zeno.util.calc.constants.Extreme;
  */
 public class DRTree extends BSTree<Cut>
 {
+	/**
+	 * The {@code Intervals} class iterates over intervals in a {@code DRTree}.
+	 *
+	 * @author Zeno
+	 * @since 17 Aug 2020
+	 * @version 1.0
+	 * 
+	 * 
+	 * @see Interval
+	 * @see Iterator
+	 */
+	public class Intervals implements Iterator<Interval>
+	{
+		private Iterator<BSNode<Cut>> nodes = inorder().iterator();
+		
+		@Override
+		public boolean hasNext()
+		{
+			return nodes.hasNext();
+		}
+
+		@Override
+		public Interval next()
+		{
+			Cut min = nodes.next().Value();
+			Cut max = nodes.next().Value();
+			return new Interval(min, max);
+		}
+	}
+	
+	
 	/**
 	 * Deletes an interval from the {@code DRTree}.
 	 * 
@@ -343,6 +376,20 @@ public class DRTree extends BSTree<Cut>
 		}
 	}
 	
+	
+	/**
+	 * Returns the intervals in the {@code DRTree}.
+	 * 
+	 * @return  an interval iterable
+	 * 
+	 * 
+	 * @see Interval
+	 * @see Iterable
+	 */
+	public Iterable<Interval> Intervals()
+	{
+		return () -> new Intervals();
+	}
 	
 	/**
 	 * Creates a new node for the {@code DRTree}.
