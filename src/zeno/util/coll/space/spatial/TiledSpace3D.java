@@ -70,7 +70,12 @@ public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> i
 			int col = (int) (Column() + c.X());
 			int ais = (int) (Aisle() + c.Z());
 			
-			return Parent().get(col, row, ais);
+			if(Parent().contains(col, row, ais))
+			{
+				return Parent().get(col, row, ais);
+			}
+			
+			return null;
 		}
 
 		

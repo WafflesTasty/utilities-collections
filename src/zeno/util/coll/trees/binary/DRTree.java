@@ -745,6 +745,7 @@ public class DRTree extends BSTree<Cut>
 		if(min.Index() == 0)
 		{
 			min.Parent().replace(min);
+			mergeAbove(min);
 		}
 	}
 	
@@ -760,6 +761,7 @@ public class DRTree extends BSTree<Cut>
 		if(max.Index() == 1)
 		{
 			max.Parent().replace(max);
+			mergeBelow(max);
 		}
 	}
 }

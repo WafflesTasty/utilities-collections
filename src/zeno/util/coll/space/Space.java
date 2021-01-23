@@ -1,5 +1,6 @@
 package zeno.util.coll.space;
 
+import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.IBounded;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
@@ -17,6 +18,21 @@ import zeno.util.geom.collidables.geometry.generic.ICuboid;
  */
 public interface Space<O extends IBounded> extends IBounded
 {
+	/**
+	 * Queries the {@code Space} at a specified vector.
+	 * 
+	 * @param v  a vector to query
+	 * @return  a set of possible results
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see Vector
+	 */
+	public default Iterable<O> query(Vector v)
+	{
+		return query(new Point(v, 1f));
+	}
+	
 	/**
 	 * Queries the {@code Space} in a specified cuboid.
 	 * 

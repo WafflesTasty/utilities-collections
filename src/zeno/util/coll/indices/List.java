@@ -81,7 +81,13 @@ public class List<V> implements Collection<V>, Index<V>
 	{
 		return source.set(coords[0], val);
 	}
-
+	
+	@Override
+	public V remove(int... coords)
+	{
+		return source.remove(coords[0]);
+	}
+	
 	@Override
 	public V get(int... coords)
 	{

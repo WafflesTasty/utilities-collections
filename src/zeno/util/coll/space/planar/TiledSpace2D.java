@@ -62,7 +62,12 @@ public class TiledSpace2D<T extends TiledSpace2D.Tile2D> extends TiledSpace<T> i
 			int row = (int) (Row() + c.Y());
 			int col = (int) (Column() + c.X());
 			
-			return Parent().get(col, row);
+			if(Parent().contains(col, row))
+			{
+				return Parent().get(col, row);
+			}
+			
+			return null;
 		}
 
 		
@@ -94,6 +99,26 @@ public class TiledSpace2D<T extends TiledSpace2D.Tile2D> extends TiledSpace<T> i
 		super(cols, rows);
 	}
 	
+	
+	/**
+	 * Returns the width of the {@code TiledSpace2D}.
+	 * 
+	 * @return  a space width
+	 */
+	public float Width()
+	{
+		return Size().get(0);
+	}
+	
+	/**
+	 * Returns the height of the {@code TiledSpace2D}.
+	 * 
+	 * @return  a space width
+	 */
+	public float Height()
+	{
+		return Size().get(1);
+	}
 	
 	/**
 	 * Returns the columns of the {@code TiledSpace2D}.

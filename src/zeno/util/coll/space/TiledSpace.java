@@ -201,7 +201,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 	}
 	
 	
-	private T query(Vector v)
+	private T find(Vector v)
 	{
 		int[] index = new int[Order()];
 		for(int i = 0; i < Order(); i++)
@@ -219,13 +219,13 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 	@Override
 	public Iterable<T> query(ICuboid c)
 	{
-		T min = query(c.Minimum());
+		T min = find(c.Minimum());
 		if(min == null)
 		{
 			min = get(Minimum());
 		}
 		
-		T max = query(c.Maximum());
+		T max = find(c.Maximum());
 		if(max == null)
 		{
 			max = get(Maximum());
@@ -237,7 +237,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 	@Override
 	public Iterable<T> query(Point p)
 	{
-		T tile = query(p.asVector());
+		T tile = find(p.asVector());
 		if(tile != null)
 		{
 			return Iterables.singleton(tile);
