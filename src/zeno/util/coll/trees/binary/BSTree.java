@@ -254,7 +254,7 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 		if(comp == 0)
 		{
 			node.delete();
-			tracker.onDelete(node);
+			onDelete(node);
 		}
 	}
 	
@@ -264,7 +264,7 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 		if(Root() == null)
 		{
 			setRoot(new BSNode<>(this, obj));
-			tracker.onInsert(Root());
+			onInsert(Root());
 			return;
 		}
 		
@@ -275,12 +275,12 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 		if(comp < 0)
 		{
 			node.setLChild(new BSNode<>(this, obj));
-			tracker.onInsert(node.LChild());
+			onInsert(node.LChild());
 		}
 		else
 		{
 			node.setRChild(new BSNode<>(this, obj));
-			tracker.onInsert(node.RChild());
+			onInsert(node.RChild());
 		}
 	}
 

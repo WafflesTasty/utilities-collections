@@ -3,8 +3,9 @@ package zeno.util.coll.trees.orthtree;
 import java.util.Iterator;
 
 import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.coll.Queue;
+import zeno.util.coll.DEQueue;
 import zeno.util.coll.indices.List;
+import zeno.util.coll.queues.LLQueue;
 import zeno.util.coll.space.Space;
 import zeno.util.coll.trees.Tree;
 import zeno.util.geom.collidables.affine.Point;
@@ -107,7 +108,7 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 	public class BoxSearch implements Iterator<O>
 	{
 		private OrtNode<O> curr;
-		private Queue<OrtNode<O>> queue;
+		private DEQueue<OrtNode<O>> queue;
 		private Iterator<O> objects;
 		private Point min, max;
 
@@ -121,7 +122,7 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 		 */
 		public BoxSearch(ICuboid b)
 		{
-			queue = new Queue<>();
+			queue = new LLQueue<>();
 			objects = Objects().iterator();
 			min = new Point(b.Minimum(), 1f);
 			max = new Point(b.Maximum(), 1f);

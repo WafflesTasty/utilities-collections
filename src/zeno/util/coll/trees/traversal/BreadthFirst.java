@@ -2,7 +2,8 @@ package zeno.util.coll.trees.traversal;
 
 import java.util.Iterator;
 
-import zeno.util.coll.Queue;
+import zeno.util.coll.DEQueue;
+import zeno.util.coll.queues.LLQueue;
 import zeno.util.coll.utilities.relations.nodes.INode;
 
 /**
@@ -19,7 +20,7 @@ import zeno.util.coll.utilities.relations.nodes.INode;
  */
 public class BreadthFirst<N extends INode> implements Iterator<N>
 {	
-	private Queue<INode> queue;
+	private DEQueue<INode> queue;
 
 	/**
 	 * Creates a new {@code BreadthFirst}.
@@ -28,7 +29,7 @@ public class BreadthFirst<N extends INode> implements Iterator<N>
 	 */
 	public BreadthFirst(N base)
 	{
-		queue = new Queue<>();
+		queue = new LLQueue<>();
 		queue.pushFirst(base);
 	}
 
