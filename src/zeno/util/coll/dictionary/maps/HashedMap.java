@@ -45,7 +45,7 @@ public class HashedMap<K, V> implements Dictionary<K, V>
 			V val = e.getValue();
 			K key = e.getKey();
 			
-			return new Pair<>(key, val);
+			return create(key, val);
 		}
 		
 		@Override
@@ -71,6 +71,21 @@ public class HashedMap<K, V> implements Dictionary<K, V>
 	public Iterator<Pair<K, V>> iterator()
 	{
 		return new MapIterator();
+	}
+	
+	/**
+	 * Create a pair for the {@code HashedMap}.
+	 * 
+	 * @param key  a pair key
+	 * @param val  a pair value
+	 * @return  a dictionary pair
+	 * 
+	 * 
+	 * @see Dictionary
+	 */
+	public Pair<K, V> create(K key, V val)
+	{
+		return new Pair<>(key, val);
 	}
 
 	
