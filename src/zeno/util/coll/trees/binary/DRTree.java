@@ -420,11 +420,10 @@ public class DRTree extends BSTree<Cut>
 			return false;
 		}
 		
-		
 		// Find the surrounding nodes in the tree.
 		DRNode prev = lowerBound(ival.min());
 		DRNode next = upperBound(ival.max());
-
+		
 		// If the interval has no lower bound...
 		if(prev == null)
 		{
@@ -434,7 +433,7 @@ public class DRTree extends BSTree<Cut>
 				// There is an intersection.
 				return true;
 			}
-
+			
 			// Otherwise, check if the upper bound is the lowest node.
 			return next.prev() != null;
 		}
