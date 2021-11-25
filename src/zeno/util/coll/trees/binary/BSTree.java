@@ -191,6 +191,13 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 
 	
 	@Override
+	public void clear()
+	{
+		setRoot(null);
+		tracker.onClear(this);
+	}
+	
+	@Override
 	public int compare(V o1, V o2)
 	{
 		if(compare != null)
@@ -199,6 +206,15 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 		}
 		
 		return ((Comparable<V>) o1).compareTo(o2);
+	}
+	
+	@Override
+	public void onClear(BSTree<V> tree)
+	{
+		if(tracker != null)
+		{
+			tracker.onClear(tree);
+		}
 	}
 	
 	@Override

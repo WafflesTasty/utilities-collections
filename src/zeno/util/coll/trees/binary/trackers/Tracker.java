@@ -53,4 +53,17 @@ public interface Tracker<O>
 	{
 		// NOT APPLICABLE
 	}
+
+	/**
+	 * An event raised when a tree is cleared.
+	 * 
+	 * @param tree  a target tree
+	 * 
+	 * 
+	 * @see BSTree
+	 */
+	public default void onClear(BSTree<O> tree)
+	{
+		// NOT APPLICABLE
+	}
 }

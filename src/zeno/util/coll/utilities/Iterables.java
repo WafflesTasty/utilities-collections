@@ -1,6 +1,6 @@
 package zeno.util.coll.utilities;
 
-import zeno.util.coll.indices.Index;
+import zeno.util.coll.indices.arrays.Index;
 import zeno.util.coll.trees.binary.BiNode;
 import zeno.util.coll.trees.traversal.binary.InOrder;
 import zeno.util.coll.trees.traversal.binary.PostOrder;

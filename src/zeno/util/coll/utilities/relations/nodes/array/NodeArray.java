@@ -72,7 +72,7 @@ public class NodeArray implements INodeArray
 		{
 			if(children[i] == child)
 			{
-				children[i] = null;
+				children = Array.remove.from(children, i);
 				return;
 			}
 		}

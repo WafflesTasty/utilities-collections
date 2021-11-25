@@ -8,15 +8,15 @@ import zeno.util.geom.collidables.geometry.generic.ICuboid;
 /**
  * The {@code Space} interface defines a collection that handles spatial queries.
  * 
- * @author Zeno
+ * @author Waffles
  * @since Mar 29, 2017
- * @version 1.0
+ * @version 1.1
  *
  * 
  * @param <O>  a space object type
  * @see IBounded
  */
-public interface Space<O extends IBounded> extends IBounded
+public interface Space<O> extends IBounded
 {
 	/**
 	 * Queries the {@code Space} at a specified vector.

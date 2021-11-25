@@ -85,6 +85,12 @@ public class ScapeGoat<O> implements Tracker<O>
 		}
 	}
 	
+	@Override
+	public void onClear(BSTree<O> tree)
+	{
+		size = max = 0;
+	}
+	
 	
 	BSNode<O> median(BSNode<O> base)
 	{

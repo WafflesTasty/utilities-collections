@@ -186,8 +186,12 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 			{
 				split();
 			}
-
-			Child(index).add(obj);
+			
+			OrtNode<O> child = Child(index);
+			if(child != null)
+			{
+				child.add(obj);
+			}
 		}
 	}
 
@@ -205,7 +209,12 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 			set.remove(obj);
 		else
 		{
-			Child(index).remove(obj);
+			OrtNode<O> child = Child(index);
+			if(child != null)
+			{
+				child.remove(obj);
+			}
+			
 			if(Count() == set.Count())
 			{
 				clearChildren();
@@ -221,10 +230,23 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 			return set.contains(obj);
 		else
 		{
-			return Child(index).contains(obj);
+			OrtNode<O> child = Child(index);
+			if(child != null)
+			{
+				return child.contains(obj);
+			}
+			
+			return false;
 		}
 	}
 
+	@Override
+	public void clear()
+	{
+		clearChildren();
+		set.clear();
+	}
+	
 	@Override
 	public int Count()
 	{

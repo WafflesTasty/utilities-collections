@@ -1,20 +1,43 @@
-package zeno.util.coll.indices;
+package zeno.util.coll.indices.arrays;
 
 import zeno.util.tools.helper.Array;
 
 /**
  * The {@code Index} interface defines a collection maintained in a discrete index.
  *
- * @author Zeno
+ * @author Waffles
  * @since Feb 03, 2020
  * @version 1.0
  * 
  * 
  * @param <T>  an index type
- * @see Iterable
  */
-public interface Index<T> extends Iterable<T>
+public interface Index<T>
 {		
+	/**
+	 * The {@code Unique} interface defines an index with unique elements.
+	 *
+	 * @author Waffles
+	 * @since 16 Nov 2021
+	 * @version 1.0
+	 *
+	 *
+	 * @param <T>  an object type
+	 * @see Iterable
+	 * @see Index
+	 */
+	public static interface Unique<T> extends Index<T>, Iterable<T>
+	{
+		/**
+		 * Returns a coordinate in the {@code Index}.
+		 * 
+		 * @param val  a target value
+		 * @return  a value coordinate
+		 */
+		public abstract int[] indexOf(T val);
+	}
+	
+	
 	/**
 	 * Returns a value from the {@code Index}.
 	 * 
@@ -38,7 +61,29 @@ public interface Index<T> extends Iterable<T>
 	 * @param coords  a coordinate to check
 	 * @return  {@code true} if the coordinate is allowed
 	 */
-	public abstract boolean contains(int... coords);
+	public default boolean contains(int... coords)
+	{
+		for(int i = 0; i < coords.length; i++)
+		{
+			// If coordinates exceed the index order...
+			if(Order() <= i)
+			{
+				// The remainder have to be zero.
+				if(coords[i] != 0)
+				{
+					return false;
+				}
+			}
+			
+			// Otherwise, check the coordinate bounds.
+			if(coords[i] < 0 || Dimensions()[i] <= coords[i])
+			{
+				return false;
+			}
+		}
+		
+		return true;
+	}
 	
 	/**
 	 * Removes a value from the {@code Index}.
@@ -52,13 +97,6 @@ public interface Index<T> extends Iterable<T>
 	}
 	
 	
-	/**
-	 * Returns a coordinate in the {@code Index}.
-	 * 
-	 * @param val  a target value
-	 * @return  a value coordinate
-	 */
-	public abstract int[] indexOf(T val);
 	
 	/**
 	 * Returns the dimension of the {@code Index}.

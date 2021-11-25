@@ -5,7 +5,7 @@ import zeno.util.coll.trees.Tree;
 /**
  * The {@code BiNode} class defines a generic binary tree node.
  *
- * @author Zeno
+ * @author Waffles
  * @since 01 Aug 2020
  * @version 1.0
  * 
@@ -282,7 +282,12 @@ public class BiNode extends Tree.Node
 	{
 		return Child(1);
 	}
-		
+
+	
+	protected BiTree Tree()
+	{
+		return tree;
+	}
 	
 	@Override
 	public BiNode Parent()

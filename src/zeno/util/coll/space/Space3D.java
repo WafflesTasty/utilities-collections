@@ -1,6 +1,5 @@
-package zeno.util.coll.space.spatial;
+package zeno.util.coll.space;
 
-import zeno.util.coll.space.Space;
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.IBounded3D;
 

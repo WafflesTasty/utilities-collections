@@ -110,7 +110,6 @@ public class BSQueue<O> implements Queue<O>, Comparator<O>
 			node = node.LLeaf();
 			node.delete();
 			
-			data.onDelete(node);
 			return node.Value();
 		}
 		

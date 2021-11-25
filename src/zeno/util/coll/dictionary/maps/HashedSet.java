@@ -83,6 +83,12 @@ public class HashedSet<O> implements Collection<O>
 	}
 
 	@Override
+	public void clear()
+	{
+		data.clear();
+	}
+	
+	@Override
 	public int Count()
 	{
 		return data.size();

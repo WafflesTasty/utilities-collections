@@ -1,27 +1,27 @@
-package zeno.util.coll.space.spatial;
+package zeno.util.coll.space.tiles.array;
 
-import zeno.util.coll.space.TiledSpace;
+import zeno.util.coll.space.Space3D;
 import zeno.util.geom.collidables.IGeometrical3D;
 import zeno.util.geom.collidables.bounds.Bounds3D;
 import zeno.util.geom.collidables.geometry.spatial.Cube;
-import zeno.util.geom.utilities.cardinal.Cardinal3D;
+import zeno.util.geom.utilities.mobility.Cardinal3D;
 
 /**
- * The {@code TiledSpace3D} class defines a space partitioned into cubes of equal size.
+ * The {@code TASpace3D} class defines a space partitioned into cubes of equal size.
  *
- * @author Zeno
+ * @author Waffles
  * @since 23 Jul 2020
  * @version 1.0
  *
  *
  * @param <T>  a tile type
- * @see TiledSpace
+ * @see TASpace
  * @see Space3D
  */
-public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> implements Space3D<T>
+public class TASpace3D<T extends TASpace3D.Tile3D> extends TASpace<T> implements Space3D<T>
 {
 	/**
-	 * The {@code Tile3D} class defines a single element of a {@code TiledSpace3D}.
+	 * The {@code Tile3D} class defines a single element of a {@code TASpace3D}.
 	 *
 	 * @author Zeno
 	 * @since 23 Jul 2020
@@ -29,9 +29,9 @@ public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> i
 	 * 
 	 * 
 	 * @see IGeometrical3D
-	 * @see TiledSpace
+	 * @see TASpace
 	 */
-	public static interface Tile3D extends TiledSpace.Tile, IGeometrical3D
+	public static interface Tile3D extends TASpace.Tile, IGeometrical3D
 	{		
 		/**
 		 * Returns the row of the {@code Tile3D}.
@@ -80,7 +80,7 @@ public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> i
 
 		
 		@Override
-		public abstract TiledSpace3D<?> Parent();
+		public abstract TASpace3D<?> Parent();
 		
 		@Override
 		public default int[] Coordinates()
@@ -97,20 +97,20 @@ public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> i
 
 	
 	/**
-	 * Creates a new {@code TiledSpace3D}.
+	 * Creates a new {@code TASpace3D}.
 	 * 
 	 * @param cols  a column count
 	 * @param rows  a row count
 	 * @param aisl  an aisle count
 	 */
-	public TiledSpace3D(int cols, int rows, int aisl)
+	public TASpace3D(int cols, int rows, int aisl)
 	{
 		super(cols, rows, aisl);
 	}
 	
 	
 	/**
-	 * Returns the columns of the {@code TiledSpace3D}.
+	 * Returns the columns of the {@code TASpace3D}.
 	 * 
 	 * @return  a column count
 	 */
@@ -120,7 +120,7 @@ public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> i
 	}
 
 	/**
-	 * Returns the aisles of the {@code TiledSpace3D}.
+	 * Returns the aisles of the {@code TASpace3D}.
 	 * 
 	 * @return  an aisle count
 	 */
@@ -130,7 +130,7 @@ public class TiledSpace3D<T extends TiledSpace3D.Tile3D> extends TiledSpace<T> i
 	}
 	
 	/**
-	 * Returns the rows of the {@code TiledSpace3D}.
+	 * Returns the rows of the {@code TASpace3D}.
 	 * 
 	 * @return  a row count
 	 */

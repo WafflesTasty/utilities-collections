@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import zeno.util.coll.Collection;
+import zeno.util.coll.indices.arrays.Index;
 
 /**
  * The {@code List} class defines a one-dimensional collection backed by an {@code ArrayList}.
@@ -18,7 +19,7 @@ import zeno.util.coll.Collection;
  * @see Collection
  * @see Index
  */
-public class List<V> implements Collection<V>, Index<V>
+public class List<V> implements Collection<V>, Index.Unique<V>
 {
 	private ArrayList<V> source;
 	
@@ -59,6 +60,12 @@ public class List<V> implements Collection<V>, Index<V>
 		source.remove(val);
 	}
 
+	@Override
+	public void clear()
+	{
+		source = new ArrayList<>();
+	}
+	
 	
 	@Override
 	public boolean contains(int... coords)

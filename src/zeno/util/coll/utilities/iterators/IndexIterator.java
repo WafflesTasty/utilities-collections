@@ -2,7 +2,7 @@ package zeno.util.coll.utilities.iterators;
 
 import java.util.Iterator;
 
-import zeno.util.coll.indices.Index;
+import zeno.util.coll.indices.arrays.Index;
 
 /**
  * The {@code IndexIterator} class iterators over a subsection of an {@code Index}.

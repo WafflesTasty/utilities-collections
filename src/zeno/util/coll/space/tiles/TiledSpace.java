@@ -1,39 +1,38 @@
-package zeno.util.coll.space;
+package zeno.util.coll.space.tiles;
 
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.coll.indices.ArrayIndex;
+import zeno.util.coll.indices.arrays.Index;
+import zeno.util.coll.space.Space;
 import zeno.util.geom.ITransformation;
 import zeno.util.geom.collidables.IGeometrical;
-import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.Bounds;
 import zeno.util.geom.collidables.geometry.generic.ICube;
-import zeno.util.geom.collidables.geometry.generic.ICuboid;
 import zeno.util.geom.utilities.Geometries;
-import zeno.util.tools.helper.Iterables;
 
 /**
- * The {@code TiledSpace} class defines a space partitioned into hypercubes of equal size.
+ * The {@code TiledSpace} interface defines a space partitioned into hypercubes of equal size.
  *
- * @author Zeno
+ * @author Waffles
  * @since 28 Feb 2020
- * @version 1.0
+ * @version 1.1
  *
- *
+ * 
+ * @param <V>  a value type
  * @param <T>  a tile type
- * @see ArrayIndex
+ * @see Index
  * @see Space
  */
-public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements Space<T>
+public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Space<T>
 {		
 	/**
 	 * The {@code Tile} interface defines a single element of a {@code TiledSpace}.
 	 *
-	 * @author Zeno
+	 * @author Waffles
 	 * @since 26 Feb 2020
-	 * @version 1.0
+	 * @version 1.1
 	 * 
 	 * 
 	 * @see IGeometrical
@@ -71,7 +70,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 			@Override
 			public Matrix Matrix(int dim)
 			{
-				int ord = target.Parent().Order();
+				int ord = target.Coordinates().length;
 				float size = target.Parent().TileSize();
 				
 				Matrix mat = Matrices.create(dim + 1, dim + 1);
@@ -94,7 +93,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 			@Override
 			public Matrix Inverse(int dim)
 			{
-				int ord = target.Parent().Order();
+				int ord = target.Coordinates().length;
 				float size = target.Parent().TileSize();
 				
 				Matrix inv = Matrices.create(dim + 1, dim + 1);
@@ -131,7 +130,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 		 * 
 		 * @see TiledSpace
 		 */
-		public abstract TiledSpace<?> Parent();
+		public abstract TiledSpace<?, ?> Parent();
 		
 		
 		@Override
@@ -143,32 +142,16 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 		@Override
 		public default ICube Shape()
 		{
-			Vector o = Vectors.create(Parent().Order());
+			Vector o = Vectors.create(Coordinates().length);
 			return Geometries.cube(o, 2f);
 		}
 	}
+
 	
-	
-	private float tSize;
-	
-	/**
-	 * Creates a new {@code TiledSpace}.
-	 * 
-	 * @param dim  a space index
-	 */
-	public TiledSpace(int... dim)
+	@Override
+	public default Bounds Bounds()
 	{
-		super(dim); setTileSize(2f);
-	}
-	
-	/**
-	 * Changes the tile size of the {@code TiledSpace}.
-	 * 
-	 * @param s  a tile size
-	 */
-	public void setTileSize(float s)
-	{
-		tSize = s;
+		return Geometries.cuboid(Size().times(0.5f), Size());
 	}
 	
 	/**
@@ -176,10 +159,7 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 	 * 
 	 * @return  a tile size
 	 */
-	public float TileSize()
-	{
-		return tSize;
-	}
+	public abstract float TileSize();
 	
 	/**
 	 * Returns the size of the {@code TiledSpace}.
@@ -189,66 +169,15 @@ public class TiledSpace<T extends TiledSpace.Tile> extends ArrayIndex<T> impleme
 	 * 
 	 * @see Vector
 	 */
-	public Vector Size()
+	public default Vector Size()
 	{
-		Vector s = Vectors.create(Order());
-		for(int i = 0; i < Order(); i++)
+		int dim = Bounds().Dimension();
+		Vector s = Vectors.create(dim);
+		for(int i = 0; i < dim; i++)
 		{
-			s.set(Dimensions()[i] * tSize, i);
+			s.set(Dimensions()[i] * TileSize(), i);
 		}
 		
 		return s;
-	}
-	
-	
-	private T find(Vector v)
-	{
-		int[] index = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			index[i] = (int) (v.get(i) / TileSize());
-			if(index[i] < 0 || Dimensions()[i] <= index[i])
-			{
-				return null;
-			}
-		}
-		
-		return get(index);
-	}
-	
-	@Override
-	public Iterable<T> query(ICuboid c)
-	{
-		T min = find(c.Minimum());
-		if(min == null)
-		{
-			min = get(Minimum());
-		}
-		
-		T max = find(c.Maximum());
-		if(max == null)
-		{
-			max = get(Maximum());
-		}
-		
-		return null;
-	}
-
-	@Override
-	public Iterable<T> query(Point p)
-	{
-		T tile = find(p.asVector());
-		if(tile != null)
-		{
-			return Iterables.singleton(tile);
-		}
-		
-		return Iterables.empty();
-	}
-	
-	@Override
-	public Bounds Bounds()
-	{
-		return Geometries.cuboid(Size().times(0.5f), Size());
 	}
 }

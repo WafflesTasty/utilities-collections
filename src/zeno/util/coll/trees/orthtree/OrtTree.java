@@ -177,16 +177,19 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 			{
 				return true;
 			}
-
-			if(!curr.isLeaf())
-				findChildren();
-			else if(queue.isEmpty())
+			
+			if(queue.isEmpty())
 			{
 				return false;
 			}
 			
 			curr = queue.popFirst();
 			objects = curr.Objects().iterator();
+			if(!curr.isLeaf())
+			{
+				findChildren();
+			}
+
 			return hasNext();
 		}
 		
@@ -241,7 +244,7 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 	@Override
 	public Iterable<O> query(ICuboid c)
 	{
-		if(!Bounds().contains(c))
+		if(!Bounds().intersects(c))
 			return Objects();
 		else
 		{

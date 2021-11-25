@@ -31,12 +31,10 @@ public interface Collection<O> extends Iterable<O>
 	
 	
 	/**
-	 * Adds an object to the {@code Collection}.
-	 * 
-	 * @param obj  an object to add
+	 * Removes objects from the {@code Collection}.
 	 */
-	public abstract void add(O obj);
-	
+	public abstract void clear();
+		
 	/**
 	 * Removes an object from the {@code Collection}.
 	 * 
@@ -51,9 +49,16 @@ public interface Collection<O> extends Iterable<O>
 	 * @return  {@code true} if the object is contained
 	 */
 	public abstract boolean contains(O obj);
-		
+	
 	/**
-	 * Returns the count of the {@code Collection}.
+	 * Adds an object to the {@code Collection}.
+	 * 
+	 * @param obj  an object to add
+	 */
+	public abstract void add(O obj);
+	
+	/**
+	 * Returns the {@code Collection} size.
 	 * 
 	 * @return  an item count
 	 */

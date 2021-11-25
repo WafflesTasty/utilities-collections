@@ -1,4 +1,4 @@
-package zeno.util.coll.indices;
+package zeno.util.coll.indices.arrays;
 
 import java.util.Iterator;
 
@@ -15,7 +15,7 @@ import zeno.util.tools.helper.iterators.ArrayIterator;
  * @param <V>  an index type
  * @see Index
  */
-public class ArrayIndex<V> implements Index<V>
+public class ArrayIndex<V> implements Index.Unique<V>
 {
 	private Object[] source;
 	private int[] dimension;
@@ -98,30 +98,6 @@ public class ArrayIndex<V> implements Index<V>
 		return index;
 	}
 
-	@Override
-	public boolean contains(int... coords)
-	{
-		for(int i = 0; i < coords.length; i++)
-		{
-			// If coordinates exceed the index order...
-			if(Order() <= i)
-			{
-				// The remainder have to be zero.
-				if(coords[i] != 0)
-				{
-					return false;
-				}
-			}
-			
-			// Otherwise, check the coordinate bounds.
-			if(coords[i] < 0 || dimension[i] <= coords[i])
-			{
-				return false;
-			}
-		}
-		
-		return true;
-	}
 	
 	@Override
 	public V put(V val, int... coords)
