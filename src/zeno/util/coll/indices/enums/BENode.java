@@ -117,7 +117,21 @@ public class BENode<E extends Enum<E>> extends BiNode
 	}
 	
 	/**
-	 * Splits the {@code BENode}.
+	 * Merges the {@code BENode} with its parent.
+	 */
+	public void merge()
+	{
+		if(Sibling().Value() == value)
+		{
+			Parent().setValue(value);
+			Parent().setLChild(null);
+			Parent().setRChild(null);
+			Parent().merge();
+		}
+	}
+	
+	/**
+	 * Splits the {@code BENode} into two children.
 	 */
 	public void split()
 	{
@@ -130,7 +144,7 @@ public class BENode<E extends Enum<E>> extends BiNode
 		lMax[dim] = cMin[dim] + diff / 2;
 		rMin[dim] = lMax[dim] + 1;
 
-		
+
 		BENode<E> lChild = new BENode<>(Tree(), cMin, lMax);
 		BENode<E> rChild = new BENode<>(Tree(), rMin, cMax);
 		
@@ -141,6 +155,19 @@ public class BENode<E extends Enum<E>> extends BiNode
 		setRChild(rChild);
 	}
 
+	/**
+	 * Returns the cut of the {@code BENode}.
+	 * 
+	 * @return  an index cut
+	 * 
+	 * 
+	 * @see Cut
+	 */
+	public Cut Cut()
+	{
+		return cut;
+	}
+	
 	
 	/**
 	 * Checks the size of the {@code BENode}.
@@ -188,6 +215,12 @@ public class BENode<E extends Enum<E>> extends BiNode
 	protected BEIndex<E, ?> Tree()
 	{
 		return (BEIndex<E, ?>) super.Tree();
+	}
+	
+	@Override
+	public BENode<E> Sibling()
+	{
+		return (BENode<E>) super.Sibling();
 	}
 	
 	@Override

@@ -171,7 +171,7 @@ public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Spac
 	 */
 	public default Vector Size()
 	{
-		int dim = Bounds().Dimension();
+		int dim = Dimensions().length;
 		Vector s = Vectors.create(dim);
 		for(int i = 0; i < dim; i++)
 		{

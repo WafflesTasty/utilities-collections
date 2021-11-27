@@ -53,33 +53,46 @@ public class BEIterator<E extends Enum<E>, T extends Tile<E>> implements Iterato
 	{
 		queue = new FIFOQueue<>();
 		queue.push(tgt.Root());
-		cMin = min;	cMax = max;
+		
+		cMin = min;
+		cMax = max;
+		target = tgt;
 		next = findNext();
 	}
 	
 	
 	private int[] findNext()
 	{
+		if(queue.isEmpty()) return null;
 		BENode<E> node = queue.peek();
+
 		// If the node is not a leaf...
 		if(!node.isLeaf())
 		{
 			// Proceed to the relevant children...
 			BENode<E> nMin = node.Child(cMin);
 			BENode<E> nMax = node.Child(cMax);
-			
-			
+
 			queue.pop();				
 			queue.push(nMin);
 			if(nMin != nMax)
 			{
 				queue.push(nMax);
 			}
-			
+
 			// ...and try again.
 			return findNext();
 		}
 
+		
+		// If the node has no value...
+		if(node.Value() == null)
+		{
+			queue.pop(); next = null;
+			// ...lose it and try again.
+			return findNext();
+		}
+		
 		
 		int dim = cMin.length;
 		int[] nMin = new int[dim];
@@ -90,8 +103,7 @@ public class BEIterator<E extends Enum<E>, T extends Tile<E>> implements Iterato
 			nMin[i] = Integers.max(cMin[i], node.Minimum()[i]);
 			nMax[i] = Integers.min(cMax[i], node.Maximum()[i]);
 		}
-		
-		
+
 		// If this is the first element...
 		if(next == null)
 		{
@@ -112,9 +124,9 @@ public class BEIterator<E extends Enum<E>, T extends Tile<E>> implements Iterato
 
 			next[i] = nMin[i];
 		}
-		
+
 		// Otherwise, remove the node...
-		queue.pop();
+		queue.pop(); next = null;
 		// ...and, try again.
 		return findNext();
 	}

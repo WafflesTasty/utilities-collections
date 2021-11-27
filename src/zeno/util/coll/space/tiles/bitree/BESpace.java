@@ -1,6 +1,7 @@
 package zeno.util.coll.space.tiles.bitree;
 
 import zeno.util.algebra.linear.vector.Vector;
+import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.coll.indices.enums.BEIndex;
 import zeno.util.coll.indices.enums.BEIterator;
 import zeno.util.coll.space.tiles.TiledSpace;
@@ -73,8 +74,33 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 	 */
 	public BESpace(int... dim)
 	{
+		super(dim);
 		index = new BEIndex<>(dim);
 		tSize = 2f;
+	}
+
+	/**
+	 * Returns a coordinate in the {@code BESpace}.
+	 * 
+	 * @param v  a target vector
+	 * @return   a tile coordinate
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public int[] Coordinate(Vector v)
+	{
+		int[] coords = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			coords[i] = (int) (v.get(i) / TileSize());
+			if(coords[i] < 0 || Dimensions()[i] <= coords[i])
+			{
+				return null;
+			}
+		}
+		
+		return coords;
 	}
 	
 	/**
@@ -89,30 +115,9 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 	
 	
 	@Override
-	public Iterable<Tile<E>> query(Point p)
+	protected Tile<E> create(E value, int[] index)
 	{
-		Vector v = p.asVector();
-		int[] coords = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			coords[i] = (int) (v.get(i) / TileSize());
-			if(coords[i] < 0 || Dimensions()[i] <= coords[i])
-			{
-				return Iterables.empty();
-			}
-		}
-
-		if(contains(coords))
-		{
-			E value = index.get(coords);
-			if(value != null)
-			{
-				Tile<E> tile = create(value, coords);
-				return Iterables.singleton(tile);
-			}
-		}
-		
-		return Iterables.empty();
+		return new Tile<>(this, value, index);
 	}
 
 	@Override
@@ -144,17 +149,45 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 		
 		return () -> new BEIterator<>(this, min, max);
 	}
-		
-	
+
 	@Override
-	protected Tile<E> create(E value, int[] index)
+	public Iterable<Tile<E>> query(Point p)
 	{
-		return new Tile<>(this, value, index);
+		int[] coords = Coordinate(p.asVector());
+		if(coords == null)
+		{
+			return Iterables.empty();
+		}
+		
+		if(contains(coords))
+		{
+			E value = index.get(coords);
+			if(value != null)
+			{
+				Tile<E> tile = create(value, coords);
+				return Iterables.singleton(tile);
+			}
+		}
+		
+		return Iterables.empty();
 	}
-	
+		
 	@Override
 	public float TileSize()
 	{
 		return tSize;
+	}
+
+	@Override
+	public Vector Size()
+	{
+		int[] max = index.Maximum();
+		Vector size = Vectors.create(max.length);
+		for(int i = 0; i < max.length; i++)
+		{
+			size.set(max[i] * tSize, i);
+		}
+
+		return size;
 	}
 }
