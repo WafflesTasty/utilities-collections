@@ -133,7 +133,19 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 		}
 		
 		node.setValue(val);
-		node.merge();
+		while(!node.isRoot())
+		{
+			BENode<E> sibl = node.Sibling();
+			if(sibl.Value() != val)
+			{
+				return prev;
+			}
+			
+			node = node.Parent();
+			node.clearChildren();
+			node.setValue(val);
+		}
+
 		return prev;
 	}
 	

@@ -17,6 +17,17 @@ import zeno.util.coll.utilities.enums.Binary;
  */
 public class BoolSpace extends BESpace<Binary>
 {
+	/**
+	 * Creates a new {@code BoolSpace}.
+	 * 
+	 * @param dim  an index dimension
+	 */
+	public BoolSpace(int... dim)
+	{
+		super(dim);
+	}
+	
+	
 	@Override
 	public Binary put(Binary val, int... coords)
 	{

@@ -117,20 +117,6 @@ public class BENode<E extends Enum<E>> extends BiNode
 	}
 	
 	/**
-	 * Merges the {@code BENode} with its parent.
-	 */
-	public void merge()
-	{
-		if(Sibling().Value() == value)
-		{
-			Parent().setValue(value);
-			Parent().setLChild(null);
-			Parent().setRChild(null);
-			Parent().merge();
-		}
-	}
-	
-	/**
 	 * Splits the {@code BENode} into two children.
 	 */
 	public void split()
