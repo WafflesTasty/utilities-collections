@@ -29,14 +29,21 @@ public interface Tree
 	 */
 	public static class Node implements INode, INodeArray
 	{
+		private Tree tree;
 		private NodeArray nodes;
 		
 		/**
 		 * Creates a new {@code Node}.
+		 * 
+		 * @param t  a parent tree
+		 * 
+		 * 
+		 * @see Tree
 		 */
-		public Node()
+		public Node(Tree t)
 		{
 			nodes = new NodeArray(this);
+			tree  = t;
 		}
 
 			
@@ -80,6 +87,19 @@ public interface Tree
 		public void clearChildren()
 		{
 			nodes.clearChildren();
+		}
+		
+		/**
+		 * Returns the tree of the {@code Node}.
+		 * 
+		 * @return  a parent tree
+		 * 
+		 * 
+		 * @see Tree
+		 */
+		public Tree Tree()
+		{
+			return tree;
 		}
 		
 		
@@ -144,6 +164,20 @@ public interface Tree
 	 * @return  {@code true} if the tree is empty
 	 */
 	public abstract boolean isEmpty();
+	
+	/**
+	 * Creates a new node for the {@code Tree}.
+	 * 
+	 * @param vals  a set of parameters
+	 * @return  a new node
+	 * 
+	 * 
+	 * @see Node
+	 */
+	public default Node create(Object... vals)
+	{
+		return new Node(this);
+	}
 	
 	/**
 	 * Returns the root of the {@code Tree}.

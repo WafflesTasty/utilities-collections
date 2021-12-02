@@ -4,9 +4,12 @@ import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
 import zeno.util.coll.indices.enums.BEIndex;
 import zeno.util.coll.indices.enums.BEIterator;
+import zeno.util.coll.indices.enums.BENode;
 import zeno.util.coll.space.tiles.TiledSpace;
 import zeno.util.geom.collidables.affine.Point;
+import zeno.util.geom.collidables.bounds.IBounded;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
+import zeno.util.geom.utilities.Geometries;
 import zeno.util.tools.helper.Iterables;
 
 /**
@@ -63,9 +66,69 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 		}
 	}
 	
+	/**
+	 * The {@code Node} class defines a single node in a {@code BESpace}.
+	 * Since this is a bounded space, the nodes are bounded objects.
+	 * 
+	 * @author Waffles
+	 * @since 02 Dec 2021
+	 * @version 1.0
+	 *
+	 *
+	 * @param <E>  an enum type
+	 * @see IBounded
+	 * @see BENode
+	 */
+	public static class Node<E extends Enum<E>> extends BENode<E> implements IBounded
+	{
+		/**
+		 * Creates a new {@code Node}.
+		 * 
+		 * @param tree  a parent tree
+		 * @param min   an index minimum
+		 * @param max   an index maximum
+		 * 
+		 * 
+		 * @see BESpace
+		 */
+		public Node(BESpace<E> tree, int[] min, int[] max)
+		{
+			super(tree, min, max);
+		}
+
+		
+		@Override
+		public BESpace<E> Tree()
+		{
+			return (BESpace<E>) super.Tree();
+		}
+		
+		@Override
+		public ICuboid Bounds()
+		{
+			int[] min = Minimum();
+			int[] max = Maximum();
+			
+			float tSize = Tree().TileSize();
+						
+			Vector c = Vectors.create(min.length);
+			Vector s = Vectors.create(min.length);
+
+			for(int i = 0; i < min.length; i++)
+			{
+				float dif = max[i] - min[i] + 1;
+				float avg = (min[i] + max[i] + 1) / 2f;
+				
+				c.set(avg * tSize, i);
+				s.set(dif * tSize, i);
+			}
+			
+			return Geometries.cuboid(c, s);
+		}
+	}
+	
 	
 	private float tSize;
-	private BEIndex<E, Tile<E>> index;
 	
 	/**
 	 * Creates a new {@code BESpace}.
@@ -75,7 +138,6 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 	public BESpace(int... dim)
 	{
 		super(dim);
-		index = new BEIndex<>(dim);
 		tSize = 2f;
 	}
 
@@ -113,6 +175,15 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 		tSize = size;
 	}
 	
+	
+	@Override
+	public Node<E> create(Object... vals)
+	{
+		int[] min = (int[]) vals[0];
+		int[] max = (int[]) vals[1];
+
+		return new Node<>(this, min, max);
+	}
 	
 	@Override
 	protected Tile<E> create(E value, int[] index)
@@ -161,7 +232,7 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 		
 		if(contains(coords))
 		{
-			E value = index.get(coords);
+			E value = get(coords);
 			if(value != null)
 			{
 				Tile<E> tile = create(value, coords);
@@ -181,7 +252,7 @@ public class BESpace<E extends Enum<E>> extends BEIndex<E, BESpace.Tile<E>> impl
 	@Override
 	public Vector Size()
 	{
-		int[] max = index.Maximum();
+		int[] max = Maximum();
 		Vector size = Vectors.create(max.length);
 		for(int i = 0; i < max.length; i++)
 		{

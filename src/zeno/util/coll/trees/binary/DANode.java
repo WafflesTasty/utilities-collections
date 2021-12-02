@@ -19,7 +19,7 @@ public class DANode extends DRNode
 	/**
 	 * Creates a new {@code DANode}.
 	 * 
-	 * @param t  a source tree
+	 * @param tree  a parent tree
 	 * @param cut  an real line cut
 	 * @param ex   an interval extreme
 	 * 
@@ -28,9 +28,9 @@ public class DANode extends DRNode
 	 * @see DATree
 	 * @see Cut
 	 */
-	public DANode(DATree t, Cut cut, Extreme ex)
+	public DANode(DATree tree, Cut cut, Extreme ex)
 	{
-		super(t, cut, ex);
+		super(tree, cut, ex);
 	}
 
 	

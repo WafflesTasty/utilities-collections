@@ -131,8 +131,8 @@ public class BENode<E extends Enum<E>> extends BiNode
 		rMin[dim] = lMax[dim] + 1;
 
 
-		BENode<E> lChild = new BENode<>(Tree(), cMin, lMax);
-		BENode<E> rChild = new BENode<>(Tree(), rMin, cMax);
+		BENode<E> lChild = Tree().create(cMin, lMax);
+		BENode<E> rChild = Tree().create(rMin, cMax);
 		
 		lChild.setValue(value);
 		rChild.setValue(value);
@@ -198,7 +198,7 @@ public class BENode<E extends Enum<E>> extends BiNode
 
 
 	@Override
-	protected BEIndex<E, ?> Tree()
+	public BEIndex<E, ?> Tree()
 	{
 		return (BEIndex<E, ?>) super.Tree();
 	}

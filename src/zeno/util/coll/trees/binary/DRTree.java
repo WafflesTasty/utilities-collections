@@ -390,21 +390,7 @@ public class DRTree extends BSTree<Cut>
 	{
 		return () -> new Intervals();
 	}
-	
-	/**
-	 * Creates a new node for the {@code DRTree}.
-	 * 
-	 * @param cut  an interval cut
-	 * @param ex  an interval extreme
-	 * @return  a new node
-	 * @see Extreme
-	 * @see DRNode
-	 */
-	public DRNode create(Cut cut, Extreme ex)
-	{
-		return new DRNode(this, cut, ex);
-	}
-	
+		
 	/**
 	 * Checks if the {@code DRTree} intersects an interval.
 	 * 
@@ -624,6 +610,14 @@ public class DRTree extends BSTree<Cut>
 	protected DRNode search(Cut cut)
 	{
 		return (DRNode) super.search(cut);
+	}
+	
+	@Override
+	public DRNode create(Object... vals)
+	{
+		Cut cut = (Cut) vals[0];
+		Extreme ex = (Extreme) vals[1];
+		return new DRNode(this, cut, ex);
 	}
 	
 	@Override

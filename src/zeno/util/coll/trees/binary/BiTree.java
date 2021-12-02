@@ -73,7 +73,13 @@ public class BiTree implements Tree
 	{
 		return () -> new PreOrder<>(Root());
 	}
-		
+
+	
+	@Override
+	public BiNode create(Object... vals)
+	{
+		return new BiNode(this);
+	}
 	
 	@Override
 	public boolean isEmpty()

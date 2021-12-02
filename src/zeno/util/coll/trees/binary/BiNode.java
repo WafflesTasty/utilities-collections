@@ -14,8 +14,6 @@ import zeno.util.coll.trees.Tree;
  */
 public class BiNode extends Tree.Node
 {	
-	private BiTree tree;
-	
 	/**
 	 * Creates a new {@code BiNode}.
 	 * 
@@ -26,7 +24,7 @@ public class BiNode extends Tree.Node
 	 */
 	public BiNode(BiTree tree)
 	{
-		this.tree = tree;
+		super(tree);
 	}
 	
 	
@@ -153,7 +151,7 @@ public class BiNode extends Tree.Node
 		else
 		{
 			node.setParent(null);
-			tree.setRoot(node);
+			Tree().setRoot(node);
 		}
 	}
 	
@@ -213,7 +211,7 @@ public class BiNode extends Tree.Node
 		if(!isRoot())
 			Parent().setChild(Index(), null);
 		else
-			tree.setRoot(null);
+			Tree().setRoot(null);
 	}
 	
 	/**
@@ -284,9 +282,10 @@ public class BiNode extends Tree.Node
 	}
 
 	
-	protected BiTree Tree()
+	@Override
+	public BiTree Tree()
 	{
-		return tree;
+		return (BiTree) super.Tree();
 	}
 	
 	@Override

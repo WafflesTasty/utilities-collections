@@ -90,13 +90,15 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 	/**
 	 * Creates a new {@code OrtNode}.
 	 * 
+	 * @param tree  a parent tree
 	 * @param b  a bounds cuboid
 	 * 
 	 * 
 	 * @see ICuboid
 	 */
-	public OrtNode(ICuboid b)
+	public OrtNode(OrtTree<O> tree, ICuboid b)
 	{
+		super(tree);
 		set = new HashedSet<>();
 		bounds = b;
 	}
@@ -104,15 +106,16 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 	/**
 	 * Creates a new {@code OrtNode}.
 	 * 
+	 * @param tree  a parent tree
 	 * @param c  a bounds center
 	 * @param s  a bounds size
 	 * 
 	 * 
 	 * @see Vector
 	 */
-	public OrtNode(Vector c, Vector s)
+	public OrtNode(OrtTree<O> tree, Vector c, Vector s)
 	{
-		this(Geometries.cuboid(c, s));
+		this(tree, Geometries.cuboid(c, s));
 	}
 	
 	
@@ -148,6 +151,12 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 		return true;
 	}
 	
+	
+	@Override
+	public OrtTree<O> Tree()
+	{
+		return (OrtTree<O>) super.Tree();
+	}
 		
 	@Override
 	public OrtNode<O> Child(int i)
@@ -304,7 +313,7 @@ public class OrtNode<O extends IBounded> extends Tree.Node implements Collection
 					v.set(c.get(j) + s.get(j) / 2, j);
 			}
 			
-			addChild(new OrtNode<>(v, s));
+			addChild(Tree().create(v, s));
 		}
 	}
 }

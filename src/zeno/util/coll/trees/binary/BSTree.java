@@ -183,6 +183,13 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 		return new Values();
 	}
 	
+	
+	@Override
+	public BSNode<V> create(Object... vals)
+	{
+		return new BSNode<>(this, (V) vals[0]);
+	}
+	
 	@Override
 	public BSNode<V> Root()
 	{
@@ -279,7 +286,7 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 	{
 		if(Root() == null)
 		{
-			setRoot(new BSNode<>(this, obj));
+			setRoot(create(obj));
 			onInsert(Root());
 			return;
 		}
@@ -290,12 +297,12 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 		
 		if(comp < 0)
 		{
-			node.setLChild(new BSNode<>(this, obj));
+			node.setLChild(create(obj));
 			onInsert(node.LChild());
 		}
 		else
 		{
-			node.setRChild(new BSNode<>(this, obj));
+			node.setRChild(create(obj));
 			onInsert(node.RChild());
 		}
 	}

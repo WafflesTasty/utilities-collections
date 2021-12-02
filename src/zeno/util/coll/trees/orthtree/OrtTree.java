@@ -211,7 +211,7 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 	 */
 	public OrtTree(ICuboid b)
 	{
-		super(b);
+		super(null, b);
 	}
 	
 	/**
@@ -225,9 +225,17 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 	 */
 	public OrtTree(Vector c, Vector s)
 	{
-		super(c, s);
+		super(null, c, s);
 	}
 
+	
+	@Override
+	public OrtNode<O> create(Object... vals)
+	{
+		Vector c = (Vector) vals[0];
+		Vector s = (Vector) vals[1];
+		return new OrtNode<>(this, c, s);
+	}
 	
 	@Override
 	public Iterable<OrtNode<O>> BFSearch()
@@ -269,6 +277,12 @@ public class OrtTree<O extends IBounded> extends OrtNode<O> implements Space<O>,
 		return this;
 	}
 
+	@Override
+	public OrtTree<O> Tree()
+	{
+		return this;
+	}
+	
 		
 	@Override
 	public boolean contains(O obj)

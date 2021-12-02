@@ -87,7 +87,7 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 			max[i] = dim[i] - 1;
 		}
 		
-		setRoot(new BENode<>(this, min, max));
+		setRoot(create(min, max));
 		dimension = dim;
 	}
 
@@ -178,6 +178,16 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 	public Iterable<BENode<E>> DFSearch()
 	{
 		return super.DFSearch();
+	}
+	
+	
+	@Override
+	public BENode<E> create(Object... vals)
+	{
+		int[] min = (int[]) vals[0];
+		int[] max = (int[]) vals[1];
+		
+		return new BENode<>(this, min, max);
 	}
 	
 	@Override
