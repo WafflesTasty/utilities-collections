@@ -1,6 +1,7 @@
 package zeno.util.coll.indices.enums;
 
 import zeno.util.coll.trees.binary.BiNode;
+import zeno.util.tools.Integers;
 import zeno.util.tools.helper.Array;
 
 /**
@@ -114,6 +115,44 @@ public class BENode<E extends Enum<E>> extends BiNode
 	public void setValue(E val)
 	{
 		value = val;
+	}
+	
+	/**
+	 * Changes a value range in the {@code BENode}.
+	 * 
+	 * @param val  an enum value
+	 * @param min  a range minimum
+	 * @param max  a range maximum
+	 */
+	public void put(E val, int[] min, int[] max)
+	{
+		int[] nMin = new int[min.length];
+		int[] nMax = new int[max.length];
+		
+		for(int i = 0; i < min.length; i++)
+		{
+			if(max[i] < cMin[i] || cMax[i] < min[i])
+			{
+				return;
+			}
+			
+			nMin[i] = Integers.max(min[i], cMin[i]);
+			nMax[i] = Integers.min(max[i], cMax[i]);
+		}
+		
+		if(isTile())
+		{
+			value = val;
+			return;
+		}
+		
+		if(isLeaf())
+		{
+			split();
+		}
+		
+		LChild().put(val, nMin, nMax);
+		RChild().put(val, nMin, nMax);		
 	}
 	
 	/**

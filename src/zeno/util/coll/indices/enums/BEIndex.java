@@ -91,6 +91,18 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 		dimension = dim;
 	}
 
+	/**
+	 * Changes a cuboid area of the {@code BEIndex}.
+	 * 
+	 * @param val  an index value
+	 * @param min  an index minimum
+	 * @param max  an index maximum
+	 */
+	public void put(E val, int[] min, int[] max)
+	{
+		Root().put(val, min, max);
+	}
+	
 				
 	protected BENode<E> search(int... coords)
 	{
