@@ -2,7 +2,10 @@ package zeno.util.coll.indices.enums;
 
 import java.util.Iterator;
 
+import zeno.util.coll.Queue;
 import zeno.util.coll.indices.arrays.Index;
+import zeno.util.coll.indices.enums.BENode.Collision;
+import zeno.util.coll.queues.FIFOQueue;
 import zeno.util.coll.trees.binary.BiTree;
 
 /**
@@ -69,9 +72,79 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 			return value;
 		}
 	}
+		
+	/**
+	 * The {@code TypeIterator} class iterates over all nodes with a specific value.
+	 *
+	 * @author Waffles
+	 * @since 08 Dec 2021
+	 * @version 1.0
+	 * 
+	 * 
+	 * @see Iterator
+	 * @see BENode
+	 */
+	public class TypeIterator implements Iterator<BENode<E>>
+	{
+		private E value;
+		private BENode<E> next;
+		private Queue<BENode<E>> nodes;
+		
+		/**
+		 * Creates a new {@code TypeIterator}.
+		 * 
+		 * @param val  an enum value
+		 */
+		public TypeIterator(E val)
+		{
+			value = val;
+			nodes = new FIFOQueue<>();
+			nodes.push(Root());
+			next = findNext();
+		}
+		
+		
+		private BENode<E> findNext()
+		{
+			if(nodes.isEmpty())
+			{
+				return null;
+			}
+			
+			next = nodes.pop();
+			if(!next.hasValue(value))
+			{
+				return findNext();
+			}
+			
+			if(!next.isLeaf())
+			{
+				nodes.push(next.LChild());
+				nodes.push(next.RChild());
+				return findNext();
+			}
+			
+			return next;
+		}
+		
+		@Override
+		public boolean hasNext()
+		{
+			return next != null;
+		}
+
+		@Override
+		public BENode<E> next()
+		{
+			BENode<E> curr = next;
+			next = findNext();
+			return curr;
+		}
+	}
 	
-	
+
 	private int[] dimension;
+	private Queue<BENode<E>> queue;
 	
 	/**
 	 * Creates a new {@code BEIndex}.
@@ -90,7 +163,19 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 		setRoot(create(min, max));
 		dimension = dim;
 	}
-
+	
+		
+	/**
+	 * Removes a cuboid area of the {@code BEIndex}.
+	 * 
+	 * @param min  an index minimum
+	 * @param max  an index maximum
+	 */
+	public void remove(int[] min, int[] max)
+	{
+		put(null, min, max);
+	}
+	
 	/**
 	 * Changes a cuboid area of the {@code BEIndex}.
 	 * 
@@ -100,28 +185,54 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 	 */
 	public void put(E val, int[] min, int[] max)
 	{
-		Root().put(val, min, max);
-	}
-	
-				
-	protected BENode<E> search(int... coords)
-	{
-		BENode<E> node = Root();
-		// Start checking from root...
-		while(true)
+		queue = new FIFOQueue<>();
+		queue.push(Root());
+		
+		while(!queue.isEmpty())
 		{
-			// If the node is a leaf...
-			if(node.isLeaf())
+			BENode<E> node = queue.pop();
+			Collision<E> cls = node.intersect(min, max);
+			if(cls.isEmpty()) continue;
+			if(cls.isCover())
 			{
-				// Return it.
-				return node;
+				node.clearChildren();
+				node.setValue(val);
+				continue;
 			}
 			
-			// Otherwise, move to a child node.
-			node = node.Child(coords);
+			if(node.isTile())
+			{
+				node.setValue(val);
+				continue;
+			}
+			
+			node.addValue(val);
+			if(node.isLeaf())
+			{
+				node.split();
+			}
+			
+			queue.push(node.LChild());
+			queue.push(node.RChild());
 		}
 	}
 	
+	/**
+	 * Iterates nodes of a type in the {@code BEIndex}.
+	 * 
+	 * @param val  an enum value
+	 * @return  a node iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see BENode
+	 */
+	public Iterable<BENode<E>> Nodes(E val)
+	{
+		return () -> new TypeIterator(val);
+	}
+	
+				
 	protected Tile<E> create(E val, int[] coords)
 	{
 		return new Tile<>(val, coords);
@@ -130,7 +241,15 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 	@Override
 	public E put(E val, int... coords)
 	{
-		BENode<E> node = search(coords);
+		if(!contains(coords)) return null;
+		
+		BENode<E> node = Root();
+		while(!node.isLeaf())
+		{
+			node.addValue(val);
+			node = node.Child(coords);
+		}
+		
 		if(node.Value() == val)
 		{
 			return val;
@@ -140,7 +259,7 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 		while(!node.isTile())
 		{
 			node.split();
-			node.setValue(null);
+			node.addValue(val);
 			node = node.Child(coords);
 		}
 		
@@ -148,14 +267,18 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 		while(!node.isRoot())
 		{
 			BENode<E> sibl = node.Sibling();
-			if(sibl.Value() != val)
+			if(sibl.isLeaf())
 			{
-				return prev;
+				if(sibl.hasValue(val))
+				{
+					node = node.Parent();
+					node.clearChildren();
+					node.setValue(val);
+					continue;
+				}
 			}
 			
-			node = node.Parent();
-			node.clearChildren();
-			node.setValue(val);
+			return prev;
 		}
 
 		return prev;
@@ -164,7 +287,13 @@ public class BEIndex<E extends Enum<E>, T extends BEIndex.Tile<E>> extends BiTre
 	@Override
 	public E get(int... coords)
 	{
-		return search(coords).Value();
+		BENode<E> node = Root();
+		while(!node.isLeaf())
+		{
+			node= node.Child(coords);
+		}
+		
+		return node.Value();
 	}
 
 	

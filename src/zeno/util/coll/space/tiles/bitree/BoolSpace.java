@@ -29,6 +29,15 @@ public class BoolSpace extends BESpace<Binary>
 	
 	
 	@Override
+	public void put(Binary val, int[] min, int[] max)
+	{
+		if(val == Binary.ZERO)
+			super.remove(min, max);
+		else		
+			super.put(val, min, max);
+	}
+	
+	@Override
 	public Binary put(Binary val, int... coords)
 	{
 		if(val != Binary.ZERO)
@@ -36,14 +45,14 @@ public class BoolSpace extends BESpace<Binary>
 			return super.put(val, coords);
 		}
 		
-		return super.put(null, coords);
+		return super.remove(coords);
 	}
 	
 	@Override
 	public Binary get(int... coords)
 	{
 		Binary b = super.get(coords);
-		if(b == null) return Binary.ZERO;
-		return super.get(coords);
+		if(b != null) return b;
+		return Binary.ZERO;
 	}
 }

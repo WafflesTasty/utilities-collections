@@ -19,6 +19,99 @@ import zeno.util.tools.helper.Array;
 public class BENode<E extends Enum<E>> extends BiNode
 {
 	/**
+	 * The {@code Collision} class provides info on intersection of a range with a {@code BENode}.
+	 *
+	 * @author Waffles
+	 * @since 07 Dec 2021
+	 * @version 1.0
+	 * 
+	 * 
+	 * @param <E>  an enum type
+	 * @see BENode
+	 * @see Enum
+	 */
+	public static class Collision<E extends Enum<E>>
+	{
+		private boolean isCover, isEmpty;
+		private int[] cMin, cMax, iMin, iMax;
+		
+		/**
+		 * Creates a new {@code Collision}.
+		 * 
+		 * @param src  a source node
+		 * @param min  a range minimum
+		 * @param max  a range maximum
+		 */
+		public Collision(BENode<E> src, int[] min, int[] max)
+		{
+			isCover = true;
+			
+			cMin = src.Minimum();
+			cMax = src.Maximum();
+			
+			iMin = new int[cMin.length];
+			iMax = new int[cMax.length];
+			
+			for(int i = 0; i < cMin.length; i++)
+			{
+				if(max[i] < cMin[i] || cMax[i] < min[i])
+				{
+					isEmpty = true;
+				}
+				
+				if(cMin[i] < min[i] || max[i] < cMax[i])
+				{
+					isCover = false;
+				}
+				
+				iMin[i] = Integers.max(min[i], cMin[i]);
+				iMax[i] = Integers.min(max[i], cMax[i]);
+			}
+		}
+
+		
+		/**
+		 * Checks if the range covers the entire node.
+		 * 
+		 * @return  {@code true} if the node is covered
+		 */
+		public boolean isCover()
+		{
+			return isCover;
+		}
+		
+		/**
+		 * Checks if the range is disjoint from the node.
+		 * 
+		 * @return  {@code true} if intersection is empty
+		 */
+		public boolean isEmpty()
+		{
+			return isEmpty;
+		}
+		
+		/**
+		 * Returns the minimum of the intersection.
+		 * 
+		 * @return  an intersection minimum
+		 */
+		public int[] Minimum()
+		{
+			return iMin;
+		}
+		
+		/**
+		 * Returns the maximum of the intersection.
+		 * 
+		 * @return  an intersection maximum
+		 */
+		public int[] Maximum()
+		{
+			return iMin;
+		}
+	}
+	
+	/**
 	 * The {@code Cut} class defines a plane that splits a {@code BENode}.
 	 *
 	 * @author Waffles
@@ -62,14 +155,14 @@ public class BENode<E extends Enum<E>> extends BiNode
 		{
 			int dMin = cMin[Dimension()];
 			int dMax = cMax[Dimension()];
-			
+
 			return dMin + (dMax - dMin) / 2 + 0.5f;
 		}
 	}
 	
 	
-	private E value;
 	private Cut cut;
+	private Enum<E>[] values;
 	
 	private int[] cMin;
 	private int[] cMax;
@@ -89,8 +182,24 @@ public class BENode<E extends Enum<E>> extends BiNode
 		super(tree);
 		cut = new Cut();
 		cMin = min; cMax = max;
+		values = new Enum[]{null};
 	}
 
+	/**
+	 * Intersects a range with the {@code BENode}.
+	 * 
+	 * @param min  a range minimum
+	 * @param max  a range maximum
+	 * @return  a collision
+	 * 
+	 * 
+	 * @see Collision
+	 */
+	public Collision<E> intersect(int[] min, int[] max)
+	{
+		return new Collision<>(this, min, max);
+	}
+	
 	/**
 	 * Returns a target child of the {@code BENode}.
 	 * 
@@ -108,53 +217,61 @@ public class BENode<E extends Enum<E>> extends BiNode
 	}
 
 	/**
+	 * Returns the cut of the {@code BENode}.
+	 * 
+	 * @return  an index cut
+	 * 
+	 * 
+	 * @see Cut
+	 */
+	public Cut Cut()
+	{
+		return cut;
+	}
+
+	
+	/**
+	 * Adds a value to the {@code BENode}.
+	 * 
+	 * @param val  an enum value
+	 */
+	public void addValue(E val)
+	{
+		if(!hasValue(val))
+		{
+			values = Array.add.to(values, val);
+		}
+	}
+	
+	/**
+	 * Checks a value in the {@code BENode}.
+	 * 
+	 * @param val  an enum value
+	 * @return  {@code true} if the node contains the value
+	 */
+	public boolean hasValue(E val)
+	{
+		for(Enum<E> e : values)
+		{
+			if(e == val)
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	/**
 	 * Changes the value of the {@code BENode}.
 	 * 
 	 * @param val  an enum value
 	 */
 	public void setValue(E val)
 	{
-		value = val;
+		values = new Enum[]{val};
 	}
-	
-	/**
-	 * Changes a value range in the {@code BENode}.
-	 * 
-	 * @param val  an enum value
-	 * @param min  a range minimum
-	 * @param max  a range maximum
-	 */
-	public void put(E val, int[] min, int[] max)
-	{
-		int[] nMin = new int[min.length];
-		int[] nMax = new int[max.length];
 		
-		for(int i = 0; i < min.length; i++)
-		{
-			if(max[i] < cMin[i] || cMax[i] < min[i])
-			{
-				return;
-			}
-			
-			nMin[i] = Integers.max(min[i], cMin[i]);
-			nMax[i] = Integers.min(max[i], cMax[i]);
-		}
-		
-		if(isTile())
-		{
-			value = val;
-			return;
-		}
-		
-		if(isLeaf())
-		{
-			split();
-		}
-		
-		LChild().put(val, nMin, nMax);
-		RChild().put(val, nMin, nMax);		
-	}
-	
 	/**
 	 * Splits the {@code BENode} into two children.
 	 */
@@ -173,24 +290,11 @@ public class BENode<E extends Enum<E>> extends BiNode
 		BENode<E> lChild = Tree().create(cMin, lMax);
 		BENode<E> rChild = Tree().create(rMin, cMax);
 		
-		lChild.setValue(value);
-		rChild.setValue(value);
+		lChild.setValue(Value());
+		rChild.setValue(Value());
 		
 		setLChild(lChild);
 		setRChild(rChild);
-	}
-
-	/**
-	 * Returns the cut of the {@code BENode}.
-	 * 
-	 * @return  an index cut
-	 * 
-	 * 
-	 * @see Cut
-	 */
-	public Cut Cut()
-	{
-		return cut;
 	}
 	
 	
@@ -232,7 +336,9 @@ public class BENode<E extends Enum<E>> extends BiNode
 	 */
 	public E Value()
 	{
-		return value;
+		if(values.length > 0)
+			return (E) values[0];
+		return null;
 	}
 
 

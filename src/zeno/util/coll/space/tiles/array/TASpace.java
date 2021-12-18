@@ -84,7 +84,8 @@ public class TASpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements
 	 */
 	public TASpace(int... dim)
 	{
-		super(dim); setTileSize(2f);
+		super(dim);
+		tSize = 2f;
 	}
 	
 	/**
