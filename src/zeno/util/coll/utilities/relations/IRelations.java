@@ -1,5 +1,6 @@
 package zeno.util.coll.utilities.relations;
 
+import zeno.util.coll.queues.BSQueue;
 import zeno.util.tools.patterns.Decorator;
 
 /**
@@ -56,6 +57,36 @@ public interface IRelations extends Decorator<IRelatable>
 		}
 	}
 	
+	
+	/**
+	 * Returns a parent chain of the {@code IRelations}.
+	 * 
+	 * @param <R>  a node type
+	 * @return  a node chain
+	 * 
+	 * 
+	 * @see IRelatable
+	 * @see Iterable
+	 */
+	public default <R extends IRelatable> Iterable<R> Chain()
+	{
+		BSQueue<R> queue = new BSQueue<>((r1, r2) -> 
+		{
+			int d1 = r1.Relations().Depth();
+			int d2 = r2.Relations().Depth();
+			
+			return d1 - d2;
+		});
+		
+		R node = (R) Root();
+		while(node != null)
+		{
+			queue.push(node);
+			node = node.Relations().Parent();
+		}
+		
+		return queue;
+	}
 	
 	/**
 	 * Returns the parent of the {@code IRelations}.

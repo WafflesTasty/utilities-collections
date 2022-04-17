@@ -103,7 +103,16 @@ public interface Index<T>
 	 * 
 	 * @return  an index dimension
 	 */
-	public abstract int[] Dimensions();
+	public default int[] Dimensions()
+	{
+		int[] dim = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			dim[i] = Maximum()[i] - Minimum()[i] + 1;
+		}
+
+		return dim;
+	}
 	
 	/**
 	 * Returns the minimum coordinate of the {@code Index}.
@@ -112,13 +121,7 @@ public interface Index<T>
 	 */
 	public default int[] Minimum()
 	{
-		int[] min = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			min[i] = 0;
-		}
-		
-		return min;
+		return new int[Order()];
 	}
 	
 	/**

@@ -1,9 +1,9 @@
-package zeno.util.coll.space.tiles.bitree;
+package zeno.util.coll.space.tiles.enums;
 
 import zeno.util.coll.utilities.enums.Binary;
 
 /**
- * The {@code BoolSpace} class defines an enum space with two possible values.
+ * The {@code BoolTree} class defines an enum space with two possible values.
  * For ease of use, the space considers {@code Binary.ZERO} as equal to null under the hood.
  * For the sake of consistency, any null value is returned as {@code Binary.ZERO} as well.
  *
@@ -12,19 +12,20 @@ import zeno.util.coll.utilities.enums.Binary;
  * @version 1.0
  * 
  * 
- * @see BESpace
+ * @see BETree
  * @see Binary
  */
-public class BoolSpace extends BESpace<Binary>
+public class BoolTree extends BETree<Binary>
 {
 	/**
-	 * Creates a new {@code BoolSpace}.
+	 * Creates a new {@code BoolTree}.
 	 * 
-	 * @param dim  an index dimension
+	 * @param tSize  a grid tile size
+	 * @param dim    an index dimension
 	 */
-	public BoolSpace(int... dim)
+	public BoolTree(float tSize, int... dim)
 	{
-		super(dim);
+		super(tSize, dim);
 	}
 	
 	

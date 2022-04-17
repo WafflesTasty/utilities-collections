@@ -85,7 +85,7 @@ public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Spac
 						mat.set(size * (ci + 0.5f), i, dim);
 						mat.set(size / 2, i, i);
 					}
-				}
+				}	
 
 				return mat;
 			}
@@ -106,7 +106,7 @@ public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Spac
 						int ci = target.Coordinates()[i];
 						
 						inv.set(- (2 * ci + 1), i, dim);
-						inv.set(2 / size, i, i);
+						inv.set(2f / size, i, i);
 					}
 				}
 
