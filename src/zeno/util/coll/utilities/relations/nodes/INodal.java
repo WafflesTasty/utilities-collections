@@ -112,19 +112,19 @@ public interface INodal extends IRelations
 	}
 	
 	/**
-	 * Returns the node height of the {@code INode}.
+	 * Returns the node level of the {@code INode}.
 	 * </br> This indicates the relative depth of the deepest child node.
 	 * 
-	 * @return  a node height
+	 * @return  a node level
 	 */
-	public default int Height()
+	public default int Level()
 	{
 		if(!isLeaf())
 		{
 			int max = 0;
 			for(INode child : Children())
 			{
-				max = Integers.max(max, child.Relations().Height());
+				max = Integers.max(max, child.Relations().Level());
 			}
 			
 			return 1 + max;
@@ -139,14 +139,14 @@ public interface INodal extends IRelations
 	 * 
 	 * @return  a node size
 	 */
-	public default int Size()
+	public default int TreeSize()
 	{
 		int count = 1;
 		for(INode child : Children())
 		{
 			if(child != null)
 			{
-				count += child.Relations().Size();
+				count += child.Relations().TreeSize();
 			}
 		}
 		

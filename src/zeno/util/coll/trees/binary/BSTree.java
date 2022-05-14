@@ -311,6 +311,6 @@ public class BSTree<V> extends BiTree implements Collection<V>, Comparator<V>, T
 	public int Count()
 	{
 		if(Root() == null) return 0;
-		return Root().Size();
+		return Root().TreeSize();
 	}	
 }

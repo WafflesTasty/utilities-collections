@@ -688,7 +688,7 @@ public class DRTree extends BSTree<Cut>
 		
 		if(dmin < dmax)
 		{
-			if(max.Index() == 1)
+			if(max.TreeIndex() == 1)
 			{
 				pmax.replace(max);
 				mergeBetween(min, max);
@@ -699,7 +699,7 @@ public class DRTree extends BSTree<Cut>
 			return;
 		}
 		
-		if(min.Index() == 0)
+		if(min.TreeIndex() == 0)
 		{
 			pmin.replace(min);
 			mergeBetween(min, max);
@@ -730,12 +730,12 @@ public class DRTree extends BSTree<Cut>
 	{
 		if(min.isRoot()) return;
 		
-		if(min.Index() == 1)
+		if(min.TreeIndex() == 1)
 		{
 			mergeAbove(min.Parent());
 		}
 		
-		if(min.Index() == 0)
+		if(min.TreeIndex() == 0)
 		{
 			min.Parent().replace(min);
 			mergeAbove(min);
@@ -746,12 +746,12 @@ public class DRTree extends BSTree<Cut>
 	{
 		if(max.isRoot()) return;
 		
-		if(max.Index() == 0)
+		if(max.TreeIndex() == 0)
 		{
 			mergeBelow(max.Parent());
 		}
 		
-		if(max.Index() == 1)
+		if(max.TreeIndex() == 1)
 		{
 			max.Parent().replace(max);
 			mergeBelow(max);

@@ -147,7 +147,7 @@ public class BiNode extends Tree.Node
 	public void replace(BiNode node)
 	{
 		if(!isRoot())
-			Parent().setChild(Index(), node);
+			Parent().setChild(TreeIndex(), node);
 		else
 		{
 			node.setParent(null);
@@ -209,7 +209,7 @@ public class BiNode extends Tree.Node
 	public void detach()
 	{
 		if(!isRoot())
-			Parent().setChild(Index(), null);
+			Parent().setChild(TreeIndex(), null);
 		else
 			Tree().setRoot(null);
 	}

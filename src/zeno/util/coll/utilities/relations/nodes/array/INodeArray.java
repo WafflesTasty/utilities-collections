@@ -52,7 +52,7 @@ public interface INodeArray extends INodal
 	 * 
 	 * @return  a nodal index
 	 */
-	public default int Index()
+	public default int TreeIndex()
 	{
 		int index = 0;
 		// Assumes the iterator starts at zero.

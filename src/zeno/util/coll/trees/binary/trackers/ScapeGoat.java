@@ -63,7 +63,7 @@ public class ScapeGoat<O> implements Tracker<O>
 			{
 				s1 = s1 + s2 + 1;
 				if(curr.Sibling() != null)
-					s2 = curr.Sibling().Size();
+					s2 = curr.Sibling().TreeSize();
 				else
 					s2 = 0;
 				curr = curr.Parent();
@@ -94,7 +94,7 @@ public class ScapeGoat<O> implements Tracker<O>
 	
 	BSNode<O> median(BSNode<O> base)
 	{
-		int med = base.Size() / 2;
+		int med = base.TreeSize() / 2;
 		for(BSNode<O> node : Iterables.inorder(base))
 		{
 			if(med-- == 0)

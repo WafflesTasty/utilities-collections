@@ -1,5 +1,8 @@
 package zeno.util.coll.trees;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import zeno.util.coll.trees.traversal.BreadthFirst;
 import zeno.util.coll.trees.traversal.DepthFirst;
 import zeno.util.coll.utilities.relations.nodes.INode;
@@ -31,6 +34,7 @@ public interface Tree
 	{
 		private Tree tree;
 		private NodeArray nodes;
+		private Map<String, Object> props;
 		
 		/**
 		 * Creates a new {@code Node}.
@@ -42,6 +46,7 @@ public interface Tree
 		 */
 		public Node(Tree t)
 		{
+			props = new HashMap<>();
 			nodes = new NodeArray(this);
 			tree  = t;
 		}
@@ -102,6 +107,21 @@ public interface Tree
 			return tree;
 		}
 		
+		
+		@Override
+		public <O, P> void setProperty(Class<O> type, P prop)
+		{
+			if(prop != null)
+				props.put(type.getName(), prop);
+			else
+				props.remove(type.getName());
+		}
+		
+		@Override
+		public <O, P> P getProperty(Class<O> type)
+		{
+			return (P) props.get(type.getName());
+		}
 		
 		@Override
 		public INode[] Array()
