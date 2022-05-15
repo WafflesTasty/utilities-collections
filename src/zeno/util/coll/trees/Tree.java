@@ -7,7 +7,6 @@ import zeno.util.coll.trees.traversal.BreadthFirst;
 import zeno.util.coll.trees.traversal.DepthFirst;
 import zeno.util.coll.utilities.relations.nodes.INode;
 import zeno.util.coll.utilities.relations.nodes.array.INodeArray;
-import zeno.util.coll.utilities.relations.nodes.array.NodeArray;
 
 /**
  * The {@code Tree} interface defines a generic tree structure.
@@ -33,7 +32,6 @@ public interface Tree
 	public static class Node implements INode, INodeArray
 	{
 		private Tree tree;
-		private NodeArray nodes;
 		private Map<String, Object> props;
 		
 		/**
@@ -47,51 +45,7 @@ public interface Tree
 		public Node(Tree t)
 		{
 			props = new HashMap<>();
-			nodes = new NodeArray(this);
 			tree  = t;
-		}
-
-			
-		/**
-		 * Adds a child to the {@code Node}.
-		 * 
-		 * @param child  a child node
-		 * 
-		 * 
-		 * @see Node
-		 */
-		public void addChild(Node child)
-		{
-			nodes.addChild(child);
-		}
-		
-		/**
-		 * Changes a child from the {@code Node}.
-		 * 
-		 * @param i  a child index
-		 * @param child  a new child node
-		 */
-		public void setChild(int i, Node child)
-		{
-			nodes.setChild(i, child);
-		}
-		
-		/**
-		 * Changes the parent of the {@code Node}.
-		 * 
-		 * @param parent  a parent node
-		 */
-		public void setParent(Node parent)
-		{
-			nodes.setParent(parent);
-		}
-		
-		/**
-		 * Clears children from the {@code Node}.
-		 */
-		public void clearChildren()
-		{
-			nodes.clearChildren();
 		}
 		
 		/**
@@ -107,7 +61,7 @@ public interface Tree
 			return tree;
 		}
 		
-		
+				
 		@Override
 		public <O, P> void setProperty(Class<O> type, P prop)
 		{
@@ -123,16 +77,11 @@ public interface Tree
 			return (P) props.get(type.getName());
 		}
 		
+		
 		@Override
 		public INode[] Array()
 		{
-			return nodes.Array();
-		}
-		
-		@Override
-		public NodeArray Relations()
-		{
-			return nodes;
+			return Relations().Array();
 		}
 		
 		@Override
@@ -140,11 +89,11 @@ public interface Tree
 		{
 			return this;
 		}
-				
+	
 		@Override
 		public Node Parent()
 		{
-			return nodes.Parent();
+			return Relations().Parent();
 		}
 	}
 	
@@ -177,14 +126,6 @@ public interface Tree
 		return () -> new DepthFirst<>((N) Root());
 	}
 
-	
-	/**
-	 * Checks if there is data in the {@code Tree}.
-	 * 
-	 * @return  {@code true} if the tree is empty
-	 */
-	public abstract boolean isEmpty();
-	
 	/**
 	 * Creates a new node for the {@code Tree}.
 	 * 
@@ -199,6 +140,14 @@ public interface Tree
 		return new Node(this);
 	}
 	
+	
+	/**
+	 * Checks if there is data in the {@code Tree}.
+	 * 
+	 * @return  {@code true} if the tree is empty
+	 */
+	public abstract boolean isEmpty();
+		
 	/**
 	 * Returns the root of the {@code Tree}.
 	 * 

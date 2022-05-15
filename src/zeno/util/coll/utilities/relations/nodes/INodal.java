@@ -112,7 +112,27 @@ public interface INodal extends IRelations
 	}
 	
 	/**
-	 * Returns the node level of the {@code INode}.
+	 * Returns the tree size of the {@code INode}.
+	 * </br> This indicates the amount of nodes under this node plus one.
+	 * 
+	 * @return  a node size
+	 */
+	public default int TreeSize()
+	{
+		int count = 1;
+		for(INode child : Children())
+		{
+			if(child != null)
+			{
+				count += child.Relations().TreeSize();
+			}
+		}
+		
+		return count;
+	}
+	
+	/**
+	 * Returns the level of the {@code INode}.
 	 * </br> This indicates the relative depth of the deepest child node.
 	 * 
 	 * @return  a node level
@@ -131,25 +151,5 @@ public interface INodal extends IRelations
 		}
 		
 		return 0;
-	}
-
-	/**
-	 * Returns the size of the {@code INode}.
-	 * </br> This indicates the amount of nodes under this node plus one.
-	 * 
-	 * @return  a node size
-	 */
-	public default int TreeSize()
-	{
-		int count = 1;
-		for(INode child : Children())
-		{
-			if(child != null)
-			{
-				count += child.Relations().TreeSize();
-			}
-		}
-		
-		return count;
 	}
 }
