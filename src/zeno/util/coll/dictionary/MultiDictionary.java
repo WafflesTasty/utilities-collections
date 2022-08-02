@@ -88,4 +88,10 @@ public class MultiDictionary<K, V> implements Dictionary<HashedSet<K>, V>
 	{
 		return map.get(key);
 	}
+
+	@Override
+	public int Count()
+	{
+		return map.Count();
+	}
 }

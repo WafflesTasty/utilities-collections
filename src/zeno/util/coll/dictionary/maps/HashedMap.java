@@ -106,4 +106,10 @@ public class HashedMap<K, V> implements Dictionary<K, V>
 	{
 		return data.get(key);
 	}
+
+	@Override
+	public int Count()
+	{
+		return data.size();
+	}
 }

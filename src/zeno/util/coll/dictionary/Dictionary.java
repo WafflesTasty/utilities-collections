@@ -92,8 +92,8 @@ public interface Dictionary<K, V> extends Iterable<Dictionary.Pair<K, V>>
 	{
 		return () -> new ValueIterator<>(this);
 	}
-	
 
+	
 	/**
 	 * Puts a key-value pair into the {@code Dictionary}.
 	 * 
@@ -118,4 +118,11 @@ public interface Dictionary<K, V> extends Iterable<Dictionary.Pair<K, V>>
 	 * @return  a current dictionary value
 	 */
 	public abstract V get(K key);
+
+	/**
+	 * Returns the count of the {@code Dictionary}.
+	 * 
+	 * @return  a set count
+	 */
+	public abstract int Count();
 }
