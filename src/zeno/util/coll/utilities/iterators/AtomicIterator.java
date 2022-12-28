@@ -2,12 +2,13 @@ package zeno.util.coll.utilities.iterators;
 
 import java.util.Iterator;
 
-import zeno.util.coll.indices.arrays.Index;
+import zeno.util.coll.indices.Index;
+import zeno.util.coll.indices.Index.Atomic;
 
 /**
- * The {@code IndexIterator} class iterators over a subsection of an {@code Index}.
+ * The {@code AtomicIterator} class iterators over a subsection of an {@code Atomic}.
  *
- * @author Zeno
+ * @author Waffles
  * @since 28 Feb 2020
  * @version 1.0
  *
@@ -15,25 +16,25 @@ import zeno.util.coll.indices.arrays.Index;
  * @param <V>  an index value type
  * @see Iterator
  */
-public class IndexIterator<V> implements Iterator<V>
+public class AtomicIterator<V> implements Iterator<V>
 {
-	private Index<V> index;
+	private Atomic<V> atomic;
 	private int[] curr, next;
 	private int[] min, max;
 	
 	/**
-	 * Creates a new {@code IndexIterator}.
+	 * Creates a new {@code AtomicIterator}.
 	 * 
-	 * @param index  a target index
+	 * @param atomic  an atomic index
 	 * @param min  a minimum coordinate set
 	 * @param max  a maximum coordinate set
 	 * 
 	 * 
 	 * @see Index
 	 */
-	public IndexIterator(Index<V> index, int[] min, int[] max)
+	public AtomicIterator(Atomic<V> atomic, int[] min, int[] max)
 	{
-		this.index = index;
+		this.atomic = atomic;
 		
 		this.min = min;
 		this.max = max;
@@ -45,26 +46,26 @@ public class IndexIterator<V> implements Iterator<V>
 	}
 	
 	/**
-	 * Creates a new {@code IndexIterator}.
+	 * Creates a new {@code AtomicIterator}.
 	 * 
-	 * @param index  a target index
+	 * @param atomic  an atomic index
 	 * 
 	 * 
 	 * @see Index
 	 */
-	public IndexIterator(Index<V> index)
+	public AtomicIterator(Atomic<V> atomic)
 	{
-		this.index = index;
+		this.atomic = atomic;
 		
-		this.min = index.Minimum();
-		this.max = index.Maximum();
+		this.min = atomic.Minimum();
+		this.max = atomic.Maximum();
 	}
 	
 	
 	@Override
 	public void remove()
 	{
-		index.remove(curr);
+		atomic.remove(curr);
 	}
 	
 	@Override
@@ -76,7 +77,7 @@ public class IndexIterator<V> implements Iterator<V>
 	@Override
 	public V next()
 	{
-		V val = index.get(next);
+		V val = atomic.get(next);
 		curr = next;
 		find();
 		
@@ -86,7 +87,7 @@ public class IndexIterator<V> implements Iterator<V>
 	
 	private boolean validate()
 	{
-		for(int i = 0; i < index.Order(); i++)
+		for(int i = 0; i < atomic.Order(); i++)
 		{
 			if(min[i] > max[i])
 			{
@@ -101,7 +102,7 @@ public class IndexIterator<V> implements Iterator<V>
 	
 	private void find()
 	{
-		for(int i = 0; i < index.Order(); i++)
+		for(int i = 0; i < atomic.Order(); i++)
 		{
 			next[i]++;
 			if(next[i] <= max[i])
@@ -109,7 +110,7 @@ public class IndexIterator<V> implements Iterator<V>
 			else
 			{
 				next[i] = min[i];
-				if(i == index.Order() - 1)
+				if(i == atomic.Order() - 1)
 				{
 					next = null;
 					return;
@@ -117,7 +118,7 @@ public class IndexIterator<V> implements Iterator<V>
 			}
 		}
 		
-		if(index.get(next) == null)
+		if(atomic.get(next) == null)
 		{
 			find();
 		}

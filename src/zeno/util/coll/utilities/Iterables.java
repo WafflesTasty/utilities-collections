@@ -1,11 +1,11 @@
 package zeno.util.coll.utilities;
 
-import zeno.util.coll.indices.arrays.Index;
+import zeno.util.coll.indices.Index.Atomic;
 import zeno.util.coll.trees.binary.BiNode;
 import zeno.util.coll.trees.traversal.binary.InOrder;
 import zeno.util.coll.trees.traversal.binary.PostOrder;
 import zeno.util.coll.trees.traversal.binary.PreOrder;
-import zeno.util.coll.utilities.iterators.IndexIterator;
+import zeno.util.coll.utilities.iterators.AtomicIterator;
 
 /**
  * The {@code Iterables} class provides a few basic iterables over collections.
@@ -20,7 +20,7 @@ public final class Iterables
 	 * Returns an iterable over a generic {@code Index}.
 	 * 
 	 * @param <V>  an index value type
-	 * @param index  a target index
+	 * @param atomic  an atomic index
 	 * @param min  a minimum coordinate
 	 * @param max  a maximum coordinate
 	 * @return  an index iterable
@@ -28,9 +28,9 @@ public final class Iterables
 	 * 
 	 * @see Iterable
 	 */
-	public static <V> Iterable<V> index(Index<V> index, int[] min, int[] max)
+	public static <V> Iterable<V> index(Atomic<V> atomic, int[] min, int[] max)
 	{
-		return () -> new IndexIterator<>(index, min, max);
+		return () -> new AtomicIterator<>(atomic, min, max);
 	}
 	
 	

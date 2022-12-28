@@ -5,7 +5,6 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import zeno.util.coll.Collection;
-import zeno.util.coll.indices.arrays.Index;
 
 /**
  * The {@code List} class defines a one-dimensional collection backed by an {@code ArrayList}.
@@ -19,7 +18,7 @@ import zeno.util.coll.indices.arrays.Index;
  * @see Collection
  * @see Index
  */
-public class List<V> implements Collection<V>, Index.Unique<V>
+public class List<V> implements Collection<V>, Index.Atomic<V>
 {
 	private ArrayList<V> source;
 	
@@ -40,7 +39,7 @@ public class List<V> implements Collection<V>, Index.Unique<V>
 	{
 		source = new ArrayList<>();
 	}
-	
+
 	
 	@Override
 	public void add(V value)
@@ -66,6 +65,17 @@ public class List<V> implements Collection<V>, Index.Unique<V>
 		source = new ArrayList<>();
 	}
 	
+		
+	@Override
+	public V get(int... coords)
+	{
+		if(0 <= coords[0] && coords[0] < source.size())
+		{
+			return source.get(coords[0]);
+		}
+		
+		return null;
+	}
 	
 	@Override
 	public boolean contains(int... coords)
@@ -82,7 +92,7 @@ public class List<V> implements Collection<V>, Index.Unique<V>
 		
 		return 0 <= coords[0] && coords[0] < source.size();
 	}
-
+	
 	@Override
 	public V put(V val, int... coords)
 	{
@@ -94,23 +104,14 @@ public class List<V> implements Collection<V>, Index.Unique<V>
 	{
 		return source.remove(coords[0]);
 	}
-	
-	@Override
-	public V get(int... coords)
-	{
-		if(0 <= coords[0] && coords[0] < source.size())
-		{
-			return source.get(coords[0]);
-		}
-		
-		return null;
-	}
 
 	
 	@Override
 	public int[] indexOf(V val)
 	{
-		return new int[]{source.indexOf(val)};
+		int index = source.indexOf(val);
+		if(index == -1) return null;
+		return new int[]{index};
 	}
 	
 	@Override

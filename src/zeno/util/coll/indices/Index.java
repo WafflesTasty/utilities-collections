@@ -1,5 +1,8 @@
-package zeno.util.coll.indices.arrays;
+package zeno.util.coll.indices;
 
+import java.util.Iterator;
+
+import zeno.util.coll.utilities.iterators.AtomicIterator;
 import zeno.util.tools.helper.Array;
 
 /**
@@ -15,7 +18,8 @@ import zeno.util.tools.helper.Array;
 public interface Index<T>
 {		
 	/**
-	 * The {@code Unique} interface defines an index with unique elements.
+	 * The {@code Atomic} interface defines an index with atomic elements.
+	 * </br> These lists allow manipulation of individual element coordinates.
 	 *
 	 * @author Waffles
 	 * @since 16 Nov 2021
@@ -26,15 +30,39 @@ public interface Index<T>
 	 * @see Iterable
 	 * @see Index
 	 */
-	public static interface Unique<T> extends Index<T>, Iterable<T>
+	public static interface Atomic<T> extends Index<T>, Iterable<T>
 	{
+		@Override
+		public default Iterator<T> iterator()
+		{
+			return new AtomicIterator<>(this);
+		}
+		
+		
 		/**
-		 * Returns a coordinate in the {@code Index}.
+		 * Returns a coordinate in the {@code Atomic Index}.
 		 * 
 		 * @param val  a target value
 		 * @return  a value coordinate
 		 */
 		public abstract int[] indexOf(T val);
+		
+		/**
+		 * Changes a value from the {@code Atomic Index}.
+		 * 
+		 * @param val  an index value
+		 * @param coords  index coordinates
+		 * @return  a previous index value
+		 */
+		public abstract T put(T val, int... coords);
+		
+		/**
+		 * Removes a value from the {@code Atomic Index}.
+		 * 
+		 * @param coords  index coordinates
+		 * @return  a previous index value
+		 */
+		public abstract T remove(int... coords);
 	}
 	
 	
@@ -45,16 +73,7 @@ public interface Index<T>
 	 * @return  a current index value
 	 */
 	public abstract T get(int... coords);
-	
-	/**
-	 * Changes a value from the {@code Index}.
-	 * 
-	 * @param val  an index value
-	 * @param coords  index coordinates
-	 * @return  a previous index value
-	 */
-	public abstract T put(T val, int... coords);
-	
+		
 	/**
 	 * Checks a coordinate in the {@code Index}.
 	 * 
@@ -84,20 +103,8 @@ public interface Index<T>
 		
 		return true;
 	}
-	
-	/**
-	 * Removes a value from the {@code Index}.
-	 * 
-	 * @param coords  index coordinates
-	 * @return  a previous index value
-	 */
-	public default T remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
-	
-	
+
+
 	/**
 	 * Returns the dimension of the {@code Index}.
 	 * 

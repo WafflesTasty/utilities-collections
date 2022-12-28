@@ -3,6 +3,7 @@ package zeno.util.coll.indices.arrays;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.coll.dictionary.Dictionary.Pair;
 import zeno.util.coll.dictionary.maps.HashedMap;
+import zeno.util.coll.indices.Index;
 import zeno.util.tools.Integers;
 import zeno.util.tools.helper.Array;
 
@@ -17,10 +18,10 @@ import zeno.util.tools.helper.Array;
  * @param <V>  an index value
  * @see Index
  */
-public class MultiIndex<V> implements Index<V>
+public class MultiIndex<V> implements Index.Atomic<V>
 {
 	private int order;
-	private HashedMap<Vector, Index<V>> map;
+	private HashedMap<Vector, Atomic<V>> map;
 	
 	/**
 	 * Creates a new {@code MultiIndex}.
@@ -41,9 +42,8 @@ public class MultiIndex<V> implements Index<V>
 	 * 
 	 * 
 	 * @see Vector
-	 * @see Index
 	 */
-	public void add(Vector v, Index<V> i)
+	public void add(Vector v, Atomic<V> i)
 	{
 		map.put(v, i);
 	}
@@ -65,10 +65,10 @@ public class MultiIndex<V> implements Index<V>
 	@Override
 	public V get(int... coords)
 	{
-		for(Pair<Vector, Index<V>> pair : map)
+		for(Pair<Vector, Atomic<V>> pair : map)
 		{
 			Vector v = pair.Key();
-			Index<V> index = pair.Value();
+			Atomic<V> index = pair.Value();
 			
 			int[] crd = new int[coords.length];
 			for(int i = 0; i < coords.length; i++)
@@ -84,14 +84,14 @@ public class MultiIndex<V> implements Index<V>
 		
 		return null;
 	}
-
+	
 	@Override
 	public V put(V val, int... coords)
 	{
-		for(Pair<Vector, Index<V>> pair : map)
+		for(Pair<Vector, Atomic<V>> pair : map)
 		{
 			Vector v = pair.Key();
-			Index<V> index = pair.Value();
+			Atomic<V> index = pair.Value();
 			
 			int[] crd = new int[coords.length];
 			for(int i = 0; i < coords.length; i++)
@@ -107,7 +107,35 @@ public class MultiIndex<V> implements Index<V>
 		
 		return null;
 	}
+	
+	@Override
+	public V remove(int... coords)
+	{
+		return put(null, coords);
+	}
 
+	@Override
+	public int[] indexOf(V val)
+	{
+		for(Pair<Vector, Atomic<V>> pair : map)
+		{
+			Vector v = pair.Key();
+			Atomic<V> atom = pair.Value();
+			int[] index = atom.indexOf(val);
+			if(index != null)
+			{
+				for(int i = 0; i < index.length; i++)
+				{
+					index[i] = (int) (index[i] + v.get(i));
+				}
+				
+				return index;
+			}
+		}
+		
+		return null;
+	}
+	
 	
 	@Override
 	public int[] Minimum()
@@ -116,10 +144,10 @@ public class MultiIndex<V> implements Index<V>
 		int iMax = Integers.MAX_VALUE;
 		min = Array.fill.in(min, iMax);
 
-		for(Pair<Vector, Index<V>> pair : map)
+		for(Pair<Vector, Atomic<V>> pair : map)
 		{
 			Vector v = pair.Key();
-			Index<V> index = pair.Value();
+			Atomic<V> index = pair.Value();
 			int[] iMin = index.Minimum();
 			
 			for(int i = 0; i < Order(); i++)
@@ -139,10 +167,10 @@ public class MultiIndex<V> implements Index<V>
 		int iMin = Integers.MIN_VALUE;
 		max = Array.fill.in(max, iMin);
 
-		for(Pair<Vector, Index<V>> pair : map)
+		for(Pair<Vector, Atomic<V>> pair : map)
 		{
 			Vector v = pair.Key();
-			Index<V> index = pair.Value();
+			Atomic<V> index = pair.Value();
 			int[] iMax = index.Maximum();
 			
 			for(int i = 0; i < Order(); i++)

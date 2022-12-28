@@ -1,5 +1,6 @@
 package zeno.util.coll.space.tiles.enums;
 
+import zeno.util.coll.indices.trees.BEPTree;
 import zeno.util.coll.utilities.enums.Binary;
 
 /**
@@ -12,48 +13,56 @@ import zeno.util.coll.utilities.enums.Binary;
  * @version 1.0
  * 
  * 
- * @see BETree
+ * @see BEPTree
  * @see Binary
  */
-public class BoolTree extends BETree<Binary>
+public class BoolTree extends BEPTree<Binary>
 {
 	/**
 	 * Creates a new {@code BoolTree}.
 	 * 
-	 * @param tSize  a grid tile size
 	 * @param dim    an index dimension
 	 */
-	public BoolTree(float tSize, int... dim)
+	public BoolTree(int... dim)
 	{
-		super(tSize, dim);
+		super(dim);
 	}
 	
 	
 	@Override
 	public void put(Binary val, int[] min, int[] max)
 	{
-		if(val == Binary.ZERO)
+		switch(val)
+		{
+		case ONE:
+			super.put(val, min, max); break;
+		default:
 			super.remove(min, max);
-		else		
-			super.put(val, min, max);
+		}
 	}
 	
 	@Override
 	public Binary put(Binary val, int... coords)
 	{
-		if(val != Binary.ZERO)
+		switch(val)
 		{
+		case ONE:
 			return super.put(val, coords);
+		default:
+			return super.remove(coords);
 		}
-		
-		return super.remove(coords);
 	}
 	
 	@Override
 	public Binary get(int... coords)
 	{
-		Binary b = super.get(coords);
-		if(b != null) return b;
-		return Binary.ZERO;
+		Binary val = super.get(coords);
+		switch(val)
+		{
+		case ONE:
+			return Binary.ONE;
+		default:
+			return Binary.ZERO;
+		}
 	}
 }

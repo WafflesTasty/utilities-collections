@@ -4,13 +4,17 @@ import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.coll.indices.arrays.Index;
+import zeno.util.coll.indices.Index;
 import zeno.util.coll.space.Space;
+import zeno.util.coll.utilities.iterators.AtomicIterator;
 import zeno.util.geom.ITransformation;
 import zeno.util.geom.collidables.IGeometrical;
+import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.Bounds;
 import zeno.util.geom.collidables.geometry.generic.ICube;
+import zeno.util.geom.collidables.geometry.generic.ICuboid;
 import zeno.util.geom.utilities.Geometries;
+import zeno.util.tools.helper.Iterables;
 
 /**
  * The {@code TiledSpace} interface defines a space partitioned into hypercubes of equal size.
@@ -20,13 +24,12 @@ import zeno.util.geom.utilities.Geometries;
  * @version 1.1
  *
  * 
- * @param <V>  a value type
  * @param <T>  a tile type
  * @see Index
  * @see Space
  */
-public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Space<T>
-{		
+public interface TiledSpace<T extends TiledSpace.Tile> extends Index.Atomic<T>, Space<T>
+{
 	/**
 	 * The {@code Tile} interface defines a single element of a {@code TiledSpace}.
 	 *
@@ -42,7 +45,7 @@ public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Spac
 		/**
 		 * The {@code Transform} interface defines the transformation of a {@code Tile}.
 		 *
-		 * @author Zeno
+		 * @author Waffles
 		 * @since 26 Feb 2020
 		 * @version 1.0
 		 * 
@@ -130,7 +133,7 @@ public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Spac
 		 * 
 		 * @see TiledSpace
 		 */
-		public abstract TiledSpace<?, ?> Parent();
+		public abstract TiledSpace<?> Parent();
 		
 		
 		@Override
@@ -148,18 +151,49 @@ public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Spac
 	}
 
 	
-	@Override
-	public default Bounds Bounds()
-	{
-		return Geometries.cuboid(Size().times(0.5f), Size());
-	}
-	
 	/**
 	 * Returns the tile size of the {@code TiledSpace}.
 	 * 
 	 * @return  a tile size
 	 */
 	public abstract float TileSize();
+	
+	/**
+	 * Returns a coordinate in the {@code TiledSpace}.
+	 * 
+	 * @param v  a space vector
+	 * @return  a tile coordinate
+	 * 
+	 * 
+	 * @see Vector
+	 */
+	public default int[] Coordinate(Vector v)
+	{
+		int[] coords = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			coords[i] = (int) (v.get(i) / TileSize());
+			if(coords[i] < 0 || Dimensions()[i] <= coords[i])
+			{
+				return null;
+			}
+		}
+
+		return coords;
+	}
+	
+	/**
+	 * Iterates over tiles in the {@code TiledSpace}.
+	 * 
+	 * @return  a tile iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 */
+	public default Iterable<T> queryAll()
+	{
+		return () -> new AtomicIterator<>(this, Minimum(), Maximum());
+	}
 	
 	/**
 	 * Returns the size of the {@code TiledSpace}.
@@ -179,5 +213,34 @@ public interface TiledSpace<V, T extends TiledSpace.Tile> extends Index<V>, Spac
 		}
 		
 		return s;
+	}
+
+		
+	@Override
+	public default Iterable<T> query(Point p)
+	{
+		int[] crds = Coordinate(p.asVector());
+		return Iterables.singleton(get(crds));
+	}
+	
+	@Override
+	public default Iterable<T> query(ICuboid c)
+	{
+		int[] min = Coordinate(c.Minimum());
+		int[] max = Coordinate(c.Maximum());
+
+		return () -> new AtomicIterator<>(this, min, max);
+	}
+
+	@Override
+	public default int[] indexOf(T val)
+	{
+		return val.Coordinates();
+	}
+	
+	@Override
+	public default Bounds Bounds()
+	{
+		return Geometries.cuboid(Size().times(0.5f), Size());
 	}
 }

@@ -2,6 +2,7 @@ package zeno.util.coll.indices.arrays;
 
 import java.util.Iterator;
 
+import zeno.util.coll.indices.Index;
 import zeno.util.tools.helper.iterators.ArrayIterator;
 
 /**
@@ -15,7 +16,7 @@ import zeno.util.tools.helper.iterators.ArrayIterator;
  * @param <V>  an index type
  * @see Index
  */
-public class ArrayIndex<V> implements Index.Unique<V>
+public class ArrayIndex<V> implements Index.Atomic<V>
 {
 	private Object[] source;
 	private int[] dimension;
@@ -40,7 +41,29 @@ public class ArrayIndex<V> implements Index.Unique<V>
 	{
 		return source;
 	}
-		
+	
+	
+	@Override
+	public V get(int... coords)
+	{
+		return (V) source[toIndex(coords)];
+	}
+	
+	@Override
+	public V put(V val, int... coords)
+	{
+		int index = toIndex(coords);
+		V prev = (V) source[index];
+		source[index] = val;
+		return prev;
+	}
+	
+	@Override
+	public V remove(int... coords)
+	{
+		return put(null, coords);
+	}
+	
 	
 	@Override
 	public int[] Dimensions()
@@ -59,7 +82,7 @@ public class ArrayIndex<V> implements Index.Unique<V>
 	{
 		for(int i = 0; i < source.length; i++)
 		{
-			if(source == val)
+			if(source[i] == val)
 			{
 				return toCoord(i);
 			}
@@ -96,21 +119,5 @@ public class ArrayIndex<V> implements Index.Unique<V>
 		}
 
 		return index;
-	}
-
-	
-	@Override
-	public V put(V val, int... coords)
-	{
-		int index = toIndex(coords);
-		V prev = (V) source[index];
-		source[index] = val;
-		return prev;
-	}
-		
-	@Override
-	public V get(int... coords)
-	{
-		return (V) source[toIndex(coords)];
 	}
 }

@@ -23,7 +23,7 @@ import zeno.util.tools.helper.Iterables;
  * @see ArrayIndex
  * @see TiledSpace
  */
-public class TASpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements TiledSpace<T, T>
+public class TASpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements TiledSpace<T>
 {		
 	private class Query implements Iterator<T>
 	{
