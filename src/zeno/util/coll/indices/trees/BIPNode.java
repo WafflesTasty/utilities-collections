@@ -11,13 +11,11 @@ import zeno.util.tools.helper.Array;
  * @version 1.0
  * 
  * 
- * @param <V>  a value type
  * @see BiNode
  */
-public class BIPNode<V> extends BiNode
+public class BIPNode extends BiNode
 {	
 	private int cDim;
-	private Object[] values;
 	private int[] cMin, cMax;
 	
 	/**
@@ -30,23 +28,12 @@ public class BIPNode<V> extends BiNode
 	 * 
 	 * @see BIPTree
 	 */
-	public BIPNode(BIPTree<V> tree, int[] min, int[] max)
+	public BIPNode(BIPTree<?> tree, int[] min, int[] max)
 	{
 		super(tree);
 		
-		values = new Object[0];
 		cMin = Array.copy.of(min);
 		cMax = Array.copy.of(max);
-		cDim = -1;
-	}
-
-	
-	/**
-	 * Performs a merge on the {@code BIPNode}.
-	 */
-	public void merge()
-	{
-		clearChildren();
 		cDim = -1;
 	}
 	
@@ -101,12 +88,22 @@ public class BIPNode<V> extends BiNode
 
 		
 		// Generate the child nodes.
-		BIPNode<V> lChild = Tree().create(cMin, lMax);
-		BIPNode<V> rChild = Tree().create(rMin, cMax);
+		BIPNode lChild = Tree().create(cMin, lMax);
+		BIPNode rChild = Tree().create(rMin, cMax);
 	
 		setLChild(lChild);
 		setRChild(rChild);
 	}
+
+	/**
+	 * Performs a merge on the {@code BIPNode}.
+	 */
+	public void merge()
+	{
+		clearChildren();
+		cDim = -1;
+	}
+	
 	
 	/**
 	 * Returns a child of the {@code BIPNode}.
@@ -117,7 +114,7 @@ public class BIPNode<V> extends BiNode
 	 * 
 	 * @see BIPNode
 	 */
-	public BIPNode<V> Child(int... coords)
+	public BIPNode Child(int... coords)
 	{
 		if(isLeaf()) return null;
 		int cut = RChild().Minimum()[cDim];
@@ -126,63 +123,6 @@ public class BIPNode<V> extends BiNode
 		return RChild();
 	}
 		
-	/**
-	 * Checks a value in the {@code BIPNode}.
-	 * 
-	 * @param val  an object value
-	 * @return  {@code true} if the node contains the value
-	 */
-	public boolean hasValue(V val)
-	{
-		for(Object o : values)
-		{
-			if(val.equals(o))
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	/**
-	 * Adds a value to the {@code BIPNode}.
-	 * 
-	 * @param val  an object value
-	 */
-	public void addValue(V val)
-	{
-		if(!hasValue(val))
-		{
-			values = Array.add.to(values, val);
-		}
-	}
-	
-	/**
-	 * Changes the value of the {@code BIPNode}.
-	 * 
-	 * @param val  a node value
-	 */
-	public void setValue(V val)
-	{
-		if(val != null)
-			values = new Object[]{val};
-		values = new Object[0];
-	}
-	
-	/**
-	 * Returns the value of the {@code BIPNode}.
-	 * 
-	 * @return  a node value
-	 */
-	public V Value()
-	{
-		if(values.length > 0)
-			return (V) values[0];
-		return null;
-	}
-		
-	
 	/**
 	 * Checks the size of the {@code BIPNode}.
 	 * </br> A node is a tile iff it contains exactly one coordinate.
@@ -193,6 +133,18 @@ public class BIPNode<V> extends BiNode
 	{
 		return Array.equals.of(cMin, cMax);
 	}
+
+	/**
+	 * Returns the split of the {@code BIPNode}.
+	 * </br> This indicates which dimension the children are split over.
+	 * 
+	 * @return  a split dimension
+	 */
+	public int DimSplit()
+	{
+		return cDim;
+	}
+	
 	
 	/**
 	 * Returns the minimum of the {@code BIPNode}.
@@ -216,32 +168,32 @@ public class BIPNode<V> extends BiNode
 	
 	
 	@Override
-	public BIPNode<V> Parent()
+	public BIPNode Parent()
 	{
-		return (BIPNode<V>) super.Parent();
+		return (BIPNode) super.Parent();
 	}
 	
 	@Override
-	public BIPNode<V> LChild()
+	public BIPNode LChild()
 	{
-		return (BIPNode<V>) super.LChild();
+		return (BIPNode) super.LChild();
 	}
 	
 	@Override
-	public BIPNode<V> RChild()
+	public BIPNode RChild()
 	{
-		return (BIPNode<V>) super.RChild();
+		return (BIPNode) super.RChild();
 	}
 	
 	@Override
-	public BIPNode<V> Sibling()
+	public BIPNode Sibling()
 	{
-		return (BIPNode<V>) super.Sibling();
+		return (BIPNode) super.Sibling();
 	}
 	
 	@Override
-	public BIPTree<V> Tree()
+	public BIPTree<?> Tree()
 	{
-		return (BIPTree<V>) super.Tree();
+		return (BIPTree<?>) super.Tree();
 	}
 }

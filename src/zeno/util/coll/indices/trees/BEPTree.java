@@ -1,7 +1,5 @@
 package zeno.util.coll.indices.trees;
 
-import java.util.Iterator;
-
 import zeno.util.coll.Queue;
 import zeno.util.coll.indices.Index;
 import zeno.util.coll.queues.FIFOQueue;
@@ -21,78 +19,8 @@ import zeno.util.tools.Integers;
  * @see Enum
  */
 public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atomic<E>
-{	
-	/**
-	 * The {@code Nodes} class iterates over {@code BEPTree} nodes of a specific value.
-	 *
-	 * @author Waffles
-	 * @since 17 Apr 2022
-	 * @version 1.0
-	 * 
-	 * 
-	 * @see Iterator
-	 * @see BIPNode
-	 */
-	public class QRYValue implements Iterator<BIPNode<E>>
-	{
-		private E value;
-		private BIPNode<E> next;
-		private Queue<BIPNode<E>> nodes;
-		
-		/**
-		 * Creates a new {@code QRYValue}.
-		 * 
-		 * @param val  an enum value
-		 */
-		public QRYValue(E val)
-		{
-			value = val;
-			nodes = new FIFOQueue<>();
-			nodes.push(Root());
-			next = findNext();
-		}
-		
-		
-		BIPNode<E> findNext()
-		{
-			if(nodes.isEmpty())
-			{
-				return null;
-			}
-			
-			next = nodes.pop();
-			if(!next.hasValue(value))
-			{
-				return findNext();
-			}
-			
-			if(!next.isLeaf())
-			{
-				nodes.push(next.LChild());
-				nodes.push(next.RChild());
-				return findNext();
-			}
-			
-			return next;
-		}
-		
-		@Override
-		public boolean hasNext()
-		{
-			return next != null;
-		}
-
-		@Override
-		public BIPNode<E> next()
-		{
-			BIPNode<E> curr = next;
-			next = findNext();
-			return curr;
-		}
-	}
-	
-	
-	private Queue<BIPNode<E>> queue;
+{		
+	private Queue<BEPNode<E>> queue;
 	
 	/**
 	 * Creates a new {@code BEPTree}.
@@ -111,23 +39,9 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 		}
 
 		setRoot(create(min, max));
+		setTool(Tool());
 	}
 
-	/**
-	 * Queries a value into the {@code BEPTree}.
-	 * 
-	 * @param val  a value to query
-	 * @return  a node iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 * @see BIPNode
-	 */
-	public Iterable<BIPNode<E>> query(E val)
-	{
-		return () -> new QRYValue(val);
-	}
-	
 	/**
 	 * Changes a cuboid area of the {@code BEPTree}.
 	 * 
@@ -143,7 +57,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 		
 		while(!queue.isEmpty())
 		{
-			BIPNode<E> node = queue.pop();
+			BEPNode<E> node = queue.pop();
 			
 			
 			boolean isCover = true;
@@ -203,7 +117,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 		
 		while(!queue.isEmpty())
 		{
-			BIPNode<E> node = queue.pop();
+			BEPNode<E> node = queue.pop();
 			
 			
 			boolean isCover = true;
@@ -257,42 +171,38 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 			queue.push(node.RChild());
 		}
 	}
-		
+	
 	
 	@Override
-	public E remove(int... coords)
+	public int[] indexOf(E val)
 	{
-		if(!contains(coords)) return null;
-
-		BIPNode<E> node = Root();
-		while(!node.isLeaf())
-		{
-			node = node.Child(coords);
-		}
-		
-		if(node.Value() == null)
+		BEPNode<E> node = Root();
+		if(!node.hasValue(val))
 		{
 			return null;
 		}
 		
-		E prev = node.Value();
-		while(!node.isTile())
+		while(!node.isLeaf())
 		{
-			node.split(coords, coords);
-			node = node.Child(coords);
+			BEPNode<E> lchild = node.LChild();
+			BEPNode<E> rchild = node.RChild();
+			
+			if(lchild.hasValue(val))
+				node = lchild;
+			else
+				node = rchild;
 		}
 		
-		node.setValue(null);		
-		return prev;
+		return node.Minimum();
 	}
-	
+
 	@Override
 	public E put(E val, int... coords)
 	{
 		if(val == null) return remove(coords);
 		if(!contains(coords)) return null;
 		
-		BIPNode<E> node = Root();
+		BEPNode<E> node = Root();
 		while(!node.isLeaf())
 		{
 			node.addValue(val);
@@ -316,7 +226,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 		node.setValue(val);
 		while(!node.isRoot())
 		{
-			BIPNode<E> sibl = node.Sibling();
+			BEPNode<E> sibl = node.Sibling();
 			if(sibl.isLeaf())
 			{
 				if(sibl.hasValue(val))
@@ -335,25 +245,43 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 	}
 
 	@Override
-	public int[] indexOf(E val)
+	public E remove(int... coords)
 	{
-		BIPNode<E> node = Root();
-		if(!node.hasValue(val))
+		if(!contains(coords)) return null;
+
+		BEPNode<E> node = Root();
+		while(!node.isLeaf())
+		{
+			node = node.Child(coords);
+		}
+		
+		if(node.Value() == null)
 		{
 			return null;
 		}
 		
-		while(!node.isLeaf())
+		E prev = node.Value();
+		while(!node.isTile())
 		{
-			BIPNode<E> lchild = node.LChild();
-			BIPNode<E> rchild = node.RChild();
-			
-			if(lchild.hasValue(val))
-				node = lchild;
-			else
-				node = rchild;
+			node.split(coords, coords);
+			node = node.Child(coords);
 		}
 		
-		return node.Minimum();
+		node.setValue(null);		
+		return prev;
+	}
+	
+	@Override
+	public BEPNode<E> Root()
+	{
+		return (BEPNode<E>) super.Root();
+	}
+	
+	QRYTool<E> Tool()
+	{
+		return (node) ->
+		{
+			return ((BEPNode<E>) node).Value();
+		};
 	}
 }

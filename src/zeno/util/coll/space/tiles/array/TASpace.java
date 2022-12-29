@@ -5,6 +5,7 @@ import java.util.Iterator;
 import zeno.util.algebra.linear.vector.Vector;
 import zeno.util.coll.indices.arrays.ArrayIndex;
 import zeno.util.coll.space.tiles.TiledSpace;
+import zeno.util.coll.utilities.iterators.AtomicIterator;
 import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.geometry.generic.ICuboid;
 import zeno.util.tools.helper.Array;
@@ -98,20 +99,17 @@ public class TASpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements
 		tSize = s;
 	}
 	
-	
-	private T find(Vector v)
-	{
-		int[] index = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			index[i] = (int) (v.get(i) / TileSize());
-			if(index[i] < 0 || Dimensions()[i] <= index[i])
-			{
-				return null;
-			}
-		}
 		
-		return get(index);
+	@Override
+	public TASpace<T> Index()
+	{
+		return this;
+	}
+
+	@Override
+	public Iterable<T> queryTiles(int[] min, int[] max)
+	{
+		return () -> new AtomicIterator<>(this, min, max);
 	}
 	
 	@Override
@@ -151,5 +149,21 @@ public class TASpace<T extends TiledSpace.Tile> extends ArrayIndex<T> implements
 	public float TileSize()
 	{
 		return tSize;
+	}
+
+
+	T find(Vector v)
+	{
+		int[] index = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			index[i] = (int) (v.get(i) / TileSize());
+			if(index[i] < 0 || Dimensions()[i] <= index[i])
+			{
+				return null;
+			}
+		}
+		
+		return get(index);
 	}
 }

@@ -2,7 +2,7 @@ package zeno.util.coll.indices;
 
 import java.util.Iterator;
 
-import zeno.util.coll.utilities.iterators.AtomicIterator;
+import zeno.util.coll.utilities.iterators.IndexIterator;
 import zeno.util.tools.helper.Array;
 
 /**
@@ -35,7 +35,7 @@ public interface Index<T>
 		@Override
 		public default Iterator<T> iterator()
 		{
-			return new AtomicIterator<>(this);
+			return new IndexIterator<>(this);
 		}
 		
 		

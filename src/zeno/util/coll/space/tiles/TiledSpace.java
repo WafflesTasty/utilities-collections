@@ -2,36 +2,31 @@ package zeno.util.coll.space.tiles;
 
 import zeno.util.algebra.linear.matrix.Matrices;
 import zeno.util.algebra.linear.matrix.Matrix;
-import zeno.util.algebra.linear.vector.Vector;
-import zeno.util.algebra.linear.vector.Vectors;
-import zeno.util.coll.indices.Index;
 import zeno.util.coll.space.Space;
-import zeno.util.coll.utilities.iterators.AtomicIterator;
+import zeno.util.coll.space.index.IndexSpace;
 import zeno.util.geom.ITransformation;
 import zeno.util.geom.collidables.IGeometrical;
-import zeno.util.geom.collidables.affine.Point;
 import zeno.util.geom.collidables.bounds.Bounds;
+import zeno.util.geom.collidables.bounds.IBounded;
 import zeno.util.geom.collidables.geometry.generic.ICube;
-import zeno.util.geom.collidables.geometry.generic.ICuboid;
 import zeno.util.geom.utilities.Geometries;
-import zeno.util.tools.helper.Iterables;
 
 /**
- * The {@code TiledSpace} interface defines a space partitioned into hypercubes of equal size.
+ * The {@code TiledSpace} interface defines an index partitioned in a floating point space.
  *
  * @author Waffles
  * @since 28 Feb 2020
  * @version 1.1
  *
  * 
- * @param <T>  a tile type
- * @see Index
+ * @param <T>  a  tile type
+ * @see IBounded
  * @see Space
  */
-public interface TiledSpace<T extends TiledSpace.Tile> extends Index.Atomic<T>, Space<T>
-{
+public interface TiledSpace<T extends TiledSpace.Tile> extends IndexSpace<T>
+{	
 	/**
-	 * The {@code Tile} interface defines a single element of a {@code TiledSpace}.
+	 * The {@code Tile} interface defines a single element of an {@code TiledSpace}.
 	 *
 	 * @author Waffles
 	 * @since 26 Feb 2020
@@ -145,99 +140,49 @@ public interface TiledSpace<T extends TiledSpace.Tile> extends Index.Atomic<T>, 
 		@Override
 		public default ICube Shape()
 		{
-			Vector o = Vectors.create(Coordinates().length);
-			return Geometries.cube(o, 2f);
+			return Geometries.cube(Coordinates().length);
 		}
 	}
-
 	
+		
 	/**
-	 * Returns the tile size of the {@code TiledSpace}.
+	 * Queries tiles from the {@code TiledSpace}.
 	 * 
-	 * @return  a tile size
-	 */
-	public abstract float TileSize();
-	
-	/**
-	 * Returns a coordinate in the {@code TiledSpace}.
-	 * 
-	 * @param v  a space vector
-	 * @return  a tile coordinate
-	 * 
-	 * 
-	 * @see Vector
-	 */
-	public default int[] Coordinate(Vector v)
-	{
-		int[] coords = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			coords[i] = (int) (v.get(i) / TileSize());
-			if(coords[i] < 0 || Dimensions()[i] <= coords[i])
-			{
-				return null;
-			}
-		}
-
-		return coords;
-	}
-	
-	/**
-	 * Iterates over tiles in the {@code TiledSpace}.
-	 * 
-	 * @return  a tile iterable
+	 * @param min  a tile minimum
+	 * @param max  a tile maximum
+	 * @return  an object iterable
 	 * 
 	 * 
 	 * @see Iterable
 	 */
-	public default Iterable<T> queryAll()
-	{
-		return () -> new AtomicIterator<>(this, Minimum(), Maximum());
-	}
+	public abstract Iterable<T> queryTiles(int[] min, int[] max);
+	
 	
 	/**
-	 * Returns the size of the {@code TiledSpace}.
+	 * Queries tiles from the {@code TiledSpace}.
 	 * 
-	 * @return  a size vector
-	 * 
-	 * 
-	 * @see Vector
+	 * @param crds  a tile coordinate
+	 * @return  a target tile
 	 */
-	public default Vector Size()
+	public default T queryTile(int... crds)
 	{
-		int dim = Dimensions().length;
-		Vector s = Vectors.create(dim);
-		for(int i = 0; i < dim; i++)
-		{
-			s.set(Dimensions()[i] * TileSize(), i);
-		}
-		
-		return s;
+		return (T) Index().get(crds);
 	}
-
 		
-	@Override
-	public default Iterable<T> query(Point p)
+	/**
+	 * Queries tiles from the {@code TiledSpace}.
+	 * 
+	 * @return  an object iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 */
+	public default Iterable<T> queryTiles()
 	{
-		int[] crds = Coordinate(p.asVector());
-		return Iterables.singleton(get(crds));
+		return queryTiles(Index().Minimum(), Index().Maximum());
 	}
 	
-	@Override
-	public default Iterable<T> query(ICuboid c)
-	{
-		int[] min = Coordinate(c.Minimum());
-		int[] max = Coordinate(c.Maximum());
-
-		return () -> new AtomicIterator<>(this, min, max);
-	}
-
-	@Override
-	public default int[] indexOf(T val)
-	{
-		return val.Coordinates();
-	}
-	
+			
 	@Override
 	public default Bounds Bounds()
 	{

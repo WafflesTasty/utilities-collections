@@ -1,126 +1,53 @@
 package zeno.util.coll.utilities.iterators;
 
-import java.util.Iterator;
-
-import zeno.util.coll.indices.Index;
 import zeno.util.coll.indices.Index.Atomic;
 
 /**
- * The {@code AtomicIterator} class iterators over a subsection of an {@code Atomic}.
+ * The {@code AtomicIterator} class iterates over a subsection of an {@code Atomic Index}.
  *
  * @author Waffles
- * @since 28 Feb 2020
+ * @since 29 Dec 2022
  * @version 1.0
  *
  *
  * @param <V>  an index value type
- * @see Iterator
+ * @see IndexIterator
  */
-public class AtomicIterator<V> implements Iterator<V>
+public class AtomicIterator<V> extends IndexIterator<V>
 {
-	private Atomic<V> atomic;
-	private int[] curr, next;
-	private int[] min, max;
-	
 	/**
 	 * Creates a new {@code AtomicIterator}.
 	 * 
-	 * @param atomic  an atomic index
-	 * @param min  a minimum coordinate set
-	 * @param max  a maximum coordinate set
+	 * @param index  a target index
+	 * @param min    an index minimum
+	 * @param max    an index maximum
 	 * 
 	 * 
-	 * @see Index
+	 * @see Atomic
 	 */
-	public AtomicIterator(Atomic<V> atomic, int[] min, int[] max)
+	public AtomicIterator(Atomic<V> index, int[] min, int[] max)
 	{
-		this.atomic = atomic;
-		
-		this.min = min;
-		this.max = max;
-		
-		if(validate())
-		{
-			find();
-		}
+		super(index, min, max);
 	}
 	
 	/**
 	 * Creates a new {@code AtomicIterator}.
 	 * 
-	 * @param atomic  an atomic index
+	 * @param index  a target index
 	 * 
 	 * 
-	 * @see Index
+	 * @see Atomic
 	 */
-	public AtomicIterator(Atomic<V> atomic)
+	public AtomicIterator(Atomic<V> index)
 	{
-		this.atomic = atomic;
-		
-		this.min = atomic.Minimum();
-		this.max = atomic.Maximum();
+		super(index);
 	}
 	
 	
 	@Override
 	public void remove()
 	{
-		atomic.remove(curr);
-	}
-	
-	@Override
-	public boolean hasNext()
-	{
-		return next != null;
-	}
-	
-	@Override
-	public V next()
-	{
-		V val = atomic.get(next);
-		curr = next;
-		find();
-		
-		return val;
-	}
-	
-	
-	private boolean validate()
-	{
-		for(int i = 0; i < atomic.Order(); i++)
-		{
-			if(min[i] > max[i])
-			{
-				next = null;
-				return false;
-			}
-		}
-		
-		next = min;
-		return true;
-	}
-	
-	private void find()
-	{
-		for(int i = 0; i < atomic.Order(); i++)
-		{
-			next[i]++;
-			if(next[i] <= max[i])
-				break;
-			else
-			{
-				next[i] = min[i];
-				if(i == atomic.Order() - 1)
-				{
-					next = null;
-					return;
-				}
-			}
-		}
-		
-		if(atomic.get(next) == null)
-		{
-			find();
-		}
+		Atomic<V> index = (Atomic<V>) Index();
+		index.remove(Current());
 	}
 }
