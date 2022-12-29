@@ -23,6 +23,21 @@ public class BIPSTree<N extends BIPSNode> extends BIPTree<N> implements IBounded
 	private BIPSpace<?> space;
 	
 	/**
+	 * Creates a new {@code BIPSTree}.
+	 * 
+	 * @param s  a parent space
+	 * @param dims  an index dimension
+	 * 
+	 * 
+	 * @see BIPSpace
+	 */
+	public BIPSTree(BIPSpace<?> s, int... dims)
+	{
+		super(dims);
+		space = s;
+	}
+	
+	/**
 	 * Returns the tile size of the {@code BIPSTree}.
 	 * 
 	 * @return  a tile size

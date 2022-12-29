@@ -89,10 +89,11 @@ public abstract class BIPSpace<N extends BIPSNode> implements IndexSpace<N>
 	 * Creates a new {@code BIPSpace}.
 	 * 
 	 * @param size  an index tile size
+	 * @param dims  an index dimension
 	 */
-	public BIPSpace(float size)
+	public BIPSpace(float size, int... dims)
 	{
-		tree = new BIPSTree<>();
+		tree = new BIPSTree<>(this, dims);
 		tSize = size;
 	}
 		

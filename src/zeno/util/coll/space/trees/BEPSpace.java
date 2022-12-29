@@ -89,10 +89,11 @@ public class BEPSpace<E extends Enum<E>> implements IndexSpace<BEPSNode<E>>
 	 * Creates a new {@code BIPSpace}.
 	 * 
 	 * @param size  an index tile size
+	 * @param dims  an index dimension
 	 */
-	public BEPSpace(float size)
+	public BEPSpace(float size, int... dims)
 	{
-		tree = new BEPSTree<>(this);
+		tree = new BEPSTree<>(this, dims);
 		tSize = size;
 	}
 		
