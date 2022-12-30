@@ -41,68 +41,6 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 		setRoot(create(min, max));
 		setTool(Tool());
 	}
-
-	/**
-	 * Changes a cuboid area of the {@code BEPTree}.
-	 * 
-	 * @param val  an index value
-	 * @param min  an index minimum
-	 * @param max  an index maximum
-	 */
-	public void put(E val, int[] min, int[] max)
-	{
-		queue = new FIFOQueue<>();
-		queue.push(Root());
-		
-		
-		while(!queue.isEmpty())
-		{
-			BEPNode<E> node = queue.pop();
-			
-			
-			boolean isCover = true;
-			boolean isEmpty = false;
-			
-			int[] cMin = node.Minimum();
-			int[] cMax = node.Maximum();
-
-			for(int i = 0; i < cMin.length; i++)
-			{
-				if(max[i] < cMin[i] || cMax[i] < min[i])
-				{
-					isEmpty = true;
-				}
-				
-				if(cMin[i] < min[i] || max[i] < cMax[i])
-				{
-					isCover = false;
-				}
-			}
-			
-			if(isEmpty) continue;
-			if(isCover)
-			{
-				node.clearChildren();
-				node.setValue(val);
-				continue;
-			}
-			
-			if(node.isTile())
-			{
-				node.setValue(val);
-				continue;
-			}
-			
-			node.addValue(val);
-			if(node.isLeaf())
-			{
-				node.split(min, max);
-			}
-			
-			queue.push(node.LChild());
-			queue.push(node.RChild());
-		}
-	}
 	
 	/**
 	 * Removes a cuboid area of the {@code BEPTree}.
@@ -171,6 +109,68 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 			queue.push(node.RChild());
 		}
 	}
+
+	/**
+	 * Changes a cuboid area of the {@code BEPTree}.
+	 * 
+	 * @param val  an index value
+	 * @param min  an index minimum
+	 * @param max  an index maximum
+	 */
+	public void put(E val, int[] min, int[] max)
+	{
+		queue = new FIFOQueue<>();
+		queue.push(Root());
+		
+		
+		while(!queue.isEmpty())
+		{
+			BEPNode<E> node = queue.pop();
+			
+			
+			boolean isCover = true;
+			boolean isEmpty = false;
+			
+			int[] cMin = node.Minimum();
+			int[] cMax = node.Maximum();
+
+			for(int i = 0; i < cMin.length; i++)
+			{
+				if(max[i] < cMin[i] || cMax[i] < min[i])
+				{
+					isEmpty = true;
+				}
+				
+				if(cMin[i] < min[i] || max[i] < cMax[i])
+				{
+					isCover = false;
+				}
+			}
+			
+			if(isEmpty) continue;
+			if(isCover)
+			{
+				node.clearChildren();
+				node.setValue(val);
+				continue;
+			}
+			
+			if(node.isTile())
+			{
+				node.setValue(val);
+				continue;
+			}
+			
+			node.addValue(val);
+			if(node.isLeaf())
+			{
+				node.split(min, max);
+			}
+			
+			queue.push(node.LChild());
+			queue.push(node.RChild());
+		}
+	}
 	
 	
 	@Override
@@ -196,6 +196,15 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements Index.Atom
 		return node.Minimum();
 	}
 
+	@Override
+	public BEPNode<E> create(Object... vals)
+	{
+		int[] min = (int[]) vals[0];
+		int[] max = (int[]) vals[1];
+		
+		return new BEPNode<>(this, min, max);
+	}
+	
 	@Override
 	public E put(E val, int... coords)
 	{

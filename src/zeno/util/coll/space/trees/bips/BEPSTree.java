@@ -24,15 +24,16 @@ public class BEPSTree<E extends Enum<E>> extends BEPTree<E> implements IBounded
 	/**
 	 * Creates a new {@code BEPSTree}.
 	 * 
-	 * @param space  a parent space
+	 * @param s  a parent space
 	 * @param dims   an index dimension
 	 * 
 	 * 
 	 * @see BEPSpace
 	 */
-	public BEPSTree(BEPSpace<E> space, int... dims)
+	public BEPSTree(BEPSpace<E> s, int... dims)
 	{
-		this.space = space;
+		super(dims);
+		space = s;
 	}
 	
 	/**

@@ -96,7 +96,7 @@ public class BEPSpace<E extends Enum<E>> implements IndexSpace<BEPSNode<E>>
 		tree = new BEPSTree<>(this, dims);
 		tSize = size;
 	}
-		
+
 
 	@Override
 	public BEPSTree<E> Index()
