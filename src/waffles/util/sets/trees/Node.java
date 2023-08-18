@@ -330,7 +330,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	@Override
 	public Nodal Root()
 	{
-		return Set().Root();
+		return (Nodal) super.Root();
 	}
 	
 	@Override

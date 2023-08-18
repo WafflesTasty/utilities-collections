@@ -3,6 +3,7 @@ package waffles.util.sets.utilities.iterators;
 import java.util.Iterator;
 
 import waffles.util.sets.indexed.IndexedSet;
+import waffles.utils.tools.primitives.Array;
 
 /**
  * An {@code IndexIterator} iterates over a subsection of an {@code Index}.
@@ -37,7 +38,7 @@ public class IndexIterator<O> implements Iterator<O>
 		
 		this.min = min;
 		this.max = max;
-		
+
 		if(validate())
 		{
 			find();
@@ -54,10 +55,7 @@ public class IndexIterator<O> implements Iterator<O>
 	 */
 	public IndexIterator(IndexedSet<O> index)
 	{
-		this.index = index;
-		
-		this.min = index.Minimum();
-		this.max = index.Maximum();
+		this(index, index.Minimum(), index.Maximum());
 	}
 	
 		
@@ -99,7 +97,7 @@ public class IndexIterator<O> implements Iterator<O>
 			}
 		}
 		
-		next = min;
+		next = Array.copy.of(min);
 		return true;
 	}
 	
