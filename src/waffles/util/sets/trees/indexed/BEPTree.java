@@ -3,7 +3,6 @@ package waffles.util.sets.trees.indexed;
 import waffles.util.sets.indexed.MutableIndex;
 import waffles.util.sets.queues.Queue;
 import waffles.util.sets.queues.delegate.JFIFOQueue;
-import waffles.utils.tools.primitives.Integers;
 
 /**
  * A {@code BEPTree} defines a binary index partition tree for {@code Enum} values.
@@ -49,11 +48,14 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	 */
 	public void remove(int[] min, int[] max)
 	{
+		// Starting a queue from the root...
 		queue = new JFIFOQueue<>();
 		queue.push(Root());
 		
+		// As long as the queue is non-empty...
 		while(!queue.isEmpty())
 		{
+			// Pop the next node from the queue.
 			BEPNode<E> node = queue.pop();
 			
 			
@@ -62,48 +64,55 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 			
 			int[] cMin = node.Minimum();
 			int[] cMax = node.Maximum();
-			
-			int[] iMin = new int[cMin.length];
-			int[] iMax = new int[cMax.length];
-			
+
+			// For each dimension in the index...
 			for(int i = 0; i < cMin.length; i++)
 			{
+				// Check if the area is disjoint from the node.
 				if(max[i] < cMin[i] || cMax[i] < min[i])
 				{
 					isEmpty = true;
 				}
 				
+				// Check if the area fully covers the node.
 				if(cMin[i] < min[i] || max[i] < cMax[i])
 				{
 					isCover = false;
 				}
-				
-				iMin[i] = Integers.max(min[i], cMin[i]);
-				iMax[i] = Integers.min(max[i], cMax[i]);
 			}
 			
+			// If the area is disjoint, skip the node.
 			if(isEmpty) continue;
+			// If the area fully covers the node...
 			if(isCover)
 			{
+				// Turn the node into a leaf
+				// without any value.
 				node.merge();
 				node.setValue(null);
 				continue;
 			}
 			
+			// If the node is a single tile...
 			if(node.isTile())
 			{
+				// Change its value.
 				node.setValue(null);
 				continue;
 			}
-						
+			
+			// If the node is otherwise a leaf...
 			if(node.isLeaf())
 			{
+				// Skip it if it has no value.
 				if(node.Value() == null)
 					continue;
 				
+				// Otherwise, split it.
 				node.split(min, max);
 			}
 			
+			// Add the node's children to the queue.
 			queue.push(node.LChild());
 			queue.push(node.RChild());
 		}
@@ -118,12 +127,22 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	 */
 	public void put(E val, int[] min, int[] max)
 	{
+		// If the value is null...
+		if(val == null)
+		{
+			// Perform removal instead.
+			remove(min, max);
+		}
+		
+		
+		// Starting a queue from the root...
 		queue = new JFIFOQueue<>();
 		queue.push(Root());
 		
-		
+		// As long as the queue is non-empty...
 		while(!queue.isEmpty())
 		{
+			// Pop the next node from the queue.
 			BEPNode<E> node = queue.pop();
 			
 			
@@ -133,39 +152,51 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 			int[] cMin = node.Minimum();
 			int[] cMax = node.Maximum();
 
+			// For each dimension in the index...
 			for(int i = 0; i < cMin.length; i++)
 			{
+				// Check if the area is disjoint from the node.
 				if(max[i] < cMin[i] || cMax[i] < min[i])
 				{
 					isEmpty = true;
 				}
 				
+				// Check if the area fully covers the node.
 				if(cMin[i] < min[i] || max[i] < cMax[i])
 				{
 					isCover = false;
 				}
 			}
 			
+			// If the area is disjoint, skip the node.
 			if(isEmpty) continue;
+			// If the area fully covers the node...
 			if(isCover)
 			{
+				// Turn the node into a leaf with
+				// the corresponding value.
 				node.merge();
 				node.setValue(val);
 				continue;
 			}
 			
+			// If the node is a single tile...
 			if(node.isTile())
 			{
+				// Change its value.
 				node.setValue(val);
 				continue;
 			}
 			
+			// Otherwise, add the value to the node...
 			node.addValue(val);
 			if(node.isLeaf())
 			{
+				// And split it if it is a leaf.
 				node.split(min, max);
 			}
 			
+			// Add the node's children to the queue.
 			queue.push(node.LChild());
 			queue.push(node.RChild());
 		}

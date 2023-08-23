@@ -11,34 +11,34 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @version 1.0
  *
  *
- * @param <T>  an index object type
+ * @param <O>  an index object type
  * @see IndexedSet
  * @see Clearable
  */
-public interface MutableIndex<T> extends IndexedSet<T>, Clearable
+public interface MutableIndex<O> extends IndexedSet<O>, Clearable
 {
 	/**
-	 * Returns a coordinate in the {@code Mutable.Index}.
+	 * Returns a coordinate in the {@code MutableIndex}.
 	 * 
 	 * @param val  a target value
 	 * @return  a value coordinate
 	 */
-	public abstract int[] indexOf(T val);
+	public abstract int[] indexOf(O val);
 	
 	/**
-	 * Changes a value from the {@code Atomic Index}.
+	 * Changes a value in the {@code MutableIndex}.
 	 * 
 	 * @param val  an index value
 	 * @param coords  index coordinates
 	 * @return  a previous index value
 	 */
-	public abstract T put(T val, int... coords);
+	public abstract O put(O val, int... coords);
 	
 	/**
-	 * Removes a value from the {@code Mutable.Index}.
+	 * Removes a value from the {@code MutableIndex}.
 	 * 
 	 * @param coords  index coordinates
 	 * @return  a previous index value
 	 */
-	public abstract T remove(int... coords);
+	public abstract O remove(int... coords);
 }
