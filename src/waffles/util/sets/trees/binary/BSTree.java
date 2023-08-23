@@ -80,7 +80,17 @@ public class BSTree<O> extends BiTree<O> implements MutableSet<O>, Comparator<O>
 	}
 
 	
-	protected BSNode<O> search(O obj)
+	/**
+	 * Searches the {@code BSTree} for the node
+	 * closest to a given object.
+	 * 
+	 * @param obj  an object to search with
+	 * @return  the closest tree node
+	 * 
+	 * 
+	 * @see BSNode
+	 */
+	public BSNode<O> search(O obj)
 	{
 		// No null refs allowed.
 		if(obj == null)
