@@ -1,19 +1,22 @@
 package waffles.util.sets.queues;
 
-import waffles.util.sets.AtomicSet;
+import waffles.util.sets.CountableSet;
+import waffles.utils.tools.patterns.semantics.Clearable;
 
 /**
- * A {@code Deque} defines an atomic set of objects with two-way access to the head or tail.
+ * A {@code Deque} defines a set of objects with two-way access to the head or tail.
  *
  * @author Waffles
  * @since 23 May 2021
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <O>  a queue object type
- * @see AtomicSet
+ * @see CountableSet
+ * @see Clearable
+ * @see Iterable
  */
-public interface Deque<O> extends AtomicSet<O>
+public interface Deque<O> extends CountableSet<O>, Clearable, Iterable<O>
 {
 	/**
 	 * Pushes an object to the start of the {@code Deque}.

@@ -1,21 +1,20 @@
-package waffles.util.sets.atomic;
+package waffles.util.sets;
 
-import waffles.util.sets.AtomicSet;
 import waffles.utils.tools.patterns.semantics.Clearable;
 
 /**
- * A {@code MutableSet} is an atomic set which allows the adding and removing of objects.
+ * A {@code MutableSet} is a countable set which allows the adding and removing of objects.
  *
  * @author Waffles
  * @since Feb 02, 2020
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <O>  a set object type
- * @see AtomicSet
+ * @see CountableSet
  * @see Clearable
  */
-public interface MutableSet<O> extends AtomicSet<O>, Clearable
+public interface MutableSet<O> extends CountableSet<O>, Clearable
 {	
 	/**
 	 * Removes an object from the {@code MutableSet}.

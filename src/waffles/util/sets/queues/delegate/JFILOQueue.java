@@ -2,7 +2,7 @@ package waffles.util.sets.queues.delegate;
 
 import java.util.LinkedList;
 
-import waffles.util.sets.atomic.DelegateSet;
+import waffles.util.sets.mutable.DelegateSet;
 import waffles.util.sets.queues.Queue;
 
 /**

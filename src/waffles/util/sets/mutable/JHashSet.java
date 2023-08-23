@@ -1,4 +1,4 @@
-package waffles.util.sets.atomic;
+package waffles.util.sets.mutable;
 
 import java.util.Arrays;
 import java.util.HashSet;

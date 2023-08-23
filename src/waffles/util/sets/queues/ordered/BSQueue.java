@@ -6,7 +6,6 @@ import java.util.Iterator;
 import waffles.util.sets.queues.Queue;
 import waffles.util.sets.trees.binary.BSNode;
 import waffles.util.sets.trees.binary.BSTree;
-import waffles.utils.tools.patterns.semantics.Clearable;
 
 /**
  * A {@code BSQueue} defines an ordered queue as a wrapper for a {@code BSTree}.
@@ -18,10 +17,9 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * 
  * @param <O>  a queue object type
  * @see Comparator
- * @see Clearable
  * @see Queue
  */
-public class BSQueue<O> implements Clearable, Comparator<O>, Queue<O>
+public class BSQueue<O> implements Comparator<O>, Queue<O>
 {	
 	private BSTree<O> data;
 	private Comparator<O> comp;
@@ -71,13 +69,7 @@ public class BSQueue<O> implements Clearable, Comparator<O>, Queue<O>
 		if(val == 0) val = 1;
 		return val;
 	}
-	
-	@Override
-	public boolean contains(O obj)
-	{
-		return data.contains(obj);
-	}
-	
+
 	@Override
 	public boolean isEmpty()
 	{

@@ -1,4 +1,4 @@
-package waffles.util.sets.atomic;
+package waffles.util.sets.mutable;
 
 import java.util.Collection;
 import java.util.Iterator;
@@ -6,20 +6,20 @@ import java.util.Iterator;
 import waffles.utils.tools.patterns.semantics.Decorator;
 
 /**
- * A {@code DelegateSet} defines a mutable set which delegates
+ * A {@code DelegateSet} defines an atomic set which delegates
  * its functionality to a Java {@code Collection}.
  *
  * @author Waffles
  * @since 06 Aug 2023
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <O>  a set object type
  * @see Collection
- * @see MutableSet
+ * @see AtomicSet
  * @see Decorator
  */
-public interface DelegateSet<O> extends MutableSet<O>, Decorator
+public interface DelegateSet<O> extends AtomicSet<O>, Decorator
 {		
 	@Override
 	public abstract Collection<O> Delegate();

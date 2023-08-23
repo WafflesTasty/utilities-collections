@@ -3,7 +3,7 @@ package waffles.util.sets.queues.delegate;
 import java.util.ArrayDeque;
 import java.util.Arrays;
 
-import waffles.util.sets.atomic.DelegateSet;
+import waffles.util.sets.mutable.DelegateSet;
 import waffles.util.sets.queues.Deque;
 
 /**

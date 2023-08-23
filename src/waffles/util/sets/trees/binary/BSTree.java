@@ -3,7 +3,7 @@ package waffles.util.sets.trees.binary;
 import java.util.Comparator;
 import java.util.Iterator;
 
-import waffles.util.sets.atomic.MutableSet;
+import waffles.util.sets.mutable.AtomicSet;
 import waffles.util.sets.trees.binary.search.Tracker;
 import waffles.util.sets.trees.binary.search.ValueIterator;
 import waffles.utils.tools.collections.iterators.EmptyIterator;
@@ -19,12 +19,12 @@ import waffles.utils.tools.collections.iterators.EmptyIterator;
  * 
  * 
  * @param <O>  a tree object type
- * @see MutableSet
+ * @see AtomicSet
  * @see Comparator
  * @see Tracker
  * @see BiTree
  */
-public class BSTree<O> extends BiTree<O> implements MutableSet<O>, Comparator<O>, Tracker<O>
+public class BSTree<O> extends BiTree<O> implements AtomicSet<O>, Comparator<O>, Tracker<O>
 {
 	private Tracker<O> tracker;
 	private Comparator<O> compare;

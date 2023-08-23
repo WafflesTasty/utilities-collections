@@ -3,8 +3,8 @@ package waffles.util.sets.indexed.delegate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import waffles.util.sets.atomic.DelegateSet;
 import waffles.util.sets.indexed.MutableIndex;
+import waffles.util.sets.mutable.DelegateSet;
 
 /**
  * A {@code List} defines a one-dimensional index backed by a Java {@code ArrayList}.
