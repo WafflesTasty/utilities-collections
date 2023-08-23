@@ -9,7 +9,7 @@ import waffles.util.sets.keymaps.binary.BSMap;
  *
  * @author Waffles
  * @since Feb 03, 2020
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <O>  an index object type

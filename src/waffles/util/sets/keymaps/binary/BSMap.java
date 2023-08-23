@@ -11,7 +11,7 @@ import waffles.util.sets.trees.binary.BSTree;
  *
  * @author Waffles
  * @since 23 Aug 2023
- * @version 1.0
+ * @version 1.1
  *
  *
  * @param <K>  a map key type
