@@ -17,6 +17,7 @@ import waffles.util.sets.keymaps.binary.BSMap;
  */
 public class BSIndex<O> implements MutableIndex<O>
 {
+	private Order order;
 	private int[] dimension;
 	private BSMap<Integer, O> data;
 
@@ -27,8 +28,20 @@ public class BSIndex<O> implements MutableIndex<O>
 	 */
 	public BSIndex(int... dim)
 	{
-		data = new BSMap<>();
+		this(Order.COL_MAJOR, dim);
+	}
+	
+	/**
+	 * Creates a new {@code BSIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dim  an index dimension
+	 */
+	public BSIndex(Order ord, int... dim)
+	{
+		order = ord;
 		dimension = dim;
+		data = new BSMap<>();
 	}
 			
 	/**
@@ -47,64 +60,32 @@ public class BSIndex<O> implements MutableIndex<O>
 	
 	
 	@Override
-	public O get(int... coords)
-	{
-		return data.get(toIndex(coords));
-	}
-	
-	@Override
-	public O put(O val, int... coords)
-	{
-		return data.put(toIndex(coords), val);
-	}
-	
-	@Override
-	public O remove(int... coords)
-	{
-		return data.remove(toIndex(coords));
-	}
-	
-	@Override
 	public void clear()
 	{
 		data = new BSMap<>();
 	}
 	
+	@Override
+	public O get(int... coords)
+	{
+		return data.get(toIndex(order, coords));
+	}
 	
+	@Override
+	public O put(O val, int... coords)
+	{
+		return data.put(toIndex(order, coords), val);
+	}
+	
+	@Override
+	public O remove(int... coords)
+	{
+		return data.remove(toIndex(order, coords));
+	}
+
 	@Override
 	public int[] Dimensions()
 	{
 		return dimension;
-	}
-	
-	
-	@SuppressWarnings("unused")
-	private int[] toCoord(int index)
-	{
-		int[] coord = new int[Order()];
-		
-		int mod = index;
-		for(int i = Order() - 1; i >= 0; i--)
-		{
-			coord[i] = mod % dimension[i];
-			mod = (mod - coord[i]) / dimension[i];
-		}
-		
-		return coord;
-	}
-	
-	private int toIndex(int... coords)
-	{
-		int index = 0;
-		for(int i = 0; i < Order(); i++)
-		{
-			index *= dimension[i];
-			if(i < coords.length)
-			{
-				index += coords[i];
-			}
-		}
-
-		return index;
 	}
 }

@@ -15,8 +15,22 @@ import waffles.util.sets.indexed.MutableIndex;
  */
 public class ArrayIndex<O> implements MutableIndex<O>
 {
+	private Order order;
 	private Object[] data;
 	private int[] dimension;
+	
+	/**
+	 * Creates a new {@code ArrayIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dim  an index dimension
+	 */
+	public ArrayIndex(Order ord, int... dim)
+	{
+		order = ord;
+		dimension = dim;
+		data = new Object[Count()];
+	}
 	
 	/**
 	 * Creates a new {@code ArrayIndex}.
@@ -25,8 +39,7 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	 */
 	public ArrayIndex(int... dim)
 	{
-		dimension = dim;
-		data = new Object[Count()];
+		this(Order.COL_MAJOR, dim);
 	}
 			
 	/**
@@ -42,15 +55,21 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	
 	
 	@Override
+	public void clear()
+	{
+		data = new Object[Count()];
+	}
+		
+	@Override
 	public O get(int... coords)
 	{
-		return (O) data[toIndex(coords)];
+		return (O) data[toIndex(order, coords)];
 	}
 	
 	@Override
 	public O put(O val, int... coords)
 	{
-		int index = toIndex(coords);
+		int index = toIndex(order, coords);
 		O prev = (O) data[index];
 		data[index] = val;
 		return prev;
@@ -63,46 +82,8 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	}
 	
 	@Override
-	public void clear()
-	{
-		data = new Object[Count()];
-	}
-	
-	
-	@Override
 	public int[] Dimensions()
 	{
 		return dimension;
-	}
-
-
-	@SuppressWarnings("unused")
-	private int[] toCoord(int index)
-	{
-		int[] coord = new int[Order()];
-		
-		int mod = index;
-		for(int i = Order() - 1; i >= 0; i--)
-		{
-			coord[i] = mod % dimension[i];
-			mod = (mod - coord[i]) / dimension[i];
-		}
-		
-		return coord;
-	}
-	
-	private int toIndex(int... coords)
-	{
-		int index = 0;
-		for(int i = 0; i < Order(); i++)
-		{
-			index *= dimension[i];
-			if(i < coords.length)
-			{
-				index += coords[i];
-			}
-		}
-
-		return index;
 	}
 }
