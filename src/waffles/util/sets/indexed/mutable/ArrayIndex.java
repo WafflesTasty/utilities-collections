@@ -37,6 +37,17 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	/**
 	 * Creates a new {@code ArrayIndex}.
 	 * 
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public ArrayIndex(Object[] dat, int... dim)
+	{
+		this(Order.COL_MAJOR, dat, dim);
+	}
+	
+	/**
+	 * Creates a new {@code ArrayIndex}.
+	 * 
 	 * @param ord  an index order
 	 * @param dim  an index dimension
 	 */
@@ -46,7 +57,7 @@ public class ArrayIndex<O> implements MutableIndex<O>
 		dimension = dim;
 		data = new Object[Count()];
 	}
-	
+		
 	/**
 	 * Creates a new {@code ArrayIndex}.
 	 * 
