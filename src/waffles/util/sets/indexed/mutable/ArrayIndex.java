@@ -75,21 +75,8 @@ public class ArrayIndex<O> implements MutableIndex<O>
 		return dimension;
 	}
 
-	@Override
-	public int[] indexOf(O val)
-	{
-		for(int i = 0; i < data.length; i++)
-		{
-			if(data[i] == val)
-			{
-				return toCoord(i);
-			}
-		}
 
-		return null;
-	}
-	
-	
+	@SuppressWarnings("unused")
 	private int[] toCoord(int index)
 	{
 		int[] coord = new int[Order()];

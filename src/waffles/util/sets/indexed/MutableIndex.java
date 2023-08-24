@@ -18,14 +18,6 @@ import waffles.utils.tools.patterns.semantics.Clearable;
 public interface MutableIndex<O> extends IndexedSet<O>, Clearable
 {
 	/**
-	 * Returns a coordinate in the {@code MutableIndex}.
-	 * 
-	 * @param val  a target value
-	 * @return  a value coordinate
-	 */
-	public abstract int[] indexOf(O val);
-	
-	/**
 	 * Changes a value in the {@code MutableIndex}.
 	 * 
 	 * @param val  an index value

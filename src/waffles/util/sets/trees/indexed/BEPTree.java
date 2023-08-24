@@ -333,29 +333,6 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	
 	
 	@Override
-	public int[] indexOf(E val)
-	{
-		BEPNode<E> node = Root();
-		if(!node.hasValue(val))
-		{
-			return null;
-		}
-		
-		while(!node.isLeaf())
-		{
-			BEPNode<E> lchild = node.LChild();
-			BEPNode<E> rchild = node.RChild();
-			
-			if(lchild.hasValue(val))
-				node = lchild;
-			else
-				node = rchild;
-		}
-		
-		return node.Minimum();
-	}
-	
-	@Override
 	public BEPNode<E> create(Object... vals)
 	{
 		int[] min = (int[]) vals[0];

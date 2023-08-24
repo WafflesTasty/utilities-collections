@@ -40,7 +40,7 @@ public class BSIndex<O> implements MutableIndex<O>
 	 * 
 	 * @see BSMap
 	 */
-	public BSMap<Integer, O> BSMap()
+	public BSMap<Integer, O> Map()
 	{
 		return data;
 	}
@@ -76,20 +76,9 @@ public class BSIndex<O> implements MutableIndex<O>
 	{
 		return dimension;
 	}
-
-	@Override
-	public int[] indexOf(O val)
-	{
-		Integer index = data.search(val);
-		if(index != null)
-		{
-			return toCoord(index);
-		}
-
-		return null;
-	}
 	
 	
+	@SuppressWarnings("unused")
 	private int[] toCoord(int index)
 	{
 		int[] coord = new int[Order()];

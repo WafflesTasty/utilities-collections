@@ -3,7 +3,7 @@ package waffles.util.sets.indexed.delegate;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import waffles.util.sets.indexed.MutableIndex;
+import waffles.util.sets.indexed.mutable.AtomicIndex;
 import waffles.util.sets.mutable.DelegateSet;
 
 /**
@@ -15,10 +15,10 @@ import waffles.util.sets.mutable.DelegateSet;
  * 
  * 
  * @param <O>  a list object type
- * @see MutableIndex
+ * @see AtomicIndex
  * @see DelegateSet
  */
-public class List<O> implements DelegateSet<O>, MutableIndex<O>
+public class List<O> implements DelegateSet<O>, AtomicIndex<O>
 {
 	private ArrayList<O> data;
 	
