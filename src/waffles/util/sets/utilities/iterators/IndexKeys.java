@@ -6,24 +6,23 @@ import waffles.util.sets.indexed.IndexedSet;
 import waffles.utils.tools.primitives.Array;
 
 /**
- * An {@code IndexIterator} iterates over a subsection of an {@code Index}.
+ * An {@code IndexKeys} iterates over a subsection of an {@code Index} and returns non-null indices.
  *
  * @author Waffles
  * @since 28 Feb 2020
- * @version 1.0
+ * @version 1.1
  *
  *
- * @param <O>  an index object type
  * @see Iterator
  */
-public class IndexIterator<O> implements Iterator<O>
+public class IndexKeys implements Iterator<int[]>
 {
-	private IndexedSet<O> index;
+	private IndexedSet<?> index;
 	private int[] curr, next;
 	private int[] min, max;
 	
 	/**
-	 * Creates a new {@code IndexIterator}.
+	 * Creates a new {@code IndexKeys}.
 	 * 
 	 * @param index  a target index
 	 * @param min  a minimum coordinate
@@ -32,7 +31,7 @@ public class IndexIterator<O> implements Iterator<O>
 	 * 
 	 * @see IndexedSet
 	 */
-	public IndexIterator(IndexedSet<O> index, int[] min, int[] max)
+	public IndexKeys(IndexedSet<?> index, int[] min, int[] max)
 	{
 		this.index = index;
 		
@@ -46,14 +45,14 @@ public class IndexIterator<O> implements Iterator<O>
 	}
 	
 	/**
-	 * Creates a new {@code IndexIterator}.
+	 * Creates a new {@code IndexKeys}.
 	 * 
 	 * @param index  a target index
 	 * 
 	 * 
 	 * @see IndexedSet
 	 */
-	public IndexIterator(IndexedSet<O> index)
+	public IndexKeys(IndexedSet<?> index)
 	{
 		this(index, index.Minimum(), index.Maximum());
 	}
@@ -66,13 +65,12 @@ public class IndexIterator<O> implements Iterator<O>
 	}
 	
 	@Override
-	public O next()
+	public int[] next()
 	{
-		O val = index.get(next);
 		curr = next;
 		find();
 		
-		return val;
+		return curr;
 	}
 	
 	
@@ -81,7 +79,7 @@ public class IndexIterator<O> implements Iterator<O>
 		return curr;
 	}
 	
-	protected IndexedSet<O> Index()
+	protected IndexedSet<?> Index()
 	{
 		return index;
 	}

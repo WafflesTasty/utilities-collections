@@ -5,7 +5,7 @@ import waffles.util.sets.trees.binary.BiNode;
 import waffles.util.sets.trees.traversal.binary.InOrder;
 import waffles.util.sets.trees.traversal.binary.PostOrder;
 import waffles.util.sets.trees.traversal.binary.PreOrder;
-import waffles.util.sets.utilities.iterators.IndexIterator;
+import waffles.util.sets.utilities.iterators.IndexValues;
 
 /**
  * The {@code Iterables} class provides static utility methods to generate {@code Iterable} objects.
@@ -33,7 +33,7 @@ public final class Iterables
 	 */
 	public static <O> Iterable<O> index(IndexedSet<O> index, int[] min, int[] max)
 	{
-		return () -> new IndexIterator<>(index, min, max);
+		return () -> new IndexValues<>(index, min, max);
 	}
 	
 	/**
