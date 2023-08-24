@@ -1,19 +1,23 @@
 package waffles.util.sets.indexed.mutable;
 
 import waffles.util.sets.indexed.MutableIndex;
+import waffles.utils.tools.patterns.semantics.Copyable;
+import waffles.utils.tools.primitives.Array;
 
 /**
  * An {@code ArrayIndex} implements an {@code Index} by internally storing data in an array.
  *
  * @author Waffles
  * @since Feb 03, 2020
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <O>  an index object type
  * @see MutableIndex
+ * @see ArrayIndex
+ * @see Copyable
  */
-public class ArrayIndex<O> implements MutableIndex<O>
+public class ArrayIndex<O> implements MutableIndex<O>, Copyable<ArrayIndex<O>>
 {
 	private Order order;
 	private Object[] data;
@@ -85,5 +89,20 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	public int[] Dimensions()
 	{
 		return dimension;
+	}
+
+	
+	@Override
+	public ArrayIndex<O> instance()
+	{
+		return new ArrayIndex<>(order, Dimensions());
+	}
+	
+	@Override
+	public ArrayIndex<O> copy()
+	{
+		ArrayIndex<O> copy = instance();
+		copy.data = Array.copy.of(data);
+		return copy;
 	}
 }
