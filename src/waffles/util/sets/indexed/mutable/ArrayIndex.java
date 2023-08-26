@@ -40,7 +40,7 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	 * @param dat  an index data
 	 * @param dim  an index dimension
 	 */
-	public ArrayIndex(O[] dat, int... dim)
+	public ArrayIndex(Object[] dat, int... dim)
 	{
 		this(Order.COL_MAJOR, dat, dim);
 	}
