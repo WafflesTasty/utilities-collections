@@ -3,6 +3,7 @@ package waffles.util.sets.utilities.iterators;
 import java.util.Iterator;
 
 import waffles.util.sets.indexed.IndexedSet;
+import waffles.util.sets.indexed.MutableIndex.Order;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -18,23 +19,40 @@ import waffles.utils.tools.primitives.Array;
  */
 public class IndexValues<O> implements Iterator<O>
 {
-	private IndexedSet<O> index;
-	private int[] curr, next;
+	private Order order;
 	private int[] min, max;
+	private int[] curr, next;
+	private IndexedSet<O> index;
 	
 	/**
 	 * Creates a new {@code IndexValues}.
 	 * 
 	 * @param index  a target index
+	 * @param order  an index order
+	 * 
+	 * 
+	 * @see IndexedSet
+	 */
+	public IndexValues(IndexedSet<O> index, Order order)
+	{
+		this(index, order, index.Minimum(), index.Maximum());
+	}
+	
+	/**
+	 * Creates a new {@code IndexValues}.
+	 * 
+	 * @param index  a target index
+	 * @param order  an index order
 	 * @param min  a minimum coordinate
 	 * @param max  a maximum coordinate
 	 * 
 	 * 
 	 * @see IndexedSet
 	 */
-	public IndexValues(IndexedSet<O> index, int[] min, int[] max)
+	public IndexValues(IndexedSet<O> index, Order order, int[] min, int[] max)
 	{
 		this.index = index;
+		this.order = order;
 		
 		this.min = min;
 		this.max = max;
@@ -49,13 +67,28 @@ public class IndexValues<O> implements Iterator<O>
 	 * Creates a new {@code IndexValues}.
 	 * 
 	 * @param index  a target index
+	 * @param min  a minimum coordinate
+	 * @param max  a maximum coordinate
+	 * 
+	 * 
+	 * @see IndexedSet
+	 */
+	public IndexValues(IndexedSet<O> index, int[] min, int[] max)
+	{
+		this(index, Order.COL_MAJOR, min, max);
+	}
+	
+	/**
+	 * Creates a new {@code IndexValues}.
+	 * 
+	 * @param index  a target index
 	 * 
 	 * 
 	 * @see IndexedSet
 	 */
 	public IndexValues(IndexedSet<O> index)
 	{
-		this(index, index.Minimum(), index.Maximum());
+		this(index, Order.COL_MAJOR);
 	}
 	
 		
@@ -101,7 +134,7 @@ public class IndexValues<O> implements Iterator<O>
 		return true;
 	}
 	
-	private void find()
+	private void findColMajor()
 	{
 		for(int i = 0; i < index.Order(); i++)
 		{
@@ -121,7 +154,44 @@ public class IndexValues<O> implements Iterator<O>
 		
 		if(index.get(next) == null)
 		{
-			find();
+			findColMajor();
+		}
+	}
+	
+	private void findRowMajor()
+	{
+		for(int i = index.Order()-1; i >= 0; i--)
+		{
+			next[i]++;
+			if(next[i] <= max[i])
+				break;
+			else
+			{
+				next[i] = min[i];
+				if(i == 0)
+				{
+					next = null;
+					return;
+				}
+			}
+		}
+		
+		if(index.get(next) == null)
+		{
+			findRowMajor();
+		}
+	}
+	
+	private void find()
+	{
+		switch(order)
+		{
+		case COL_MAJOR:
+			findColMajor();
+		case ROW_MAJOR:
+			findRowMajor();
+		default:
+			break;
 		}
 	}
 }
