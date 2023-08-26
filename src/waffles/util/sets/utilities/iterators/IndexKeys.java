@@ -56,10 +56,7 @@ public class IndexKeys implements Iterator<int[]>
 		this.min = min;
 		this.max = max;
 
-		if(validate())
-		{
-			find();
-		}
+		validate();
 	}
 	
 	/**
@@ -100,7 +97,7 @@ public class IndexKeys implements Iterator<int[]>
 	@Override
 	public int[] next()
 	{
-		curr = next;
+		curr = Array.copy.of(next);
 		find();
 		
 		return curr;
@@ -149,11 +146,6 @@ public class IndexKeys implements Iterator<int[]>
 				}
 			}
 		}
-		
-		if(index.get(next) == null)
-		{
-			findColMajor();
-		}
 	}
 	
 	private void findRowMajor()
@@ -173,11 +165,6 @@ public class IndexKeys implements Iterator<int[]>
 				}
 			}
 		}
-		
-		if(index.get(next) == null)
-		{
-			findRowMajor();
-		}
 	}
 	
 	private void find()
@@ -185,9 +172,9 @@ public class IndexKeys implements Iterator<int[]>
 		switch(order)
 		{
 		case COL_MAJOR:
-			findColMajor();
+			findColMajor(); break;
 		case ROW_MAJOR:
-			findRowMajor();
+			findRowMajor(); break;
 		default:
 			break;
 		}

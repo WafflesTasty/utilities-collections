@@ -19,10 +19,10 @@ import waffles.utils.tools.primitives.Array;
  */
 public class IndexValues<O> implements Iterator<O>
 {
-	private Order order;
+	private int[] next;
 	private int[] min, max;
-	private int[] curr, next;
 	private IndexedSet<O> index;
+	private Order order;
 	
 	/**
 	 * Creates a new {@code IndexValues}.
@@ -57,7 +57,8 @@ public class IndexValues<O> implements Iterator<O>
 		this.min = min;
 		this.max = max;
 
-		if(validate())
+		validate();
+		if(index.get(next) == null)
 		{
 			find();
 		}
@@ -102,22 +103,11 @@ public class IndexValues<O> implements Iterator<O>
 	public O next()
 	{
 		O val = index.get(next);
-		curr = next;
 		find();
 		
 		return val;
 	}
 	
-	
-	protected int[] Current()
-	{
-		return curr;
-	}
-	
-	protected IndexedSet<O> Index()
-	{
-		return index;
-	}
 	
 	private boolean validate()
 	{
@@ -187,9 +177,9 @@ public class IndexValues<O> implements Iterator<O>
 		switch(order)
 		{
 		case COL_MAJOR:
-			findColMajor();
+			findColMajor(); break;
 		case ROW_MAJOR:
-			findRowMajor();
+			findRowMajor(); break;
 		default:
 			break;
 		}
