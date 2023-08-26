@@ -17,8 +17,8 @@ import waffles.util.sets.indexed.MutableIndex;
 public class ArrayIndex<O> implements MutableIndex<O>
 {
 	private Order order;
-	private Object[] data;
 	private int[] dimension;
+	private Object[] data;
 	
 	/**
 	 * Creates a new {@code ArrayIndex}.
@@ -40,7 +40,7 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	 * @param dat  an index data
 	 * @param dim  an index dimension
 	 */
-	public ArrayIndex(Object[] dat, int... dim)
+	public ArrayIndex(O[] dat, int... dim)
 	{
 		this(Order.COL_MAJOR, dat, dim);
 	}
