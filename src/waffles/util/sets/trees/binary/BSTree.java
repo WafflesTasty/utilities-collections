@@ -100,7 +100,7 @@ public class BSTree<O> extends BiTree<O> implements AtomicSet<O>, Comparator<O>,
 				
 		BSNode<O> node = Root();
 		// Start checking from root...
-		while(true)
+		while(node != null)
 		{
 			int comp = compare(obj, node.Value());
 			
@@ -138,6 +138,8 @@ public class BSTree<O> extends BiTree<O> implements AtomicSet<O>, Comparator<O>,
 				continue;
 			}
 		}
+		
+		return null;
 	}
 	
 	@Override
