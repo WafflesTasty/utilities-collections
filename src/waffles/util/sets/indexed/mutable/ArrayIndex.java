@@ -74,7 +74,7 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	 * 
 	 * @return  a grid array
 	 */
-	public Object[] Source()
+	protected Object[] Source()
 	{
 		return data;
 	}
