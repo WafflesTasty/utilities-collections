@@ -69,12 +69,12 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	}
 			
 	/**
-	 * Returns the array that stores the data
-	 * of the {@code ArrayIndex}.
+	 * Returns the source array that stores
+	 * the data of the {@code ArrayIndex}.
 	 * 
 	 * @return  a grid array
 	 */
-	public Object[] Array()
+	public Object[] Source()
 	{
 		return data;
 	}
