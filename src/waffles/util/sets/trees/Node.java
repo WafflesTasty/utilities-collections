@@ -9,8 +9,7 @@ import waffles.utils.tools.primitives.Integers;
  * A {@code Node} defines a single element of a {@code Tree}.
  * A node extends the basic structure of a {@code Hierarchy} with an array of child nodes.
  * This class implements {@code Nodal} to allow nodes to serve as direct parents and children.
- * Note that parent-child relations aren't implicitly established both ways. Instead, making
- * both relations explicit is left to the advanced methods.
+ * Note that setting a child into the node automatically assigns it as its parent.
  * 
  * @author Waffles
  * @since 08 Aug 2023
@@ -108,11 +107,18 @@ public class Node extends Hierarchy implements Clearable, Nodal
 			if(children[i] == null)
 			{
 				children[i] = nodal;
+				Node node = nodal.Arch();
+				node.setParent(Delegate());
 				return;
 			}
 		}
 		
 		children = Array.add.to(children, nodal);
+		if(nodal != null)
+		{
+			Node node = nodal.Arch();
+			node.setParent(Delegate());
+		}
 	}
 		
 	/**
@@ -132,6 +138,11 @@ public class Node extends Hierarchy implements Clearable, Nodal
 		}
 		
 		children[i] = nodal;
+		if(nodal != null)
+		{
+			Node node = nodal.Arch();
+			node.setParent(Delegate());
+		}
 	}
 		
 	/**
@@ -155,7 +166,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 			}
 		}
 	}
-	
+
 	/**
 	 * Replaces this node with a {@code Nodal}.
 	 * 
@@ -166,21 +177,12 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public void replace(Nodal nodal)
 	{
-		if(!isRoot())
-		{
-			Parent().Arch().setChild(TreeIndex(), nodal);
-			if(nodal != null)
-			{
-				nodal.Arch().setParent(Parent());
-			}
-		}
+		if(isRoot())
+			Set().setRoot(nodal);
 		else
 		{
-			Set().setRoot(nodal);
-			if(nodal != null)
-			{
-				nodal.Arch().setParent(null);
-			}
+			Node pNode = Parent().Arch();
+			pNode.setChild(TreeIndex(), nodal);
 		}
 	}
 	
@@ -192,6 +194,20 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	public Nodal[] Children()
 	{
 		return children;
+	}
+
+	/**
+	 * Detaches the {@code Node}.
+	 */
+	public void detach()
+	{
+		if(isRoot())
+			Set().setRoot(null);
+		else
+		{
+			Node parent = Parent().Arch();
+			parent.setChild(TreeIndex(), null);
+		}
 	}
 	
 	
@@ -247,8 +263,12 @@ public class Node extends Hierarchy implements Clearable, Nodal
 		Node parent = (Node) Parent().Arch();
 		for(Nodal nodal : parent.Children())
 		{
-			if(this == nodal.Arch())
-				return index;
+			if(nodal != null)
+			{
+				if(this == nodal.Arch())
+					return index;
+			}
+
 			index++;
 		}
 		

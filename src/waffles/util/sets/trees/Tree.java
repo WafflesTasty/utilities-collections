@@ -33,6 +33,11 @@ public abstract class Tree<O> implements CountableSet<O>
 	public void setRoot(Nodal root)
 	{
 		this.root = root;
+		if(root != null)
+		{
+			Node node = root.Arch();
+			node.setParent(null);
+		}
 	}
 		
 	/**

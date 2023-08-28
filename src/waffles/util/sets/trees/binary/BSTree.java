@@ -278,30 +278,34 @@ public class BSTree<O> extends BiTree<O> implements AtomicSet<O>, Comparator<O>,
 	@Override
 	public void add(O obj)
 	{
+		// Create a new child node.
+		BSNode<O> child = create(obj);
+		
 		// If the tree has no nodes...
 		if(Root() == null)
 		{
-			// Create a root node.
-			setRoot(create(obj));
-			onInsert(Root());
+			// Set it as root.
+			setRoot(child);
+			onInsert(child);
 			return;
 		}
-		
+
 		// Search the closest node...
 		BSNode<O> node = search(obj);
 		int comp = compare(obj, node.Value());
 		// If its value is equal, discard the object.
 		if(comp == 0) return;
-		// Otherwise, add it to the closest child.
+
+		// Otherwise, set it as closest child.
 		if(comp < 0)
 		{
-			node.setLChild(create(obj));
-			onInsert(node.LChild());
+			node.setLChild(child);
+			onInsert(child);
 		}
 		else
 		{
-			node.setRChild(create(obj));
-			onInsert(node.RChild());
+			node.setRChild(child);
+			onInsert(child);
 		}
 	}
 

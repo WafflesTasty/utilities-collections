@@ -59,28 +59,28 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	{
 		return data;
 	}
-	
+
 	@Override
 	public V put(K key, V val)
 	{
 		KeyPair<K,V> pNew = new KeyPair<>(key, val);
-		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
-		if(pNode == null)
+		if(data.isEmpty())
 		{
 			data.add(pNew);
 			return null;
 		}
+
 		
-		
-		V vOld = null;
+		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
 		KeyPair<K,V> pOld = pNode.Value();
+
+		V vOld = null;
 		if(key.equals(pOld.Key()))
 		{
 			vOld = pOld.Value();
 			pNode.delete();
 		}
-		
-		
+
 		data.add(pNew);
 		return vOld;
 	}
@@ -89,21 +89,21 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	public V remove(K key)
 	{
 		KeyPair<K,V> pNew = new KeyPair<>(key, null);
-		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
-		if(pNode == null)
+		if(data.isEmpty())
 		{
 			return null;
 		}
 		
 		
-		V vOld = null;
+		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
 		KeyPair<K,V> pOld = pNode.Value();
+		
+		V vOld = null;
 		if(key.equals(pOld.Key()))
 		{
 			vOld = pOld.Value();
 			pNode.delete();
 		}
-		
 		
 		return vOld;
 	}
@@ -112,14 +112,15 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	public V get(K key)
 	{
 		KeyPair<K,V> pNew = new KeyPair<>(key, null);
-		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
-		if(pNode == null)
+		if(data.isEmpty())
 		{
 			return null;
 		}
 		
 		
+		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
 		KeyPair<K,V> pOld = pNode.Value();
+		
 		if(key.equals(pOld.Key()))
 		{
 			return pOld.Value();

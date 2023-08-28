@@ -6,6 +6,7 @@ import java.util.Iterator;
 
 import waffles.util.sets.trees.binary.BiNodal;
 import waffles.util.sets.trees.binary.BiNode;
+
 /**
  * The {@code InOrder} class defines an in-order iterator for a binary tree.
  * 
@@ -36,8 +37,8 @@ public class InOrder<N extends BiNodal> implements Iterator<N>
 		queue = new ArrayDeque<>();
 		nodal = base;
 	}
-	
-	
+
+
 	@Override
 	public boolean hasNext()
 	{

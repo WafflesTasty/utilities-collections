@@ -82,13 +82,12 @@ public class BiNode extends Node implements BiNodal
 		int count = ChildCount();
 		BiNodal lchild = LChild();
 		BiNodal rchild = RChild();
-		
+
 		// If the node has no children...
 		if(count == 0)
 		{
-			// Remove it from its parent.
-			replace(null);
-			return;
+			// Detach it from its parent.
+			detach(); return;
 		}
 		
 		// If the node has one child...
@@ -106,33 +105,20 @@ public class BiNode extends Node implements BiNodal
 		{
 			// Find the next node in order.
 			BiNodal next = next();
-			
+
 			// Update the node's children.
 			next.Arch().setLChild(lchild);
-			lchild.Arch().setParent(next);
 			if(!next.equals(rchild))
 			{
 				next.Arch().setRChild(rchild);
-				rchild.Arch().setParent(next);
 			}
 			
-
 			// Replace it with the next.
+			next.Arch().detach();
 			replace(next);
 		}
 	}
-	
-	/**
-	 * Detaches the {@code BiNode}.
-	 */
-	public void detach()
-	{
-		if(!isRoot())
-			Parent().Arch().setChild(TreeIndex(), null);
-		else
-			Set().setRoot(null);
-	}
-	
+		
 	/**
 	 * Rotates the {@code BiNode}.
 	 */
