@@ -82,19 +82,17 @@ public interface IndexedSet<O> extends CountableSet<O>, DimensionalSet<O>
 		return max;
 	}
 
-	
-	private int Dimension(int i)
-	{
-		return Maximum()[i] - Minimum()[i] + 1;
-	}
-	
+
 	@Override
 	public default int[] Dimensions()
 	{
+		int[] min = Minimum();
+		int[] max = Maximum();
+		
 		int[] dim = new int[Order()];
 		for(int i = 0; i < Order(); i++)
 		{
-			dim[i] = Dimension(i);
+			dim[i] = max[i] - min[i] + 1;
 		}
 
 		return dim;
