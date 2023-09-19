@@ -36,7 +36,6 @@ public class BEPNode<E extends Enum<E>> extends BIPNode
 		super(tree, min, max);
 		values = new Enum[]{null};
 	}
-
 	
 		
 	/**
@@ -59,7 +58,7 @@ public class BEPNode<E extends Enum<E>> extends BIPNode
 	}
 	
 	/**
-	 * Adds a value to the {@code BEPNode}.
+	 * Adds a new value to the {@code BEPNode}.
 	 * 
 	 * @param val  an enum value
 	 */
