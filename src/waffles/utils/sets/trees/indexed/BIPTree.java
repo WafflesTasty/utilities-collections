@@ -44,22 +44,6 @@ public abstract class BIPTree<O> extends BiTree<O> implements IndexedSet<O>
 			
 	
 	@Override
-	public BIPNode create(Object... vals)
-	{
-		int[] min = (int[]) vals[0];
-		int[] max = (int[]) vals[1];
-		
-		return new BIPNode(this, min, max);
-	}
-	
-	@Override
-	public BIPNode Root()
-	{
-		return (BIPNode) super.Root();
-	}
-
-	
-	@Override
 	public O get(int... coords)
 	{
 		// If the coordinates are out of bounds...
@@ -97,5 +81,21 @@ public abstract class BIPTree<O> extends BiTree<O> implements IndexedSet<O>
 	public int[] Maximum()
 	{
 		return Root().Maximum();
+	}
+
+
+	@Override
+	public BIPNode create(Object... vals)
+	{
+		int[] min = (int[]) vals[0];
+		int[] max = (int[]) vals[1];
+		
+		return new BIPNode(this, min, max);
+	}
+	
+	@Override
+	public BIPNode Root()
+	{
+		return (BIPNode) super.Root();
 	}
 }
