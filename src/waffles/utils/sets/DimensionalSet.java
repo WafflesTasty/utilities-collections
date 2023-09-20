@@ -1,5 +1,6 @@
 package waffles.utils.sets;
 
+import waffles.utils.tools.patterns.semantics.Ordered;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -8,11 +9,14 @@ import waffles.utils.tools.primitives.Array;
  *
  * @author Waffles
  * @since Jul 5, 2018
- * @version 1.0
+ * @version 1.1
  * 
  * @param <O>  a set object type
+ * 
+ * 
+ * @see Ordered
  */
-public interface DimensionalSet<O>
+public interface DimensionalSet<O> extends Ordered
 {	
 	/**
 	 * Returns a single value from the {@code DimensionalSet}.
@@ -36,6 +40,7 @@ public interface DimensionalSet<O>
 	 * 
 	 * @return  a dimension order
 	 */
+	@Override
 	public default int Order()
 	{
 		return Dimensions().length;
