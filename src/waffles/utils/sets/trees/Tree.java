@@ -34,21 +34,13 @@ public abstract class Tree implements Rooted
 			node.setParent(null);
 		}
 	}
-		
-	/**
-	 * Creates a new node for the {@code Tree}.
-	 * 
-	 * @param vals  an array of values
-	 * @return  a new tree node
-	 * 
-	 * 
-	 * @see Node
-	 */
+
+
+	@Override
 	public Node create(Object... vals)
 	{
 		return new Node(this);
 	}
-
 
 	@Override
 	public Nodal Root()

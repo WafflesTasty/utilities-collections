@@ -26,6 +26,16 @@ public interface Rooted extends CountableSet
 	 */
 	public abstract Nodal Root();
 	
+	/**
+	 * Creates a new node for the {@code Rooted}.
+	 * 
+	 * @param vals  an array of values
+	 * @return  a new node
+	 * 
+	 * 
+	 * @see Node
+	 */
+	public abstract Node create(Object... vals);
 	
 	/**
 	 * Returns a depth-first iterable for the {@code Rooted}.
