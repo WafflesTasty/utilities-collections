@@ -1,9 +1,5 @@
 package waffles.utils.sets.trees;
 
-import waffles.utils.sets.CountableSet;
-import waffles.utils.sets.trees.traversal.BreadthFirst;
-import waffles.utils.sets.trees.traversal.DepthFirst;
-
 /**
  * The abstract {@code Tree} class defines a generic tree structure.
  * Each tree requires at least a root {@code Node}, and optionally allows
@@ -12,12 +8,12 @@ import waffles.utils.sets.trees.traversal.DepthFirst;
  *
  * @author Waffles
  * @since 08 Aug 2023
- * @version 1.0
+ * @version 1.1
  *
  *
- * @see CountableSet
+ * @see Rooted
  */
-public abstract class Tree implements CountableSet
+public abstract class Tree implements Rooted
 {
 	private Nodal root;
 	
@@ -52,53 +48,11 @@ public abstract class Tree implements CountableSet
 	{
 		return new Node(this);
 	}
-		
-	/**
-	 * Returns the root of the {@code Tree}.
-	 * 
-	 * @return  a root nodal
-	 * 
-	 * 
-	 * @see Nodal
-	 */
+
+
+	@Override
 	public Nodal Root()
 	{
 		return root;
-	}
-	
-	
-	/**
-	 * Returns a depth-first iterable for the {@code Tree}.
-	 * 
-	 * @param <N>  a node type
-	 * @return  a depth-first iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 */
-	public <N extends Nodal> Iterable<N> DFSearch()
-	{
-		return () -> new DepthFirst<>((N) Root());
-	}
-
-	/**
-	 * Returns a breadth-first iterable for the {@code Tree}.
-	 * 
-	 * @param <N>  a node type
-	 * @return  a breadth-first iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 */
-	public <N extends Nodal> Iterable<N> BFSearch()
-	{
-		return () -> new BreadthFirst<>((N) Root());
-	}
-
-	
-	@Override
-	public boolean isEmpty()
-	{
-		return root == null;
 	}
 }
