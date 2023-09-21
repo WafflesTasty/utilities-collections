@@ -43,6 +43,21 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 	}
 	
 	/**
+	 * Queries the {@code BIPNode} for a subindex.
+	 * 
+	 * @param min  a minimum index
+	 * @param max  a maximum index
+	 * @return  a bip query
+	 * 
+	 * 
+	 * @see IPQuery
+	 */
+	public IPQuery<BIPNode> query(int[] min, int[] max)
+	{
+		return new IPQuery<>(this, min, max);
+	}
+	
+	/**
 	 * Performs a split on the {@code BIPNode}.
 	 * </br> 
 	 * 
@@ -75,46 +90,6 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 	}
 
 	/**
-	 * Performs a merge on the {@code BIPNode}.
-	 */
-	public void merge()
-	{
-		cDim = -1;
-		clear();
-	}
-
-	
-	/**
-	 * Checks the size of the {@code BIPNode}.
-	 * A node is a tile if and only if it spans
-	 * a single element in an indexed set.
-	 * 
-	 * @return  {@code true} if the node is a tile
-	 */
-	public boolean isTile()
-	{
-		int[] min = Minimum();
-		int[] max = Maximum();
-		
-		return Array.equals.of(min, max);
-	}
-	
-	/**
-	 * Queries the {@code BIPNode} for a subindex.
-	 * 
-	 * @param min  a minimum index
-	 * @param max  a maximum index
-	 * @return  a bip query
-	 * 
-	 * 
-	 * @see IPQuery
-	 */
-	public IPQuery<BIPNode> query(int[] min, int[] max)
-	{
-		return new IPQuery<>(this, min, max);
-	}
-	
-	/**
 	 * Finds a child of the {@code BIPNode} which
 	 * is the closest to a given index.
 	 * 
@@ -141,7 +116,22 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 			return LChild();
 		return RChild();
 	}
-	
+		
+	/**
+	 * Checks the tile size of the {@code BIPNode}.
+	 * A node is a tile if and only if it spans
+	 * a single element in an indexed set.
+	 * 
+	 * @return  {@code true} if the node is a tile
+	 */
+	public boolean isTile()
+	{
+		int[] min = Minimum();
+		int[] max = Maximum();
+		
+		return Array.equals.of(min, max);
+	}
+			
 	/**
 	 * Returns the split of the {@code BIPNode}.
 	 * </br> This indicates which dimension the children are split over.
@@ -151,6 +141,15 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 	public int DimSplit()
 	{
 		return cDim;
+	}
+	
+	/**
+	 * Performs a merge on the {@code BIPNode}.
+	 */
+	public void merge()
+	{
+		cDim = -1;
+		clear();
 	}
 	
 	
