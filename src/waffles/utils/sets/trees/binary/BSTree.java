@@ -24,7 +24,7 @@ import waffles.utils.tools.collections.iterators.EmptyIterator;
  * @see Tracker
  * @see BiTree
  */
-public class BSTree<O> extends BiTree<O> implements AtomicSet<O>, Comparator<O>, Tracker<O>
+public class BSTree<O> extends BiTree implements AtomicSet<O>, Comparator<O>, Tracker<O>
 {
 	private Tracker<O> tracker;
 	private Comparator<O> compare;

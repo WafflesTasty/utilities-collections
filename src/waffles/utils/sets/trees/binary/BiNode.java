@@ -27,7 +27,7 @@ public class BiNode extends Node implements BiNodal
 	 * @see BiNodal
 	 * @see BiTree
 	 */
-	public BiNode(BiTree<?> tree, BiNodal del)
+	public BiNode(BiTree tree, BiNodal del)
 	{
 		super(tree, del);
 	}
@@ -40,7 +40,7 @@ public class BiNode extends Node implements BiNodal
 	 * 
 	 * @see BiTree
 	 */
-	public BiNode(BiTree<?> tree)
+	public BiNode(BiTree tree)
 	{
 		super(tree);
 	}
@@ -294,9 +294,9 @@ public class BiNode extends Node implements BiNodal
 	
 	
 	@Override
-	public BiTree<?> Set()
+	public BiTree Set()
 	{
-		return (BiTree<?>) super.Set();
+		return (BiTree) super.Set();
 	}
 	
 	@Override

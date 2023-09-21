@@ -16,10 +16,9 @@ import waffles.utils.sets.trees.traversal.binary.PreOrder;
  * @version 1.0
  * 
  * 
- * @param <O>  a tree object type
  * @see Tree
  */
-public abstract class BiTree<O> extends Tree<O>
+public abstract class BiTree extends Tree
 {
 	/**
 	 * Performs in-order iteration of the {@code BiTree}.

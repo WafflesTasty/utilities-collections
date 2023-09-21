@@ -14,7 +14,7 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @see CountableSet
  * @see Clearable
  */
-public interface MutableSet<O> extends CountableSet<O>, Clearable
+public interface MutableSet<O> extends CountableSet, Clearable
 {	
 	/**
 	 * Removes an object from the {@code MutableSet}.

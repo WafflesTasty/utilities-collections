@@ -34,7 +34,7 @@ public class Hierarchy extends Collectable implements Decorator, Hierarchical
 	 * @see CountableSet
 	 * @see Hierarchical
 	 */
-	public Hierarchy(CountableSet<?> set, Hierarchical del)
+	public Hierarchy(CountableSet set, Hierarchical del)
 	{
 		super(set);	delegate = del;
 	}
@@ -47,7 +47,7 @@ public class Hierarchy extends Collectable implements Decorator, Hierarchical
 	 * 
 	 * @see CountableSet
 	 */
-	public Hierarchy(CountableSet<?> set)
+	public Hierarchy(CountableSet set)
 	{
 		super(set);
 	}

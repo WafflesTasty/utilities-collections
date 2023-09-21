@@ -17,7 +17,7 @@ import waffles.utils.tools.primitives.Array;
  * @see DimensionalSet
  * @see CountableSet
  */
-public interface IndexedSet<O> extends CountableSet<O>, DimensionalSet<O>
+public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 {	
 	/**
 	 * Verifies if the {@code IndexedSet} contains a coordinate.

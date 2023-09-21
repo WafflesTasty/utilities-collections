@@ -15,10 +15,9 @@ import waffles.utils.sets.trees.traversal.DepthFirst;
  * @version 1.0
  *
  *
- * @param <O>  a tree object type
  * @see CountableSet
  */
-public abstract class Tree<O> implements CountableSet<O>
+public abstract class Tree implements CountableSet
 {
 	private Nodal root;
 	

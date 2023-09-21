@@ -14,7 +14,7 @@ import waffles.utils.sets.CountableSet;
  */
 public class Collectable
 {
-	private CountableSet<?> set;
+	private CountableSet set;
 
 	/**
 	 * Creates a new {@code Collectable}.
@@ -32,7 +32,7 @@ public class Collectable
 	 * 
 	 * @see CountableSet
 	 */
-	public Collectable(CountableSet<?> set)
+	public Collectable(CountableSet set)
 	{
 		this.set = set;
 	}
@@ -45,7 +45,7 @@ public class Collectable
 	 * 
 	 * @see CountableSet
 	 */
-	public void setCollection(CountableSet<?> set)
+	public void setCollection(CountableSet set)
 	{
 		this.set = set;
 	}
@@ -59,7 +59,7 @@ public class Collectable
 	 * 
 	 * @see CountableSet
 	 */
-	public <S extends CountableSet<?>> S Set()
+	public <S extends CountableSet> S Set()
 	{
 		return (S) set;
 	}

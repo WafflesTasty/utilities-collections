@@ -19,7 +19,7 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @see CountableSet
  * @see Clearable
  */
-public interface KeyMap<K, V> extends CountableSet<V>, Clearable
+public interface KeyMap<K, V> extends CountableSet, Clearable
 {	
 	/**
 	 * The {@code Keys} iterator traverses all keys in a {@code KeyMap}.

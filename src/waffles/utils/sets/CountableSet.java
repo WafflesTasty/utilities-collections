@@ -6,12 +6,9 @@ package waffles.utils.sets;
  * @author Waffles
  * @since Feb 02, 2020
  * @version 1.0
- * 
- * 
- * @param <O>  a set object type
  */
 @FunctionalInterface
-public interface CountableSet<O>
+public interface CountableSet
 {	
 	/**
 	 * Checks if the {@code CountableSet} is completely empty.

@@ -16,7 +16,7 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @see Clearable
  * @see Iterable
  */
-public interface Deque<O> extends CountableSet<O>, Clearable, Iterable<O>
+public interface Deque<O> extends CountableSet, Clearable, Iterable<O>
 {
 	/**
 	 * Pushes an object to the start of the {@code Deque}.

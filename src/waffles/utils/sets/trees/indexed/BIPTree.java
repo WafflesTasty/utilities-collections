@@ -17,7 +17,7 @@ import waffles.utils.sets.trees.binary.BiTree;
  * @see IndexedSet
  * @see BiTree
  */
-public abstract class BIPTree<O> extends BiTree<O> implements IndexedSet<O>
+public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 {	
 	private int[] dims;
 	

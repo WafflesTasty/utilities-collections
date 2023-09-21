@@ -34,7 +34,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 * @see Nodal
 	 * @see Tree
 	 */
-	public Node(Tree<?> tree, Nodal del)
+	public Node(Tree tree, Nodal del)
 	{
 		super(tree, del); children = new Nodal[0];
 	}
@@ -47,7 +47,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 * 
 	 * @see Tree
 	 */
-	public Node(Tree<?> tree)
+	public Node(Tree tree)
 	{
 		super(tree); children = new Nodal[0];
 	}
@@ -328,13 +328,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	{
 		children = new Nodal[0];
 	}
-			
-	@Override
-	public Tree<?> Set()
-	{
-		return super.Set();
-	}
-	
+				
 	@Override
 	public Nodal Delegate()
 	{
@@ -357,5 +351,11 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	public Node Arch()
 	{
 		return this;
+	}
+	
+	@Override
+	public Tree Set()
+	{
+		return super.Set();
 	}
 }

@@ -17,7 +17,7 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @see Clearable
  * @see Iterable
  */
-public interface Queue<O> extends CountableSet<O>, Clearable, Iterable<O>
+public interface Queue<O> extends CountableSet, Clearable, Iterable<O>
 {
 	/**
 	 * Pushes an object onto the {@code Queue}.
