@@ -342,6 +342,12 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	}
 	
 	@Override
+	public BEPNode<E> nodeAt(int... coords)
+	{
+		return (BEPNode<E>) super.nodeAt(coords);
+	}
+	
+	@Override
 	public BEPNode<E> Root()
 	{
 		return (BEPNode<E>) super.Root();

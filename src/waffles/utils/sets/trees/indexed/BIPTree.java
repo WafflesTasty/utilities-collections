@@ -41,10 +41,17 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	 * @see BIPNode
 	 */
 	public abstract O valueOf(BIPNode node);
-			
 	
-	@Override
-	public O get(int... coords)
+	/**
+	 * Returns a node at a given coordinate.
+	 * 
+	 * @param coords  an index coordinate
+	 * @return  a tree node
+	 * 
+	 * 
+	 * @see BIPNode
+	 */
+	public BIPNode nodeAt(int... coords)
 	{
 		// If the coordinates are out of bounds...
 		if(!contains(coords))
@@ -62,7 +69,14 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 			node = node.get(coords);
 		}
 		
-		return valueOf(node);
+		return node;
+	}
+			
+	
+	@Override
+	public O get(int... coords)
+	{
+		return valueOf(nodeAt(coords));
 	}
 
 	@Override
