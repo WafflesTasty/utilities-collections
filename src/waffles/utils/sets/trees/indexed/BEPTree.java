@@ -204,7 +204,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	 * @see Iterable
 	 * @see BEPNode
 	 */
-	public Iterable<BEPNode<E>> nodes(E val)
+	public <N extends BEPNode<E>> Iterable<N> nodes(E val)
 	{
 		return () -> new BEPNodes<>(this, val);
 	}

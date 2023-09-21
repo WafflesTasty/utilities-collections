@@ -44,7 +44,7 @@ public class BEPNode<E extends Enum<E>> extends BIPNode
 	 * @param val  an enum value
 	 * @return  {@code true} if it contains the value
 	 */
-	public boolean hasValue(E val)
+	public boolean hasValue(Enum<?> val)
 	{
 		for(Object o : values)
 		{
@@ -62,11 +62,11 @@ public class BEPNode<E extends Enum<E>> extends BIPNode
 	 * 
 	 * @param val  an enum value
 	 */
-	public void addValue(E val)
+	public void addValue(Enum<?> val)
 	{
 		if(!hasValue(val))
 		{
-			values = Array.add.to(values, val);
+			values = Array.add.to(values, (E) val);
 		}
 	}
 	
@@ -75,7 +75,7 @@ public class BEPNode<E extends Enum<E>> extends BIPNode
 	 * 
 	 * @param val  a node value
 	 */
-	public void setValue(E val)
+	public void setValue(Enum<?> val)
 	{
 		values = new Enum[]{val};
 	}

@@ -15,14 +15,14 @@ import waffles.utils.sets.trees.indexed.BEPTree;
  * @version 1.1
  *
  *
- * @param <E>  an enum type
+ * @param <N>  a node type
  * @see Iterator
  * @see BEPNode
  */
-public class BEPNodes<E extends Enum<E>> implements Iterator<BEPNode<E>>
+public class BEPNodes<N extends BEPNode<?>> implements Iterator<N>
 {
-	private E tgt;
-	private Queue<BEPNode<E>> nodes;
+	private Enum<?> tgt;
+	private Queue<BEPNode<?>> nodes;
 	
 	/**
 	 * Creates a new {@code BEPNodes}.
@@ -33,7 +33,7 @@ public class BEPNodes<E extends Enum<E>> implements Iterator<BEPNode<E>>
 	 * 
 	 * @see BEPTree
 	 */
-	public BEPNodes(BEPTree<E> s, E t)
+	public BEPNodes(BEPTree<?> s, Enum<?> t)
 	{
 		tgt = t;
 		
@@ -52,24 +52,24 @@ public class BEPNodes<E extends Enum<E>> implements Iterator<BEPNode<E>>
 	}
 
 	@Override
-	public BEPNode<E> next()
+	public N next()
 	{
-		BEPNode<E> next = nodes.pop();
+		BEPNode<?> next = nodes.pop();
 		if(!next.isLeaf())
 		{
-			BEPNode<E> lchild = next.LChild();
+			BEPNode<?> lchild = next.LChild();
 			if(lchild.hasValue(tgt))
 			{
 				nodes.push(lchild);
 			}
 			
-			BEPNode<E> rchild = next.RChild();
+			BEPNode<?> rchild = next.RChild();
 			if(rchild.hasValue(tgt))
 			{
 				nodes.push(rchild);
 			}
 		}
 		
-		return next;
+		return (N) next;
 	}
 }
