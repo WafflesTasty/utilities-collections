@@ -3,13 +3,14 @@ package waffles.utils.sets.trees.indexed;
 import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.queues.Queue;
 import waffles.utils.sets.queues.delegate.JFIFOQueue;
+import waffles.utils.sets.utilities.iterators.BEPNodes;
 
 /**
  * A {@code BEPTree} defines a binary index partition tree for {@code Enum} values.
  *
  * @author Waffles
  * @since 28 Dec 2022
- * @version 1.0
+ * @version 1.1
  *
  *
  * @param <E>  an index enum type
@@ -191,6 +192,21 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 			queue.push(node.LChild());
 			queue.push(node.RChild());
 		}
+	}
+	
+	/**
+	 * Iterates over the nodes of the {@code BEPTree}.
+	 * 
+	 * @param val  a node value
+	 * @return  a node iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see BEPNode
+	 */
+	public Iterable<BEPNode<E>> nodes(E val)
+	{
+		return () -> new BEPNodes<>(this, val);
 	}
 	
 	/**
