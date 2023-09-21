@@ -1,7 +1,9 @@
 package waffles.utils.sets.trees.indexed;
 
+import waffles.utils.sets.indexed.IndexedSet;
+import waffles.utils.sets.indexed.nodes.IPQuery;
+import waffles.utils.sets.indexed.nodes.IPQuery.Axis;
 import waffles.utils.sets.trees.binary.BiNode;
-import waffles.utils.sets.trees.indexed.BIPQuery.Axis;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -13,9 +15,10 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.0
  * 
  * 
+ * @see IndexedSet
  * @see BiNode
  */
-public class BIPNode extends BiNode
+public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 {	
 	private int cDim;
 	private int[] cMin, cMax;
@@ -79,7 +82,22 @@ public class BIPNode extends BiNode
 		cDim = -1;
 		clear();
 	}
+
 	
+	/**
+	 * Checks the size of the {@code BIPNode}.
+	 * A node is a tile if and only if it spans
+	 * a single element in an indexed set.
+	 * 
+	 * @return  {@code true} if the node is a tile
+	 */
+	public boolean isTile()
+	{
+		int[] min = Minimum();
+		int[] max = Maximum();
+		
+		return Array.equals.of(min, max);
+	}
 	
 	/**
 	 * Queries the {@code BIPNode} for a subindex.
@@ -89,11 +107,11 @@ public class BIPNode extends BiNode
 	 * @return  a bip query
 	 * 
 	 * 
-	 * @see BIPQuery
+	 * @see IPQuery
 	 */
-	public BIPQuery query(int[] min, int[] max)
+	public IPQuery<BIPNode> query(int[] min, int[] max)
 	{
-		return new BIPQuery(this, min, max);
+		return new IPQuery<>(this, min, max);
 	}
 	
 	/**
@@ -106,7 +124,8 @@ public class BIPNode extends BiNode
 	 * 
 	 * @see BIPNode
 	 */
-	public BIPNode Child(int... coords)
+	@Override
+	public BIPNode get(int... coords)
 	{
 		// If it has no children...
 		if(isLeaf())
@@ -122,18 +141,7 @@ public class BIPNode extends BiNode
 			return LChild();
 		return RChild();
 	}
-		
-	/**
-	 * Checks the size of the {@code BIPNode}.
-	 * </br> A node is a tile iff it contains exactly one coordinate.
-	 * 
-	 * @return  {@code true} if the node is a tile
-	 */
-	public boolean isTile()
-	{
-		return Array.equals.of(cMin, cMax);
-	}
-
+	
 	/**
 	 * Returns the split of the {@code BIPNode}.
 	 * </br> This indicates which dimension the children are split over.
@@ -143,27 +151,6 @@ public class BIPNode extends BiNode
 	public int DimSplit()
 	{
 		return cDim;
-	}
-	
-	
-	/**
-	 * Returns the minimum of the {@code BIPNode}.
-	 * 
-	 * @return  a minimum coordinate
-	 */
-	public int[] Minimum()
-	{
-		return cMin;
-	}
-	
-	/**
-	 * Returns the maximum of the {@code BIPNode}.
-	 * 
-	 * @return  a maximum coordinate
-	 */
-	public int[] Maximum()
-	{
-		return cMax;
 	}
 	
 	
@@ -195,5 +182,17 @@ public class BIPNode extends BiNode
 	public BIPTree<?> Set()
 	{
 		return (BIPTree<?>) super.Set();
+	}
+
+	@Override
+	public int[] Minimum()
+	{
+		return cMin;
+	}
+
+	@Override
+	public int[] Maximum()
+	{
+		return cMax;
 	}
 }

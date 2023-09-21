@@ -245,7 +245,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 			// adding the value to the
 			// nodes along the way.
 			node.addValue(val);
-			node = node.Child(coords);
+			node = node.get(coords);
 		}
 		
 		// If the final child has the same value...
@@ -263,7 +263,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 			node.split(coords, coords);
 			node.addValue(val);
 			
-			node = node.Child(coords);
+			node = node.get(coords);
 		}
 		
 		node.setValue(val);
@@ -301,7 +301,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 		while(!node.isLeaf())
 		{
 			// And find the closest child node.
-			node = node.Child(coords);
+			node = node.get(coords);
 		}
 		
 		// If it has no value...
@@ -316,7 +316,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 		while(!node.isTile())
 		{
 			node.split(coords, coords);
-			node = node.Child(coords);
+			node = node.get(coords);
 		}
 		
 		// And remove the final tile's value.

@@ -1,16 +1,21 @@
-package waffles.utils.sets.trees.indexed;
+package waffles.utils.sets.indexed.nodes;
+
+import waffles.utils.sets.indexed.IndexedSet;
 
 /**
- * A {@code BIPQuery} contains information when querying a {@code BIPTree} with an index array.
+ * An {@code IPQuery} generates information for an index partition query.
  *
  * @author Waffles
  * @since 08 Aug 2023
  * @version 1.0
+ * 
+ * 
+ * @param <O>  an object type
  */
-public class BIPQuery
+public class IPQuery<O>
 {
 	/**
-	 * An {@code Axis} is generated to define the optimal splitting axis in a {@code BIPQuery}. 
+	 * An {@code Axis} is generated to define the optimal splitting axis in a {@code IPQuery}. 
 	 *
 	 * @author Waffles
 	 * @since 08 Aug 2023
@@ -54,20 +59,20 @@ public class BIPQuery
 	}
 	
 	
-	private BIPNode node;
 	private int[] min, max;
+	private IndexedSet<O> node;
 	
 	/**
-	 * Creates a new {@code BIPQuery}.
+	 * Creates a new {@code IPQuery}.
 	 * 
 	 * @param node  a target node
 	 * @param min   a minimum index
 	 * @param max   a maximum index
 	 * 
 	 * 
-	 * @see BIPNode
+	 * @see IndexedSet
 	 */
-	public BIPQuery(BIPNode node, int[] min, int[] max)
+	public IPQuery(IndexedSet<O> node, int[] min, int[] max)
 	{
 		this.node = node;
 		this.min = min;
@@ -76,7 +81,7 @@ public class BIPQuery
 
 	
 	/**
-	 * Returns the optimal axis of the {@code BIPQuery}.
+	 * Returns the optimal axis of the {@code IPQuery}.
 	 * 
 	 * @return  an optimal axis
 	 */
@@ -122,7 +127,7 @@ public class BIPQuery
 	}
 
 	/**
-	 * Checks if the {@code BIPQuery} is a cover.
+	 * Checks if the {@code IPQuery} is a cover.
 	 * </br> This is true if the queried index covers the node.
 	 * 
 	 * @return  a query cover state
@@ -144,7 +149,7 @@ public class BIPQuery
 	}
 	
 	/**
-	 * Checks if the {@code BIPQuery} is empty.
+	 * Checks if the {@code IPQuery} is empty.
 	 * </br> This is true if the queried index is outside the node.
 	 * 
 	 * @return  a query emptiness state

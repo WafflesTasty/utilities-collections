@@ -100,9 +100,9 @@ public class BEPNode<E extends Enum<E>> extends BIPNode
 	}
 
 	@Override
-	public BEPNode<E> Child(int... coords)
+	public BEPNode<E> get(int... coords)
 	{
-		return (BEPNode<E>) super.Child(coords);
+		return (BEPNode<E>) super.get(coords);
 	}
 		
 	@Override

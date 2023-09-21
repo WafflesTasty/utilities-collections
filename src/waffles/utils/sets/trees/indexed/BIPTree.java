@@ -59,7 +59,7 @@ public abstract class BIPTree<O> extends BiTree<O> implements IndexedSet<O>
 		while(!node.isLeaf())
 		{
 			// And find the closest node.
-			node = node.Child(coords);
+			node = node.get(coords);
 		}
 		
 		return valueOf(node);
