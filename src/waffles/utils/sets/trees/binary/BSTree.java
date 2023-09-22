@@ -170,7 +170,7 @@ public class BSTree<O> extends BiTree implements AtomicSet<O>, Comparator<O>, Tr
 	
 	
 	@Override
-	public BSNode<O> create(Object... vals)
+	public BSNode<O> createNode(Object... vals)
 	{
 		return new BSNode<>(this, (O) vals[0]);
 	}
@@ -279,7 +279,7 @@ public class BSTree<O> extends BiTree implements AtomicSet<O>, Comparator<O>, Tr
 	public void add(O obj)
 	{
 		// Create a new child node.
-		BSNode<O> child = create(obj);
+		BSNode<O> child = createNode(obj);
 		
 		// If the tree has no nodes...
 		if(Root() == null)

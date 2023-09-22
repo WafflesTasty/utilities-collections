@@ -3,6 +3,7 @@ package waffles.utils.sets.trees;
 import waffles.utils.sets.CountableSet;
 import waffles.utils.sets.trees.traversal.BreadthFirst;
 import waffles.utils.sets.trees.traversal.DepthFirst;
+import waffles.utils.tools.collections.Iterables;
 
 /**
  * The {@code Rooted} interface defines a structure with a {@code Nodal} root.
@@ -35,7 +36,7 @@ public interface Rooted extends CountableSet
 	 * 
 	 * @see Node
 	 */
-	public abstract Node create(Object... vals);
+	public abstract Node createNode(Object... vals);
 	
 	/**
 	 * Returns a depth-first iterable for the {@code Rooted}.
@@ -48,7 +49,12 @@ public interface Rooted extends CountableSet
 	 */
 	public default <N extends Nodal> Iterable<N> DFSearch()
 	{
-		return () -> new DepthFirst<>((N) Root());
+		if(Root() != null)
+		{
+			return () -> new DepthFirst<>((N) Root());
+		}
+		
+		return Iterables.empty();
 	}
 
 	/**
@@ -62,7 +68,12 @@ public interface Rooted extends CountableSet
 	 */
 	public default <N extends Nodal> Iterable<N> BFSearch()
 	{
-		return () -> new BreadthFirst<>((N) Root());
+		if(Root() != null)
+		{
+			return () -> new BreadthFirst<>((N) Root());
+		}
+		
+		return Iterables.empty();
 	}
 
 	

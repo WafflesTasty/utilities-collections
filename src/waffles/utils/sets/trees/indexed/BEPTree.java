@@ -340,7 +340,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	
 	
 	@Override
-	public BEPNode<E> create(Object... vals)
+	public BEPNode<E> createNode(Object... vals)
 	{
 		int[] min = (int[]) vals[0];
 		int[] max = (int[]) vals[1];
@@ -357,22 +357,6 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	@Override
 	public BEPNode<E> Root()
 	{
-		BIPNode root = super.Root();
-		if(root == null)
-		{
-			int[] dim = Dimensions();
-			int[] min = new int[dim.length];
-			int[] max = new int[dim.length];
-			for(int i = 0; i < dim.length; i++)
-			{
-				max[i] = dim[i] - 1;
-			}
-
-			root = create(min, max);
-			setRoot(root);
-		}
-		
-		return (BEPNode<E>) root;
-		
+		return (BEPNode<E>) super.Root();
 	}
 }

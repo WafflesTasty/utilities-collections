@@ -3,7 +3,7 @@ package waffles.utils.sets.trees;
 /**
  * The abstract {@code Tree} class defines a generic tree structure.
  * Each tree requires at least a root {@code Node}, and optionally allows
- * the {@link #create(Object...)} method to be overwritten to create
+ * the {@link #createNode(Object...)} method to be overwritten to create
  * custom nodes for the {@code Tree}.
  *
  * @author Waffles
@@ -37,7 +37,7 @@ public abstract class Tree implements Rooted
 
 
 	@Override
-	public Node create(Object... vals)
+	public Node createNode(Object... vals)
 	{
 		return new Node(this);
 	}

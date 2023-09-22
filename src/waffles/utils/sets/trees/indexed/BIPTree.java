@@ -2,6 +2,7 @@ package waffles.utils.sets.trees.indexed;
 
 import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.trees.binary.BiTree;
+import waffles.utils.sets.utilities.iterators.BIPNodes;
 
 /**
  * The {@code BIPTree} class defines a binary index partition tree.
@@ -41,6 +42,23 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	 * @see BIPNode
 	 */
 	public abstract O valueOf(BIPNode node);
+	
+	/**
+	 * Iterates over the nodes of the {@code BIPTree}.
+	 * 
+	 * @param min  an index minimum
+	 * @param max  an index maximum
+	 * @return  a node iterable
+	 * 
+	 * 
+	 * @param <N>  a node type
+	 * @see Iterable
+	 * @see BIPNode
+	 */
+	public <N extends BIPNode> Iterable<N> nodes(int[] min, int[] max)
+	{
+		return () -> new BIPNodes<>(this, min, max);
+	}
 	
 	/**
 	 * Returns a node at a given coordinate.
@@ -99,7 +117,7 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 
 
 	@Override
-	public BIPNode create(Object... vals)
+	public BIPNode createNode(Object... vals)
 	{
 		int[] min = (int[]) vals[0];
 		int[] max = (int[]) vals[1];

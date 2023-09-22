@@ -64,7 +64,7 @@ public abstract class BiTree extends Tree
 
 	
 	@Override
-	public BiNode create(Object... vals)
+	public BiNode createNode(Object... vals)
 	{
 		return new BiNode(this);
 	}

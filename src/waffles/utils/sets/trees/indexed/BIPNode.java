@@ -80,8 +80,8 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 		rMin[axis.Index()] = axis.Value() + 1;
 				
 		// Generate the corresponding child nodes.
-		BIPNode lChild = Set().create(lMin, lMax);
-		BIPNode rChild = Set().create(rMin, rMax);
+		BIPNode lChild = Set().createNode(lMin, lMax);
+		BIPNode rChild = Set().createNode(rMin, rMax);
 		
 		// Update the node.
 		cDim = axis.Index();
