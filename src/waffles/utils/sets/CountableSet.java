@@ -5,10 +5,10 @@ package waffles.utils.sets;
  *
  * @author Waffles
  * @since Feb 02, 2020
- * @version 1.0
+ * @version 1.1
  */
 @FunctionalInterface
-public interface CountableSet
+public interface CountableSet extends Set
 {	
 	/**
 	 * Checks if the {@code CountableSet} is completely empty.

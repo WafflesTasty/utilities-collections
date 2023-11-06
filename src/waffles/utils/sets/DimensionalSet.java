@@ -15,8 +15,9 @@ import waffles.utils.tools.primitives.Array;
  * 
  * 
  * @see Ordered
+ * @see Set
  */
-public interface DimensionalSet<O> extends Ordered
+public interface DimensionalSet<O> extends Ordered, Set
 {	
 	/**
 	 * Returns a single value from the {@code DimensionalSet}.

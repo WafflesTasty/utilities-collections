@@ -1,20 +1,17 @@
 package waffles.utils.sets.utilities;
 
-import waffles.utils.sets.CountableSet;
+import waffles.utils.sets.Set;
 
 /**
  * A {@code Collectable} describes the information of an object in a {@code CountableSet}.
  *
  * @author Waffles
  * @since 08 Aug 2023
- * @version 1.0
- *
- *
- * @see CountableSet
+ * @version 1.1
  */
 public class Collectable
 {
-	private CountableSet set;
+	private Set set;
 
 	/**
 	 * Creates a new {@code Collectable}.
@@ -27,39 +24,36 @@ public class Collectable
 	/**
 	 * Creates a new {@code Collectable}.
 	 * 
-	 * @param set  a target set
+	 * @param s  a target set
 	 * 
 	 * 
-	 * @see CountableSet
+	 * @see Set
 	 */
-	public Collectable(CountableSet set)
+	public Collectable(Set s)
 	{
-		this.set = set;
+		set = s;
 	}
 	
 	/**
 	 * Changes the set of the {@cod Collectable}.
 	 * 
-	 * @param set  a target set
+	 * @param s  a target set
 	 * 
 	 * 
-	 * @see CountableSet
+	 * @see Set
 	 */
-	public void setCollection(CountableSet set)
+	public void setCollection(Set s)
 	{
-		this.set = set;
+		set = s;
 	}
 		
 	/**
 	 * Returns the top-level set of
 	 * the {@code Hierarchy}.
 	 * 
-	 * @return  a countable set
-	 * 
-	 * 
-	 * @see CountableSet
+	 * @return  an object set
 	 */
-	public <S extends CountableSet> S Set()
+	public <S extends Object> S Set()
 	{
 		return (S) set;
 	}

@@ -1,6 +1,6 @@
 package waffles.utils.sets.utilities.collectables;
 
-import waffles.utils.sets.CountableSet;
+import waffles.utils.sets.Set;
 import waffles.utils.sets.queues.Deque;
 import waffles.utils.sets.queues.delegate.JDeque;
 import waffles.utils.sets.utilities.Collectable;
@@ -13,7 +13,7 @@ import waffles.utils.tools.patterns.semantics.Decorator;
  *
  * @author Waffles
  * @since 08 Aug 2023
- * @version 1.0
+ * @version 1.1
  *
  * 
  * @see Hierarchical
@@ -31,10 +31,10 @@ public class Hierarchy extends Collectable implements Decorator, Hierarchical
 	 * @param del  a delegate object
 	 * 
 	 * 
-	 * @see CountableSet
 	 * @see Hierarchical
+	 * @see Set
 	 */
-	public Hierarchy(CountableSet set, Hierarchical del)
+	public Hierarchy(Set set, Hierarchical del)
 	{
 		super(set);	delegate = del;
 	}
@@ -45,9 +45,9 @@ public class Hierarchy extends Collectable implements Decorator, Hierarchical
 	 * @param set  a target set
 	 * 
 	 * 
-	 * @see CountableSet
+	 * @see Set
 	 */
-	public Hierarchy(CountableSet set)
+	public Hierarchy(Set set)
 	{
 		super(set);
 	}
