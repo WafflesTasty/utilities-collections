@@ -21,12 +21,12 @@ public interface IntegerArray extends CountableSet, Copyable<IntegerArray>
 	 * 
 	 * @return  a primitive array
 	 */
-	public abstract int[] Data();
+	public abstract int[] Array();
 	
 	
 	@Override
 	public default int Count()
 	{
-		return Data().length;
+		return Array().length;
 	}
 }

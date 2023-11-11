@@ -21,12 +21,12 @@ public interface FloatArray extends CountableSet, Copyable<FloatArray>
 	 * 
 	 * @return  a primitive array
 	 */
-	public abstract float[] Data();
+	public abstract float[] Array();
 	
 	
 	@Override
 	public default int Count()
 	{
-		return Data().length;
+		return Array().length;
 	}
 }

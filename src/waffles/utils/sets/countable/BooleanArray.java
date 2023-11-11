@@ -21,12 +21,12 @@ public interface BooleanArray extends CountableSet, Copyable<BooleanArray>
 	 * 
 	 * @return  a primitive array
 	 */
-	public abstract boolean[] Data();
+	public abstract boolean[] Array();
 	
 	
 	@Override
 	public default int Count()
 	{
-		return Data().length;
+		return Array().length;
 	}
 }

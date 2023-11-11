@@ -119,7 +119,7 @@ public class FloatIndex implements FloatArray, MutableIndex<Float>
 	}
 	
 	@Override
-	public float[] Data()
+	public float[] Array()
 	{
 		return data;
 	}

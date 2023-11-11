@@ -119,7 +119,7 @@ public class ByteIndex implements ByteArray, MutableIndex<Byte>
 	}
 	
 	@Override
-	public byte[] Data()
+	public byte[] Array()
 	{
 		return data;
 	}

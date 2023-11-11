@@ -119,7 +119,7 @@ public class DoubleIndex implements DoubleArray, MutableIndex<Double>
 	}
 	
 	@Override
-	public double[] Data()
+	public double[] Array()
 	{
 		return data;
 	}

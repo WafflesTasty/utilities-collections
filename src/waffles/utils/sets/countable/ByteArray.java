@@ -21,12 +21,12 @@ public interface ByteArray extends CountableSet, Copyable<ByteArray>
 	 * 
 	 * @return  a primitive array
 	 */
-	public abstract byte[] Data();
+	public abstract byte[] Array();
 	
 	
 	@Override
 	public default int Count()
 	{
-		return Data().length;
+		return Array().length;
 	}
 }

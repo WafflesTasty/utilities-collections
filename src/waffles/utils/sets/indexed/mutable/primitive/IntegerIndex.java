@@ -119,7 +119,7 @@ public class IntegerIndex implements IntegerArray, MutableIndex<Integer>
 	}
 	
 	@Override
-	public int[] Data()
+	public int[] Array()
 	{
 		return data;
 	}

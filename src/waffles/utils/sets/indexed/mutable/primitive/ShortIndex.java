@@ -119,7 +119,7 @@ public class ShortIndex implements ShortArray, MutableIndex<Short>
 	}
 	
 	@Override
-	public short[] Data()
+	public short[] Array()
 	{
 		return data;
 	}

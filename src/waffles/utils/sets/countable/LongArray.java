@@ -21,12 +21,12 @@ public interface LongArray extends CountableSet, Copyable<LongArray>
 	 * 
 	 * @return  a primitive array
 	 */
-	public abstract long[] Data();
+	public abstract long[] Array();
 	
 	
 	@Override
 	public default int Count()
 	{
-		return Data().length;
+		return Array().length;
 	}
 }

@@ -21,12 +21,12 @@ public interface ShortArray extends CountableSet, Copyable<ShortArray>
 	 * 
 	 * @return  a primitive array
 	 */
-	public abstract short[] Data();
+	public abstract short[] Array();
 	
 	
 	@Override
 	public default int Count()
 	{
-		return Data().length;
+		return Array().length;
 	}
 }

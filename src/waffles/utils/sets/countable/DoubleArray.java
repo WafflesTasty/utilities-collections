@@ -21,12 +21,12 @@ public interface DoubleArray extends CountableSet, Copyable<DoubleArray>
 	 * 
 	 * @return  a primitive array
 	 */
-	public abstract double[] Data();
+	public abstract double[] Array();
 	
 	
 	@Override
 	public default int Count()
 	{
-		return Data().length;
+		return Array().length;
 	}
 }

@@ -119,7 +119,7 @@ public class BooleanIndex implements BooleanArray, MutableIndex<Boolean>
 	}
 	
 	@Override
-	public boolean[] Data()
+	public boolean[] Array()
 	{
 		return data;
 	}

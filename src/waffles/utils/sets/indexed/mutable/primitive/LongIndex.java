@@ -119,7 +119,7 @@ public class LongIndex implements LongArray, MutableIndex<Long>
 	}
 	
 	@Override
-	public long[] Data()
+	public long[] Array()
 	{
 		return data;
 	}
