@@ -3,7 +3,7 @@ package waffles.utils.sets.indexed.mutable;
 import waffles.utils.sets.indexed.MutableIndex;
 
 /**
- * An {@code ArrayIndex} implements an {@code Index} by internally storing data in an array.
+ * An {@code ArrayIndex} implements a {@code MutableIndex} by internally storing data in an array.
  *
  * @author Waffles
  * @since Feb 03, 2020
@@ -12,7 +12,6 @@ import waffles.utils.sets.indexed.MutableIndex;
  * 
  * @param <O>  an index object type
  * @see MutableIndex
- * @see ArrayIndex
  */
 public class ArrayIndex<O> implements MutableIndex<O>
 {
@@ -72,9 +71,9 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	 * Returns the source array that stores
 	 * the data of the {@code ArrayIndex}.
 	 * 
-	 * @return  a grid array
+	 * @return  an object array
 	 */
-	protected Object[] Source()
+	protected Object[] Data()
 	{
 		return data;
 	}
