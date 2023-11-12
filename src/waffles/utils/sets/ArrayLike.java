@@ -10,6 +10,7 @@ package waffles.utils.sets;
  *
  * @param <A>  an array type
  */
+@FunctionalInterface
 public interface ArrayLike<A>
 {
 	/**
