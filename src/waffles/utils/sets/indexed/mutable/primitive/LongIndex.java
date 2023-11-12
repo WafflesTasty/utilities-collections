@@ -84,7 +84,7 @@ public class LongIndex implements LongArray
 	
 	
 	@Override
-	public long[] PArray()
+	public long[] Array()
 	{
 		return data;
 	}

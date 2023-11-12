@@ -1,10 +1,11 @@
 package waffles.utils.sets.arrays;
 
-import waffles.utils.sets.ArraySet;
+import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * An {@code IntegerArray} manages a primitive integer array as an {@code ArraySet}.
+ * An {@code IntegerArray} manages a primitive integer array as a {@code MutableIndex}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -12,26 +13,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * 
  * 
  * @see Copyable
- * @see ArraySet
+ * @see MutableIndex
+ * @see ArrayLike
  */
-public interface IntegerArray extends Copyable<IntegerArray>, ArraySet<Integer>
+public interface IntegerArray extends ArrayLike<int[]>, Copyable<IntegerArray>, MutableIndex<Integer>
 {
 	/**
-	 * Returns the primitive array of the {@code IntegerArray}.
+	 * Returns the ordering of the {@code IntegerArray}.
 	 * 
-	 * @return  a primitive array
+	 * @return  an index order
 	 */
-	public abstract int[] PArray();
+	public abstract Order Ordering();
+	
 	
 	@Override
-	public default Integer[] Array()
+	public default Integer get(int... coords)
 	{
-		Integer[] data = new Integer[Count()];
-		for(int i = 0; i < Count(); i++)
-		{
-			data[i] = PArray()[i];
-		}
-		
-		return data;
+		return Array()[toIndex(Ordering(), coords)];
+	}
+	
+	@Override
+	public default Integer put(Integer val, int... coords)
+	{
+		int index = toIndex(Ordering(), coords);
+		Integer prev = Array()[index];
+		Array()[index] = val;
+		return prev;
+	}
+	
+	@Override
+	public default Integer remove(int... coords)
+	{
+		return put(null, coords);
 	}
 }

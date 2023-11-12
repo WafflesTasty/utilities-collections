@@ -84,7 +84,7 @@ public class ByteIndex implements ByteArray
 	
 	
 	@Override
-	public byte[] PArray()
+	public byte[] Array()
 	{
 		return data;
 	}

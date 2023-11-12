@@ -84,7 +84,7 @@ public class BooleanIndex implements BooleanArray
 
 	
 	@Override
-	public boolean[] PArray()
+	public boolean[] Array()
 	{
 		return data;
 	}

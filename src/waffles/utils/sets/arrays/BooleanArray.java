@@ -1,10 +1,11 @@
 package waffles.utils.sets.arrays;
 
-import waffles.utils.sets.ArraySet;
+import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code BooleanArray} manages a primitive boolean array as an {@code ArraySet}.
+ * A {@code BooleanArray} manages a primitive boolean array as a {@code MutableIndex}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -12,26 +13,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * 
  * 
  * @see Copyable
- * @see ArraySet
+ * @see MutableIndex
+ * @see ArrayLike
  */
-public interface BooleanArray extends Copyable<BooleanArray>, ArraySet<Boolean>
+public interface BooleanArray extends ArrayLike<boolean[]>, Copyable<BooleanArray>, MutableIndex<Boolean>
 {
 	/**
-	 * Returns the primitive array of the {@code BooleanArray}.
+	 * Returns the ordering of the {@code BooleanArray}.
 	 * 
-	 * @return  a primitive array
+	 * @return  an index order
 	 */
-	public abstract boolean[] PArray();
-
+	public abstract Order Ordering();
+	
+	
 	@Override
-	public default Boolean[] Array()
+	public default Boolean get(int... coords)
 	{
-		Boolean[] data = new Boolean[Count()];
-		for(int i = 0; i < Count(); i++)
-		{
-			data[i] = PArray()[i];
-		}
-		
-		return data;
+		return Array()[toIndex(Ordering(), coords)];
+	}
+	
+	@Override
+	public default Boolean put(Boolean val, int... coords)
+	{
+		int index = toIndex(Ordering(), coords);
+		Boolean prev = Array()[index];
+		Array()[index] = val;
+		return prev;
+	}
+	
+	@Override
+	public default Boolean remove(int... coords)
+	{
+		return put(null, coords);
 	}
 }

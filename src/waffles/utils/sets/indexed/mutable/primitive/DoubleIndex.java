@@ -84,7 +84,7 @@ public class DoubleIndex implements DoubleArray
 	
 	
 	@Override
-	public double[] PArray()
+	public double[] Array()
 	{
 		return data;
 	}

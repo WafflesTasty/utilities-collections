@@ -84,7 +84,7 @@ public class FloatIndex implements FloatArray
 	
 	
 	@Override
-	public float[] PArray()
+	public float[] Array()
 	{
 		return data;
 	}

@@ -1,10 +1,11 @@
 package waffles.utils.sets.arrays;
 
-import waffles.utils.sets.ArraySet;
+import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code LongArray} manages a primitive long array as an {@code ArraySet}.
+ * A {@code LongArray} manages a primitive long array as a {@code MutableIndex}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -12,26 +13,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * 
  * 
  * @see Copyable
- * @see ArraySet
+ * @see MutableIndex
+ * @see ArrayLike
  */
-public interface LongArray extends Copyable<LongArray>, ArraySet<Long>
+public interface LongArray extends ArrayLike<long[]>, Copyable<LongArray>, MutableIndex<Long>
 {
 	/**
-	 * Returns the primitive array of the {@code LongArray}.
+	 * Returns the ordering of the {@code LongArray}.
 	 * 
-	 * @return  a primitive array
+	 * @return  an index order
 	 */
-	public abstract long[] PArray();
+	public abstract Order Ordering();
+	
 	
 	@Override
-	public default Long[] Array()
+	public default Long get(int... coords)
 	{
-		Long[] data = new Long[Count()];
-		for(int i = 0; i < Count(); i++)
-		{
-			data[i] = PArray()[i];
-		}
-		
-		return data;
+		return Array()[toIndex(Ordering(), coords)];
+	}
+	
+	@Override
+	public default Long put(Long val, int... coords)
+	{
+		int index = toIndex(Ordering(), coords);
+		Long prev = Array()[index];
+		Array()[index] = val;
+		return prev;
+	}
+	
+	@Override
+	public default Long remove(int... coords)
+	{
+		return put(null, coords);
 	}
 }

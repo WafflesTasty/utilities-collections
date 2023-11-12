@@ -1,9 +1,10 @@
-package waffles.utils.sets;
+package waffles.utils.sets.arrays;
 
+import waffles.utils.sets.ArrayLike;
 import waffles.utils.sets.indexed.MutableIndex;
 
 /**
- * An {@code ArraySet} defines a generic data array.
+ * An {@code ObjectArray} manages an object array as a {@code MutableIndex}.
  *
  * @author Waffles
  * @since 12 Nov 2023
@@ -11,18 +12,13 @@ import waffles.utils.sets.indexed.MutableIndex;
  *
  *
  * @param <O>  an object type
+ * @see MutableIndex
+ * @see ArrayLike
  */
-public interface ArraySet<O> extends MutableIndex<O>
+public interface ObjectArray<O> extends ArrayLike<Object[]>, MutableIndex<O>
 {
 	/**
-	 * Returns the array of the {@code ArraySet}.
-	 * 
-	 * @return  a data array
-	 */
-	public abstract O[] Array();
-	
-	/**
-	 * Returns the ordering of the {@code ArraySet}.
+	 * Returns the ordering of the {@code ObjectArray}.
 	 * 
 	 * @return  an index order
 	 */
@@ -32,14 +28,14 @@ public interface ArraySet<O> extends MutableIndex<O>
 	@Override
 	public default O get(int... coords)
 	{
-		return Array()[toIndex(Ordering(), coords)];
+		return (O) Array()[toIndex(Ordering(), coords)];
 	}
 	
 	@Override
 	public default O put(O val, int... coords)
 	{
 		int index = toIndex(Ordering(), coords);
-		O prev = Array()[index];
+		O prev = (O) Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
@@ -48,11 +44,5 @@ public interface ArraySet<O> extends MutableIndex<O>
 	public default O remove(int... coords)
 	{
 		return put(null, coords);
-	}
-	
-	@Override
-	public default int Count()
-	{
-		return Array().length;
 	}
 }

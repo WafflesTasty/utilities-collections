@@ -84,7 +84,7 @@ public class IntegerIndex implements IntegerArray
 	
 	
 	@Override
-	public int[] PArray()
+	public int[] Array()
 	{
 		return data;
 	}

@@ -84,7 +84,7 @@ public class ShortIndex implements ShortArray
 	
 	
 	@Override
-	public short[] PArray()
+	public short[] Array()
 	{
 		return data;
 	}

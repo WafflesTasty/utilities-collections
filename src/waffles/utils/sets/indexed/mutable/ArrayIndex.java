@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable;
 
-import waffles.utils.sets.indexed.MutableIndex;
+import waffles.utils.sets.arrays.ObjectArray;
 
 /**
  * An {@code ArrayIndex} implements a {@code MutableIndex} by internally storing data in an array.
@@ -11,9 +11,9 @@ import waffles.utils.sets.indexed.MutableIndex;
  * 
  * 
  * @param <O>  an index object type
- * @see MutableIndex
+ * @see ObjectArray
  */
-public class ArrayIndex<O> implements MutableIndex<O>
+public class ArrayIndex<O> implements ObjectArray<O>
 {
 	private Order order;
 	private int[] dimension;
@@ -66,49 +66,29 @@ public class ArrayIndex<O> implements MutableIndex<O>
 	{
 		this(Order.COL_MAJOR, dim);
 	}
+
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
+	}
 			
-	/**
-	 * Returns the source array that stores
-	 * the data of the {@code ArrayIndex}.
-	 * 
-	 * @return  an object array
-	 */
-	protected Object[] Data()
+	@Override
+	public int[] Dimensions()
+	{
+		return dimension;
+	}
+
+	@Override
+	public Object[] Array()
 	{
 		return data;
 	}
-	
 	
 	@Override
 	public void clear()
 	{
 		data = new Object[Count()];
-	}
-		
-	@Override
-	public O get(int... coords)
-	{
-		return (O) data[toIndex(order, coords)];
-	}
-	
-	@Override
-	public O put(O val, int... coords)
-	{
-		int index = toIndex(order, coords);
-		O prev = (O) data[index];
-		data[index] = val;
-		return prev;
-	}
-	
-	@Override
-	public O remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
-	@Override
-	public int[] Dimensions()
-	{
-		return dimension;
 	}
 }

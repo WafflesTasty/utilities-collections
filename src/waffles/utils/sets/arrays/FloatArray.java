@@ -1,6 +1,7 @@
 package waffles.utils.sets.arrays;
 
-import waffles.utils.sets.ArraySet;
+import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
@@ -12,26 +13,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * 
  * 
  * @see Copyable
- * @see ArraySet
+ * @see MutableIndex
+ * @see ArrayLike
  */
-public interface FloatArray extends Copyable<FloatArray>, ArraySet<Float>
+public interface FloatArray extends ArrayLike<float[]>, Copyable<FloatArray>, MutableIndex<Float>
 {
 	/**
-	 * Returns the primitive array of the {@code FloatArray}.
+	 * Returns the ordering of the {@code FloatArray}.
 	 * 
-	 * @return  a primitive array
+	 * @return  an index order
 	 */
-	public abstract float[] PArray();
+	public abstract Order Ordering();
+	
 	
 	@Override
-	public default Float[] Array()
+	public default Float get(int... coords)
 	{
-		Float[] data = new Float[Count()];
-		for(int i = 0; i < Count(); i++)
-		{
-			data[i] = PArray()[i];
-		}
-		
-		return data;
+		return Array()[toIndex(Ordering(), coords)];
+	}
+	
+	@Override
+	public default Float put(Float val, int... coords)
+	{
+		int index = toIndex(Ordering(), coords);
+		Float prev = Array()[index];
+		Array()[index] = val;
+		return prev;
+	}
+	
+	@Override
+	public default Float remove(int... coords)
+	{
+		return put(null, coords);
 	}
 }
