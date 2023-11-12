@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
-import waffles.utils.sets.countable.ByteArray;
+import waffles.utils.sets.arrays.ByteArray;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -69,18 +69,6 @@ public class ByteIndex implements ByteArray
 
 
 	@Override
-	public byte[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int[] Dimensions()
-	{
-		return dimension;
-	}
-				
-	@Override
 	public ByteIndex instance()
 	{
 		return new ByteIndex(order, dimension);
@@ -92,6 +80,25 @@ public class ByteIndex implements ByteArray
 		ByteIndex copy = instance();
 		copy.data = Array.copy.of(data);
 		return copy;
+	}
+	
+	
+	@Override
+	public byte[] PArray()
+	{
+		return data;
+	}
+	
+	@Override
+	public int[] Dimensions()
+	{
+		return dimension;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
 	}
 	
 	@Override

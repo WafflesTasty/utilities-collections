@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
-import waffles.utils.sets.countable.BooleanArray;
+import waffles.utils.sets.arrays.BooleanArray;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -67,18 +67,6 @@ public class BooleanIndex implements BooleanArray
 		this(Order.COL_MAJOR, dim);
 	}
 
-
-	@Override
-	public boolean[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int[] Dimensions()
-	{
-		return dimension;
-	}
 				
 	@Override
 	public BooleanIndex instance()
@@ -92,6 +80,25 @@ public class BooleanIndex implements BooleanArray
 		BooleanIndex copy = instance();
 		copy.data = Array.copy.of(data);
 		return copy;
+	}
+
+	
+	@Override
+	public boolean[] PArray()
+	{
+		return data;
+	}
+	
+	@Override
+	public int[] Dimensions()
+	{
+		return dimension;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
 	}
 	
 	@Override

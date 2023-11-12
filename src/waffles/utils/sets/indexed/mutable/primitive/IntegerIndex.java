@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
-import waffles.utils.sets.countable.IntegerArray;
+import waffles.utils.sets.arrays.IntegerArray;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -69,18 +69,6 @@ public class IntegerIndex implements IntegerArray
 
 
 	@Override
-	public int[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int[] Dimensions()
-	{
-		return dimension;
-	}
-				
-	@Override
 	public IntegerIndex instance()
 	{
 		return new IntegerIndex(order, dimension);
@@ -92,6 +80,25 @@ public class IntegerIndex implements IntegerArray
 		IntegerIndex copy = instance();
 		copy.data = Array.copy.of(data);
 		return copy;
+	}
+	
+	
+	@Override
+	public int[] PArray()
+	{
+		return data;
+	}
+	
+	@Override
+	public int[] Dimensions()
+	{
+		return dimension;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
 	}
 	
 	@Override

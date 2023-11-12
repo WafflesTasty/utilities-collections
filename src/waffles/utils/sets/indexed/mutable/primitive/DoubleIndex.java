@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
-import waffles.utils.sets.countable.DoubleArray;
+import waffles.utils.sets.arrays.DoubleArray;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -67,19 +67,7 @@ public class DoubleIndex implements DoubleArray
 		this(Order.COL_MAJOR, dim);
 	}
 
-
-	@Override
-	public double[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int[] Dimensions()
-	{
-		return dimension;
-	}
-				
+		
 	@Override
 	public DoubleIndex instance()
 	{
@@ -92,6 +80,25 @@ public class DoubleIndex implements DoubleArray
 		DoubleIndex copy = instance();
 		copy.data = Array.copy.of(data);
 		return copy;
+	}
+	
+	
+	@Override
+	public double[] PArray()
+	{
+		return data;
+	}
+	
+	@Override
+	public int[] Dimensions()
+	{
+		return dimension;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
 	}
 	
 	@Override

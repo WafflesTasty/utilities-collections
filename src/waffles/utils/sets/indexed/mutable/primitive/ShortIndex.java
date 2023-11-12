@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
-import waffles.utils.sets.countable.ShortArray;
+import waffles.utils.sets.arrays.ShortArray;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -67,19 +67,7 @@ public class ShortIndex implements ShortArray
 		this(Order.COL_MAJOR, dim);
 	}
 
-
-	@Override
-	public short[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int[] Dimensions()
-	{
-		return dimension;
-	}
-				
+		
 	@Override
 	public ShortIndex instance()
 	{
@@ -92,6 +80,25 @@ public class ShortIndex implements ShortArray
 		ShortIndex copy = instance();
 		copy.data = Array.copy.of(data);
 		return copy;
+	}
+	
+	
+	@Override
+	public short[] PArray()
+	{
+		return data;
+	}
+	
+	@Override
+	public int[] Dimensions()
+	{
+		return dimension;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
 	}
 	
 	@Override

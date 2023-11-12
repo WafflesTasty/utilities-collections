@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
-import waffles.utils.sets.countable.LongArray;
+import waffles.utils.sets.arrays.LongArray;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -69,18 +69,6 @@ public class LongIndex implements LongArray
 
 
 	@Override
-	public long[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int[] Dimensions()
-	{
-		return dimension;
-	}
-				
-	@Override
 	public LongIndex instance()
 	{
 		return new LongIndex(order, dimension);
@@ -92,6 +80,25 @@ public class LongIndex implements LongArray
 		LongIndex copy = instance();
 		copy.data = Array.copy.of(data);
 		return copy;
+	}
+	
+	
+	@Override
+	public long[] PArray()
+	{
+		return data;
+	}
+	
+	@Override
+	public int[] Dimensions()
+	{
+		return dimension;
+	}
+	
+	@Override
+	public Order Ordering()
+	{
+		return order;
 	}
 	
 	@Override
