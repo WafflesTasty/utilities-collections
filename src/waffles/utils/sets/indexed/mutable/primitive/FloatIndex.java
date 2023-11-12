@@ -1,7 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
 import waffles.utils.sets.countable.FloatArray;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -12,11 +11,9 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  * 
  * 
- * @see MutableIndex
  * @see FloatArray
- * @see Float
  */
-public class FloatIndex implements FloatArray, MutableIndex<Float>
+public class FloatIndex implements FloatArray
 {
 	private Order order;
 	private int[] dimension;
@@ -70,34 +67,19 @@ public class FloatIndex implements FloatArray, MutableIndex<Float>
 		this(Order.COL_MAJOR, dim);
 	}
 
-
+	
 	@Override
-	public void clear()
+	public float[] Array()
 	{
-		data = new float[Count()];
-	}
-		
-	@Override
-	public Float get(int... coords)
-	{
-		return data[toIndex(order, coords)];
+		return data;
 	}
 	
 	@Override
-	public Float put(Float val, int... coords)
+	public int[] Dimensions()
 	{
-		int index = toIndex(order, coords);
-		float prev = data[index];
-		data[index] = val;
-		return prev;
+		return dimension;
 	}
-	
-	@Override
-	public Float remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
+				
 	@Override
 	public FloatIndex instance()
 	{
@@ -113,20 +95,8 @@ public class FloatIndex implements FloatArray, MutableIndex<Float>
 	}
 	
 	@Override
-	public int[] Dimensions()
+	public void clear()
 	{
-		return dimension;
-	}
-	
-	@Override
-	public float[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int Count()
-	{
-		return MutableIndex.super.Count();
+		data = new float[Count()];
 	}
 }

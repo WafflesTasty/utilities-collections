@@ -1,7 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
 import waffles.utils.sets.countable.ByteArray;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -12,11 +11,9 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  * 
  * 
- * @see MutableIndex
  * @see ByteArray
- * @see Byte
  */
-public class ByteIndex implements ByteArray, MutableIndex<Byte>
+public class ByteIndex implements ByteArray
 {
 	private Order order;
 	private int[] dimension;
@@ -72,32 +69,17 @@ public class ByteIndex implements ByteArray, MutableIndex<Byte>
 
 
 	@Override
-	public void clear()
+	public byte[] Array()
 	{
-		data = new byte[Count()];
-	}
-		
-	@Override
-	public Byte get(int... coords)
-	{
-		return data[toIndex(order, coords)];
+		return data;
 	}
 	
 	@Override
-	public Byte put(Byte val, int... coords)
+	public int[] Dimensions()
 	{
-		int index = toIndex(order, coords);
-		byte prev = data[index];
-		data[index] = val;
-		return prev;
+		return dimension;
 	}
-	
-	@Override
-	public Byte remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
+				
 	@Override
 	public ByteIndex instance()
 	{
@@ -113,20 +95,8 @@ public class ByteIndex implements ByteArray, MutableIndex<Byte>
 	}
 	
 	@Override
-	public int[] Dimensions()
+	public void clear()
 	{
-		return dimension;
-	}
-	
-	@Override
-	public byte[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int Count()
-	{
-		return MutableIndex.super.Count();
+		data = new byte[Count()];
 	}
 }

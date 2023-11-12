@@ -1,7 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
 import waffles.utils.sets.countable.LongArray;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -12,11 +11,9 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  * 
  * 
- * @see MutableIndex
  * @see LongArray
- * @see Long
  */
-public class LongIndex implements LongArray, MutableIndex<Long>
+public class LongIndex implements LongArray
 {
 	private Order order;
 	private int[] dimension;
@@ -72,32 +69,17 @@ public class LongIndex implements LongArray, MutableIndex<Long>
 
 
 	@Override
-	public void clear()
+	public long[] Array()
 	{
-		data = new long[Count()];
-	}
-		
-	@Override
-	public Long get(int... coords)
-	{
-		return data[toIndex(order, coords)];
+		return data;
 	}
 	
 	@Override
-	public Long put(Long val, int... coords)
+	public int[] Dimensions()
 	{
-		int index = toIndex(order, coords);
-		long prev = data[index];
-		data[index] = val;
-		return prev;
+		return dimension;
 	}
-	
-	@Override
-	public Long remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
+				
 	@Override
 	public LongIndex instance()
 	{
@@ -113,20 +95,8 @@ public class LongIndex implements LongArray, MutableIndex<Long>
 	}
 	
 	@Override
-	public int[] Dimensions()
+	public void clear()
 	{
-		return dimension;
-	}
-	
-	@Override
-	public long[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int Count()
-	{
-		return MutableIndex.super.Count();
+		data = new long[Count()];
 	}
 }

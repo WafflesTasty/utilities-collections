@@ -1,7 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
 import waffles.utils.sets.countable.DoubleArray;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -12,11 +11,9 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  * 
  * 
- * @see MutableIndex
  * @see DoubleArray
- * @see Double
  */
-public class DoubleIndex implements DoubleArray, MutableIndex<Double>
+public class DoubleIndex implements DoubleArray
 {
 	private Order order;
 	private int[] dimension;
@@ -72,32 +69,17 @@ public class DoubleIndex implements DoubleArray, MutableIndex<Double>
 
 
 	@Override
-	public void clear()
+	public double[] Array()
 	{
-		data = new double[Count()];
-	}
-		
-	@Override
-	public Double get(int... coords)
-	{
-		return data[toIndex(order, coords)];
+		return data;
 	}
 	
 	@Override
-	public Double put(Double val, int... coords)
+	public int[] Dimensions()
 	{
-		int index = toIndex(order, coords);
-		double prev = data[index];
-		data[index] = val;
-		return prev;
+		return dimension;
 	}
-	
-	@Override
-	public Double remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
+				
 	@Override
 	public DoubleIndex instance()
 	{
@@ -113,20 +95,8 @@ public class DoubleIndex implements DoubleArray, MutableIndex<Double>
 	}
 	
 	@Override
-	public int[] Dimensions()
+	public void clear()
 	{
-		return dimension;
-	}
-	
-	@Override
-	public double[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int Count()
-	{
-		return MutableIndex.super.Count();
+		data = new double[Count()];
 	}
 }

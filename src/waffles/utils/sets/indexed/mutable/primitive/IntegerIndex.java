@@ -1,7 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
 import waffles.utils.sets.countable.IntegerArray;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -12,11 +11,9 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  * 
  * 
- * @see MutableIndex
  * @see IntegerArray
- * @see Integer
  */
-public class IntegerIndex implements IntegerArray, MutableIndex<Integer>
+public class IntegerIndex implements IntegerArray
 {
 	private Order order;
 	private int[] dimension;
@@ -72,32 +69,17 @@ public class IntegerIndex implements IntegerArray, MutableIndex<Integer>
 
 
 	@Override
-	public void clear()
+	public int[] Array()
 	{
-		data = new int[Count()];
-	}
-		
-	@Override
-	public Integer get(int... coords)
-	{
-		return data[toIndex(order, coords)];
+		return data;
 	}
 	
 	@Override
-	public Integer put(Integer val, int... coords)
+	public int[] Dimensions()
 	{
-		int index = toIndex(order, coords);
-		int prev = data[index];
-		data[index] = val;
-		return prev;
+		return dimension;
 	}
-	
-	@Override
-	public Integer remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
+				
 	@Override
 	public IntegerIndex instance()
 	{
@@ -113,20 +95,8 @@ public class IntegerIndex implements IntegerArray, MutableIndex<Integer>
 	}
 	
 	@Override
-	public int[] Dimensions()
+	public void clear()
 	{
-		return dimension;
-	}
-	
-	@Override
-	public int[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int Count()
-	{
-		return MutableIndex.super.Count();
+		data = new int[Count()];
 	}
 }

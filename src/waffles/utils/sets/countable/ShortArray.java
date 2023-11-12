@@ -1,6 +1,6 @@
 package waffles.utils.sets.countable;
 
-import waffles.utils.sets.CountableSet;
+import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
@@ -11,10 +11,10 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @version 1.1
  * 
  * 
- * @see CountableSet
+ * @see MutableIndex
  * @see Copyable
  */
-public interface ShortArray extends CountableSet, Copyable<ShortArray>
+public interface ShortArray extends Copyable<ShortArray>, MutableIndex<Short>
 {
 	/**
 	 * Returns the data of the {@code IntegerArray}.
@@ -23,6 +23,27 @@ public interface ShortArray extends CountableSet, Copyable<ShortArray>
 	 */
 	public abstract short[] Array();
 	
+	
+	@Override
+	public default Short get(int... coords)
+	{
+		return Array()[toIndex(Order.COL_MAJOR, coords)];
+	}
+	
+	@Override
+	public default Short put(Short val, int... coords)
+	{
+		int index = toIndex(Order.COL_MAJOR, coords);
+		short prev = Array()[index];
+		Array()[index] = val;
+		return prev;
+	}
+	
+	@Override
+	public default Short remove(int... coords)
+	{
+		return put(null, coords);
+	}
 	
 	@Override
 	public default int Count()

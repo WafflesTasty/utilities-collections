@@ -1,7 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
 import waffles.utils.sets.countable.ShortArray;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -12,11 +11,9 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  * 
  * 
- * @see MutableIndex
  * @see ShortArray
- * @see Short
  */
-public class ShortIndex implements ShortArray, MutableIndex<Short>
+public class ShortIndex implements ShortArray
 {
 	private Order order;
 	private int[] dimension;
@@ -72,32 +69,17 @@ public class ShortIndex implements ShortArray, MutableIndex<Short>
 
 
 	@Override
-	public void clear()
+	public short[] Array()
 	{
-		data = new short[Count()];
-	}
-		
-	@Override
-	public Short get(int... coords)
-	{
-		return data[toIndex(order, coords)];
+		return data;
 	}
 	
 	@Override
-	public Short put(Short val, int... coords)
+	public int[] Dimensions()
 	{
-		int index = toIndex(order, coords);
-		short prev = data[index];
-		data[index] = val;
-		return prev;
+		return dimension;
 	}
-	
-	@Override
-	public Short remove(int... coords)
-	{
-		return put(null, coords);
-	}
-	
+				
 	@Override
 	public ShortIndex instance()
 	{
@@ -113,20 +95,8 @@ public class ShortIndex implements ShortArray, MutableIndex<Short>
 	}
 	
 	@Override
-	public int[] Dimensions()
+	public void clear()
 	{
-		return dimension;
-	}
-	
-	@Override
-	public short[] Array()
-	{
-		return data;
-	}
-	
-	@Override
-	public int Count()
-	{
-		return MutableIndex.super.Count();
+		data = new short[Count()];
 	}
 }
