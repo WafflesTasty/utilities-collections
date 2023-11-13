@@ -1,31 +1,21 @@
 package waffles.utils.sets.arrays;
 
 import waffles.utils.sets.ArrayLike;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code FloatArray} manages a primitive float array as an {@code ArraySet}.
+ * A {@code FloatArray} manages a primitive float array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
  * @version 1.1
  * 
  * 
- * @see Copyable
- * @see MutableIndex
  * @see ArrayLike
+ * @see Copyable
  */
-public interface FloatArray extends ArrayLike<float[]>, Copyable<FloatArray>, MutableIndex<Float>
+public interface FloatArray extends ArrayLike<float[], Float>, Copyable<FloatArray>
 {
-	/**
-	 * Returns the ordering of the {@code FloatArray}.
-	 * 
-	 * @return  an index order
-	 */
-	public abstract Order Ordering();
-	
-	
 	@Override
 	public default Float get(int... coords)
 	{

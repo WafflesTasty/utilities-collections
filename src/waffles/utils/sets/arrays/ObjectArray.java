@@ -1,10 +1,9 @@
 package waffles.utils.sets.arrays;
 
 import waffles.utils.sets.ArrayLike;
-import waffles.utils.sets.indexed.MutableIndex;
 
 /**
- * An {@code ObjectArray} manages an object array as a {@code MutableIndex}.
+ * An {@code ObjectArray} manages an object array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 12 Nov 2023
@@ -12,19 +11,10 @@ import waffles.utils.sets.indexed.MutableIndex;
  *
  *
  * @param <O>  an object type
- * @see MutableIndex
  * @see ArrayLike
  */
-public interface ObjectArray<O> extends ArrayLike<Object[]>, MutableIndex<O>
+public interface ObjectArray<O> extends ArrayLike<Object[], O>
 {
-	/**
-	 * Returns the ordering of the {@code ObjectArray}.
-	 * 
-	 * @return  an index order
-	 */
-	public abstract Order Ordering();
-	
-	
 	@Override
 	public default O get(int... coords)
 	{

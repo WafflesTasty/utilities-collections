@@ -1,31 +1,21 @@
 package waffles.utils.sets.arrays;
 
 import waffles.utils.sets.ArrayLike;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * An {@code IntegerArray} manages a primitive integer array as a {@code MutableIndex}.
+ * An {@code IntegerArray} manages a primitive integer array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
  * @version 1.1
  * 
  * 
- * @see Copyable
- * @see MutableIndex
  * @see ArrayLike
+ * @see Copyable
  */
-public interface IntegerArray extends ArrayLike<int[]>, Copyable<IntegerArray>, MutableIndex<Integer>
+public interface IntegerArray extends ArrayLike<int[], Integer>, Copyable<IntegerArray>
 {
-	/**
-	 * Returns the ordering of the {@code IntegerArray}.
-	 * 
-	 * @return  an index order
-	 */
-	public abstract Order Ordering();
-	
-	
 	@Override
 	public default Integer get(int... coords)
 	{

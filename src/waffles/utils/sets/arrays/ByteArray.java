@@ -1,31 +1,21 @@
 package waffles.utils.sets.arrays;
 
 import waffles.utils.sets.ArrayLike;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code ByteArray} manages a primitive byte array as a {@code MutableIndex}.
+ * A {@code ByteArray} manages a primitive byte array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
  * @version 1.1
  * 
  * 
- * @see Copyable
- * @see MutableIndex
  * @see ArrayLike
+ * @see Copyable
  */
-public interface ByteArray extends ArrayLike<byte[]>, Copyable<ByteArray>, MutableIndex<Byte>
+public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
 {
-	/**
-	 * Returns the ordering of the {@code ByteArray}.
-	 * 
-	 * @return  an index order
-	 */
-	public abstract Order Ordering();
-	
-	
 	@Override
 	public default Byte get(int... coords)
 	{

@@ -1,31 +1,21 @@
 package waffles.utils.sets.arrays;
 
 import waffles.utils.sets.ArrayLike;
-import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code DoubleArray} manages a primitive double array as a {@code MutableIndex}.
+ * A {@code DoubleArray} manages a primitive double array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
  * @version 1.1
  * 
  * 
- * @see Copyable
- * @see MutableIndex
  * @see ArrayLike
+ * @see Copyable
  */
-public interface DoubleArray extends ArrayLike<double[]>, Copyable<DoubleArray>, MutableIndex<Double>
+public interface DoubleArray extends ArrayLike<double[], Double>, Copyable<DoubleArray>
 {
-	/**
-	 * Returns the ordering of the {@code DoubleArray}.
-	 * 
-	 * @return  an index order
-	 */
-	public abstract Order Ordering();
-	
-	
 	@Override
 	public default Double get(int... coords)
 	{
