@@ -36,4 +36,16 @@ public interface ShortArray extends ArrayLike<short[], Short>, Copyable<ShortArr
 	{
 		return put(null, coords);
 	}
+	
+	@Override
+	public default ShortArray instance()
+	{
+		return () -> null;
+	}
+	
+	@Override
+	public default ShortArray copy()
+	{
+		return () -> Array();
+	}	
 }

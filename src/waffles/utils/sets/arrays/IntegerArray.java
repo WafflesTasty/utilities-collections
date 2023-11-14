@@ -36,4 +36,16 @@ public interface IntegerArray extends ArrayLike<int[], Integer>, Copyable<Intege
 	{
 		return put(null, coords);
 	}
+	
+	@Override
+	public default IntegerArray instance()
+	{
+		return () -> null;
+	}
+	
+	@Override
+	public default IntegerArray copy()
+	{
+		return () -> Array();
+	}
 }

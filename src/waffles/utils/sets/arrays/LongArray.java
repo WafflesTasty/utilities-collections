@@ -36,4 +36,16 @@ public interface LongArray extends ArrayLike<long[], Long>, Copyable<LongArray>
 	{
 		return put(null, coords);
 	}
+	
+	@Override
+	public default LongArray instance()
+	{
+		return () -> null;
+	}
+	
+	@Override
+	public default LongArray copy()
+	{
+		return () -> Array();
+	}
 }

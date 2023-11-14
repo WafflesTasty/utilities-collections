@@ -36,4 +36,16 @@ public interface DoubleArray extends ArrayLike<double[], Double>, Copyable<Doubl
 	{
 		return put(null, coords);
 	}
+	
+	@Override
+	public default DoubleArray instance()
+	{
+		return () -> null;
+	}
+	
+	@Override
+	public default DoubleArray copy()
+	{
+		return () -> Array();
+	}
 }

@@ -60,7 +60,10 @@ public interface ArrayLike<A, O> extends MutableIndex<O>
 	 * 
 	 * @return  an index order
 	 */
-	public abstract Order Ordering();
+	public default Order Ordering()
+	{
+		return Order.COL_MAJOR;
+	}
 	
 	/**
 	 * Returns the array of the {@code ArraySet}.

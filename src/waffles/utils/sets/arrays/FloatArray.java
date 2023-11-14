@@ -36,4 +36,16 @@ public interface FloatArray extends ArrayLike<float[], Float>, Copyable<FloatArr
 	{
 		return put(null, coords);
 	}
+	
+	@Override
+	public default FloatArray instance()
+	{
+		return () -> null;
+	}
+	
+	@Override
+	public default FloatArray copy()
+	{
+		return () -> Array();
+	}
 }

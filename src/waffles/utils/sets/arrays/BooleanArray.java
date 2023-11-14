@@ -36,4 +36,16 @@ public interface BooleanArray extends ArrayLike<boolean[], Boolean>, Copyable<Bo
 	{
 		return put(null, coords);
 	}
+	
+	@Override
+	public default BooleanArray instance()
+	{
+		return () -> null;
+	}
+	
+	@Override
+	public default BooleanArray copy()
+	{
+		return () -> Array();
+	}
 }

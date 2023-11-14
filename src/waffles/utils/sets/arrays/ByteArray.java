@@ -14,6 +14,7 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see ArrayLike
  * @see Copyable
  */
+@FunctionalInterface
 public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
 {
 	@Override
@@ -35,5 +36,17 @@ public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
 	public default Byte remove(int... coords)
 	{
 		return put(null, coords);
+	}
+	
+	@Override
+	public default ByteArray instance()
+	{
+		return () -> null;
+	}
+	
+	@Override
+	public default ByteArray copy()
+	{
+		return () -> Array();
 	}
 }
