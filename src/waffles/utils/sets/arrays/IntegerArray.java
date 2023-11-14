@@ -14,6 +14,7 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see ArrayLike
  * @see Copyable
  */
+@FunctionalInterface
 public interface IntegerArray extends ArrayLike<int[], Integer>, Copyable<IntegerArray>
 {
 	@Override
