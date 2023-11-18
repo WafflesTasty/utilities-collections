@@ -17,13 +17,14 @@ import waffles.utils.sets.arrays.like.DoubleArray;
 @FunctionalInterface
 public interface DoubleSet extends ArraySet<double[], Double>, DoubleArray
 {
-	/**
-	 * Returns the byte size of a single value.
-	 */
-	public static final int BYTESIZE = Double.BYTES;
-	
 	@Override
 	public default int DataSize()
+	{
+		return Double.BYTES * Count();
+	}
+	
+	@Override
+	public default int Count()
 	{
 		return Array().length;
 	}

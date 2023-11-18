@@ -17,12 +17,6 @@ public interface ArraySet<A, O> extends ArrayLike<A, O>
 	@Override
 	public default int[] Dimensions()
 	{
-		return new int[]{DataSize()};
-	}
-	
-	@Override
-	public default int Count()
-	{
-		return DataSize();
+		return new int[]{Count()};
 	}
 }

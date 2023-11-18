@@ -17,13 +17,14 @@ import waffles.utils.sets.arrays.like.LongArray;
 @FunctionalInterface
 public interface LongSet extends ArraySet<long[], Long>, LongArray
 {
-	/**
-	 * Returns the byte size of a single long value.
-	 */
-	public static final int BYTESIZE = Long.BYTES;
-	
 	@Override
 	public default int DataSize()
+	{
+		return Long.BYTES * Count();
+	}
+	
+	@Override
+	public default int Count()
 	{
 		return Array().length;
 	}

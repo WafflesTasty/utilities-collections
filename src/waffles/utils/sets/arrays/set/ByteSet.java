@@ -17,13 +17,14 @@ import waffles.utils.sets.arrays.like.ByteArray;
 @FunctionalInterface
 public interface ByteSet extends ArraySet<byte[], Byte>, ByteArray
 {
-	/**
-	 * Returns the byte size of a single value.
-	 */
-	public static final int BYTESIZE = Byte.BYTES;
-	
 	@Override
 	public default int DataSize()
+	{
+		return Count();
+	}
+	
+	@Override
+	public default int Count()
 	{
 		return Array().length;
 	}

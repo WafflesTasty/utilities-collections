@@ -17,13 +17,14 @@ import waffles.utils.sets.arrays.like.FloatArray;
 @FunctionalInterface
 public interface FloatSet extends ArraySet<float[], Float>, FloatArray
 {
-	/**
-	 * Returns the byte size of a single float value.
-	 */
-	public static final int BYTESIZE = Float.BYTES;
-
 	@Override
 	public default int DataSize()
+	{
+		return Float.BYTES * Count();
+	}
+	
+	@Override
+	public default int Count()
 	{
 		return Array().length;
 	}

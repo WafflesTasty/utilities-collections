@@ -20,6 +20,12 @@ public interface BooleanSet extends ArraySet<boolean[], Boolean>, BooleanArray
 	@Override
 	public default int DataSize()
 	{
+		return (Count() + 7) / 8;
+	}
+	
+	@Override
+	public default int Count()
+	{
 		return Array().length;
 	}
 }

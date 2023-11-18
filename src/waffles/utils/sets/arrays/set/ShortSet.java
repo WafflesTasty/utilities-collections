@@ -17,13 +17,14 @@ import waffles.utils.sets.arrays.like.ShortArray;
 @FunctionalInterface
 public interface ShortSet extends ArraySet<short[], Short>, ShortArray
 {
-	/**
-	 * Returns the byte size of a single value.
-	 */
-	public static final int BYTESIZE = Short.BYTES;
-	
 	@Override
 	public default int DataSize()
+	{
+		return Short.BYTES * Count();
+	}
+	
+	@Override
+	public default int Count()
 	{
 		return Array().length;
 	}
