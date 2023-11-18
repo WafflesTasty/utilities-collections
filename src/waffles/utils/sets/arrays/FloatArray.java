@@ -49,4 +49,10 @@ public interface FloatArray extends ArrayLike<float[], Float>, Copyable<FloatArr
 	{
 		return () -> Array();
 	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Array().length;
+	}
 }

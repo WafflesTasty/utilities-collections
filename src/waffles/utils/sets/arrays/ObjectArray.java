@@ -35,4 +35,10 @@ public interface ObjectArray<O> extends ArrayLike<Object[], O>
 	{
 		return put(null, coords);
 	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Array().length;
+	}
 }

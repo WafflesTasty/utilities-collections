@@ -49,4 +49,10 @@ public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
 	{
 		return () -> Array();
 	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Array().length;
+	}
 }

@@ -49,4 +49,10 @@ public interface IntegerArray extends ArrayLike<int[], Integer>, Copyable<Intege
 	{
 		return () -> Array();
 	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Array().length;
+	}
 }

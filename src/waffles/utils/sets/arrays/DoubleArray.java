@@ -49,4 +49,10 @@ public interface DoubleArray extends ArrayLike<double[], Double>, Copyable<Doubl
 	{
 		return () -> Array();
 	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Array().length;
+	}
 }

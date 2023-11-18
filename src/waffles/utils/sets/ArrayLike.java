@@ -3,6 +3,7 @@ package waffles.utils.sets;
 import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.utilities.iterators.IndexKeys;
 import waffles.utils.sets.utilities.iterators.IndexValues;
+import waffles.utils.tools.patterns.persistence.Data;
 
 /**
  * An {@code ArrayLike} defines a generic array-like structure.
@@ -16,7 +17,7 @@ import waffles.utils.sets.utilities.iterators.IndexValues;
  * @param <O>  an object type
  * @see MutableIndex
  */
-public interface ArrayLike<A, O> extends MutableIndex<O>
+public interface ArrayLike<A, O> extends Data, MutableIndex<O>
 {	
 	@Override
 	public default void clear()

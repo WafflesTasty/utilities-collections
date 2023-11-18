@@ -49,4 +49,10 @@ public interface LongArray extends ArrayLike<long[], Long>, Copyable<LongArray>
 	{
 		return () -> Array();
 	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Array().length;
+	}
 }

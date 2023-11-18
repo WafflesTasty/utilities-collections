@@ -48,5 +48,11 @@ public interface ShortArray extends ArrayLike<short[], Short>, Copyable<ShortArr
 	public default ShortArray copy()
 	{
 		return () -> Array();
-	}	
+	}
+	
+	@Override
+	public default int DataSize()
+	{
+		return Array().length;
+	}
 }
