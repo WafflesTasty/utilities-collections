@@ -1,21 +1,21 @@
-package waffles.utils.sets.arrays.data;
+package waffles.utils.sets.arrays.set;
 
-import waffles.utils.sets.arrays.ArrayData;
+import waffles.utils.sets.arrays.ArraySet;
 import waffles.utils.sets.arrays.like.LongArray;
 
 /**
- * A {@code LongSet} maintains a primitive long array as an {@code ArrayData} object.
+ * A {@code LongSet} maintains a primitive long array as an {@code ArraySet} object.
  *
  * @author Waffles
  * @since 13 Nov 2023
  * @version 1.1
  * 
  * 
- * @see ArrayData
+ * @see ArraySet
  * @see LongArray
  */
 @FunctionalInterface
-public interface LongSet extends ArrayData<long[], Long>, LongArray
+public interface LongSet extends ArraySet<long[], Long>, LongArray
 {
 	/**
 	 * Returns the byte size of a single long value.

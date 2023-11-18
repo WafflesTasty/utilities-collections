@@ -1,10 +1,10 @@
-package waffles.utils.sets.arrays.data;
+package waffles.utils.sets.arrays.set;
 
-import waffles.utils.sets.arrays.ArrayData;
+import waffles.utils.sets.arrays.ArraySet;
 import waffles.utils.sets.arrays.like.ShortArray;
 
 /**
- * A {@code ShortSet} maintains a primitive short array as an {@code ArrayData} object.
+ * A {@code ShortSet} maintains a primitive short array as an {@code ArraySet} object.
  *
  * @author Waffles
  * @since 13 Nov 2023
@@ -12,10 +12,10 @@ import waffles.utils.sets.arrays.like.ShortArray;
  * 
  * 
  * @see ShortArray
- * @see ArrayData
+ * @see ArraySet
  */
 @FunctionalInterface
-public interface ShortSet extends ArrayData<short[], Short>, ShortArray
+public interface ShortSet extends ArraySet<short[], Short>, ShortArray
 {
 	/**
 	 * Returns the byte size of a single value.

@@ -1,7 +1,7 @@
 package waffles.utils.sets.arrays;
 
 /**
- * An {@code ArrayData} object maintains a one-dimensional {@code ArrayLike} object.
+ * An {@code ArraySet} object maintains a one-dimensional {@code ArrayLike} object.
  *
  * @author Waffles
  * @since 13 Nov 2023
@@ -12,7 +12,7 @@ package waffles.utils.sets.arrays;
  * @param <O>  an object type
  * @see ArrayLike
  */
-public interface ArrayData<A, O> extends ArrayLike<A, O>
+public interface ArraySet<A, O> extends ArrayLike<A, O>
 {	
 	@Override
 	public default int[] Dimensions()

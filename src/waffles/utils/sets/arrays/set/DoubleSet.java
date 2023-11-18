@@ -1,21 +1,21 @@
-package waffles.utils.sets.arrays.data;
+package waffles.utils.sets.arrays.set;
 
-import waffles.utils.sets.arrays.ArrayData;
+import waffles.utils.sets.arrays.ArraySet;
 import waffles.utils.sets.arrays.like.DoubleArray;
 
 /**
- * A {@code DoubleSet} maintains a primitive double array as an {@code ArrayData} object.
+ * A {@code DoubleSet} maintains a primitive double array as an {@code ArraySet} object.
  *
  * @author Waffles
  * @since 13 Nov 2023
  * @version 1.1
  * 
  * 
- * @see ArrayData
+ * @see ArraySet
  * @see DoubleArray
  */
 @FunctionalInterface
-public interface DoubleSet extends ArrayData<double[], Double>, DoubleArray
+public interface DoubleSet extends ArraySet<double[], Double>, DoubleArray
 {
 	/**
 	 * Returns the byte size of a single value.

@@ -1,10 +1,10 @@
-package waffles.utils.sets.arrays.data;
+package waffles.utils.sets.arrays.set;
 
-import waffles.utils.sets.arrays.ArrayData;
+import waffles.utils.sets.arrays.ArraySet;
 import waffles.utils.sets.arrays.like.IntegerArray;
 
 /**
- * An {@code IntegerSet} maintains a primitive integer array as an {@code ArrayData} object.
+ * An {@code IntegerSet} maintains a primitive integer array as an {@code ArraySet} object.
  *
  * @author Waffles
  * @since 13 Nov 2023
@@ -12,10 +12,10 @@ import waffles.utils.sets.arrays.like.IntegerArray;
  * 
  * 
  * @see IntegerArray
- * @see ArrayData
+ * @see ArraySet
  */
 @FunctionalInterface
-public interface IntegerSet extends ArrayData<int[], Integer>, IntegerArray
+public interface IntegerSet extends ArraySet<int[], Integer>, IntegerArray
 {
 	/**
 	 * Returns the byte size of a single integer value.
