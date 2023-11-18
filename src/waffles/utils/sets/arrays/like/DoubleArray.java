@@ -14,7 +14,6 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see ArrayLike
  * @see Copyable
  */
-@FunctionalInterface
 public interface DoubleArray extends ArrayLike<double[], Double>, Copyable<DoubleArray>
 {
 	@Override
