@@ -41,7 +41,7 @@ public abstract class Tree implements Rooted
 	{
 		return new Node(this);
 	}
-
+	
 	@Override
 	public Nodal Root()
 	{
