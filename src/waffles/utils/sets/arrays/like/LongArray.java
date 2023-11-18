@@ -1,10 +1,10 @@
-package waffles.utils.sets.arrays;
+package waffles.utils.sets.arrays.like;
 
-import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code BooleanArray} manages a primitive boolean array as an {@code ArrayLike}.
+ * A {@code LongArray} manages a primitive long array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -15,37 +15,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see Copyable
  */
 @FunctionalInterface
-public interface BooleanArray extends ArrayLike<boolean[], Boolean>, Copyable<BooleanArray>
+public interface LongArray extends ArrayLike<long[], Long>, Copyable<LongArray>
 {
 	@Override
-	public default Boolean get(int... coords)
+	public default Long get(int... coords)
 	{
 		return Array()[toIndex(Ordering(), coords)];
 	}
 	
 	@Override
-	public default Boolean put(Boolean val, int... coords)
+	public default Long put(Long val, int... coords)
 	{
 		int index = toIndex(Ordering(), coords);
-		Boolean prev = Array()[index];
+		Long prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Boolean remove(int... coords)
+	public default Long remove(int... coords)
 	{
 		return put(null, coords);
 	}
 	
 	@Override
-	public default BooleanArray instance()
+	public default LongArray instance()
 	{
 		return () -> null;
 	}
 	
 	@Override
-	public default BooleanArray copy()
+	public default LongArray copy()
 	{
 		return () -> Array();
 	}

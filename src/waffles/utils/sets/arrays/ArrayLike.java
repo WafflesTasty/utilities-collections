@@ -1,4 +1,4 @@
-package waffles.utils.sets;
+package waffles.utils.sets.arrays;
 
 import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.utilities.iterators.IndexKeys;

@@ -1,6 +1,6 @@
-package waffles.utils.sets.arrays;
+package waffles.utils.sets.arrays.like;
 
-import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.arrays.ArrayLike;
 
 /**
  * An {@code ObjectArray} manages an object array as an {@code ArrayLike}.

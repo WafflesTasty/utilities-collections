@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable.primitive;
 
-import waffles.utils.sets.arrays.BooleanArray;
+import waffles.utils.sets.arrays.like.BooleanArray;
 import waffles.utils.tools.primitives.Array;
 
 /**

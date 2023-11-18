@@ -1,10 +1,10 @@
-package waffles.utils.sets.arrays;
+package waffles.utils.sets.arrays.like;
 
-import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code LongArray} manages a primitive long array as an {@code ArrayLike}.
+ * A {@code FloatArray} manages a primitive float array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -15,37 +15,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see Copyable
  */
 @FunctionalInterface
-public interface LongArray extends ArrayLike<long[], Long>, Copyable<LongArray>
+public interface FloatArray extends ArrayLike<float[], Float>, Copyable<FloatArray>
 {
 	@Override
-	public default Long get(int... coords)
+	public default Float get(int... coords)
 	{
 		return Array()[toIndex(Ordering(), coords)];
 	}
 	
 	@Override
-	public default Long put(Long val, int... coords)
+	public default Float put(Float val, int... coords)
 	{
 		int index = toIndex(Ordering(), coords);
-		Long prev = Array()[index];
+		Float prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Long remove(int... coords)
+	public default Float remove(int... coords)
 	{
 		return put(null, coords);
 	}
 	
 	@Override
-	public default LongArray instance()
+	public default FloatArray instance()
 	{
 		return () -> null;
 	}
 	
 	@Override
-	public default LongArray copy()
+	public default FloatArray copy()
 	{
 		return () -> Array();
 	}

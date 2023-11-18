@@ -1,10 +1,10 @@
-package waffles.utils.sets.arrays;
+package waffles.utils.sets.arrays.like;
 
-import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code DoubleArray} manages a primitive double array as an {@code ArrayLike}.
+ * A {@code ByteArray} manages a primitive byte array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -15,37 +15,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see Copyable
  */
 @FunctionalInterface
-public interface DoubleArray extends ArrayLike<double[], Double>, Copyable<DoubleArray>
+public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
 {
 	@Override
-	public default Double get(int... coords)
+	public default Byte get(int... coords)
 	{
 		return Array()[toIndex(Ordering(), coords)];
 	}
 	
 	@Override
-	public default Double put(Double val, int... coords)
+	public default Byte put(Byte val, int... coords)
 	{
 		int index = toIndex(Ordering(), coords);
-		Double prev = Array()[index];
+		Byte prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Double remove(int... coords)
+	public default Byte remove(int... coords)
 	{
 		return put(null, coords);
 	}
 	
 	@Override
-	public default DoubleArray instance()
+	public default ByteArray instance()
 	{
 		return () -> null;
 	}
 	
 	@Override
-	public default DoubleArray copy()
+	public default ByteArray copy()
 	{
 		return () -> Array();
 	}

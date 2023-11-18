@@ -1,10 +1,10 @@
-package waffles.utils.sets.arrays;
+package waffles.utils.sets.arrays.like;
 
-import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code ByteArray} manages a primitive byte array as an {@code ArrayLike}.
+ * A {@code ShortArray} manages a primitive short array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -15,37 +15,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see Copyable
  */
 @FunctionalInterface
-public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
+public interface ShortArray extends ArrayLike<short[], Short>, Copyable<ShortArray>
 {
 	@Override
-	public default Byte get(int... coords)
+	public default Short get(int... coords)
 	{
 		return Array()[toIndex(Ordering(), coords)];
 	}
 	
 	@Override
-	public default Byte put(Byte val, int... coords)
+	public default Short put(Short val, int... coords)
 	{
 		int index = toIndex(Ordering(), coords);
-		Byte prev = Array()[index];
+		Short prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Byte remove(int... coords)
+	public default Short remove(int... coords)
 	{
 		return put(null, coords);
 	}
 	
 	@Override
-	public default ByteArray instance()
+	public default ShortArray instance()
 	{
 		return () -> null;
 	}
 	
 	@Override
-	public default ByteArray copy()
+	public default ShortArray copy()
 	{
 		return () -> Array();
 	}

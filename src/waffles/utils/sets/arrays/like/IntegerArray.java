@@ -1,10 +1,10 @@
-package waffles.utils.sets.arrays;
+package waffles.utils.sets.arrays.like;
 
-import waffles.utils.sets.ArrayLike;
+import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
 
 /**
- * A {@code FloatArray} manages a primitive float array as an {@code ArrayLike}.
+ * An {@code IntegerArray} manages a primitive integer array as an {@code ArrayLike}.
  *
  * @author Waffles
  * @since 11 Nov 2023
@@ -15,37 +15,37 @@ import waffles.utils.tools.patterns.semantics.Copyable;
  * @see Copyable
  */
 @FunctionalInterface
-public interface FloatArray extends ArrayLike<float[], Float>, Copyable<FloatArray>
+public interface IntegerArray extends ArrayLike<int[], Integer>, Copyable<IntegerArray>
 {
 	@Override
-	public default Float get(int... coords)
+	public default Integer get(int... coords)
 	{
 		return Array()[toIndex(Ordering(), coords)];
 	}
 	
 	@Override
-	public default Float put(Float val, int... coords)
+	public default Integer put(Integer val, int... coords)
 	{
 		int index = toIndex(Ordering(), coords);
-		Float prev = Array()[index];
+		Integer prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Float remove(int... coords)
+	public default Integer remove(int... coords)
 	{
 		return put(null, coords);
 	}
 	
 	@Override
-	public default FloatArray instance()
+	public default IntegerArray instance()
 	{
 		return () -> null;
 	}
 	
 	@Override
-	public default FloatArray copy()
+	public default IntegerArray copy()
 	{
 		return () -> Array();
 	}

@@ -1,6 +1,6 @@
 package waffles.utils.sets.indexed.mutable;
 
-import waffles.utils.sets.arrays.ObjectArray;
+import waffles.utils.sets.arrays.like.ObjectArray;
 
 /**
  * An {@code ArrayIndex} implements a {@code MutableIndex} by internally storing data in an array.
