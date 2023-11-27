@@ -2,6 +2,7 @@ package waffles.utils.sets.arrays.like;
 
 import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
+import waffles.utils.tools.primitives.Integers;
 
 /**
  * An {@code IntegerArray} manages a primitive integer array as an {@code ArrayLike}.
@@ -52,6 +53,6 @@ public interface IntegerArray extends ArrayLike<int[], Integer>, Copyable<Intege
 	@Override
 	public default int DataSize()
 	{
-		return Array().length;
+		return Integers.BYTE_SIZE * Count();
 	}
 }

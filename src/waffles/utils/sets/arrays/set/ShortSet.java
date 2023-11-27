@@ -18,12 +18,6 @@ import waffles.utils.sets.arrays.like.ShortArray;
 public interface ShortSet extends ArraySet<short[], Short>, ShortArray
 {
 	@Override
-	public default int DataSize()
-	{
-		return Short.BYTES * Count();
-	}
-	
-	@Override
 	public default int Count()
 	{
 		return Array().length;

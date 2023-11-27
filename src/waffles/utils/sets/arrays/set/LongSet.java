@@ -18,12 +18,6 @@ import waffles.utils.sets.arrays.like.LongArray;
 public interface LongSet extends ArraySet<long[], Long>, LongArray
 {
 	@Override
-	public default int DataSize()
-	{
-		return Long.BYTES * Count();
-	}
-	
-	@Override
 	public default int Count()
 	{
 		return Array().length;

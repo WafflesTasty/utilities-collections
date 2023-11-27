@@ -39,6 +39,6 @@ public interface ObjectArray<O> extends ArrayLike<Object[], O>
 	@Override
 	public default int DataSize()
 	{
-		return Array().length;
+		return Count();
 	}
 }

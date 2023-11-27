@@ -18,12 +18,6 @@ import waffles.utils.sets.arrays.like.DoubleArray;
 public interface DoubleSet extends ArraySet<double[], Double>, DoubleArray
 {
 	@Override
-	public default int DataSize()
-	{
-		return Double.BYTES * Count();
-	}
-	
-	@Override
 	public default int Count()
 	{
 		return Array().length;

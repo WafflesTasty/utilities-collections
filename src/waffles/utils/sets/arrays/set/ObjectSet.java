@@ -19,12 +19,6 @@ import waffles.utils.sets.arrays.like.ObjectArray;
 public interface ObjectSet<O> extends ArraySet<Object[], O>, ObjectArray<O>
 {
 	@Override
-	public default int DataSize()
-	{
-		return Count();
-	}
-	
-	@Override
 	public default int Count()
 	{
 		return Array().length;

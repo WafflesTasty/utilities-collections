@@ -52,6 +52,6 @@ public interface BooleanArray extends ArrayLike<boolean[], Boolean>, Copyable<Bo
 	@Override
 	public default int DataSize()
 	{
-		return Array().length;
+		return (Count() + 7) / 8;
 	}
 }

@@ -2,6 +2,7 @@ package waffles.utils.sets.arrays.like;
 
 import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
+import waffles.utils.tools.primitives.Longs;
 
 /**
  * A {@code LongArray} manages a primitive long array as an {@code ArrayLike}.
@@ -52,6 +53,6 @@ public interface LongArray extends ArrayLike<long[], Long>, Copyable<LongArray>
 	@Override
 	public default int DataSize()
 	{
-		return Array().length;
+		return Longs.BYTE_SIZE * Count();
 	}
 }

@@ -18,12 +18,6 @@ import waffles.utils.sets.arrays.like.FloatArray;
 public interface FloatSet extends ArraySet<float[], Float>, FloatArray
 {
 	@Override
-	public default int DataSize()
-	{
-		return Float.BYTES * Count();
-	}
-	
-	@Override
 	public default int Count()
 	{
 		return Array().length;

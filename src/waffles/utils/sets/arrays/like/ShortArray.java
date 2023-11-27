@@ -2,6 +2,7 @@ package waffles.utils.sets.arrays.like;
 
 import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
+import waffles.utils.tools.primitives.Shorts;
 
 /**
  * A {@code ShortArray} manages a primitive short array as an {@code ArrayLike}.
@@ -52,6 +53,6 @@ public interface ShortArray extends ArrayLike<short[], Short>, Copyable<ShortArr
 	@Override
 	public default int DataSize()
 	{
-		return Array().length;
+		return Shorts.BYTE_SIZE * Count();
 	}
 }

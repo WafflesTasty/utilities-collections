@@ -16,13 +16,7 @@ import waffles.utils.sets.arrays.like.ByteArray;
  */
 @FunctionalInterface
 public interface ByteSet extends ArraySet<byte[], Byte>, ByteArray
-{
-	@Override
-	public default int DataSize()
-	{
-		return Count();
-	}
-	
+{	
 	@Override
 	public default int Count()
 	{

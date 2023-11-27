@@ -18,12 +18,6 @@ import waffles.utils.sets.arrays.like.IntegerArray;
 public interface IntegerSet extends ArraySet<int[], Integer>, IntegerArray
 {
 	@Override
-	public default int DataSize()
-	{
-		return Integer.BYTES * Count();
-	}
-	
-	@Override
 	public default int Count()
 	{
 		return Array().length;

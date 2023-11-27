@@ -2,6 +2,7 @@ package waffles.utils.sets.arrays.like;
 
 import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
+import waffles.utils.tools.primitives.Bytes;
 
 /**
  * A {@code ByteArray} manages a primitive byte array as an {@code ArrayLike}.
@@ -52,6 +53,6 @@ public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
 	@Override
 	public default int DataSize()
 	{
-		return Array().length;
+		return Bytes.BYTE_SIZE * Count();
 	}
 }
