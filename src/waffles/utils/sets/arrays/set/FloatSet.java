@@ -17,6 +17,17 @@ import waffles.utils.sets.arrays.like.FloatArray;
 @FunctionalInterface
 public interface FloatSet extends ArraySet<float[], Float>, FloatArray
 {
+	/**
+	 * Wraps a {@code FloatSet} around an array.
+	 * 
+	 * @param set  a float array
+	 * @return  a float set
+	 */
+	public static FloatSet of(float... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{

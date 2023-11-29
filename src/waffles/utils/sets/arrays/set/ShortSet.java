@@ -17,6 +17,17 @@ import waffles.utils.sets.arrays.like.ShortArray;
 @FunctionalInterface
 public interface ShortSet extends ArraySet<short[], Short>, ShortArray
 {
+	/**
+	 * Wraps a {@code ShortSet} around an array.
+	 * 
+	 * @param set  a short array
+	 * @return  a short set
+	 */
+	public static ShortSet of(short... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{

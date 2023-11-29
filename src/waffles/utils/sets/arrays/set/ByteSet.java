@@ -16,7 +16,18 @@ import waffles.utils.sets.arrays.like.ByteArray;
  */
 @FunctionalInterface
 public interface ByteSet extends ArraySet<byte[], Byte>, ByteArray
-{	
+{
+	/**
+	 * Wraps a {@code ByteSet} around an array.
+	 * 
+	 * @param set  a byte array
+	 * @return  a byte set
+	 */
+	public static ByteSet of(byte... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{

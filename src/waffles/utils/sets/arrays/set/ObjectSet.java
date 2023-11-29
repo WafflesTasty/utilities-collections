@@ -18,6 +18,17 @@ import waffles.utils.sets.arrays.like.ObjectArray;
 @FunctionalInterface
 public interface ObjectSet<O> extends ArraySet<Object[], O>, ObjectArray<O>
 {
+	/**
+	 * Wraps an {@code ObjectSet} around an array.
+	 * 
+	 * @param set  an object array
+	 * @return  an object set
+	 */
+	public static ObjectSet<?> of(Object... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{

@@ -17,6 +17,17 @@ import waffles.utils.sets.arrays.like.IntegerArray;
 @FunctionalInterface
 public interface IntegerSet extends ArraySet<int[], Integer>, IntegerArray
 {
+	/**
+	 * Wraps a {@code IntegerSet} around an array.
+	 * 
+	 * @param set  an integer array
+	 * @return  an integer set
+	 */
+	public static IntegerSet of(int... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{

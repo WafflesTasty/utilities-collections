@@ -17,6 +17,17 @@ import waffles.utils.sets.arrays.like.BooleanArray;
 @FunctionalInterface
 public interface BooleanSet extends ArraySet<boolean[], Boolean>, BooleanArray
 {	
+	/**
+	 * Wraps a {@code BooleanSet} around an array.
+	 * 
+	 * @param set  a boolean array
+	 * @return  a boolean set
+	 */
+	public static BooleanSet of(boolean... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{

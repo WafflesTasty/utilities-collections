@@ -17,6 +17,17 @@ import waffles.utils.sets.arrays.like.LongArray;
 @FunctionalInterface
 public interface LongSet extends ArraySet<long[], Long>, LongArray
 {
+	/**
+	 * Wraps a {@code LongSet} around an array.
+	 * 
+	 * @param set  a long array
+	 * @return  a long set
+	 */
+	public static LongSet of(long... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{

@@ -17,6 +17,17 @@ import waffles.utils.sets.arrays.like.DoubleArray;
 @FunctionalInterface
 public interface DoubleSet extends ArraySet<double[], Double>, DoubleArray
 {
+	/**
+	 * Wraps a {@code DoubleSet} around an array.
+	 * 
+	 * @param set  a double array
+	 * @return  a double set
+	 */
+	public static DoubleSet of(double... set)
+	{
+		return () -> set;
+	}
+	
 	@Override
 	public default int Count()
 	{
