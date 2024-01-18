@@ -2,7 +2,6 @@ package waffles.utils.sets.arrays.like;
 
 import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
-import waffles.utils.tools.primitives.Doubles;
 
 /**
  * A {@code DoubleArray} manages a primitive double array as an {@code ArrayLike}.
@@ -48,11 +47,5 @@ public interface DoubleArray extends ArrayLike<double[], Double>, Copyable<Doubl
 	public default DoubleArray copy()
 	{
 		return () -> Array();
-	}
-	
-	@Override
-	public default int DataSize()
-	{
-		return Doubles.BYTE_SIZE * Count();
 	}
 }

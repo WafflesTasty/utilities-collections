@@ -2,7 +2,6 @@ package waffles.utils.sets.arrays.like;
 
 import waffles.utils.sets.arrays.ArrayLike;
 import waffles.utils.tools.patterns.semantics.Copyable;
-import waffles.utils.tools.primitives.Floats;
 
 /**
  * A {@code FloatArray} manages a primitive float array as an {@code ArrayLike}.
@@ -48,11 +47,5 @@ public interface FloatArray extends ArrayLike<float[], Float>, Copyable<FloatArr
 	public default FloatArray copy()
 	{
 		return () -> Array();
-	}
-	
-	@Override
-	public default int DataSize()
-	{
-		return Floats.BYTE_SIZE * Count();
 	}
 }
