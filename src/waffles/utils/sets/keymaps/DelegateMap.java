@@ -27,7 +27,7 @@ public interface DelegateMap<K,V> extends KeyMap<K,V>, Decorator
 	 *
 	 * @author Waffles
 	 * @since 10 Aug 2023
-	 * @version 1.0
+	 * @version 1.1
 	 *
 	 *
 	 * @param <K>  a map key type
@@ -49,7 +49,7 @@ public interface DelegateMap<K,V> extends KeyMap<K,V>, Decorator
 		 */
 		public Pairs(DelegateMap<K,V> map)
 		{
-			map.Delegate().entrySet().iterator();
+			pairs = map.Delegate().entrySet().iterator();
 		}
 		
 		
