@@ -2,6 +2,8 @@ package waffles.utils.sets.keymaps;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.Map.Entry;
+
 import waffles.utils.tools.patterns.semantics.Decorator;
 
 /**
@@ -36,37 +38,40 @@ public interface DelegateMap<K,V> extends KeyMap<K,V>, Decorator
 	 */
 	public class Pairs<K, V, P extends KeyPair<K, V>> implements Iterator<P>
 	{
-		private KeyMap<K, V> tgt;
-		private Iterator<K> keys;
+		private KeyMap<K, V> source;
+		private Iterator<Entry<K, V>> pairs;
 		
 		/**
 		 * Creates a new {@code Pairs}.
 		 * 
-		 * @param map  a source map
+		 * @param src  a source map
 		 * 
 		 * 
-		 * @see KeyMap
+		 * @see DelegateMap
 		 */
-		public Pairs(KeyMap<K, V> map)
+		public Pairs(DelegateMap<K, V> src)
 		{
-			keys = map.Keys().iterator();
-			tgt = map;
+			pairs = src.Delegate().entrySet().iterator();
+			source = src;
+			
 		}
 		
 		
 		@Override
 		public P next()
 		{
-			K key = keys.next();
-			V val = tgt.get(key);
+			Entry<K, V> e = pairs.next();
+
+			V val = e.getValue();
+			K key = e.getKey();
 			
-			return (P) tgt.createPair(key, val);
+			return (P) source.createPair(key, val);
 		}
 		
 		@Override
 		public boolean hasNext()
 		{
-			return keys.hasNext();
+			return pairs.hasNext();
 		}
 	}
 	
