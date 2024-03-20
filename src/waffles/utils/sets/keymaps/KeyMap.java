@@ -11,11 +11,11 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  *
  * @author Waffles
  * @since Feb 03, 2020
- * @version 1.0
+ * @version 1.1
  * 
  * 
- * @param <K>  a map key type
- * @param <V>  a map value type
+ * @param <K>  a key type
+ * @param <V>  a value type
  * @see CountableSet
  * @see Clearable
  */
@@ -29,8 +29,8 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	 * @version 1.0
 	 * 
 	 * 
-	 * @param <K>  a map key type
-	 * @param <V>  a map value type
+	 * @param <K>  a key type
+	 * @param <V>  a value type
 	 * @see Iterator
 	 */
 	public class Keys<K, V> implements Iterator<K>
@@ -72,8 +72,8 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	 * @version 1.0
 	 * 
 	 * 
-	 * @param <K>  a map key type
-	 * @param <V>  a map value type
+	 * @param <K>  a key type
+	 * @param <V>  a value type
 	 * @see Iterator
 	 */
 	public class Values<K, V> implements Iterator<V>
@@ -108,14 +108,86 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	}
 	
 	/**
+	 * The {@code Pairs} iterator generates {@code KeyPair} objects for a {@code DelegateMap}.
+	 *
+	 * @author Waffles
+	 * @since 10 Aug 2023
+	 * @version 1.1
+	 *
+	 *
+	 * @param <K>  a key type
+	 * @param <V>  a value type
+	 * @param <P>  a key-pair type
+	 * @see Iterator
+	 * @see KeyPair
+	 */
+	public class Pairs<K, V, P extends KeyPair<K, V>> implements Iterator<P>
+	{
+		private KeyMap<K, V> tgt;
+		private Iterator<K> keys;
+		
+		/**
+		 * Creates a new {@code Pairs}.
+		 * 
+		 * @param map  a source map
+		 * 
+		 * 
+		 * @see KeyMap
+		 */
+		public Pairs(KeyMap<K, V> map)
+		{
+			keys = map.Keys().iterator();
+			tgt = map;
+		}
+		
+		
+		@Override
+		public P next()
+		{
+			K key = keys.next();
+			V val = tgt.get(key);
+			
+			return (P) tgt.createPair(key, val);
+		}
+		
+		@Override
+		public boolean hasNext()
+		{
+			return keys.hasNext();
+		}
+	}
+	
+	/**
 	 * Returns the key-value pairs of the {@code KeyMap}.
+	 * This method is made generic to allow iteration of subtypes.
+	 * Make sure to override {@link #createPair(Object, Object) createPair}
+	 * to generate the correct subtype you need to iterate.
 	 * 
 	 * @return  a pair iterable
 	 * 
 	 * 
 	 * @see Iterable
+	 * @see KeyPair
 	 */
-	public abstract Iterable<KeyPair<K, V>> Pairs();
+	public default <P extends KeyPair<K, V>> Iterable<P> Pairs()
+	{
+		return () -> new Pairs<>(this);
+	}
+	
+	/**
+	 * Creates a new key-value pair for the {@code KeyMap}.
+	 * 
+	 * @param key  a key
+	 * @param val  a value
+	 * @return  a key-value pair
+	 * 
+	 * 
+	 * @see KeyPair
+	 */
+	public default KeyPair<K, V> createPair(K key, V val)
+	{
+		return new KeyPair<>(key, val);
+	}
 
 	
 	/**

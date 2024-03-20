@@ -9,7 +9,7 @@ import waffles.utils.sets.keymaps.DelegateMap;
  *
  * @author Waffles
  * @since Feb 03, 2020
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <K>  a map key type
