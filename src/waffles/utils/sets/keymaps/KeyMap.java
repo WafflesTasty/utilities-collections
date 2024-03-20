@@ -107,55 +107,6 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 		}
 	}
 	
-	/**
-	 * The {@code Pairs} iterator generates {@code KeyPair} objects for a {@code DelegateMap}.
-	 *
-	 * @author Waffles
-	 * @since 10 Aug 2023
-	 * @version 1.1
-	 *
-	 *
-	 * @param <K>  a key type
-	 * @param <V>  a value type
-	 * @param <P>  a key-pair type
-	 * @see Iterator
-	 * @see KeyPair
-	 */
-	public class Pairs<K, V, P extends KeyPair<K, V>> implements Iterator<P>
-	{
-		private KeyMap<K, V> tgt;
-		private Iterator<K> keys;
-		
-		/**
-		 * Creates a new {@code Pairs}.
-		 * 
-		 * @param map  a source map
-		 * 
-		 * 
-		 * @see KeyMap
-		 */
-		public Pairs(KeyMap<K, V> map)
-		{
-			keys = map.Keys().iterator();
-			tgt = map;
-		}
-		
-		
-		@Override
-		public P next()
-		{
-			K key = keys.next();
-			V val = tgt.get(key);
-			
-			return (P) tgt.createPair(key, val);
-		}
-		
-		@Override
-		public boolean hasNext()
-		{
-			return keys.hasNext();
-		}
-	}
 	
 	/**
 	 * Returns the key-value pairs of the {@code KeyMap}.
@@ -169,10 +120,7 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	 * @see Iterable
 	 * @see KeyPair
 	 */
-	public default <P extends KeyPair<K, V>> Iterable<P> Pairs()
-	{
-		return () -> new Pairs<>(this);
-	}
+	public abstract <P extends KeyPair<K, V>> Iterable<P> Pairs();
 	
 	/**
 	 * Creates a new key-value pair for the {@code KeyMap}.
