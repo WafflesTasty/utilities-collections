@@ -35,7 +35,7 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	 */
 	public class Keys<K, V> implements Iterator<K>
 	{
-		private Iterator<KeyPair<K, V>> source;
+		private Iterator<Pair<K, V>> source;
 		
 		/**
 		 * Creates a new {@code Keys}.
@@ -78,7 +78,7 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	 */
 	public class Values<K, V> implements Iterator<V>
 	{
-		private Iterator<KeyPair<K, V>> source;
+		private Iterator<Pair<K, V>> source;
 		
 		/**
 		 * Creates a new {@code Values}.
@@ -118,9 +118,9 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	 * 
 	 * 
 	 * @see Iterable
-	 * @see KeyPair
+	 * @see Pair
 	 */
-	public abstract <P extends KeyPair<K, V>> Iterable<P> Pairs();
+	public abstract <P extends Pair<K, V>> Iterable<P> Pairs();
 	
 	/**
 	 * Creates a new key-value pair for the {@code KeyMap}.
@@ -130,11 +130,11 @@ public interface KeyMap<K, V> extends CountableSet, Clearable
 	 * @return  a key-value pair
 	 * 
 	 * 
-	 * @see KeyPair
+	 * @see Pair
 	 */
-	public default KeyPair<K, V> createPair(K key, V val)
+	public default Pair<K, V> createPair(K key, V val)
 	{
-		return new KeyPair<>(key, val);
+		return new Pair.Base<>(key, val);
 	}
 
 	

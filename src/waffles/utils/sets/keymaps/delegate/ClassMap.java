@@ -2,7 +2,7 @@ package waffles.utils.sets.keymaps.delegate;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.keymaps.KeyPair;
+import waffles.utils.sets.keymaps.Pair;
 
 /**
  * The {@code ClassMap} class defines a map which uses classes as keys.
@@ -12,7 +12,7 @@ import waffles.utils.sets.keymaps.KeyPair;
  *
  * @author Waffles
  * @since Feb 03, 2020
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <V>  a map value type
@@ -36,7 +36,7 @@ public class ClassMap<V> extends JHashMap<Class<?>, V>
 	{
 		private V next;
 		private Class<?> type;
-		private Iterator<KeyPair<Class<?>, V>> pairs;
+		private Iterator<Pair<Class<?>, V>> pairs;
 		
 		/**
 		 * Creates a new {@code SubValues}.
@@ -73,7 +73,7 @@ public class ClassMap<V> extends JHashMap<Class<?>, V>
 			}
 			
 			
-			KeyPair<Class<?>, V> pair = pairs.next();
+			Pair<Class<?>, V> pair = pairs.next();
 			if(pair.Key().isAssignableFrom(type))
 			{
 				return pair.Value();

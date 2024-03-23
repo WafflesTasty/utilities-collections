@@ -34,9 +34,9 @@ public interface DelegateMap<K,V> extends KeyMap<K,V>, Decorator
 	 * @param <V>  a value type
 	 * @param <P>  a key-pair type
 	 * @see Iterator
-	 * @see KeyPair
+	 * @see Pair
 	 */
-	public class Pairs<K, V, P extends KeyPair<K, V>> implements Iterator<P>
+	public class Pairs<K, V, P extends Pair<K, V>> implements Iterator<P>
 	{
 		private KeyMap<K, V> source;
 		private Iterator<Entry<K, V>> pairs;
@@ -77,7 +77,7 @@ public interface DelegateMap<K,V> extends KeyMap<K,V>, Decorator
 	
 	
 	@Override
-	public default <P extends KeyPair<K, V>> Iterable<P> Pairs()
+	public default <P extends Pair<K, V>> Iterable<P> Pairs()
 	{
 		return () -> new Pairs<>(this);
 	}

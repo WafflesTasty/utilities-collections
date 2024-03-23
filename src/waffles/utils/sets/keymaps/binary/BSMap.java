@@ -1,7 +1,7 @@
 package waffles.utils.sets.keymaps.binary;
 
 import waffles.utils.sets.keymaps.KeyMap;
-import waffles.utils.sets.keymaps.KeyPair;
+import waffles.utils.sets.keymaps.Pair;
 import waffles.utils.sets.trees.binary.BSNode;
 import waffles.utils.sets.trees.binary.BSTree;
 
@@ -21,7 +21,7 @@ import waffles.utils.sets.trees.binary.BSTree;
  */
 public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 {
-	private BSTree<KeyPair<K,V>> data;
+	private BSTree<Pair<K,V>> data;
 
 	/**
 	 * Creates a new {@code BSMap}.
@@ -42,7 +42,7 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	 */
 	public K search(V val)
 	{
-		for(KeyPair<K,V> pair : data)
+		for(Pair<K,V> pair : data)
 		{
 			if(val.equals(pair.Value()))
 			{
@@ -55,7 +55,7 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	
 	
 	@Override
-	public Iterable<KeyPair<K, V>> Pairs()
+	public Iterable<Pair<K, V>> Pairs()
 	{
 		return data;
 	}
@@ -63,7 +63,7 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	@Override
 	public V put(K key, V val)
 	{
-		KeyPair<K,V> pNew = new KeyPair<>(key, val);
+		Pair<K,V> pNew = new Pair.Base<>(key, val);
 		if(data.isEmpty())
 		{
 			data.add(pNew);
@@ -71,8 +71,8 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 		}
 
 		
-		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
-		KeyPair<K,V> pOld = pNode.Value();
+		BSNode<Pair<K,V>> pNode = data.search(pNew);
+		Pair<K,V> pOld = pNode.Value();
 
 		V vOld = null;
 		if(key.equals(pOld.Key()))
@@ -88,15 +88,15 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	@Override
 	public V remove(K key)
 	{
-		KeyPair<K,V> pNew = new KeyPair<>(key, null);
+		Pair<K,V> pNew = new Pair.Base<>(key, null);
 		if(data.isEmpty())
 		{
 			return null;
 		}
 		
 		
-		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
-		KeyPair<K,V> pOld = pNode.Value();
+		BSNode<Pair<K,V>> pNode = data.search(pNew);
+		Pair<K,V> pOld = pNode.Value();
 		
 		V vOld = null;
 		if(key.equals(pOld.Key()))
@@ -111,15 +111,15 @@ public class BSMap<K extends Comparable<K>,V> implements KeyMap<K,V>
 	@Override
 	public V get(K key)
 	{
-		KeyPair<K,V> pNew = new KeyPair<>(key, null);
+		Pair<K,V> pNew = new Pair.Base<>(key, null);
 		if(data.isEmpty())
 		{
 			return null;
 		}
 		
 		
-		BSNode<KeyPair<K,V>> pNode = data.search(pNew);
-		KeyPair<K,V> pOld = pNode.Value();
+		BSNode<Pair<K,V>> pNode = data.search(pNew);
+		Pair<K,V> pOld = pNode.Value();
 		
 		if(key.equals(pOld.Key()))
 		{
