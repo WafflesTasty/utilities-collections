@@ -1,7 +1,6 @@
 package waffles.utils.sets.indexed.delegate;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import waffles.utils.sets.indexed.mutable.AtomicIndex;
 import waffles.utils.sets.mutable.DelegateSet;
@@ -29,7 +28,11 @@ public class List<O> implements DelegateSet<O>, AtomicIndex<O>
 	 */
 	public List(O... set)
 	{
-		data = new ArrayList<>(Arrays.asList(set));
+		data = new ArrayList<>();
+		for(O obj : set)
+		{
+			data.add(obj);
+		}
 	}
 	
 	/**
@@ -66,7 +69,13 @@ public class List<O> implements DelegateSet<O>, AtomicIndex<O>
 	@Override
 	public O put(O val, int... coords)
 	{
-		return Delegate().set(coords[0], val);
+		while(Count() <= coords[0])
+		{
+			Delegate().add(null);
+		}
+		
+		Delegate().set(coords[0], val);
+		return val;
 	}
 	
 	@Override
