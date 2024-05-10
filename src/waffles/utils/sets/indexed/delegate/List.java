@@ -37,6 +37,16 @@ public class List<O> implements DelegateSet<O>, AtomicIndex<O>
 	
 	/**
 	 * Creates a new {@code List}.
+	 * 
+	 * @param size  an initial size
+	 */
+	public List(int size)
+	{
+		data = new ArrayList<>(size);
+	}
+	
+	/**
+	 * Creates a new {@code List}.
 	 */
 	public List()
 	{
