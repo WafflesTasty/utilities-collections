@@ -21,6 +21,17 @@ import waffles.utils.sets.utilities.Activity;
 public class ActionTree extends BEPTree<Activity>
 {
 	/**
+	 * Creates a new {@code ActionTree}.
+	 * 
+	 * @param dims  an index dimension
+	 */
+	public ActionTree(int... dims)
+	{
+		super(dims);
+	}
+	
+	
+	/**
 	 * Iterates over active nodes in the {@code ActionTree}.
 	 * 
 	 * @return  a node iterable
