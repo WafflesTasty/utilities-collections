@@ -1,9 +1,12 @@
 package waffles.utils.sets.trees.indexed;
 
+import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.queues.Queue;
 import waffles.utils.sets.queues.delegate.JFIFOQueue;
 import waffles.utils.sets.utilities.iterators.BEPNodes;
+import waffles.utils.sets.utilities.iterators.BEPObjects;
+import waffles.utils.sets.utilities.iterators.BEPKeys;
 
 /**
  * A {@code BEPTree} defines a binary index partition tree for {@code Enum} values.
@@ -204,9 +207,40 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	 * @see Iterable
 	 * @see BEPNode
 	 */
-	public <N extends BEPNode<E>> Iterable<N> nodes(E val)
+	public <N extends BEPNode<E>> Iterable<N> Nodes(E val)
 	{
 		return () -> new BEPNodes<>(this, val);
+	}
+	
+	/**
+	 * Iterates over objects along the {@code BEPTree}.
+	 * 
+	 * @param <O>  an object type
+	 * @param src  an indexed set
+	 * @param val  an enum value
+	 * @return  an object iterable
+	 * 
+	 * 
+	 * @see IndexedSet
+	 * @see Iterable
+	 */
+	public <O> Iterable<O> Objects(IndexedSet<O> src, E val)
+	{
+		return () -> new BEPObjects<>(src, this, val);
+	}
+	
+	/**
+	 * Iterates over the keys of the {@code BEPTree}.
+	 * 
+	 * @param val  a node value
+	 * @return  a key iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 */
+	public Iterable<int[]> Keys(E val)
+	{
+		return () -> new BEPKeys(this, val);
 	}
 	
 	/**
@@ -214,7 +248,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	 * 
 	 * @param val  a base value
 	 */
-	public void clear(E val)
+	public void fill(E val)
 	{
 		Root().merge();
 		Root().setValue(val);
