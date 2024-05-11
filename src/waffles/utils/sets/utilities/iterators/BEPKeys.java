@@ -49,7 +49,11 @@ public class BEPKeys implements Iterator<int[]>
 		if(nodes.hasNext())
 		{
 			BEPNode<?> node = nodes.next();
-			keys = node.Keys().iterator();
+			if(node.isLeaf())
+			{
+				keys = node.Keys().iterator();
+			}
+			
 			return findNext();
 		}
 		
@@ -67,6 +71,6 @@ public class BEPKeys implements Iterator<int[]>
 	{
 		int[] curr = next;
 		next = findNext();
-		return next;
+		return curr;
 	}
 }

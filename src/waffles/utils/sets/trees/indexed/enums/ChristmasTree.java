@@ -6,7 +6,7 @@ import waffles.utils.sets.utilities.Activity;
 /**
  * A {@code ChristmasTree} is a regular {@code ArrayIndex} coupled with an {@code ActionTree}.
  * The {@code ActionTree} defines the visibility state of objects in the index, which
- * allows the subset of visible objects to be iterated efficiently.
+ * allows the subset of visible objects to be iterated efficiently. Hopefully.
  *
  * @author Waffles
  * @since 11 May 2024
@@ -27,7 +27,7 @@ public class ChristmasTree<O> extends ArrayIndex<O>
 	 */
 	public ChristmasTree(int... dims)
 	{
-		super(dims);
+		super(dims); tree = new ActionTree(dims);
 	}
 	
 	/**
@@ -63,6 +63,26 @@ public class ChristmasTree<O> extends ArrayIndex<O>
 	public void hide(int[] min, int[] max)
 	{
 		tree.put(Activity.IDLE, min, max);
+	}
+	
+	/**
+	 * Designates a visible tile of the {@code ChristmasTree}.
+	 * 
+	 * @param crd  an index coordinate
+	 */
+	public void show(int... crd)
+	{
+		tree.put(Activity.ACTIVE, crd);
+	}
+
+	/**
+	 * Designates a hidden tile of the {@code ChristmasTree}.
+	 * 
+	 * @param crd  an index coordinate
+	 */
+	public void hide(int... crd)
+	{
+		tree.put(Activity.IDLE, crd);
 	}
 	
 	

@@ -208,4 +208,10 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 	{
 		return cMax;
 	}
+
+	@Override
+	public int Order()
+	{
+		return cMin.length;
+	}
 }

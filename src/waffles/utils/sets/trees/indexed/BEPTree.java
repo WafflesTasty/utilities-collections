@@ -368,8 +368,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	@Override
 	public void clear()
 	{
-		Root().setValue(Root().Value());
-		Root().merge();
+		fill(Root().Value());
 	}
 	
 	
