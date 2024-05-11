@@ -28,6 +28,7 @@ public class ActionTree extends BEPTree<Activity>
 	public ActionTree(int... dims)
 	{
 		super(dims);
+		clear();
 	}
 	
 	
@@ -72,5 +73,12 @@ public class ActionTree extends BEPTree<Activity>
 	public Iterable<int[]> ActiveKeys()
 	{
 		return Keys(Activity.ACTIVE);
+	}
+
+	
+	@Override
+	public void clear()
+	{
+		fill(Activity.IDLE);
 	}
 }
