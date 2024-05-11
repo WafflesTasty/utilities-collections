@@ -4,6 +4,7 @@ import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.indexed.nodes.IPQuery;
 import waffles.utils.sets.indexed.nodes.IPQuery.Axis;
 import waffles.utils.sets.trees.binary.BiNode;
+import waffles.utils.sets.utilities.iterators.IndexKeys;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -12,7 +13,7 @@ import waffles.utils.tools.primitives.Array;
  *
  * @author Waffles
  * @since 27 Dec 2022
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @see IndexedSet
@@ -117,6 +118,19 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 		return RChild();
 	}
 		
+	/**
+	 * Iterates the coordinates in the {@code BIPNode}.
+	 * 
+	 * @return  a coordinate iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 */
+	public Iterable<int[]> Keys()
+	{
+		return () -> new IndexKeys(this);
+	}
+	
 	/**
 	 * Checks the tile size of the {@code BIPNode}.
 	 * A node is a tile if and only if it spans
