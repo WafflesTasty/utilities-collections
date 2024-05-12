@@ -1,6 +1,6 @@
 package waffles.utils.sets;
 
-import waffles.utils.tools.patterns.semantics.Ordered;
+import waffles.utils.tools.patterns.semantics.Dimensional;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -14,10 +14,10 @@ import waffles.utils.tools.primitives.Array;
  * @param <O>  a set object type
  * 
  * 
- * @see Ordered
+ * @see Dimensional
  * @see Set
  */
-public interface DimensionalSet<O> extends Ordered, Set
+public interface DimensionalSet<O> extends Dimensional, Set
 {	
 	/**
 	 * Returns a single value from the {@code DimensionalSet}.
@@ -26,14 +26,7 @@ public interface DimensionalSet<O> extends Ordered, Set
 	 * @return        an index value
 	 */
 	public abstract O get(int... coords);
-	
-	/**
-	 * Returns the dimensions of the {@code DimensionalSet}.
-	 * 
-	 * @return  an integer dimension array
-	 */
-	public abstract int[] Dimensions();	
-	
+
 	/**
 	 * Returns the order of the {@code DimensionalSet}.
 	 * The order represents how many indices are needed
