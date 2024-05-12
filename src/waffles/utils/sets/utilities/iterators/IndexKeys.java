@@ -98,8 +98,7 @@ public class IndexKeys implements Iterator<int[]>
 	public int[] next()
 	{
 		curr = Array.copy.of(next);
-		find();
-		
+		next = findNext();
 		return curr;
 	}
 	
@@ -129,7 +128,7 @@ public class IndexKeys implements Iterator<int[]>
 		return true;
 	}
 	
-	private void findColMajor()
+	private int[] findColMajor()
 	{
 		for(int i = 0; i < index.Order(); i++)
 		{
@@ -142,13 +141,15 @@ public class IndexKeys implements Iterator<int[]>
 				if(i == index.Order() - 1)
 				{
 					next = null;
-					return;
+					break;
 				}
 			}
 		}
+		
+		return next;
 	}
 	
-	private void findRowMajor()
+	private int[] findRowMajor()
 	{
 		for(int i = index.Order()-1; i >= 0; i--)
 		{
@@ -161,22 +162,24 @@ public class IndexKeys implements Iterator<int[]>
 				if(i == 0)
 				{
 					next = null;
-					return;
+					break;
 				}
 			}
 		}
+		
+		return next;
 	}
 	
-	private void find()
+	private int[] findNext()
 	{
 		switch(order)
 		{
 		case COL_MAJOR:
-			findColMajor(); break;
+			return findColMajor();
 		case ROW_MAJOR:
-			findRowMajor(); break;
+			return findRowMajor();
 		default:
-			break;
+			return null;
 		}
 	}
 }
