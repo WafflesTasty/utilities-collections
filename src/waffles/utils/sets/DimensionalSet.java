@@ -1,6 +1,6 @@
 package waffles.utils.sets;
 
-import waffles.utils.tools.patterns.semantics.Dimensional;
+import waffles.utils.sets.utilities.coordinates.Coordinator;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -14,10 +14,10 @@ import waffles.utils.tools.primitives.Array;
  * @param <O>  a set object type
  * 
  * 
- * @see Dimensional
+ * @see Coordinator
  * @see Set
  */
-public interface DimensionalSet<O> extends Dimensional, Set
+public interface DimensionalSet<O> extends Coordinator, Set
 {	
 	/**
 	 * Returns a single value from the {@code DimensionalSet}.
