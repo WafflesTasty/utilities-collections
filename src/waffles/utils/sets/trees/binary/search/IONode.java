@@ -11,13 +11,13 @@ import waffles.utils.tools.patterns.semantics.Valuable;
  * @version 1.0
  * 
  * 
- * @param <O>  a node object type
+ * @param <V>  a value type
  * @see Valuable
  * @see BiNode
  */
-public class IONode<O> extends BiNode implements Valuable<O>
+public class IONode<V> extends BiNode implements Valuable<V>
 {
-	private O value;
+	private V value;
 
 	/**
 	 * Creates a new {@code IOTree}.
@@ -28,7 +28,7 @@ public class IONode<O> extends BiNode implements Valuable<O>
 	 * 
 	 * @see IOTree
 	 */
-	public IONode(IOTree<?, O> tree, O val)
+	public IONode(IOTree<?, V> tree, V val)
 	{
 		super(tree);
 		value = val;
@@ -36,67 +36,67 @@ public class IONode<O> extends BiNode implements Valuable<O>
 
 
 	@Override
-	public IOTree<?, O> Set()
+	public IOTree<?, V> Set()
 	{
-		return (IOTree<?, O>) super.Set();
+		return (IOTree<?, V>) super.Set();
 	}
 	
 	@Override
-	public IONode<O> Delegate()
+	public IONode<V> Delegate()
 	{
 		return this;
 	}
 
 	@Override
-	public IONode<O> Sibling()
+	public IONode<V> Sibling()
 	{
-		return (IONode<O>) super.Sibling();
+		return (IONode<V>) super.Sibling();
 	}
 	
 	@Override
-	public IONode<O> LChild()
+	public IONode<V> LChild()
 	{
-		return (IONode<O>) super.LChild();
+		return (IONode<V>) super.LChild();
 	}
 	
 	@Override
-	public IONode<O> RChild()
+	public IONode<V> RChild()
 	{
-		return (IONode<O>) super.RChild();
+		return (IONode<V>) super.RChild();
 	}
 
 	@Override
-	public IONode<O> Parent()
+	public IONode<V> Parent()
 	{
-		return (IONode<O>) super.Parent();
+		return (IONode<V>) super.Parent();
 	}
 
 	@Override
-	public IONode<O> LLeaf()
+	public IONode<V> LLeaf()
 	{
-		return (IONode<O>) super.LLeaf();
+		return (IONode<V>) super.LLeaf();
 	}
 	
 	@Override
-	public IONode<O> RLeaf()
+	public IONode<V> RLeaf()
 	{
-		return (IONode<O>) super.RLeaf();
+		return (IONode<V>) super.RLeaf();
 	}
 	
 	@Override
-	public IONode<O> Root()
+	public IONode<V> Root()
 	{
-		return (IONode<O>) super.Root();
+		return (IONode<V>) super.Root();
 	}
 	
 	@Override
-	public IONode<O> Arch()
+	public IONode<V> Arch()
 	{
 		return this;
 	}
 
 	@Override
-	public O Value()
+	public V Value()
 	{
 		return value;
 	}

@@ -4,7 +4,6 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import waffles.utils.sets.IterableSet;
-import waffles.utils.sets.trees.binary.BiNode;
 import waffles.utils.sets.trees.binary.BiTree;
 import waffles.utils.sets.utilities.Balance;
 import waffles.utils.sets.utilities.BalanceTree;
@@ -28,7 +27,7 @@ import waffles.utils.tools.collections.iterators.ValueIterator;
  * @see IterableSet
  * @see Comparator
  */
-public class IOTree<N extends BiNode, O> extends BiTree implements BalanceTree<N>, Comparator<O>, IterableSet<O>
+public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTree<N>, Comparator<O>, IterableSet<O>
 {
 	private Balance<N> balance;
 	private Comparator<O> comp;
@@ -61,11 +60,8 @@ public class IOTree<N extends BiNode, O> extends BiTree implements BalanceTree<N
 	 * 
 	 * @param obj  an object to search with
 	 * @return  the closest tree node
-	 * 
-	 * 
-	 * @see IONode
 	 */
-	public IONode<O> search(O obj)
+	public N search(O obj)
 	{
 		// No null refs allowed.
 		if(obj == null)
@@ -82,7 +78,7 @@ public class IOTree<N extends BiNode, O> extends BiTree implements BalanceTree<N
 			// The value has been found.
 			if(comp == 0)
 			{
-				return node;
+				return (N) node;
 			}
 			
 			// The value is lower than the node...
@@ -91,7 +87,7 @@ public class IOTree<N extends BiNode, O> extends BiTree implements BalanceTree<N
 				// ...but it's the closest one found.
 				if(node.LChild() == null)
 				{
-					return node;
+					return (N) node;
 				}
 				
 				// ...so continue with its left child.
@@ -105,7 +101,7 @@ public class IOTree<N extends BiNode, O> extends BiTree implements BalanceTree<N
 				// ...but it's the closest one found.
 				if(node.RChild() == null)
 				{
-					return node;
+					return (N) node;
 				}
 				
 				// ...so continue with its right child.
@@ -138,9 +134,9 @@ public class IOTree<N extends BiNode, O> extends BiTree implements BalanceTree<N
 	}
 	
 	@Override
-	public IONode<O> Root()
+	public N Root()
 	{
-		return (IONode<O>) super.Root();
+		return (N) super.Root();
 	}
 	
 	
