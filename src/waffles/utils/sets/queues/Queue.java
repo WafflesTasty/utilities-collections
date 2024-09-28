@@ -1,7 +1,6 @@
 package waffles.utils.sets.queues;
 
 import waffles.utils.sets.CountableSet;
-import waffles.utils.tools.patterns.semantics.Clearable;
 
 /**
  * A {@code Queue} defines an atomic set of objects with one-way access to the head or tail.
@@ -12,12 +11,11 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @version 1.1
  * 
  * 
- * @param <O>  a queue object type
+ * @param <O>  an object type
  * @see CountableSet
- * @see Clearable
  * @see Iterable
  */
-public interface Queue<O> extends CountableSet, Clearable, Iterable<O>
+public interface Queue<O> extends CountableSet, Iterable<O>
 {
 	/**
 	 * Pushes an object onto the {@code Queue}.

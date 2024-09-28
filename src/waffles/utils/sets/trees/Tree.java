@@ -35,6 +35,12 @@ public abstract class Tree implements Rooted
 		}
 	}
 
+	
+	@Override
+	public void clear()
+	{
+		root = null;
+	}
 
 	@Override
 	public Node createNode(Object... vals)

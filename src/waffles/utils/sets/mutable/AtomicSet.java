@@ -1,7 +1,7 @@
 package waffles.utils.sets.mutable;
 
+import waffles.utils.sets.IterableSet;
 import waffles.utils.sets.MutableSet;
-import waffles.utils.tools.collections.Iterables;
 
 /**
  * An {@code AtomicSet} is a mutable set which can iterate over its contents.
@@ -12,33 +12,10 @@ import waffles.utils.tools.collections.Iterables;
  * 
  * 
  * @param <O>  a set object type
+ * @see IterableSet
  * @see MutableSet
- * @see Iterable
  */
-public interface AtomicSet<O> extends MutableSet<O>, Iterable<O>
+public interface AtomicSet<O> extends IterableSet<O>, MutableSet<O>
 {
-	/**
-	 * Checks if the {@code AtomicSet} contains an object.
-	 * 
-	 * @param obj  a potential set object
-	 * @return  {@code true} if the set contains obj
-	 */
-	public default boolean contains(O obj)
-	{
-		for(O o : this)
-		{
-			if(obj.equals(o))
-			{
-				return true;
-			}
-		}
-		
-		return false;
-	}
-	
-	@Override
-	public default int Count()
-	{
-		return Iterables.count(this);
-	}
+	// NOT APPLICABLE
 }

@@ -13,7 +13,7 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.0
  * 
  * 
- * @param <O>  an index object type
+ * @param <O>  an object type
  * @see DimensionalSet
  * @see CountableSet
  */

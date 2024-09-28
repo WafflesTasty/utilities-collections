@@ -20,6 +20,8 @@ import waffles.utils.sets.utilities.iterators.BIPNodes;
  */
 public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 {	
+	private int[] dimensions;
+	
 	/**
 	 * Creates a new {@code BIPTree}.
 	 * 
@@ -27,14 +29,8 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	 */
 	public BIPTree(int... dims)
 	{
-		int[] min = new int[dims.length];
-		int[] max = new int[dims.length];
-		for(int i = 0; i < dims.length; i++)
-		{
-			max[i] = dims[i] - 1;
-		}
-		
-		setRoot(createNode(min, max));
+		dimensions = dims;
+		clear();
 	}
 	
 	/**
@@ -105,19 +101,40 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	@Override
 	public int[] Dimensions()
 	{
-		return Root().Dimensions();
+		return dimensions;
 	}
 	
 	@Override
 	public int[] Minimum()
 	{
-		return Root().Minimum();
+		return new int[Order()];
 	}
 	
 	@Override
 	public int[] Maximum()
 	{
-		return Root().Maximum();
+		int[] max = new int[Order()];
+		for(int i = 0; i < Order(); i++)
+		{
+			max[i] = Dimensions()[i] - 1;
+		}
+		
+		return max;
+	}
+	
+	@Override
+	public void clear()
+	{
+		int[] min = Minimum();
+		int[] max = Maximum();
+		
+		setRoot(createNode(min, max));
+	}
+	
+	@Override
+	public int Count()
+	{
+		return IndexedSet.super.Count();
 	}
 
 

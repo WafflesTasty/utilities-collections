@@ -3,7 +3,6 @@ package waffles.utils.sets.keymaps;
 import java.util.Iterator;
 
 import waffles.utils.sets.CountableSet;
-import waffles.utils.tools.patterns.semantics.Clearable;
 
 /**
  * The {@code KeyMap} interface defines a mapping of key-value pairs.
@@ -17,9 +16,8 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @param <K>  a key type
  * @param <V>  a value type
  * @see CountableSet
- * @see Clearable
  */
-public interface KeyMap<K, V> extends CountableSet, Clearable
+public interface KeyMap<K, V> extends CountableSet
 {	
 	/**
 	 * The {@code Keys} iterator traverses all keys in a {@code KeyMap}.

@@ -1,7 +1,5 @@
 package waffles.utils.sets;
 
-import waffles.utils.tools.patterns.semantics.Clearable;
-
 /**
  * A {@code MutableSet} is a countable set which allows the adding and removing of objects.
  *
@@ -12,9 +10,8 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * 
  * @param <O>  a set object type
  * @see CountableSet
- * @see Clearable
  */
-public interface MutableSet<O> extends CountableSet, Clearable
+public interface MutableSet<O> extends CountableSet
 {	
 	/**
 	 * Removes an object from the {@code MutableSet}.

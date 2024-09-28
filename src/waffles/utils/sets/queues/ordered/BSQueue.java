@@ -4,8 +4,8 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import waffles.utils.sets.queues.Queue;
-import waffles.utils.sets.trees.binary.BSNode;
-import waffles.utils.sets.trees.binary.BSTree;
+import waffles.utils.sets.trees.binary.search.BSNode;
+import waffles.utils.sets.trees.binary.search.BSTree;
 
 /**
  * A {@code BSQueue} defines an ordered queue as a wrapper for a {@code BSTree}.

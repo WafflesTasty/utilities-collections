@@ -82,4 +82,16 @@ public interface Rooted extends CountableSet
 	{
 		return Root() == null;
 	}
+	
+	@Override
+	public default int Count()
+	{
+		if(Root() != null)
+		{
+			Node n = Root().Arch();
+			return n.TreeSize();
+		}
+		
+		return 0;
+	}
 }

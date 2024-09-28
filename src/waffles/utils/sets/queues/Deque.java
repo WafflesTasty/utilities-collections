@@ -1,7 +1,6 @@
 package waffles.utils.sets.queues;
 
 import waffles.utils.sets.CountableSet;
-import waffles.utils.tools.patterns.semantics.Clearable;
 
 /**
  * A {@code Deque} defines a set of objects with two-way access to the head or tail.
@@ -11,12 +10,11 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @version 1.1
  * 
  * 
- * @param <O>  a queue object type
+ * @param <O>  an object type
  * @see CountableSet
- * @see Clearable
  * @see Iterable
  */
-public interface Deque<O> extends CountableSet, Clearable, Iterable<O>
+public interface Deque<O> extends CountableSet, Iterable<O>
 {
 	/**
 	 * Pushes an object to the start of the {@code Deque}.

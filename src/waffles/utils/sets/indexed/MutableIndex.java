@@ -1,7 +1,5 @@
 package waffles.utils.sets.indexed;
 
-import waffles.utils.tools.patterns.semantics.Clearable;
-
 /**
  * A {@code MutableIndex} defines an index with directly mutable values.
  * The index allows coordinates to be converted to unique integers
@@ -12,11 +10,10 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * @version 1.1
  *
  *
- * @param <O>  an index object type
+ * @param <O>  an object type
  * @see IndexedSet
- * @see Clearable
  */
-public interface MutableIndex<O> extends IndexedSet<O>, Clearable
+public interface MutableIndex<O> extends IndexedSet<O>
 {
 	/**
 	 * The {@code Order} enum defines two ways of converting coordinates

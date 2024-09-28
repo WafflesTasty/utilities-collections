@@ -1,6 +1,4 @@
-package waffles.utils.sets.trees.binary;
-
-import waffles.utils.tools.patterns.semantics.Valuable;
+package waffles.utils.sets.trees.binary.search;
 
 /**
  * The {@code BSNode} class defines a single node in a binary search tree.
@@ -10,14 +8,11 @@ import waffles.utils.tools.patterns.semantics.Valuable;
  * @version 1.0
  * 
  * 
- * @param <O>  a node object type
- * @see Valuable
- * @see BiNode
+ * @param <O>  an object type
+ * @see IONode
  */
-public class BSNode<O> extends BiNode implements Valuable<O>
+public class BSNode<O> extends IONode<O>
 {
-	private O value;
-
 	/**
 	 * Creates a new {@code BSNode}.
 	 * 
@@ -29,8 +24,7 @@ public class BSNode<O> extends BiNode implements Valuable<O>
 	 */
 	public BSNode(BSTree<O> tree, O val)
 	{
-		super(tree);
-		value = val;
+		super(tree, val);
 	}
 
 	
@@ -92,11 +86,5 @@ public class BSNode<O> extends BiNode implements Valuable<O>
 	public BSNode<O> Arch()
 	{
 		return this;
-	}
-	
-	@Override
-	public O Value()
-	{
-		return value;
 	}
 }

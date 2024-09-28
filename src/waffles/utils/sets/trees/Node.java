@@ -183,6 +183,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 		{
 			Node pNode = Parent().Arch();
 			pNode.setChild(TreeIndex(), nodal);
+			setParent(null);
 		}
 	}
 	

@@ -2,8 +2,8 @@ package waffles.utils.sets.keymaps.binary;
 
 import waffles.utils.sets.keymaps.KeyMap;
 import waffles.utils.sets.keymaps.Pair;
-import waffles.utils.sets.trees.binary.BSNode;
-import waffles.utils.sets.trees.binary.BSTree;
+import waffles.utils.sets.trees.binary.search.BSNode;
+import waffles.utils.sets.trees.binary.search.BSTree;
 
 /**
  * A {@code BSMap} implements a {@code KeyMap} by internally storing data in a {@code BSTree}.
