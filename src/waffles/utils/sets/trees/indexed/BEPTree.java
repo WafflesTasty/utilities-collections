@@ -368,6 +368,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	@Override
 	public void clear()
 	{
+		super.clear();
 		if(Root() != null)
 		{
 			fill(Root().Value());
