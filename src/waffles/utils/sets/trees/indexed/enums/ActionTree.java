@@ -79,6 +79,7 @@ public class ActionTree extends BEPTree<Activity>
 	@Override
 	public void clear()
 	{
+		super.clear();
 		fill(Activity.IDLE);
 	}
 }

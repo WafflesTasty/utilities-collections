@@ -69,7 +69,7 @@ public class BSQueue<O> implements Comparator<O>, Queue<O>
 		if(val == 0) val = 1;
 		return val;
 	}
-
+	
 	@Override
 	public boolean isEmpty()
 	{
@@ -89,6 +89,12 @@ public class BSQueue<O> implements Comparator<O>, Queue<O>
 		data.add(obj);
 	}
 
+	@Override
+	public void remove(O obj)
+	{
+		data.remove(obj);
+	}
+	
 	@Override
 	public void clear()
 	{

@@ -18,12 +18,21 @@ import waffles.utils.sets.CountableSet;
 public interface Queue<O> extends CountableSet, Iterable<O>
 {
 	/**
+	 * Removes an object from the {@code Queue}.
+	 * 
+	 * @param obj  an object to remove
+	 */
+	public default void remove(O obj)
+	{
+		// NOT APPLICABLE
+	}
+	
+	/**
 	 * Pushes an object onto the {@code Queue}.
 	 * 
 	 * @param obj  an object to add
 	 */
 	public abstract void push(O obj);
-	
 	
 	
 	/**

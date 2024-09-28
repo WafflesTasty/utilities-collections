@@ -52,6 +52,12 @@ public class JFILOQueue<O> implements DelegateSet<O>, Queue<O>
 	}
 	
 	@Override
+	public void remove(O obj)
+	{
+		Delegate().remove(obj);
+	}
+	
+	@Override
 	public void push(O obj)
 	{
 		Delegate().push(obj);
