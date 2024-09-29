@@ -132,18 +132,15 @@ public class BiNode extends Node implements BiNodal
 		BiNode p = Parent().Arch();
 		if(Delegate().equals(p.LChild()))
 		{
-			
-			replace(RChild());
-			p.replace(Delegate());
-			setRChild(p.Delegate());
-			p.setLChild(null);
+			replace(Parent());
+			p.setLChild(RChild());
+			setRChild(Parent());
 			return;
 		}
 				
-		replace(LChild());
-		p.replace(Delegate());
-		setLChild(p.Delegate());
-		p.setRChild(null);
+		replace(Parent());
+		p.setRChild(LChild());
+		setLChild(Parent());
 		return;
 	}
 		

@@ -4,6 +4,7 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import waffles.utils.sets.IterableSet;
+import waffles.utils.sets.trees.Nodal;
 import waffles.utils.sets.trees.binary.BiTree;
 import waffles.utils.sets.utilities.Balance;
 import waffles.utils.sets.utilities.BalanceTree;
@@ -131,6 +132,18 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 	public IONode<O> createNode(Object... vals)
 	{
 		return new IONode<>(this, (O) vals[0]);
+	}
+	
+	@Override
+	public void setRoot(Nodal root)
+	{
+		// Fire the clear event,
+		// before firing the
+		// insert event.
+		
+		onClear();
+		super.setRoot(root);
+		onInsert((N) root);
 	}
 	
 	@Override
