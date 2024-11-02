@@ -6,8 +6,8 @@ import java.util.Iterator;
 import waffles.utils.sets.IterableSet;
 import waffles.utils.sets.trees.Nodal;
 import waffles.utils.sets.trees.binary.BiTree;
-import waffles.utils.sets.utilities.Balance;
-import waffles.utils.sets.utilities.BalanceTree;
+import waffles.utils.sets.utilities.balance.Balance;
+import waffles.utils.sets.utilities.balance.BalanceTree;
 import waffles.utils.tools.collections.iterators.EmptyIterator;
 import waffles.utils.tools.collections.iterators.ValueIterator;
 

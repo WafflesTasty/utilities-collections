@@ -1,7 +1,8 @@
-package waffles.utils.sets.utilities;
+package waffles.utils.sets.utilities.balance;
 
 import waffles.utils.sets.trees.binary.BiNodal;
 import waffles.utils.sets.trees.binary.BiNode;
+import waffles.utils.sets.utilities.Iterables;
 
 /**
  * A {@code Balance} manages the balancing algorithm of a {@code BalanceTree}.

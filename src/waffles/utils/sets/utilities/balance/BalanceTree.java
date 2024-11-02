@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities;
+package waffles.utils.sets.utilities.balance;
 
 import waffles.utils.sets.trees.Rooted;
 import waffles.utils.sets.trees.binary.BiNode;

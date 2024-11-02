@@ -2,7 +2,6 @@ package waffles.utils.sets.utilities.balance;
 
 import waffles.utils.sets.trees.binary.BiNodal;
 import waffles.utils.sets.trees.binary.BiNode;
-import waffles.utils.sets.utilities.Balance;
 import waffles.utils.tools.primitives.Floats;
 import waffles.utils.tools.primitives.Integers;
 
