@@ -1,7 +1,7 @@
 package waffles.utils.sets.utilities.collectables;
 
 /**
- * A {@code Hierarchical} object can define parent-child relationships amongst similar types.
+ * A {@code Hierarchical} object can define parent relationships amongst similar types.
  *
  * @author Waffles
  * @since Mar 5, 2016

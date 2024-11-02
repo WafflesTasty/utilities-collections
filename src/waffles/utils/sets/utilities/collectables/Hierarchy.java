@@ -7,7 +7,7 @@ import waffles.utils.sets.utilities.Collectable;
 import waffles.utils.tools.patterns.semantics.Decorator;
 
 /**
- * A {@code Hierarchy} describes the information of an object with parent-child relationships.
+ * A {@code Hierarchy} describes the information of an object with parent relationships.
  * Objects can define the {@code Hierarchical} interface to define their own hierarchy,
  * which admits a parent and allows for branch queues to be generated.
  *
