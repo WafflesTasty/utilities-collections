@@ -33,6 +33,17 @@ public class ActionTree extends BEPTree<Activity>
 	
 	
 	/**
+	 * Checks if a tile is active in the {@code ActionTree}.
+	 * 
+	 * @param coords  tile coordinates
+	 * @return  {@code true} if the tile is active
+	 */
+	public boolean isActive(int... coords)
+	{
+		return get(coords) == Activity.ACTIVE;
+	}
+	
+	/**
 	 * Iterates over active nodes in the {@code ActionTree}.
 	 * 
 	 * @return  a node iterable
