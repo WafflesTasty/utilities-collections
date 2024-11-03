@@ -11,7 +11,7 @@ import waffles.utils.sets.utilities.iterators.BIPNodes;
  *
  * @author Waffles
  * @since 27 Dec 2022
- * @version 1.0
+ * @version 1.1
  * 
  * 
  * @param <O>  an index object type
@@ -30,7 +30,6 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	public BIPTree(int... dims)
 	{
 		dimensions = dims;
-		clear();
 	}
 	
 	/**
@@ -150,6 +149,13 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	@Override
 	public BIPNode Root()
 	{
-		return (BIPNode) super.Root();
+		BIPNode root = (BIPNode) super.Root();
+		if(root != null)
+		{
+			return root;
+		}
+		
+		clear();
+		return Root();
 	}
 }
