@@ -84,11 +84,11 @@ public interface Rooted extends CountableSet
 	 * @return  a leaf iterable
 	 * 
 	 * 
-	 * @see Leaves
+	 * @see Iterable
 	 */
-	public default <N extends Nodal> Leaves<N> Leaves()
+	public default <N extends Nodal> Iterable<N> Leaves()
 	{
-		return new Leaves<>(this);
+		return () -> new Leaves<>(this);
 	}
 	
 	
