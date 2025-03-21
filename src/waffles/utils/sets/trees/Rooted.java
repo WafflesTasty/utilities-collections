@@ -3,6 +3,7 @@ package waffles.utils.sets.trees;
 import waffles.utils.sets.CountableSet;
 import waffles.utils.sets.trees.traversal.BreadthFirst;
 import waffles.utils.sets.trees.traversal.DepthFirst;
+import waffles.utils.sets.utilities.iterators.Leaves;
 import waffles.utils.tools.collections.Iterables;
 
 /**
@@ -76,6 +77,20 @@ public interface Rooted extends CountableSet
 		return Iterables.empty();
 	}
 
+	/**
+	 * Returns a leaf iterable for the {@code Rooted}.
+	 * 
+	 * @param <N>  a nodal type
+	 * @return  a leaf iterable
+	 * 
+	 * 
+	 * @see Leaves
+	 */
+	public default <N extends Nodal> Leaves<N> Leaves()
+	{
+		return new Leaves<>(this);
+	}
+	
 	
 	@Override
 	public default boolean isEmpty()
