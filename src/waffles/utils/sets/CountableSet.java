@@ -1,6 +1,7 @@
 package waffles.utils.sets;
 
 import waffles.utils.tools.patterns.semantics.Clearable;
+import waffles.utils.tools.patterns.semantics.Countable;
 
 /**
  * A {@code CountableSet} contains a countable number of objects of a specified type.
@@ -11,18 +12,12 @@ import waffles.utils.tools.patterns.semantics.Clearable;
  * 
  * 
  * @see Clearable
+ * @see Countable
  * @see Set
  */
 @FunctionalInterface
-public interface CountableSet extends Clearable, Set
-{	
-	/**
-	 * Returns the size of the {@code CountableSet}.
-	 * 
-	 * @return  an item count
-	 */
-	public abstract int Count();
-	
+public interface CountableSet extends Clearable, Countable, Set
+{		
 	/**
 	 * Checks if the {@code CountableSet} is completely empty.
 	 * 
