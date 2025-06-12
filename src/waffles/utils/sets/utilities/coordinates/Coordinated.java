@@ -1,5 +1,7 @@
 package waffles.utils.sets.utilities.coordinates;
 
+import waffles.utils.sets.utilities.Ordered;
+
 /**
  * A {@code Coordinated} object defines its own {@link #Coordinates()}.
  *

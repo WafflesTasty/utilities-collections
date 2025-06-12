@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.coordinates;
+package waffles.utils.sets.utilities;
 
 /**
  * An {@code Ordered} interface defines an object with an order.

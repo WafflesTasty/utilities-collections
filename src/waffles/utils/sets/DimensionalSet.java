@@ -28,19 +28,6 @@ public interface DimensionalSet<O> extends Coordinator, Set
 	public abstract O get(int... coords);
 
 	/**
-	 * Returns the order of the {@code DimensionalSet}.
-	 * The order represents how many indices are needed
-	 * to define a single value in the set.
-	 * 
-	 * @return  a dimension order
-	 */
-	@Override
-	public default int Order()
-	{
-		return Dimensions().length;
-	}
-		
-	/**
 	 * Returns the size of the {@code DimensionalSet}.
 	 * The size represents how many values can be
 	 * stored within this set's dimensions.

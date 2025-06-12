@@ -1,5 +1,7 @@
 package waffles.utils.sets.utilities.coordinates;
 
+import waffles.utils.sets.utilities.Ordered;
+
 /**
  * A {@code Coordinator} defines an object with a multi-valued dimension.
  *
