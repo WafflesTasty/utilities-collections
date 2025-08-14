@@ -1,6 +1,5 @@
 package waffles.utils.sets.indexed;
 
-import waffles.utils.sets.IndexedSet;
 import waffles.utils.sets.Set;
 
 /**

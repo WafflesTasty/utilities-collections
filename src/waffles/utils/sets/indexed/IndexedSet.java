@@ -1,5 +1,8 @@
-package waffles.utils.sets;
+package waffles.utils.sets.indexed;
 
+import waffles.utils.sets.CountableSet;
+import waffles.utils.sets.DimensionalSet;
+import waffles.utils.sets.Set;
 import waffles.utils.tools.primitives.Array;
 
 /**
