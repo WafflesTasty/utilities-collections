@@ -10,7 +10,7 @@ import waffles.utils.tools.collections.Iterables;
  * @version 1.1
  * 
  * 
- * @param <O>  a set object type
+ * @param <O>  an object type
  * @see CountableSet
  * @see Iterable
  */
@@ -20,7 +20,7 @@ public interface IterableSet<O> extends CountableSet, Iterable<O>
 	 * Checks if the {@code IterableSet} contains an object.
 	 * 
 	 * @param obj  a potential set object
-	 * @return  {@code true} if the set contains obj
+	 * @return  {@code true} if the object is in the set
 	 */
 	public default boolean contains(O obj)
 	{

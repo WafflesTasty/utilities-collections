@@ -1,6 +1,6 @@
 package waffles.utils.sets;
 
-import waffles.utils.sets.utilities.coordinates.Coordinator;
+import waffles.utils.sets._old.utilities.coordinates.Coordinator;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -20,7 +20,7 @@ import waffles.utils.tools.primitives.Array;
 public interface DimensionalSet<O> extends Coordinator, Set
 {	
 	/**
-	 * A {@code Wrapper} defines a wrapper around another {@code Set}.
+	 * A {@code Wrapper} defines a wrapper around another {@code DimensionalSet}.
 	 *
 	 * @author Waffles
 	 * @since 14 Aug 2025

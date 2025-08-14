@@ -1,5 +1,8 @@
 package waffles.utils.sets.indexed;
 
+import waffles.utils.sets.IndexedSet;
+import waffles.utils.sets.Set;
+
 /**
  * A {@code MutableIndex} defines an index with directly mutable values.
  * The index allows coordinates to be converted to unique integers
@@ -16,9 +19,9 @@ package waffles.utils.sets.indexed;
 public interface MutableIndex<O> extends IndexedSet<O>
 {
 	/**
-	 * The {@code Order} enum defines two ways of converting coordinates
-	 * to a unique integer value, generalizing the concept of row-major
-	 * and col-major ordering for matrices.
+	 * An {@code Order} defines two ways of converting coordinates
+	 * to a unique integer value, generalizing the concept of
+	 * row-major and col-major ordering for matrices.
 	 *
 	 * @author Waffles
 	 * @since 24 Aug 2023
@@ -87,40 +90,70 @@ public interface MutableIndex<O> extends IndexedSet<O>
 		}
 	}
 	
+	/**
+	 * A {@code Wrapper} defines a wrapper around another {@code MutableIndex}.
+	 *
+	 * @author Waffles
+	 * @since 14 Aug 2025
+	 * @version 1.1
+	 *
+	 * 
+	 * @param <O>  an object type
+	 * @see MutableIndex
+	 * @see Set
+	 */
+	public static interface Wrapper<O> extends Set.Wrapper, MutableIndex<O>
+	{		
+		@Override
+		public abstract MutableIndex<O> Delegate();
+						
+		@Override
+		public default O put(O val, int... crds)
+		{
+			return Delegate().put(val, crds);
+		}
+		
+		@Override
+		public default O remove(int... crds)
+		{
+			return Delegate().remove(crds);
+		}
+	}
+	
 	
 	/**
 	 * Removes a value from the {@code MutableIndex}.
 	 * 
-	 * @param coords  index coordinates
+	 * @param crds  an index coordinate
 	 * @return  a previous index value
 	 */
-	public abstract O remove(int... coords);
+	public abstract O remove(int... crds);
 		
 	/**
 	 * Changes a value in the {@code MutableIndex}.
 	 * 
-	 * @param val  an index value
-	 * @param coords  index coordinates
+	 * @param val   an index value
+	 * @param crds  an index coordinate
 	 * @return  a previous index value
 	 */
-	public abstract O put(O val, int... coords);
+	public abstract O put(O val, int... crds);
 	
 	
 	/**
 	 * Converts a unique index value into a set of coordinates.
 	 * 
-	 * @param order  an index order
-	 * @param index  an index value
+	 * @param ord  an index order
+	 * @param idx  an index value
 	 * @return  an index coordinate
 	 */
-	public default int[] toCoord(Order order, int index)
+	public default int[] toCoord(Order ord, int idx)
 	{
-		switch(order)
+		switch(ord)
 		{
 		case COL_MAJOR:
-			return Order.toColCoord(index, Dimensions());
+			return Order.toColCoord(idx, Dimensions());
 		case ROW_MAJOR:
-			return Order.toRowCoord(index, Dimensions());
+			return Order.toRowCoord(idx, Dimensions());
 		default:
 			return null;
 		}
@@ -129,18 +162,18 @@ public interface MutableIndex<O> extends IndexedSet<O>
 	/**
 	 * Converts a set of coordinates into a unique index value.
 	 * 
-	 * @param order  an index order
-	 * @param coords  an index coordinate
+	 * @param ord   an index order
+	 * @param crds  an index coordinate
 	 * @return  an index value
 	 */
-	public default int toIndex(Order order, int... coords)
+	public default int toIndex(Order ord, int... crds)
 	{
-		switch(order)
+		switch(ord)
 		{
 		case COL_MAJOR:
-			return Order.toColIndex(coords, Dimensions());
+			return Order.toColIndex(crds, Dimensions());
 		case ROW_MAJOR:
-			return Order.toRowIndex(coords, Dimensions());
+			return Order.toRowIndex(crds, Dimensions());
 		default:
 			return -1;
 		}

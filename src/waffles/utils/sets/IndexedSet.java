@@ -1,12 +1,10 @@
-package waffles.utils.sets.indexed;
+package waffles.utils.sets;
 
-import waffles.utils.sets.CountableSet;
-import waffles.utils.sets.DimensionalSet;
 import waffles.utils.tools.primitives.Array;
 
 /**
  * An {@code IndexedSet} stores objects in an implicit multi-dimensional array.
- * </br> This allows objects to be retrieved based on an integer index.
+ * This allows objects to be retrieved based on an integer index.
  * 
  * @author Waffles
  * @since Feb 03, 2020
@@ -20,24 +18,62 @@ import waffles.utils.tools.primitives.Array;
 public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 {	
 	/**
+	 * A {@code Wrapper} defines a wrapper around another {@code IndexedSet}.
+	 *
+	 * @author Waffles
+	 * @since 14 Aug 2025
+	 * @version 1.1
+	 *
+	 * 
+	 * @param <O>  an object type
+	 * @see IndexedSet
+	 * @see Set
+	 */
+	public static interface Wrapper<O> extends Set.Wrapper, IndexedSet<O>
+	{		
+		@Override
+		public abstract IndexedSet<O> Delegate();
+				
+		
+		@Override
+		public default int[] Dimensions()
+		{
+			return Delegate().Dimensions();
+		}
+		
+		@Override
+		public default int[] Minimum()
+		{
+			return Delegate().Minimum();
+		}
+		
+		@Override
+		public default int[] Maximum()
+		{
+			return Delegate().Maximum();
+		}
+	}
+	
+	
+	/**
 	 * Verifies if the {@code IndexedSet} contains a coordinate.
 	 * This will return false when a coordinate is negative or outside
 	 * the bounds of its given dimensions. Any index array that is too
 	 * large for the set will return true if and only if the bonus
-	 * dimension are all equal to zero.
+	 * dimensions are all equal to zero.
 	 * 
-	 * @param coords  a coordinate to verify
-	 * @return  {@code true} if the coordinate is within bounds of the index
+	 * @param crds  an index coordinate
+	 * @return  {@code true} if coordinate is valid
 	 */
-	public default boolean contains(int... coords)
+	public default boolean contains(int... crds)
 	{
-		for(int i = 0; i < coords.length; i++)
+		for(int i = 0; i < crds.length; i++)
 		{
 			// If coordinates exceed the index order...
 			if(Order() <= i)
 			{
 				// The remainder have to be zero.
-				if(coords[i] != 0)
+				if(crds[i] != 0)
 				{
 					return false;
 				}
@@ -46,7 +82,7 @@ public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 			}
 
 			// Otherwise, check the coordinate bounds.
-			if(coords[i] < Minimum()[i] || Maximum()[i] < coords[i])
+			if(crds[i] < Minimum()[i] || Maximum()[i] < crds[i])
 			{
 				return false;
 			}
