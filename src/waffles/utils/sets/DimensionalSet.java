@@ -11,7 +11,7 @@ import waffles.utils.tools.primitives.Array;
  * @since Jul 5, 2018
  * @version 1.1
  * 
- * @param <O>  a set object type
+ * @param <O>  an object type
  * 
  * 
  * @see Coordinator
@@ -20,12 +20,43 @@ import waffles.utils.tools.primitives.Array;
 public interface DimensionalSet<O> extends Coordinator, Set
 {	
 	/**
-	 * Returns a single value from the {@code DimensionalSet}.
+	 * A {@code Wrapper} defines a wrapper around another {@code Set}.
+	 *
+	 * @author Waffles
+	 * @since 14 Aug 2025
+	 * @version 1.1
+	 *
 	 * 
-	 * @param coords  an index coordinate
-	 * @return        an index value
+	 * @param <O>  an object type
+	 * @see DimensionalSet
+	 * @see Set
 	 */
-	public abstract O get(int... coords);
+	public static interface Wrapper<O> extends Set.Wrapper, DimensionalSet<O>
+	{
+		@Override
+		public default O get(int... crds)
+		{
+			return Delegate().get(crds);
+		}
+		
+		@Override
+		public abstract DimensionalSet<O> Delegate();
+				
+		@Override
+		public default int[] Dimensions()
+		{
+			return Delegate().Dimensions();
+		}
+	}
+	
+	
+	/**
+	 * Returns a value from the {@code DimensionalSet}.
+	 * 
+	 * @param crds  an index coordinate
+	 * @return      an index value
+	 */
+	public abstract O get(int... crds);
 
 	/**
 	 * Returns the size of the {@code DimensionalSet}.
