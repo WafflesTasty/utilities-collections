@@ -17,24 +17,24 @@ import waffles.utils.tools.patterns.properties.values.Copyable;
 public interface BooleanArray extends ArrayLike<boolean[], Boolean>, Copyable<BooleanArray>
 {
 	@Override
-	public default Boolean get(int... coords)
+	public default Boolean get(int... crds)
 	{
-		return Array()[toIndex(Ordering(), coords)];
+		return Array()[toIndex(Ordering(), crds)];
 	}
 	
 	@Override
-	public default Boolean put(Boolean val, int... coords)
+	public default Boolean put(Boolean val, int... crds)
 	{
-		int index = toIndex(Ordering(), coords);
+		int index = toIndex(Ordering(), crds);
 		Boolean prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Boolean remove(int... coords)
+	public default Boolean remove(int... crds)
 	{
-		return put(null, coords);
+		return put(null, crds);
 	}
 	
 	@Override

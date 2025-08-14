@@ -17,24 +17,24 @@ import waffles.utils.tools.patterns.properties.values.Copyable;
 public interface ShortArray extends ArrayLike<short[], Short>, Copyable<ShortArray>
 {
 	@Override
-	public default Short get(int... coords)
+	public default Short get(int... crds)
 	{
-		return Array()[toIndex(Ordering(), coords)];
+		return Array()[toIndex(Ordering(), crds)];
 	}
 	
 	@Override
-	public default Short put(Short val, int... coords)
+	public default Short put(Short val, int... crds)
 	{
-		int index = toIndex(Ordering(), coords);
+		int index = toIndex(Ordering(), crds);
 		Short prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Short remove(int... coords)
+	public default Short remove(int... crds)
 	{
-		return put(null, coords);
+		return put(null, crds);
 	}
 	
 	@Override

@@ -17,23 +17,23 @@ import waffles.utils.sets.indexed.array.ArrayLike;
 public interface ObjectArray<O> extends ArrayLike<Object[], O>
 {
 	@Override
-	public default O get(int... coords)
+	public default O get(int... crds)
 	{
-		return (O) Array()[toIndex(Ordering(), coords)];
+		return (O) Array()[toIndex(Ordering(), crds)];
 	}
 	
 	@Override
-	public default O put(O val, int... coords)
+	public default O put(O val, int... crds)
 	{
-		int index = toIndex(Ordering(), coords);
+		int index = toIndex(Ordering(), crds);
 		O prev = (O) Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default O remove(int... coords)
+	public default O remove(int... crds)
 	{
-		return put(null, coords);
+		return put(null, crds);
 	}
 }

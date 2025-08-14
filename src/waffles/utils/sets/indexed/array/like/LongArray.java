@@ -17,24 +17,24 @@ import waffles.utils.tools.patterns.properties.values.Copyable;
 public interface LongArray extends ArrayLike<long[], Long>, Copyable<LongArray>
 {
 	@Override
-	public default Long get(int... coords)
+	public default Long get(int... crds)
 	{
-		return Array()[toIndex(Ordering(), coords)];
+		return Array()[toIndex(Ordering(), crds)];
 	}
 	
 	@Override
-	public default Long put(Long val, int... coords)
+	public default Long put(Long val, int... crds)
 	{
-		int index = toIndex(Ordering(), coords);
+		int index = toIndex(Ordering(), crds);
 		Long prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Long remove(int... coords)
+	public default Long remove(int... crds)
 	{
-		return put(null, coords);
+		return put(null, crds);
 	}
 	
 	@Override

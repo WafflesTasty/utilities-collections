@@ -17,24 +17,24 @@ import waffles.utils.tools.patterns.properties.values.Copyable;
 public interface ByteArray extends ArrayLike<byte[], Byte>, Copyable<ByteArray>
 {
 	@Override
-	public default Byte get(int... coords)
+	public default Byte get(int... crds)
 	{
-		return Array()[toIndex(Ordering(), coords)];
+		return Array()[toIndex(Ordering(), crds)];
 	}
 	
 	@Override
-	public default Byte put(Byte val, int... coords)
+	public default Byte put(Byte val, int... crds)
 	{
-		int index = toIndex(Ordering(), coords);
+		int index = toIndex(Ordering(), crds);
 		Byte prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Byte remove(int... coords)
+	public default Byte remove(int... crds)
 	{
-		return put(null, coords);
+		return put(null, crds);
 	}
 	
 	@Override

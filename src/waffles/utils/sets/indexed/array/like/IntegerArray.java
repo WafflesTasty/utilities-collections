@@ -17,24 +17,24 @@ import waffles.utils.tools.patterns.properties.values.Copyable;
 public interface IntegerArray extends ArrayLike<int[], Integer>, Copyable<IntegerArray>
 {
 	@Override
-	public default Integer get(int... coords)
+	public default Integer get(int... crds)
 	{
-		return Array()[toIndex(Ordering(), coords)];
+		return Array()[toIndex(Ordering(), crds)];
 	}
 	
 	@Override
-	public default Integer put(Integer val, int... coords)
+	public default Integer put(Integer val, int... crds)
 	{
-		int index = toIndex(Ordering(), coords);
+		int index = toIndex(Ordering(), crds);
 		Integer prev = Array()[index];
 		Array()[index] = val;
 		return prev;
 	}
 	
 	@Override
-	public default Integer remove(int... coords)
+	public default Integer remove(int... crds)
 	{
-		return put(null, coords);
+		return put(null, crds);
 	}
 	
 	@Override
