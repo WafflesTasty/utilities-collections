@@ -25,10 +25,10 @@ public interface MutableSet<O> extends CountableSet
 	 *
 	 * 
 	 * @param <O>  an object type
+	 * @see CountableSet
 	 * @see MutableSet
-	 * @see Set
 	 */
-	public static interface Wrapper<O> extends Set.Wrapper, MutableSet<O>
+	public static interface Wrapper<O> extends CountableSet.Wrapper, MutableSet<O>
 	{
 		@Override
 		public abstract MutableSet<O> Delegate();

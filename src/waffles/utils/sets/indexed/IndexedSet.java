@@ -2,7 +2,6 @@ package waffles.utils.sets.indexed;
 
 import waffles.utils.sets.CountableSet;
 import waffles.utils.sets.DimensionalSet;
-import waffles.utils.sets.Set;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -29,21 +28,15 @@ public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 	 *
 	 * 
 	 * @param <O>  an object type
+	 * @see CountableSet
 	 * @see IndexedSet
-	 * @see Set
 	 */
-	public static interface Wrapper<O> extends Set.Wrapper, IndexedSet<O>
+	public static interface Wrapper<O> extends CountableSet.Wrapper, IndexedSet<O>
 	{		
 		@Override
 		public abstract IndexedSet<O> Delegate();
 				
-		
-		@Override
-		public default int[] Dimensions()
-		{
-			return Delegate().Dimensions();
-		}
-		
+				
 		@Override
 		public default int[] Minimum()
 		{
@@ -54,6 +47,18 @@ public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 		public default int[] Maximum()
 		{
 			return Delegate().Maximum();
+		}
+		
+		@Override
+		public default int[] Dimensions()
+		{
+			return Delegate().Dimensions();
+		}
+		
+		@Override
+		public default int Count()
+		{
+			return IndexedSet.super.Count();
 		}
 	}
 	

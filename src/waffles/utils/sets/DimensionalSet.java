@@ -1,6 +1,6 @@
 package waffles.utils.sets;
 
-import waffles.utils.sets._old.utilities.coordinates.Coordinator;
+import waffles.utils.sets.utilities.indexed.coords.Coordinator;
 import waffles.utils.tools.primitives.Array;
 
 /**

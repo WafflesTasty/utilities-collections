@@ -1,7 +1,5 @@
 package waffles.utils.sets.indexed;
 
-import waffles.utils.sets.Set;
-
 /**
  * A {@code MutableIndex} defines an index with directly mutable values.
  * The index allows coordinates to be converted to unique integers
@@ -99,9 +97,9 @@ public interface MutableIndex<O> extends IndexedSet<O>
 	 * 
 	 * @param <O>  an object type
 	 * @see MutableIndex
-	 * @see Set
+	 * @see IndexedSet
 	 */
-	public static interface Wrapper<O> extends Set.Wrapper, MutableIndex<O>
+	public static interface Wrapper<O> extends IndexedSet.Wrapper<O>, MutableIndex<O>
 	{		
 		@Override
 		public abstract MutableIndex<O> Delegate();

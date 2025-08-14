@@ -1,7 +1,7 @@
 package waffles.utils.sets.utilities;
 
 /**
- * An {@code Ordered} interface defines an object with an order.
+ * An {@code Ordered} object defines an integer order.
  *
  * @author Waffles
  * @since 20 Sep 2023
@@ -11,7 +11,7 @@ package waffles.utils.sets.utilities;
 public interface Ordered
 {
 	/**
-	 * Returns the order of the object.
+	 * Returns the order of the {@code Ordered}.
 	 * 
 	 * @return  an integer order
 	 */
