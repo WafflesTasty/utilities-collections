@@ -73,10 +73,10 @@ public interface AtomicIndex<O> extends MutableIndex<O>, IterableSet<O>
 	/**
 	 * Returns an object index the {@code AtomicIndex}.
 	 * 
-	 * @param obj  a target object
+	 * @param val  an object value
 	 * @return  an index coordinate
 	 */
-	public abstract int[] indexOf(O obj);
+	public abstract int[] indexOf(O val);
 
 	
 	@Override

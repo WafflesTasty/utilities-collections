@@ -121,21 +121,14 @@ public interface Queue<O> extends IterableSet<O>
 			return Delegate().poll();
 		}
 	}
-	
-	
-	// REMOVE THE REMOVE METHOD OR NO?
-	// Maybe just implement it where needed
-	public static final int I = 5;
-	
+
+
 	/**
 	 * Removes an object from the {@code Queue}.
 	 * 
 	 * @param obj  an object to remove
 	 */
-	public default void remove(O obj)
-	{
-		// NOT APPLICABLE
-	}
+	public abstract void remove(O obj);
 	
 	/**
 	 * Pushes an object onto the {@code Queue}.

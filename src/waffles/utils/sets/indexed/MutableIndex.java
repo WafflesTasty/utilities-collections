@@ -36,9 +36,9 @@ public interface MutableIndex<O> extends IndexedSet<O>
 		ROW_MAJOR;
 
 		
-		private static int[] toColCoord(int index, int[] dims)
+		private static int[] toColCoord(int idx, int[] dims)
 		{
-			int mod = index;
+			int mod = idx;
 			int[] coord = new int[dims.length];
 			for(int i = 0; i < dims.length; i++)
 			{
@@ -49,9 +49,9 @@ public interface MutableIndex<O> extends IndexedSet<O>
 			return coord;
 		}
 
-		private static int[] toRowCoord(int index, int[] dims)
+		private static int[] toRowCoord(int idx, int[] dims)
 		{
-			int mod = index;
+			int mod = idx;
 			int[] coord = new int[dims.length];
 			for(int i = dims.length - 1; i >= 0; i--)
 			{
@@ -62,28 +62,28 @@ public interface MutableIndex<O> extends IndexedSet<O>
 			return coord;
 		}
 		
-		private static int toColIndex(int[] coords, int[] dims)
+		private static int toColIndex(int[] crds, int[] dims)
 		{
-			int index = 0;
+			int idx = 0;
 			for(int i = dims.length - 1; i >= 0; i--)
 			{
-				index *= dims[i];
-				index += coords[i];
+				idx *= dims[i];
+				idx += crds[i];
 			}
 
-			return index;
+			return idx;
 		}
 		
-		private static int toRowIndex(int[] coords, int[] dims)
+		private static int toRowIndex(int[] crds, int[] dims)
 		{
-			int index = 0;
+			int idx = 0;
 			for(int i = 0; i < dims.length; i++)
 			{
-				index *= dims[i];
-				index += coords[i];
+				idx *= dims[i];
+				idx += crds[i];
 			}
 
-			return index;
+			return idx;
 		}
 	}
 	

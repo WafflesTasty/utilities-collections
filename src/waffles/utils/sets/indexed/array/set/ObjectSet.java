@@ -24,7 +24,7 @@ public interface ObjectSet<O> extends ArraySet<Object[], O>, ObjectArray<O>
 	 * @param set  an object array
 	 * @return  an object set
 	 */
-	public static ObjectSet<?> of(Object... set)
+	public static <O> ObjectSet<O> of(Object... set)
 	{
 		return () -> set;
 	}
