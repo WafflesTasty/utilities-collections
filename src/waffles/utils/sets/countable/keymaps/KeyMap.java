@@ -3,7 +3,6 @@ package waffles.utils.sets.countable.keymaps;
 import java.util.Map;
 
 import waffles.utils.sets.CountableSet;
-import waffles.utils.sets.Set;
 import waffles.utils.sets.utilities.keymaps.Pair;
 import waffles.utils.sets.utilities.keymaps.iterators.KeyIterator;
 import waffles.utils.sets.utilities.keymaps.iterators.PairGenerator;
@@ -35,7 +34,7 @@ public interface KeyMap<K, V> extends CountableSet
 	 * @param <K>  a key type
 	 * @param <V>  a value type
 	 * @see CountableSet
-	 * @see Set
+	 * @see KeyMap
 	 */
 	public static interface Wrapper<K, V> extends CountableSet.Wrapper, KeyMap<K, V>
 	{

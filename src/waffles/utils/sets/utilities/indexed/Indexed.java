@@ -17,21 +17,21 @@ public interface Indexed extends Coordinated
 	/**
 	 * Moves the {@code Indexed} to a new coordinate.
 	 * 
-	 * @param coords  index coordinates
+	 * @param crds  an index coordinate
 	 */
-	public abstract void moveTo(int... coords);
+	public abstract void moveTo(int... crds);
 
 	/**
 	 * Moves the {@code Indexed} for a coordinate.
 	 * 
-	 * @param coords  index coordinates
+	 * @param crds  an index coordinate
 	 */
-	public default void moveFor(int... coords)
+	public default void moveFor(int... crds)
 	{
 		int[] curr = Coordinates();
 		for(int i = 0; i < Order(); i++)
 		{
-			curr[i] += coords[i];
+			curr[i] += crds[i];
 		}
 		
 		moveTo(curr);

@@ -24,8 +24,8 @@ public interface CountableSet extends Clearable, Countable, Set
 	 * @author Waffles
 	 * @since 14 Aug 2025
 	 * @version 1.1
-	 *
-	 *
+	 * 
+	 * 
 	 * @see CountableSet
 	 * @see Set
 	 */

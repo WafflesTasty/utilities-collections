@@ -5,7 +5,7 @@ import java.util.Iterator;
 import waffles.utils.sets.IterableSet;
 
 /**
- * A {@code Queue} defines an atomic set of objects with one-way access to the head or tail.
+ * A {@code Queue} defines an iterable set of objects with one-way access to the head or tail.
  * The order of objects going in and out of the queue is left to the implementation.
  *
  * @author Waffles

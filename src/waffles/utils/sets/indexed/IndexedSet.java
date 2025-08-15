@@ -1,4 +1,4 @@
-package waffles.utils.sets.indexed;
+	package waffles.utils.sets.indexed;
 
 import waffles.utils.sets.CountableSet;
 import waffles.utils.sets.DimensionalSet;
