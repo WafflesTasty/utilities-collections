@@ -1,9 +1,10 @@
 package waffles.utils.sets.utilities;
 
 import waffles.utils.sets.indexed.IndexedSet;
-import waffles.utils.sets.indexed.array.ArrayLike;
+import waffles.utils.sets.indexed.array.ArraySet;
 import waffles.utils.sets.rooted.binary.BiNode;
 import waffles.utils.sets.utilities.indexed.iterators.IndexValues;
+import waffles.utils.sets.utilities.indexed.iterators.arrays.ReverseIterator;
 import waffles.utils.sets.utilities.rooted.iterators.binary.InOrder;
 import waffles.utils.sets.utilities.rooted.iterators.binary.PostOrder;
 import waffles.utils.sets.utilities.rooted.iterators.binary.PreOrder;
@@ -27,12 +28,12 @@ public final class Iterables
 	 * @return  a reverse iterable
 	 * 
 	 * 
-	 * @see ArrayLike
+	 * @see ArraySet
 	 * @see Iterable
 	 */
-	public static <O> Iterable<O> reverse(ArrayLike<?, O> set)
+	public static <O> Iterable<O> reverse(ArraySet<?, O> set)
 	{
-		return null;
+		return () -> new ReverseIterator<>(set);
 	}
 	
 	/**
