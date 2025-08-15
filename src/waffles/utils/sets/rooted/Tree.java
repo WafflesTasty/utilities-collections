@@ -1,7 +1,7 @@
 package waffles.utils.sets.rooted;
 
-import waffles.utils.sets._old.trees.Nodal;
-import waffles.utils.sets._old.trees.Node;
+import waffles.utils.sets.utilities.rooted.Nodal;
+import waffles.utils.sets.utilities.rooted.Node;
 
 /**
  * The {@code Tree} class defines a generic node tree structure.

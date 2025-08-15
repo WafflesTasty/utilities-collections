@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import waffles.utils.sets.countable.AtomicSet;
 import waffles.utils.sets.indexed.AtomicIndex;
-import waffles.utils.sets.indexed.array.like.ObjectArray;
+import waffles.utils.sets.indexed.array.set.ObjectSet;
 
 /**
  * A {@code JavaList} defines a one-dimensional index backed by a {@code java.util.ArrayList}.
@@ -15,11 +15,11 @@ import waffles.utils.sets.indexed.array.like.ObjectArray;
  * 
  * 
  * @param <O>  an object type
- * @see ObjectArray
  * @see AtomicIndex
  * @see AtomicSet
+ * @see ObjectSet
  */
-public class JavaList<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, ObjectArray<O>
+public class JavaList<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, ObjectSet<O>
 {
 	private ArrayList<O> data;
 	
@@ -119,10 +119,16 @@ public class JavaList<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, Obje
 	{
 		return new int[]{Count()};
 	}
-	
+		
 	@Override
 	public void clear()
 	{
 		Delegate().clear();
+	}
+	
+	@Override
+	public int Count()
+	{
+		return Delegate().size();
 	}
 }

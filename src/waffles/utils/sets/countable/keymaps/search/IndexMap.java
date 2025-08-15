@@ -30,6 +30,19 @@ public class IndexMap<K, V> extends JavaMap<K, V> implements IndexedSet<K>
 		index = new JavaList<>();
 	}
 	
+	/**
+	 * Returns the index of the {@code IndexMap}.
+	 * 
+	 * @return  an index list
+	 * 
+	 * 
+	 * @see JavaList
+	 */
+	public JavaList<K> Index()
+	{
+		return index;
+	}
+	
 	
 	@Override
 	public void clear()

@@ -1,15 +1,15 @@
 package waffles.utils.sets.rooted;
 
 import waffles.utils.sets.CountableSet;
-import waffles.utils.sets._old.trees.Nodal;
-import waffles.utils.sets._old.trees.Node;
-import waffles.utils.sets._old.trees.traversal.BreadthFirst;
-import waffles.utils.sets._old.trees.traversal.DepthFirst;
-import waffles.utils.sets._old.utilities.iterators.LeafIterator;
+import waffles.utils.sets.utilities.rooted.Nodal;
+import waffles.utils.sets.utilities.rooted.Node;
+import waffles.utils.sets.utilities.rooted.iterators.BreadthFirst;
+import waffles.utils.sets.utilities.rooted.iterators.DepthFirst;
+import waffles.utils.sets.utilities.rooted.iterators.LeafIterator;
 import waffles.utils.tools.collections.Iterables;
 
 /**
- * The {@code Rooted} interface defines a structure with a {@code Nodal} root.
+ * A {@code Rooted} object defines a tree-like structure with a {@code Nodal} root.
  *
  * @author Waffles
  * @since 08 Aug 2023

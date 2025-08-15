@@ -7,6 +7,5 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry combineaccessrules="false" kind="src" path="/Utilities - Tools"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/Utilities - Language"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
