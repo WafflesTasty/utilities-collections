@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities;
+package waffles.utils.sets.utilities.keymaps;
 
 import waffles.utils.tools.patterns.properties.Immutable;
 import waffles.utils.tools.patterns.properties.values.Valuable;

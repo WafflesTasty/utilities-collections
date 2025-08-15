@@ -1,7 +1,6 @@
 package waffles.utils.sets.countable;
 
 import waffles.utils.sets.CountableSet;
-import waffles.utils.sets.Set;
 
 /**
  * A {@code MutableSet} is a {@code CountableSet} which allows the adding and removing of objects.
@@ -55,10 +54,10 @@ public interface MutableSet<O> extends CountableSet
 	 *
 	 *
 	 * @param <O>  an object type
+	 * @see CountableSet
 	 * @see MutableSet
-	 * @see Set
 	 */
-	public static interface Java<O> extends Set.Java<O>, MutableSet<O>
+	public static interface Java<O> extends CountableSet.Java<O>, MutableSet<O>
 	{
 		@Override
 		public default void remove(O obj)

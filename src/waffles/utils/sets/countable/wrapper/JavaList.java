@@ -7,7 +7,7 @@ import waffles.utils.sets.indexed.AtomicIndex;
 import waffles.utils.sets.indexed.array.like.ObjectArray;
 
 /**
- * A {@code List} defines a one-dimensional index backed by a {@code java.util.ArrayList}.
+ * A {@code JavaList} defines a one-dimensional index backed by a {@code java.util.ArrayList}.
  *
  * @author Waffles
  * @since Feb 08, 2020
@@ -19,16 +19,16 @@ import waffles.utils.sets.indexed.array.like.ObjectArray;
  * @see AtomicIndex
  * @see AtomicSet
  */
-public class List<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, ObjectArray<O>
+public class JavaList<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, ObjectArray<O>
 {
 	private ArrayList<O> data;
 	
 	/**
-	 * Creates a new {@code List}.
+	 * Creates a new {@code JavaList}.
 	 * 
 	 * @param set  a data set
 	 */
-	public List(O... set)
+	public JavaList(O... set)
 	{
 		data = new ArrayList<>();
 		for(O obj : set)
@@ -38,19 +38,19 @@ public class List<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, ObjectAr
 	}
 	
 	/**
-	 * Creates a new {@code List}.
+	 * Creates a new {@code JavaList}.
 	 * 
 	 * @param size  a list size
 	 */
-	public List(int size)
+	public JavaList(int size)
 	{
 		data = new ArrayList<>(size);
 	}
 	
 	/**
-	 * Creates a new {@code List}.
+	 * Creates a new {@code JavaList}.
 	 */
-	public List()
+	public JavaList()
 	{
 		data = new ArrayList<>();
 	}
