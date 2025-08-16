@@ -46,13 +46,26 @@ public class Collector implements Collectible, Decorator
 		col = c;
 		set = s;
 	}
+	
+	/**
+	 * Creates a new {@code Collector}.
+	 * 
+	 * @param c  a source object
+	 * 
+	 * 
+	 * @see Collectible
+	 */
+	public Collector(Collectible c)
+	{
+		col = c;
+	}
 
 	/**
 	 * Creates a new {@code Collector}.
 	 */
 	public Collector()
 	{
-		this(null);
+		col = this;
 	}
 	
 	

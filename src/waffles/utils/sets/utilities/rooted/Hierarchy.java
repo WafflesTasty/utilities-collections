@@ -29,7 +29,7 @@ public class Hierarchy extends Collector implements Hierarchical
 	 */
 	public Hierarchy(Hierarchical h)
 	{
-		super(null, h);
+		super(h);
 	}
 		
 	/**

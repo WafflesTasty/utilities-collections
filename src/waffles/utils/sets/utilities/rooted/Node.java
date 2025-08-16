@@ -42,7 +42,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 * Creates a new {@code Node}.
 	 * 
 	 * @param t  a parent tree
-	 * @param n  a source object
+	 * @param n  a source nodal
 	 * 
 	 * 
 	 * @see Nodal
@@ -56,14 +56,14 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	/**
 	 * Creates a new {@code Node}.
 	 * 
-	 * @param t  a parent tree
+	 * @param n  a source nodal
 	 * 
 	 * 
 	 * @see Nodal
 	 */
-	public Node(Nodal t)
+	public Node(Nodal n)
 	{
-		super(t); children = new Nodal[0];
+		super(n); children = new Nodal[0];
 	}
 	
 	/**
