@@ -25,8 +25,9 @@ public class BiTree extends Tree
 	 * 
 	 * 
 	 * @see Iterable
+	 * @see BiNodal
 	 */
-	public <B extends BiNode> Iterable<B> inorder()
+	public <B extends BiNodal> Iterable<B> inorder()
 	{
 		return () -> new InOrder<>(Root());
 	}
@@ -39,8 +40,9 @@ public class BiTree extends Tree
 	 * 
 	 * 
 	 * @see Iterable
+	 * @see BiNodal
 	 */
-	public <B extends BiNode> Iterable<B> postorder()
+	public <B extends BiNodal> Iterable<B> postorder()
 	{
 		return () -> new PostOrder<>(Root());
 	}
@@ -53,8 +55,9 @@ public class BiTree extends Tree
 	 * 
 	 * 
 	 * @see Iterable
+	 * @see BiNodal
 	 */
-	public <B extends BiNode> Iterable<B> preorder()
+	public <B extends BiNodal> Iterable<B> preorder()
 	{
 		return () -> new PreOrder<>(Root());
 	}

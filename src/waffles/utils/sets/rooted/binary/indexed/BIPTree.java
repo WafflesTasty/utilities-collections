@@ -44,7 +44,7 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	public abstract O valueOf(BIPNode node);
 	
 	/**
-	 * Iterates over the nodes of the {@code BIPTree}.
+	 * Iterates over a set of nodes in the {@code BIPTree}.
 	 * 
 	 * @param min  an index minimum
 	 * @param max  an index maximum
@@ -55,7 +55,7 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	 * @see Iterable
 	 * @see BIPNode
 	 */
-	public <N extends BIPNode> Iterable<N> nodes(int[] min, int[] max)
+	public <N extends BIPNode> Iterable<N> Nodes(int[] min, int[] max)
 	{
 		return () -> new BIPNodes<>(this, min, max);
 	}
@@ -63,16 +63,16 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	/**
 	 * Returns a node at a given coordinate.
 	 * 
-	 * @param coords  an index coordinate
+	 * @param crds  an index coordinate
 	 * @return  a tree node
 	 * 
 	 * 
 	 * @see BIPNode
 	 */
-	public BIPNode nodeAt(int... coords)
+	public BIPNode nodeAt(int... crds)
 	{
 		// If the coordinates are out of bounds...
-		if(!contains(coords))
+		if(!contains(crds))
 		{
 			// Don't return anything.
 			return null;
@@ -84,7 +84,7 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 		while(!node.isLeaf())
 		{
 			// And find the closest node.
-			node = node.get(coords);
+			node = node.get(crds);
 		}
 		
 		return node;
@@ -92,9 +92,9 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 			
 	
 	@Override
-	public O get(int... coords)
+	public O get(int... crds)
 	{
-		return valueOf(nodeAt(coords));
+		return valueOf(nodeAt(crds));
 	}
 
 	@Override
