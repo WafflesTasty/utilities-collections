@@ -48,7 +48,7 @@ public class BSMap<K, V> implements KeyMap<K,V>
 	 */
 	public BSMap()
 	{
-		data = new BSTree<>();
+		this((k1, k2) -> ((Comparable<K>) k1).compareTo(k2));
 	}
 	
 	/**
