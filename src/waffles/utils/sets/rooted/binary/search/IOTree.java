@@ -127,6 +127,21 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 		balance = bal;
 	}	
 	
+	/**
+	 * Compares two nodes in the {@code IOTree}.
+	 * 
+	 * @param n1  a tree node
+	 * @param n2  a tree node
+	 * @return  a comparator
+	 * 
+	 * 
+	 * @see IONode
+	 */
+	public int compare(IONode<O> n1, IONode<O> n2)
+	{
+		return compare(n1.Value(), n2.Value());
+	}
+	
 	
 	@Override
 	public IONode<O> createNode(Object... vals)
