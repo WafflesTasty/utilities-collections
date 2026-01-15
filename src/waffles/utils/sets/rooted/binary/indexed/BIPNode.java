@@ -86,6 +86,7 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 		
 		// Update the node.
 		cDim = axis.Index();
+
 		setLChild(lChild);
 		setRChild(rChild);
 	}

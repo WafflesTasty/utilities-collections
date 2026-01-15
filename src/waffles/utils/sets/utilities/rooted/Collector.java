@@ -96,7 +96,7 @@ public class Collector implements Collectible, Decorator
 	@Override
 	public Collectible Delegate()
 	{
-		return col;
+		return col != null ? col : this;
 	}
 	
 	@Override
