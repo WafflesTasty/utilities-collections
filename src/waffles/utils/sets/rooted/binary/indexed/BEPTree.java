@@ -272,7 +272,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 		}
 		
 		// If the coordinates are out of bounds...
-		if(!contains(coords))
+		if(!defines(coords))
 		{
 			// Bail.
 			return null;
@@ -331,7 +331,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	public E remove(int... coords)
 	{
 		// If the coordinates are out of bounds...
-		if(!contains(coords))
+		if(!defines(coords))
 		{
 			// Bail.
 			return null;

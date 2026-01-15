@@ -72,7 +72,7 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	public BIPNode nodeAt(int... crds)
 	{
 		// If the coordinates are out of bounds...
-		if(!contains(crds))
+		if(!defines(crds))
 		{
 			// Don't return anything.
 			return null;

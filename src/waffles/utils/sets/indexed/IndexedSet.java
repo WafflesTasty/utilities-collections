@@ -64,7 +64,7 @@ public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 	
 	
 	/**
-	 * Verifies if the {@code IndexedSet} contains a coordinate.
+	 * Verifies if the {@code IndexedSet} defines a coordinate.
 	 * This will return false when a coordinate is negative or outside
 	 * the bounds of its given dimensions. Any index array that is too
 	 * large for the set will return true if and only if the bonus
@@ -73,7 +73,7 @@ public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 	 * @param crds  an index coordinate
 	 * @return  {@code true} if coordinate is valid
 	 */
-	public default boolean contains(int... crds)
+	public default boolean defines(int... crds)
 	{
 		for(int i = 0; i < crds.length; i++)
 		{

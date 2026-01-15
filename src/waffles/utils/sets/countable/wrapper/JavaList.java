@@ -65,7 +65,7 @@ public class JavaList<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, Obje
 	@Override
 	public O get(int... coords)
 	{
-		if(contains(coords))
+		if(defines(coords))
 		{
 			return Delegate().get(coords[0]);
 		}
@@ -76,7 +76,7 @@ public class JavaList<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, Obje
 	@Override
 	public O remove(int... coords)
 	{
-		if(contains(coords))
+		if(defines(coords))
 		{
 			return Delegate().remove(coords[0]);
 		}
