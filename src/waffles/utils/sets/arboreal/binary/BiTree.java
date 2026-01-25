@@ -1,6 +1,7 @@
-package waffles.utils.sets.rooted.binary;
+package waffles.utils.sets.arboreal.binary;
 
-import waffles.utils.sets.rooted.Tree;
+import waffles.utils.sets.arboreal.Arboreal;
+import waffles.utils.sets.arboreal.Tree;
 import waffles.utils.sets.utilities.rooted.iterators.binary.InOrder;
 import waffles.utils.sets.utilities.rooted.iterators.binary.PostOrder;
 import waffles.utils.sets.utilities.rooted.iterators.binary.PreOrder;
@@ -18,20 +19,28 @@ import waffles.utils.sets.utilities.rooted.iterators.binary.PreOrder;
 public class BiTree extends Tree
 {
 	/**
-	 * Performs in-order iteration of the {@code BiTree}.
+	 * A {@code BiTree.Factory} generates {@code BiNode} objects.
+	 *
+	 * @author Waffles
+	 * @since 25 Jan 2026
+	 * @version 1.1
+	 *
 	 * 
-	 * @param <B>  a node type
-	 * @return  an in-order iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 * @see BiNodal
+	 * @see Arboreal
 	 */
-	public <B extends BiNodal> Iterable<B> inorder()
-	{
-		return () -> new InOrder<>(Root());
+	public static interface Factory extends Arboreal.Factory
+	{			
+		@Override
+		public default BiNode node(Object... data)
+		{
+			return new BiNode(Tree());
+		}
+		
+		@Override
+		public abstract BiTree Tree();
 	}
 	
+		
 	/**
 	 * Performs post-order iteration of the {@code BiTree}.
 	 * 
@@ -62,13 +71,28 @@ public class BiTree extends Tree
 		return () -> new PreOrder<>(Root());
 	}
 
+	/**
+	 * Performs in-order iteration of the {@code BiTree}.
+	 * 
+	 * @param <B>  a node type
+	 * @return  an in-order iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see BiNodal
+	 */
+	public <B extends BiNodal> Iterable<B> inorder()
+	{
+		return () -> new InOrder<>(Root());
+	}
+	
 	
 	@Override
-	public BiNode createNode(Object... vals)
+	public Factory Factory()
 	{
-		return new BiNode(this);
+		return () -> this;
 	}
-
+	
 	@Override
 	public BiNodal Root()
 	{

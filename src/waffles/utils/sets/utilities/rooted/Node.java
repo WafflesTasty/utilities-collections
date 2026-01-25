@@ -1,6 +1,7 @@
 package waffles.utils.sets.utilities.rooted;
 
-import waffles.utils.sets.rooted.Tree;
+import waffles.utils.sets.arboreal.Arboreal;
+import waffles.utils.sets.arboreal.Tree;
 import waffles.utils.tools.patterns.basic.Clearable;
 import waffles.utils.tools.primitives.Array;
 import waffles.utils.tools.primitives.Integers;
@@ -24,34 +25,6 @@ import waffles.utils.tools.primitives.Integers;
 public class Node extends Hierarchy implements Clearable, Nodal
 {
 	private Nodal[] children;
-	
-	/**
-	 * Creates a new {@code Node}.
-	 * 
-	 * @param t  a parent tree
-	 * 
-	 * 
-	 * @see Tree
-	 */
-	public Node(Tree t)
-	{
-		super(t); children = new Nodal[0];
-	}
-	
-	/**
-	 * Creates a new {@code Node}.
-	 * 
-	 * @param t  a parent tree
-	 * @param n  a source nodal
-	 * 
-	 * 
-	 * @see Nodal
-	 * @see Tree
-	 */
-	public Node(Tree t, Nodal n)
-	{
-		super(t, n); children = new Nodal[0];
-	}
 		
 	/**
 	 * Creates a new {@code Node}.
@@ -64,6 +37,34 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	public Node(Nodal n)
 	{
 		super(n); children = new Nodal[0];
+	}
+	
+	/**
+	 * Creates a new {@code Node}.
+	 * 
+	 * @param r  a parent rooted
+	 * @param n  a source nodal
+	 * 
+	 * 
+	 * @see Arboreal
+	 * @see Nodal
+	 */
+	public Node(Arboreal r, Nodal n)
+	{
+		super(r, n); children = new Nodal[0];
+	}
+		
+	/**
+	 * Creates a new {@code Node}.
+	 * 
+	 * @param r  a rooted set
+	 * 
+	 * 
+	 * @see Arboreal
+	 */
+	public Node(Arboreal r)
+	{
+		super(r); children = new Nodal[0];
 	}
 	
 	/**

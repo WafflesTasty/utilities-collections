@@ -2,8 +2,8 @@ package waffles.utils.sets.utilities.rooted.iterators.binary.indexed;
 
 import java.util.Iterator;
 
+import waffles.utils.sets.arboreal.binary.indexed.BEPTree;
 import waffles.utils.sets.indexed.IndexedSet;
-import waffles.utils.sets.rooted.binary.indexed.BEPTree;
 
 /**
  * A {@code BEPObjects} iterator iterates over all objects along a {@code BEPTree} of the same value.

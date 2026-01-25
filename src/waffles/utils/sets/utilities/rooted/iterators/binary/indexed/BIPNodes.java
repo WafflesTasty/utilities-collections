@@ -2,10 +2,10 @@ package waffles.utils.sets.utilities.rooted.iterators.binary.indexed;
 
 import java.util.Iterator;
 
+import waffles.utils.sets.arboreal.binary.indexed.BIPNode;
+import waffles.utils.sets.arboreal.binary.indexed.BIPTree;
 import waffles.utils.sets.queues.Queue;
 import waffles.utils.sets.queues.wrapper.FIFOQueue;
-import waffles.utils.sets.rooted.binary.indexed.BIPNode;
-import waffles.utils.sets.rooted.binary.indexed.BIPTree;
 
 /**
  * A {@code BIPNodes} iterates over a subsection of a {@code BIPTree}.

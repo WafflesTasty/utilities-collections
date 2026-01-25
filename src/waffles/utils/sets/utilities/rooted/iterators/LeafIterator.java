@@ -2,7 +2,7 @@ package waffles.utils.sets.utilities.rooted.iterators;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.rooted.Rooted;
+import waffles.utils.sets.arboreal.Arboreal;
 import waffles.utils.sets.utilities.rooted.Nodal;
 
 /**
@@ -28,9 +28,9 @@ public class LeafIterator<N extends Nodal> implements Iterator<N>
 	 * @param tree  a source tree
 	 * 
 	 * 
-	 * @see Rooted
+	 * @see Arboreal
 	 */
-	public LeafIterator(Rooted tree)
+	public LeafIterator(Arboreal tree)
 	{
 		nodes = tree.BFSearch().iterator();
 		next = findNext();

@@ -1,4 +1,4 @@
-package waffles.utils.sets.rooted.binary.indexed;
+package waffles.utils.sets.arboreal.binary.indexed;
 
 import waffles.utils.tools.primitives.Array;
 

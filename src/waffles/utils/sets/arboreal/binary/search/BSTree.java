@@ -1,4 +1,4 @@
-package waffles.utils.sets.rooted.binary.search;
+package waffles.utils.sets.arboreal.binary.search;
 
 import java.util.Comparator;
 
@@ -20,6 +20,30 @@ import waffles.utils.sets.countable.AtomicSet;
  */
 public class BSTree<O> extends IOTree<BSNode<O>, O> implements AtomicSet<O>
 {
+	/**
+	 * A {@code BSTree.Factory} generates {@code BSNode} objects.
+	 *
+	 * @author Waffles
+	 * @since 25 Jan 2026
+	 * @version 1.1
+	 *
+	 * 
+	 * @param <O>  an object type
+	 * @see IOTree
+	 */
+	public static interface Factory<O> extends IOTree.Factory<O>
+	{			
+		@Override
+		public default BSNode<O> node(Object... data)
+		{
+			return new BSNode<>(Tree(), (O) data[0]);
+		}
+		
+		@Override
+		public abstract BSTree<O> Tree();
+	}
+	
+	
 	/**
 	 * Creates a new {@code BSTree}.
 	 * 
@@ -49,17 +73,17 @@ public class BSTree<O> extends IOTree<BSNode<O>, O> implements AtomicSet<O>
 	}
 	
 	@Override
+	public Factory<O> Factory()
+	{
+		return () -> this;
+	}
+	
+	@Override
 	public BSNode<O> search(O obj)
 	{
 		return (BSNode<O>) super.search(obj);
 	}
 	
-	@Override
-	public BSNode<O> createNode(Object... vals)
-	{
-		return new BSNode<>(this, (O) vals[0]);
-	}
-				
 	
 	@Override
 	public void remove(O obj)
@@ -87,7 +111,8 @@ public class BSTree<O> extends IOTree<BSNode<O>, O> implements AtomicSet<O>
 	public void add(O obj)
 	{
 		// Create a new child node.
-		BSNode<O> child = createNode(obj);
+		Factory<O> fct = Factory();
+		BSNode<O> child = fct.node(obj);
 		
 		// If the tree has no nodes...
 		if(Root() == null)

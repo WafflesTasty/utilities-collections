@@ -2,10 +2,10 @@ package waffles.utils.sets.utilities.rooted.iterators.binary.indexed;
 
 import java.util.Iterator;
 
+import waffles.utils.sets.arboreal.binary.indexed.BEPNode;
+import waffles.utils.sets.arboreal.binary.indexed.BEPTree;
 import waffles.utils.sets.queues.Queue;
 import waffles.utils.sets.queues.wrapper.FIFOQueue;
-import waffles.utils.sets.rooted.binary.indexed.BEPNode;
-import waffles.utils.sets.rooted.binary.indexed.BEPTree;
 
 /**
  * A {@code BEPNodes} iterator iterates over all nodes in a {@code BEPTree} of the same value.

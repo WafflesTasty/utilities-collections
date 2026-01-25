@@ -4,8 +4,8 @@ import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Iterator;
 
-import waffles.utils.sets.rooted.binary.BiNodal;
-import waffles.utils.sets.rooted.binary.BiNode;
+import waffles.utils.sets.arboreal.binary.BiNodal;
+import waffles.utils.sets.arboreal.binary.BiNode;
 
 /**
  * A {@code InOrder} iterator traverses a binary tree in-ordered.

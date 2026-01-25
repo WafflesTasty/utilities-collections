@@ -1,7 +1,8 @@
-package waffles.utils.sets.rooted.binary.indexed;
+package waffles.utils.sets.arboreal.binary.indexed;
 
+import waffles.utils.sets.arboreal.binary.BiNode;
+import waffles.utils.sets.arboreal.binary.indexed.BIPTree.Factory;
 import waffles.utils.sets.indexed.IndexedSet;
-import waffles.utils.sets.rooted.binary.BiNode;
 import waffles.utils.sets.utilities.indexed.iterators.IndexKeys;
 import waffles.utils.sets.utilities.rooted.indexed.IPQuery;
 import waffles.utils.sets.utilities.rooted.indexed.IPQuery.Axis;
@@ -80,9 +81,11 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 		lMax[axis.Index()] = axis.Value() + 0;
 		rMin[axis.Index()] = axis.Value() + 1;
 				
+		
+		Factory fct = Set().Factory();
 		// Generate the corresponding child nodes.
-		BIPNode lChild = Set().createNode(lMin, lMax);
-		BIPNode rChild = Set().createNode(rMin, rMax);
+		BIPNode lChild = fct.node(lMin, lMax);
+		BIPNode rChild = fct.node(rMin, rMax);
 		
 		// Update the node.
 		cDim = axis.Index();

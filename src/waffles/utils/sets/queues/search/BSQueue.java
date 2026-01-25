@@ -3,9 +3,9 @@ package waffles.utils.sets.queues.search;
 import java.util.Comparator;
 import java.util.Iterator;
 
+import waffles.utils.sets.arboreal.binary.search.BSNode;
+import waffles.utils.sets.arboreal.binary.search.BSTree;
 import waffles.utils.sets.queues.Queue;
-import waffles.utils.sets.rooted.binary.search.BSNode;
-import waffles.utils.sets.rooted.binary.search.BSTree;
 
 /**
  * A {@code BSQueue} defines a sorted queue backed by a {@code BSTree}.

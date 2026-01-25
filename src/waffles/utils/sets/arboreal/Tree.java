@@ -1,22 +1,19 @@
-package waffles.utils.sets.rooted;
+package waffles.utils.sets.arboreal;
 
 import waffles.utils.sets.utilities.rooted.Nodal;
 import waffles.utils.sets.utilities.rooted.Node;
 
 /**
- * The {@code Tree} class defines a generic node tree structure.
- * Each tree requires at least a root {@code Node}, and optionally
- * allows the {@link #createNode(Object...)} method to be overwritten
- * to create custom nodes for the {@code Tree}.
+ * A {@code Tree} implements a basic {@code Rooted}.
  *
  * @author Waffles
  * @since 08 Aug 2023
  * @version 1.1
  *
  *
- * @see Rooted
+ * @see Arboreal
  */
-public class Tree implements Rooted
+public class Tree implements Arboreal
 {
 	private Nodal root;
 	
@@ -40,20 +37,14 @@ public class Tree implements Rooted
 
 	
 	@Override
-	public void clear()
-	{
-		root = null;
-	}
-
-	@Override
-	public Node createNode(Object... vals)
-	{
-		return new Node(this);
-	}
-	
-	@Override
 	public Nodal Root()
 	{
 		return root;
+	}
+	
+	@Override
+	public void clear()
+	{
+		root = null;
 	}
 }

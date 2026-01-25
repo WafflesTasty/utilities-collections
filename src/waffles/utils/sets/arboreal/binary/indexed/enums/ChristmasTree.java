@@ -1,4 +1,4 @@
-package waffles.utils.sets.rooted.binary.indexed.enums;
+package waffles.utils.sets.arboreal.binary.indexed.enums;
 
 import waffles.utils.sets.indexed.array.index.ObjectIndex;
 import waffles.utils.sets.utilities.Activity;

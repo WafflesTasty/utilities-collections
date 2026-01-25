@@ -1,6 +1,6 @@
-package waffles.utils.sets.rooted.binary.search;
+package waffles.utils.sets.arboreal.binary.search;
 
-import waffles.utils.sets.rooted.binary.BiNode;
+import waffles.utils.sets.arboreal.binary.BiNode;
 import waffles.utils.tools.patterns.properties.values.Valuable;
 
 /**

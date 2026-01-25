@@ -2,9 +2,9 @@ package waffles.utils.sets.countable.keymaps.search;
 
 import java.util.Comparator;
 
+import waffles.utils.sets.arboreal.binary.search.BSNode;
+import waffles.utils.sets.arboreal.binary.search.BSTree;
 import waffles.utils.sets.countable.keymaps.KeyMap;
-import waffles.utils.sets.rooted.binary.search.BSNode;
-import waffles.utils.sets.rooted.binary.search.BSTree;
 import waffles.utils.sets.utilities.keymaps.Pair;
 
 /**

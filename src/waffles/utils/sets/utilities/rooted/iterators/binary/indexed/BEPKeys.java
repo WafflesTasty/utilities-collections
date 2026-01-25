@@ -2,8 +2,8 @@ package waffles.utils.sets.utilities.rooted.iterators.binary.indexed;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.rooted.binary.indexed.BEPNode;
-import waffles.utils.sets.rooted.binary.indexed.BEPTree;
+import waffles.utils.sets.arboreal.binary.indexed.BEPNode;
+import waffles.utils.sets.arboreal.binary.indexed.BEPTree;
 import waffles.utils.tools.collections.iterators.EmptyIterator;
 
 /**

@@ -1,4 +1,4 @@
-package waffles.utils.sets.rooted.binary.search;
+package waffles.utils.sets.arboreal.binary.search;
 
 /**
  * The {@code BSNode} class defines a single node in a binary search tree.

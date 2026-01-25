@@ -1,7 +1,7 @@
-package waffles.utils.sets.rooted.binary.balance;
+package waffles.utils.sets.arboreal.binary.balance;
 
-import waffles.utils.sets.rooted.binary.BiNodal;
-import waffles.utils.sets.rooted.binary.BiNode;
+import waffles.utils.sets.arboreal.binary.BiNodal;
+import waffles.utils.sets.arboreal.binary.BiNode;
 import waffles.utils.sets.utilities.Iterables;
 
 /**

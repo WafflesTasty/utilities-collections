@@ -1,8 +1,8 @@
-package waffles.utils.sets.rooted.binary.indexed.enums;
+package waffles.utils.sets.arboreal.binary.indexed.enums;
 
+import waffles.utils.sets.arboreal.binary.indexed.BEPNode;
+import waffles.utils.sets.arboreal.binary.indexed.BEPTree;
 import waffles.utils.sets.indexed.IndexedSet;
-import waffles.utils.sets.rooted.binary.indexed.BEPNode;
-import waffles.utils.sets.rooted.binary.indexed.BEPTree;
 import waffles.utils.sets.utilities.Activity;
 
 /**

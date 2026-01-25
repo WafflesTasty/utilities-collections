@@ -1,4 +1,4 @@
-package waffles.utils.sets.rooted.binary.indexed;
+package waffles.utils.sets.arboreal.binary.indexed;
 
 import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.indexed.MutableIndex;
@@ -23,6 +23,32 @@ import waffles.utils.sets.utilities.rooted.iterators.binary.indexed.BEPObjects;
  */
 public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableIndex<E>
 {		
+	/**
+	 * A {@code BEPTree.Factory} generates {@code BEPNode} objects.
+	 *
+	 * @author Waffles
+	 * @since 25 Jan 2026
+	 * @version 1.1
+	 * 
+	 * 
+	 * @see BIPTree
+	 */
+	public static interface Factory extends BIPTree.Factory
+	{			
+		@Override
+		public default BEPNode<?> node(Object... data)
+		{
+			int[] min = (int[]) data[0];
+			int[] max = (int[]) data[1];
+			
+			return new BEPNode<>(Tree(), min, max);
+		}
+		
+		@Override
+		public abstract BEPTree<?> Tree();
+	}
+	
+	
 	private Queue<BEPNode<E>> queue;
 	
 	/**
@@ -262,17 +288,17 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	}
 		
 	@Override
-	public E put(E val, int... coords)
+	public E put(E val, int... crds)
 	{
 		// If the value is null...
 		if(val == null)
 		{
 			// Perform removal instead.
-			return remove(coords);
+			return remove(crds);
 		}
 		
 		// If the coordinates are out of bounds...
-		if(!defines(coords))
+		if(!defines(crds))
 		{
 			// Bail.
 			return null;
@@ -286,7 +312,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 			// adding the value to the
 			// nodes along the way.
 			node.addValue(val);
-			node = node.get(coords);
+			node = node.get(crds);
 		}
 		
 		// If the final child has the same value...
@@ -301,10 +327,10 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 		E prev = node.Value();
 		while(!node.isTile())
 		{
-			node.split(coords, coords);
+			node.split(crds, crds);
 			node.addValue(val);
 			
-			node = node.get(coords);
+			node = node.get(crds);
 		}
 		
 		node.setValue(val);
@@ -328,10 +354,10 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	}
 
 	@Override
-	public E remove(int... coords)
+	public E remove(int... crds)
 	{
 		// If the coordinates are out of bounds...
-		if(!defines(coords))
+		if(!defines(crds))
 		{
 			// Bail.
 			return null;
@@ -342,7 +368,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 		while(!node.isLeaf())
 		{
 			// And find the closest child node.
-			node = node.get(coords);
+			node = node.get(crds);
 		}
 		
 		// If it has no value...
@@ -356,8 +382,8 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 		E prev = node.Value();
 		while(!node.isTile())
 		{
-			node.split(coords, coords);
-			node = node.get(coords);
+			node.split(crds, crds);
+			node = node.get(crds);
 		}
 		
 		// And remove the final tile's value.
@@ -367,18 +393,15 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	
 	
 	@Override
-	public BEPNode<E> createNode(Object... vals)
+	public Factory Factory()
 	{
-		int[] min = (int[]) vals[0];
-		int[] max = (int[]) vals[1];
-		
-		return new BEPNode<>(this, min, max);
+		return () -> this;
 	}
-	
+		
 	@Override
-	public BEPNode<E> nodeAt(int... coords)
+	public BEPNode<E> nodeAt(int... crds)
 	{
-		return (BEPNode<E>) super.nodeAt(coords);
+		return (BEPNode<E>) super.nodeAt(crds);
 	}
 	
 	@Override

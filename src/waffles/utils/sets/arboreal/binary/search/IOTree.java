@@ -1,12 +1,12 @@
-package waffles.utils.sets.rooted.binary.search;
+package waffles.utils.sets.arboreal.binary.search;
 
 import java.util.Comparator;
 import java.util.Iterator;
 
 import waffles.utils.sets.IterableSet;
-import waffles.utils.sets.rooted.binary.BiTree;
-import waffles.utils.sets.rooted.binary.balance.Balance;
-import waffles.utils.sets.rooted.binary.balance.BalanceTree;
+import waffles.utils.sets.arboreal.binary.BiTree;
+import waffles.utils.sets.arboreal.binary.balance.Balance;
+import waffles.utils.sets.arboreal.binary.balance.BalanceTree;
 import waffles.utils.sets.utilities.rooted.Nodal;
 import waffles.utils.tools.collections.iterators.EmptyIterator;
 import waffles.utils.tools.collections.iterators.ValueIterator;
@@ -30,6 +30,30 @@ import waffles.utils.tools.collections.iterators.ValueIterator;
  */
 public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTree<N>, Comparator<O>, IterableSet<O>
 {
+	/**
+	 * An {@code IOTree.Factory} generates {@code IONode} objects.
+	 *
+	 * @author Waffles
+	 * @since 25 Jan 2026
+	 * @version 1.1
+	 *
+	 * 
+	 * @param <O>  an object type
+	 * @see BiTree
+	 */
+	public static interface Factory<O> extends BiTree.Factory
+	{			
+		@Override
+		public default IONode<O> node(Object... data)
+		{
+			return new IONode<>(Tree(), (O) data[0]);
+		}
+		
+		@Override
+		public abstract IOTree<?, O> Tree();
+	}
+	
+	
 	private Balance<N> balance;
 	private Comparator<O> comp;
 
@@ -145,32 +169,19 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 		return compare(n1.Value(), n2.Value());
 	}
 	
-	
+			
 	@Override
-	public IONode<O> createNode(Object... vals)
-	{
-		return new IONode<>(this, (O) vals[0]);
-	}
-	
-	@Override
-	public void setRoot(Nodal root)
+	public void setRoot(Nodal r)
 	{
 		// Fire the clear event,
 		// before firing the
 		// insert event.
 		
 		onClear();
-		super.setRoot(root);
-		onInsert((N) root);
+		super.setRoot(r);
+		onInsert((N) r);
 	}
-	
-	@Override
-	public N Root()
-	{
-		return (N) super.Root();
-	}
-	
-	
+		
 	@Override
 	public boolean contains(O obj)
 	{
@@ -199,6 +210,13 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 		return ((Comparable<O>) o1).compareTo(o2);
 	}
 
+	
+	@Override
+	public Factory<O> Factory()
+	{
+		return () -> this;
+	}
+	
 	@Override
 	public Iterator<O> iterator()
 	{
@@ -216,7 +234,7 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 	{
 		return balance;
 	}
-	
+
 	
 	@Override
 	public void clear()
@@ -230,5 +248,11 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 	{
 		if(Root() == null) return 0;
 		return Root().TreeSize();
-	}	
+	}
+	
+	@Override
+	public N Root()
+	{
+		return (N) super.Root();
+	}
 }

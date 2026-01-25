@@ -1,4 +1,4 @@
-package waffles.utils.sets.rooted.binary;
+package waffles.utils.sets.arboreal.binary;
 
 import waffles.utils.sets.utilities.rooted.Node;
 

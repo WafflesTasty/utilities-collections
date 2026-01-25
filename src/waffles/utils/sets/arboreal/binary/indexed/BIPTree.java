@@ -1,7 +1,7 @@
-package waffles.utils.sets.rooted.binary.indexed;
+package waffles.utils.sets.arboreal.binary.indexed;
 
+import waffles.utils.sets.arboreal.binary.BiTree;
 import waffles.utils.sets.indexed.IndexedSet;
-import waffles.utils.sets.rooted.binary.BiTree;
 import waffles.utils.sets.utilities.rooted.iterators.binary.indexed.BIPNodes;
 
 /**
@@ -20,16 +20,42 @@ import waffles.utils.sets.utilities.rooted.iterators.binary.indexed.BIPNodes;
  */
 public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 {	
-	private int[] dimensions;
+	/**
+	 * A {@code BIPTree.Factory} generates {@code BIPNode} objects.
+	 *
+	 * @author Waffles
+	 * @since 25 Jan 2026
+	 * @version 1.1
+	 *
+	 * 
+	 * @see BiTree
+	 */
+	public static interface Factory extends BiTree.Factory
+	{
+		@Override
+		public abstract BIPTree<?> Tree();
+			
+		@Override
+		public default BIPNode node(Object... data)
+		{
+			int[] min = (int[]) data[0];
+			int[] max = (int[]) data[1];
+			
+			return new BIPNode(Tree(), min, max);
+		}
+	}
+	
+	
+	private int[] dims;
 	
 	/**
 	 * Creates a new {@code BIPTree}.
 	 * 
-	 * @param dims  a tree dimension
+	 * @param d  tree dimensions
 	 */
-	public BIPTree(int... dims)
+	public BIPTree(int... d)
 	{
-		dimensions = dims;
+		dims = d;
 	}
 	
 	/**
@@ -89,7 +115,26 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 		
 		return node;
 	}
-			
+
+	
+	@Override
+	public BIPNode Root()
+	{
+		BIPNode root = (BIPNode) super.Root();
+		if(root != null)
+		{
+			return root;
+		}
+		
+		clear();
+		return Root();
+	}
+	
+	@Override
+	public Factory Factory()
+	{
+		return () -> this;
+	}
 	
 	@Override
 	public O get(int... crds)
@@ -100,7 +145,7 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	@Override
 	public int[] Dimensions()
 	{
-		return dimensions;
+		return dims;
 	}
 	
 	@Override
@@ -123,39 +168,18 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	
 	@Override
 	public void clear()
-	{
+	{	
+		Factory fct = Factory();
+		
 		int[] min = Minimum();
 		int[] max = Maximum();
 		
-		setRoot(createNode(min, max));
+		setRoot(fct.node(min, max));
 	}
 	
 	@Override
 	public int Count()
 	{
 		return IndexedSet.super.Count();
-	}
-
-
-	@Override
-	public BIPNode createNode(Object... vals)
-	{
-		int[] min = (int[]) vals[0];
-		int[] max = (int[]) vals[1];
-		
-		return new BIPNode(this, min, max);
-	}
-	
-	@Override
-	public BIPNode Root()
-	{
-		BIPNode root = (BIPNode) super.Root();
-		if(root != null)
-		{
-			return root;
-		}
-		
-		clear();
-		return Root();
 	}
 }

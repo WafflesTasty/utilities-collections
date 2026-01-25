@@ -1,7 +1,7 @@
-package waffles.utils.sets.rooted.binary.balance;
+package waffles.utils.sets.arboreal.binary.balance;
 
-import waffles.utils.sets.rooted.Rooted;
-import waffles.utils.sets.rooted.binary.BiNode;
+import waffles.utils.sets.arboreal.Arboreal;
+import waffles.utils.sets.arboreal.binary.BiNode;
 
 /**
  * A {@code BalanceTree} defines a tree which can balance itself while keeping its nodes in order.
@@ -17,9 +17,9 @@ import waffles.utils.sets.rooted.binary.BiNode;
  * @param <N>  a node type
  * @see Balance
  * @see BiNode
- * @see Rooted
+ * @see Arboreal
  */
-public interface BalanceTree<N extends BiNode> extends Balance<N>, Rooted
+public interface BalanceTree<N extends BiNode> extends Balance<N>, Arboreal
 {
 	/**
 	 * Returns the balance of the {@code BalanceTree}.
