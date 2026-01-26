@@ -21,7 +21,6 @@ public interface Coordinator extends Ordered
 	 */
 	public abstract int[] Dimensions();
 	
-	
 	/**
 	 * Returns the order of the {@code Coordinator}.
 	 * The order represents how many indices are needed
