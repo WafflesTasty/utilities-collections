@@ -58,9 +58,12 @@ public class IndexValues<O> implements Iterator<O>
 		this.max = max;
 
 		validate();
-		if(index.get(next) == null)
+		if(next != null)
 		{
-			find();
+			if(index.get(next) == null)
+			{
+				find();
+			}
 		}
 	}
 	
