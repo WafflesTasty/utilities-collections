@@ -9,6 +9,7 @@ import waffles.utils.sets.utilities.rooted.iterators.LeafIterator;
 import waffles.utils.tools.collections.Iterables;
 import waffles.utils.tools.patterns.Constructible;
 import waffles.utils.tools.patterns.Constructible.Workshop;
+import waffles.utils.tools.patterns.properties.Immutable;
 
 /**
  * An {@code Arboreal} object defines a tree-like node structure.
@@ -23,9 +24,10 @@ import waffles.utils.tools.patterns.Constructible.Workshop;
  * 
  * @see Constructible
  * @see CountableSet
+ * @see Immutable
  */
 @FunctionalInterface
-public interface Arboreal extends Constructible, CountableSet
+public interface Arboreal extends Constructible, CountableSet, Immutable
 {
 	/**
 	 * A {@code Rooted.Factory} generates {@code Node} objects.
@@ -62,6 +64,30 @@ public interface Arboreal extends Constructible, CountableSet
 		}
 	}
 
+	/**
+	 * A {@code Mutable Arboreal} allows its root to be changed.
+	 *
+	 * @author Waffles
+	 * @since 13 Feb 2026
+	 * @version 1.1
+	 *
+	 * 
+	 * @see Immutable
+	 * @see Arboreal
+	 */
+	public static interface Mutable extends Arboreal, Immutable.Mutable
+	{
+		/**
+		 * Changes the root of the {@code Arboreal}.
+		 * 
+		 * @param r  a root node
+		 * 
+		 * 
+		 * @see Nodal
+		 */
+		public abstract void setRoot(Nodal r);
+	}
+	
 
 	/**
 	 * Returns the root of the {@code Arboreal}.

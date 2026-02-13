@@ -13,18 +13,39 @@ import waffles.utils.sets.utilities.rooted.Node;
  *
  * @see Arboreal
  */
-public class Tree implements Arboreal
+public class Tree implements Arboreal.Mutable
 {
 	private Nodal root;
-	
+
 	/**
-	 * Changes the root of the {@code Tree}.
+	 * Creates a new {@code Tree}.
 	 * 
-	 * @param r  a root nodal
+	 * @param r  a root node
 	 * 
 	 * 
 	 * @see Nodal
 	 */
+	public Tree(Nodal r)
+	{
+		root = r;
+	}
+	
+	/**
+	 * Creates a new {@code Tree}.
+	 */
+	public Tree()
+	{
+		// NOT APPLICABLE
+	}
+	
+	
+	@Override
+	public Nodal Root()
+	{
+		return root;
+	}
+	
+	@Override
 	public void setRoot(Nodal r)
 	{
 		root = r;
@@ -33,13 +54,6 @@ public class Tree implements Arboreal
 			Node node = root.Arch();
 			node.setParent(null);
 		}
-	}
-
-	
-	@Override
-	public Nodal Root()
-	{
-		return root;
 	}
 	
 	@Override

@@ -1,7 +1,6 @@
 package waffles.utils.sets.utilities.rooted;
 
 import waffles.utils.sets.arboreal.Arboreal;
-import waffles.utils.sets.arboreal.Tree;
 import waffles.utils.tools.patterns.basic.Clearable;
 import waffles.utils.tools.primitives.Array;
 import waffles.utils.tools.primitives.Integers;
@@ -332,7 +331,13 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	{
 		children = new Nodal[0];
 	}
-				
+
+	@Override
+	public Arboreal.Mutable Set()
+	{
+		return super.Set();
+	}
+	
 	@Override
 	public Nodal Delegate()
 	{
@@ -355,11 +360,5 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	public Node Arch()
 	{
 		return this;
-	}
-	
-	@Override
-	public Tree Set()
-	{
-		return super.Set();
 	}
 }
