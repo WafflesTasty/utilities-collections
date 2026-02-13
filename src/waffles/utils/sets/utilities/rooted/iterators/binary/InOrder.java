@@ -48,16 +48,15 @@ public class InOrder<N extends BiNodal> implements Iterator<N>
 	@Override
 	public N next()
 	{
-		BiNode n;
 		while(node != null)
 		{
 			queue.push(node);
-			n = node.Arch();
+			BiNode n = node.Arch();
 			node = n.LChild();
 		}
 
 		next = queue.poll();
-		n = next.Arch();
+		BiNode n = next.Arch();
 		node = n.RChild();
 		return (N) next;
 	}

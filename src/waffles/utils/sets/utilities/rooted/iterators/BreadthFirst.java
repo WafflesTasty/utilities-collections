@@ -5,7 +5,6 @@ import java.util.Iterator;
 import waffles.utils.sets.queues.Deque;
 import waffles.utils.sets.queues.wrapper.JavaDeque;
 import waffles.utils.sets.utilities.rooted.Nodal;
-import waffles.utils.sets.utilities.rooted.Node;
 
 /**
  * A {@code BreadthFirst} iterator traverses a tree in a breadth-first manner.
@@ -45,8 +44,7 @@ public class BreadthFirst<N extends Nodal> implements Iterator<N>
 	public N next()
 	{		
 		Nodal next = queue.popFirst();
-		Node arch = (Node) next.Arch();
-		for(Nodal c : arch.Children())
+		for(Nodal c : next.Arch().Children())
 		{
 			if(c != null)
 			{

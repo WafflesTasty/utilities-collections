@@ -124,7 +124,7 @@ public class Hierarchy extends Collector implements Hierarchical
 			return true;
 		}
 
-		Hierarchy a = (Hierarchy) h.Arch();
+		Hierarchy a = h.Arch();
 		Hierarchical p = a.Parent();
 		if(p != null)
 		{
@@ -160,7 +160,7 @@ public class Hierarchy extends Collector implements Hierarchical
 		Hierarchical p = Parent();
 		if(p != null)
 		{
-			return ((Hierarchy) p.Arch()).Root();
+			return p.Arch().Root();
 		}
 		
 		return Delegate();
@@ -189,7 +189,7 @@ public class Hierarchy extends Collector implements Hierarchical
 		Hierarchical p = Parent();
 		if(p != null)
 		{
-			return ((Hierarchy) p.Arch()).Depth() + 1;
+			return p.Arch().Depth() + 1;
 		}
 		
 		return 0;

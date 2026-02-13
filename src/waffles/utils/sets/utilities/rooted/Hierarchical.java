@@ -15,5 +15,5 @@ package waffles.utils.sets.utilities.rooted;
 public interface Hierarchical extends Collectible
 {		
 	@Override
-	public abstract Hierarchical Arch();
+	public abstract Hierarchy Arch();
 }

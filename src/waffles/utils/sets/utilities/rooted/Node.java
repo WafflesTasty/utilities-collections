@@ -102,23 +102,22 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public void addChild(Nodal n)
 	{
-		for(int k = 0; k < chld.length; k++)
-		{
-			if(chld[k] == null)
-			{
-				chld[k] = n;
-				
-				Node node = (Node) n.Arch();
-				node.setParent(Delegate());
-				return;
-			}
-		}
-		
-		chld = Array.add.to(chld, n);
 		if(n != null)
 		{
-			Node node = (Node) n.Arch();
-			node.setParent(Delegate());
+			Node a = n.Arch();
+			Nodal d = Delegate();
+			for(int k = 0; k < chld.length; k++)
+			{
+				if(chld[k] == null)
+				{
+					a.setParent(d);
+					chld[k] = n;
+					return;
+				}
+			}
+			
+			chld = Array.add.to(chld, n);
+			a.setParent(d);
 		}
 	}
 		
@@ -141,8 +140,8 @@ public class Node extends Hierarchy implements Clearable, Nodal
 		chld[i] = n;
 		if(n != null)
 		{
-			Node node = (Node) n.Arch();
-			node.setParent(Delegate());
+			Nodal d = Delegate();
+			n.Arch().setParent(d);
 		}
 	}
 		
@@ -182,7 +181,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 			Set().setRoot(n);
 		else
 		{
-			Node p = (Node) Parent().Arch();
+			Node p = Parent().Arch();
 			p.setChild(TreeIndex(), n);
 			setParent(null);
 		}
@@ -207,8 +206,9 @@ public class Node extends Hierarchy implements Clearable, Nodal
 			Set().setRoot(null);
 		else
 		{
-			Node parent = (Node) Parent().Arch();
-			parent.setChild(TreeIndex(), null);
+			int idx = TreeIndex();
+			Node p = Parent().Arch();
+			p.setChild(idx, null);
 		}
 	}
 	
@@ -221,9 +221,9 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public boolean isLeaf()
 	{
-		for(Nodal node : Children())
+		for(Nodal n : Children())
 		{
-			if(node != null)
+			if(n != null)
 			{
 				return false;
 			}
@@ -240,16 +240,16 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public int ChildCount()
 	{
-		int count = 0;
-		for(Nodal node : Children())
+		int cnt = 0;
+		for(Nodal n : Children())
 		{
-			if(node != null)
+			if(n != null)
 			{
-				count++;
+				cnt++;
 			}
 		}
 		
-		return count;
+		return cnt;
 	}
 	
 	/**
@@ -260,18 +260,20 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public int TreeIndex()
 	{
-		int index = 0;
+		int idx = 0;
 		// Assumes the iterator starts at zero.
-		Node parent = (Node) Parent().Arch();
-		for(Nodal nodal : parent.Children())
+		Node p = Parent().Arch();
+		for(Nodal n : p.Children())
 		{
-			if(nodal != null)
+			if(n != null)
 			{
-				if(this == nodal.Arch())
-					return index;
+				if(this == n.Arch())
+				{
+					return idx;
+				}
 			}
 
-			index++;
+			idx++;
 		}
 		
 		return -1;
@@ -286,17 +288,17 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public int TreeSize()
 	{
-		int count = 1;
-		for(Nodal nodal : Children())
+		int cnt = 1;
+		for(Nodal n : Children())
 		{
-			if(nodal != null)
+			if(n != null)
 			{
-				Node child = (Node) nodal.Arch();
-				count += child.TreeSize();
+				Node c = n.Arch();
+				cnt += c.TreeSize();
 			}
 		}
 		
-		return count;
+		return cnt;
 	}
 	
 	/**
@@ -311,12 +313,12 @@ public class Node extends Hierarchy implements Clearable, Nodal
 		if(!isLeaf())
 		{
 			int max = 0;
-			for(Nodal nodal : Children())
+			for(Nodal n : Children())
 			{
-				if(nodal != null)
+				if(n != null)
 				{
-					Node child = (Node) nodal.Arch();
-					max = Integers.max(max, child.Level());
+					int l = n.Arch().Level();
+					max = Integers.max(max, l);
 				}
 			}
 			

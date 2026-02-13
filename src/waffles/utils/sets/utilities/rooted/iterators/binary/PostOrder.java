@@ -49,13 +49,12 @@ public class PostOrder<N extends BiNodal> implements Iterator<N>
 	@Override
 	public N next()
 	{
-		BiNode n;
 		while(true)
 		{
 			if(node != null)
 			{
 				queue.push(node);
-				n = node.Arch();
+				BiNode n = node.Arch();
 				node = n.LChild();
 				continue;
 			}
