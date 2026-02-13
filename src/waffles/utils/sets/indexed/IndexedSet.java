@@ -1,7 +1,8 @@
-	package waffles.utils.sets.indexed;
+package waffles.utils.sets.indexed;
 
 import waffles.utils.sets.CountableSet;
 import waffles.utils.sets.DimensionalSet;
+import waffles.utils.sets.utilities.indexed.coords.Coordination;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -15,9 +16,10 @@ import waffles.utils.tools.primitives.Array;
  * 
  * @param <O>  an object type
  * @see DimensionalSet
+ * @see Coordination
  * @see CountableSet
  */
-public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
+public interface IndexedSet<O> extends CountableSet, Coordination, DimensionalSet<O>
 {	
 	/**
 	 * A {@code Wrapper} defines a wrapper around another {@code IndexedSet}.
@@ -62,7 +64,6 @@ public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 		}
 	}
 	
-	
 	/**
 	 * Verifies if the {@code IndexedSet} defines a coordinate.
 	 * This will return false when a coordinate is negative or outside
@@ -98,50 +99,8 @@ public interface IndexedSet<O> extends CountableSet, DimensionalSet<O>
 		
 		return true;
 	}
-	
-	
-	/**
-	 * Returns the minimum coordinate of the {@code IndexedSet}.
-	 * 
-	 * @return  a minimum index coordinate
-	 */
-	public default int[] Minimum()
-	{
-		return new int[Order()];
-	}
-	
-	/**
-	 * Returns the maximum coordinate of the {@code IndexedSet}.
-	 * 
-	 * @return  a maximum index coordinate
-	 */
-	public default int[] Maximum()
-	{
-		int[] max = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			max[i] = Dimensions()[i] - 1;
-		}
-		
-		return max;
-	}
 
 
-	@Override
-	public default int[] Dimensions()
-	{
-		int[] min = Minimum();
-		int[] max = Maximum();
-		
-		int[] dim = new int[Order()];
-		for(int i = 0; i < Order(); i++)
-		{
-			dim[i] = max[i] - min[i] + 1;
-		}
-
-		return dim;
-	}
-	
 	@Override
 	public default int Count()
 	{
