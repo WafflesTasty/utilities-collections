@@ -22,7 +22,7 @@ import waffles.utils.sets.arboreal.binary.BiNode;
 public class PostOrder<N extends BiNodal> implements Iterator<N>
 {	
 	private BiNodal peek;
-	private BiNodal next, nodal;
+	private BiNodal next, node;
 	private Deque<BiNodal> queue;
 
 	/**
@@ -36,33 +36,34 @@ public class PostOrder<N extends BiNodal> implements Iterator<N>
 	public PostOrder(BiNodal base)
 	{
 		queue = new ArrayDeque<>();
-		nodal = base;
+		node = base;
 	}
 
 	
 	@Override
 	public boolean hasNext()
 	{
-		return !(queue.isEmpty() && nodal == null);
+		return !(queue.isEmpty() && node == null);
 	}
 
 	@Override
 	public N next()
 	{
+		BiNode n;
 		while(true)
 		{
-			if(nodal != null)
+			if(node != null)
 			{
-				queue.push(nodal);
-				BiNode node = nodal.Arch();
-				nodal = node.LChild();
+				queue.push(node);
+				n = node.Arch();
+				node = n.LChild();
 				continue;
 			}
 			
 			peek = queue.peek().Arch().RChild();
 			if(peek != null && peek != next)
 			{
-				nodal = peek;
+				node = peek;
 				continue;
 			}
 			

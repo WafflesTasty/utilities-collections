@@ -13,7 +13,7 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.0
  * 
  * 
- * @param <E>  a node enum type
+ * @param <E>  an enum type
  * @see BIPNode
  * @see Enum
  */

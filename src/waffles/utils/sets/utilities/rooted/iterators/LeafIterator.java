@@ -4,6 +4,7 @@ import java.util.Iterator;
 
 import waffles.utils.sets.arboreal.Arboreal;
 import waffles.utils.sets.utilities.rooted.Nodal;
+import waffles.utils.sets.utilities.rooted.Node;
 
 /**
  * A {@code LeafIterator} iterates over all leaves of a {@code Rooted}.
@@ -37,12 +38,14 @@ public class LeafIterator<N extends Nodal> implements Iterator<N>
 	}
 
 	
-	Nodal findNext()
+	private Nodal findNext()
 	{
 		if(nodes.hasNext())
 		{
 			next = nodes.next();
-			if(!next.Arch().isLeaf())
+			
+			Node n = (Node) next.Arch();
+			if(!n.isLeaf())
 			{
 				return findNext();
 			}

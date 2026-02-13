@@ -168,9 +168,10 @@ public interface Arboreal extends Constructible, CountableSet, Immutable
 	@Override
 	public default int Count()
 	{
-		if(Root() != null)
+		Nodal r = Root();
+		if(r != null)
 		{
-			Node n = Root().Arch();
+			Node n = (Node) r.Arch();
 			return n.TreeSize();
 		}
 		

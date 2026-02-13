@@ -14,5 +14,5 @@ package waffles.utils.sets.utilities.rooted;
 public interface Nodal extends Hierarchical
 {	
 	@Override
-	public abstract Node Arch();
+	public abstract Nodal Arch();
 }

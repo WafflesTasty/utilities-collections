@@ -49,10 +49,10 @@ public class Tree implements Arboreal.Mutable
 	public void setRoot(Nodal r)
 	{
 		root = r;
-		if(root != null)
+		if(r != null)
 		{
-			Node node = root.Arch();
-			node.setParent(null);
+			Node n = (Node) r.Arch();
+			n.setParent(null);
 		}
 	}
 	

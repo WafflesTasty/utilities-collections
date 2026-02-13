@@ -23,7 +23,7 @@ import waffles.utils.tools.primitives.Integers;
  */
 public class Node extends Hierarchy implements Clearable, Nodal
 {
-	private Nodal[] children;
+	private Nodal[] chld;
 		
 	/**
 	 * Creates a new {@code Node}.
@@ -35,7 +35,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public Node(Nodal n)
 	{
-		super(n); children = new Nodal[0];
+		super(n); chld = new Nodal[0];
 	}
 	
 	/**
@@ -50,7 +50,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public Node(Arboreal r, Nodal n)
 	{
-		super(r, n); children = new Nodal[0];
+		super(r, n); chld = new Nodal[0];
 	}
 		
 	/**
@@ -63,7 +63,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public Node(Arboreal r)
 	{
-		super(r); children = new Nodal[0];
+		super(r); chld = new Nodal[0];
 	}
 	
 	/**
@@ -71,7 +71,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public Node()
 	{
-		super(); children = new Nodal[0];
+		super(); chld = new Nodal[0];
 	}
 	
 	
@@ -83,9 +83,9 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public Nodal Child(int i)
 	{
-		if(0 <= i && i < children.length)
+		if(0 <= i && i < chld.length)
 		{
-			return children[i];
+			return chld[i];
 		}
 		
 		return null;
@@ -102,21 +102,22 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public void addChild(Nodal n)
 	{
-		for(int i = 0; i < children.length; i++)
+		for(int k = 0; k < chld.length; k++)
 		{
-			if(children[i] == null)
+			if(chld[k] == null)
 			{
-				children[i] = n;
-				Node node = n.Arch();
+				chld[k] = n;
+				
+				Node node = (Node) n.Arch();
 				node.setParent(Delegate());
 				return;
 			}
 		}
 		
-		children = Array.add.to(children, n);
+		chld = Array.add.to(chld, n);
 		if(n != null)
 		{
-			Node node = n.Arch();
+			Node node = (Node) n.Arch();
 			node.setParent(Delegate());
 		}
 	}
@@ -132,15 +133,15 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public void setChild(int i, Nodal n)
 	{
-		if(children.length <= i)
+		if(chld.length <= i)
 		{
-			children = Array.copy.of(children, i + 1);
+			chld = Array.copy.of(chld, i + 1);
 		}
 		
-		children[i] = n;
+		chld[i] = n;
 		if(n != null)
 		{
-			Node node = n.Arch();
+			Node node = (Node) n.Arch();
 			node.setParent(Delegate());
 		}
 	}
@@ -157,11 +158,11 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public void removeChild(Nodal n)
 	{
-		for(int i = 0; i < children.length; i++)
+		for(int i = 0; i < chld.length; i++)
 		{
-			if(children[i] == n)
+			if(chld[i] == n)
 			{
-				children = Array.remove.from(children, i);
+				chld = Array.remove.from(chld, i);
 				return;
 			}
 		}
@@ -181,8 +182,8 @@ public class Node extends Hierarchy implements Clearable, Nodal
 			Set().setRoot(n);
 		else
 		{
-			Node pNode = Parent().Arch();
-			pNode.setChild(TreeIndex(), n);
+			Node p = (Node) Parent().Arch();
+			p.setChild(TreeIndex(), n);
 			setParent(null);
 		}
 	}
@@ -194,7 +195,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	 */
 	public Nodal[] Children()
 	{
-		return children;
+		return chld;
 	}
 
 	/**
@@ -206,7 +207,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 			Set().setRoot(null);
 		else
 		{
-			Node parent = Parent().Arch();
+			Node parent = (Node) Parent().Arch();
 			parent.setChild(TreeIndex(), null);
 		}
 	}
@@ -329,7 +330,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	@Override
 	public void clear()
 	{
-		children = new Nodal[0];
+		chld = new Nodal[0];
 	}
 
 	@Override

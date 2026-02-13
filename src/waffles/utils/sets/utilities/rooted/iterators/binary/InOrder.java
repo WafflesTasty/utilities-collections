@@ -21,7 +21,7 @@ import waffles.utils.sets.arboreal.binary.BiNode;
  */
 public class InOrder<N extends BiNodal> implements Iterator<N>
 {
-	private BiNodal nodal, next;
+	private BiNodal node, next;
 	private Deque<BiNodal> queue;
 
 	/**
@@ -35,29 +35,30 @@ public class InOrder<N extends BiNodal> implements Iterator<N>
 	public InOrder(BiNodal base)
 	{
 		queue = new ArrayDeque<>();
-		nodal = base;
+		node = base;
 	}
 
 
 	@Override
 	public boolean hasNext()
 	{
-		return !(queue.isEmpty() && nodal == null);
+		return !(queue.isEmpty() && node == null);
 	}
 	
 	@Override
 	public N next()
 	{
-		while(nodal != null)
+		BiNode n;
+		while(node != null)
 		{
-			queue.push(nodal);
-			BiNode node = nodal.Arch();
-			nodal = node.LChild();
+			queue.push(node);
+			n = node.Arch();
+			node = n.LChild();
 		}
 
 		next = queue.poll();
-		BiNode node = next.Arch();
-		nodal = node.RChild();
+		n = next.Arch();
+		node = n.RChild();
 		return (N) next;
 	}
 }

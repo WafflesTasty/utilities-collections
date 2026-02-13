@@ -14,10 +14,7 @@ public interface Collectible
 	/**
 	 * Returns the architecture of the {@code Collectible}.
 	 * 
-	 * @return  a set archicture
-	 * 
-	 * 
-	 * @see Collector
+	 * @return  a set architecture
 	 */
-	public abstract Collector Arch();
+	public abstract Collectible Arch();
 }
