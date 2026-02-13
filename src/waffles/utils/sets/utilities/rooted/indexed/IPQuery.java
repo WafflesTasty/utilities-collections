@@ -1,6 +1,7 @@
 package waffles.utils.sets.utilities.rooted.indexed;
 
 import waffles.utils.sets.indexed.IndexedSet;
+import waffles.utils.sets.utilities.indexed.coords.Coordination;
 
 /**
  * An {@code IPQuery} generates information for an index partition query.
@@ -60,7 +61,7 @@ public class IPQuery<O>
 	
 	
 	private int[] min, max;
-	private IndexedSet<O> node;
+	private Coordination node;
 	
 	/**
 	 * Creates a new {@code IPQuery}.
@@ -72,7 +73,7 @@ public class IPQuery<O>
 	 * 
 	 * @see IndexedSet
 	 */
-	public IPQuery(IndexedSet<O> node, int[] min, int[] max)
+	public IPQuery(Coordination node, int[] min, int[] max)
 	{
 		this.node = node;
 		this.min = min;

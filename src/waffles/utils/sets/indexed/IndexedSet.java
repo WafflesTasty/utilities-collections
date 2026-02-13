@@ -64,43 +64,6 @@ public interface IndexedSet<O> extends CountableSet, Coordination, DimensionalSe
 		}
 	}
 	
-	/**
-	 * Verifies if the {@code IndexedSet} defines a coordinate.
-	 * This will return false when a coordinate is negative or outside
-	 * the bounds of its given dimensions. Any index array that is too
-	 * large for the set will return true if and only if the bonus
-	 * dimensions are all equal to zero.
-	 * 
-	 * @param crds  an index coordinate
-	 * @return  {@code true} if coordinate is valid
-	 */
-	public default boolean defines(int... crds)
-	{
-		for(int i = 0; i < crds.length; i++)
-		{
-			// If coordinates exceed the index order...
-			if(Order() <= i)
-			{
-				// The remainder have to be zero.
-				if(crds[i] != 0)
-				{
-					return false;
-				}
-				
-				continue;
-			}
-
-			// Otherwise, check the coordinate bounds.
-			if(crds[i] < Minimum()[i] || Maximum()[i] < crds[i])
-			{
-				return false;
-			}
-		}
-		
-		return true;
-	}
-
-
 	@Override
 	public default int Count()
 	{

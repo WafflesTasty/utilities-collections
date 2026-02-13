@@ -97,25 +97,15 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	 */
 	public BIPNode nodeAt(int... crds)
 	{
-		// If the coordinates are out of bounds...
-		if(!defines(crds))
+		BIPNode n = Root();
+		while(!n.isLeaf())
 		{
-			// Don't return anything.
-			return null;
+			n = n.childAt(crds);
 		}
-		
-		
-		// Otherwise, start from the root...
-		BIPNode node = Root();
-		while(!node.isLeaf())
-		{
-			// And find the closest node.
-			node = node.get(crds);
-		}
-		
-		return node;
-	}
 
+		return n;
+	}
+	
 	
 	@Override
 	public BIPNode Root()

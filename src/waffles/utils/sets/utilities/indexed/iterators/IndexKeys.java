@@ -2,8 +2,8 @@ package waffles.utils.sets.utilities.indexed.iterators;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.indexed.MutableIndex.Order;
+import waffles.utils.sets.utilities.indexed.coords.Coordination;
 import waffles.utils.tools.primitives.Array;
 
 /**
@@ -21,7 +21,7 @@ public class IndexKeys implements Iterator<int[]>
 	private Order order;
 	private int[] iMin, iMax;
 	private int[] curr, next;
-	private IndexedSet<?> index;
+	private Coordination index;
 
 	/**
 	 * Creates a new {@code IndexKeys}.
@@ -30,10 +30,10 @@ public class IndexKeys implements Iterator<int[]>
 	 * @param ord  an index order
 	 * 
 	 * 
-	 * @see IndexedSet
+	 * @see Coordination
 	 * @see Order
 	 */
-	public IndexKeys(IndexedSet<?> idx, Order ord)
+	public IndexKeys(Coordination idx, Order ord)
 	{
 		this(idx, ord, idx.Minimum(), idx.Maximum());
 	}
@@ -47,10 +47,10 @@ public class IndexKeys implements Iterator<int[]>
 	 * @param max  a maximum coordinate
 	 * 
 	 * 
-	 * @see IndexedSet
+	 * @see Coordination
 	 * @see Order
 	 */
-	public IndexKeys(IndexedSet<?> idx, Order ord, int[] min, int[] max)
+	public IndexKeys(Coordination idx, Order ord, int[] min, int[] max)
 	{		
 		index = idx;
 		order = ord;
@@ -69,9 +69,9 @@ public class IndexKeys implements Iterator<int[]>
 	 * @param max  a maximum coordinate
 	 * 
 	 * 
-	 * @see IndexedSet
+	 * @see Coordination
 	 */
-	public IndexKeys(IndexedSet<?> idx, int[] min, int[] max)
+	public IndexKeys(Coordination idx, int[] min, int[] max)
 	{
 		this(idx, Order.COL_MAJOR, min, max);
 	}
@@ -82,9 +82,9 @@ public class IndexKeys implements Iterator<int[]>
 	 * @param idx  a target index
 	 * 
 	 * 
-	 * @see IndexedSet
+	 * @see Coordination
 	 */
-	public IndexKeys(IndexedSet<?> idx)
+	public IndexKeys(Coordination idx)
 	{
 		this(idx, Order.COL_MAJOR);
 	}
@@ -110,7 +110,7 @@ public class IndexKeys implements Iterator<int[]>
 		return curr;
 	}
 	
-	IndexedSet<?> Index()
+	Coordination Index()
 	{
 		return index;
 	}

@@ -311,8 +311,11 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 			// Find the closest child,
 			// adding the value to the
 			// nodes along the way.
-			node.addValue(val);
-			node = node.get(crds);
+			for(BEPNode<E> c : node.Nodes(crds))
+			{
+				node.addValue(val);
+				node = c;
+			}
 		}
 		
 		// If the final child has the same value...
@@ -329,8 +332,7 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 		{
 			node.split(crds, crds);
 			node.addValue(val);
-			
-			node = node.get(crds);
+			node = node.childAt(crds);
 		}
 		
 		node.setValue(val);
@@ -356,38 +358,31 @@ public class BEPTree<E extends Enum<E>> extends BIPTree<E> implements MutableInd
 	@Override
 	public E remove(int... crds)
 	{
-		// If the coordinates are out of bounds...
-		if(!defines(crds))
+		BEPNode<E> n = nodeAt(crds);
+		// If no node was found...
+		if(n == null)
 		{
-			// Bail.
+			// ...bail.
 			return null;
-		}
-
-		// Otherwise, start from the root...
-		BEPNode<E> node = Root();
-		while(!node.isLeaf())
-		{
-			// And find the closest child node.
-			node = node.get(crds);
-		}
+		}		
 		
 		// If it has no value...
-		if(node.Value() == null)
+		if(n.Value() == null)
 		{
-			// Bail.
+			// ...bail.
 			return null;
 		}
 		
 		// Otherwise, split it down to the tile...
-		E prev = node.Value();
-		while(!node.isTile())
+		E prev = n.Value();
+		while(!n.isTile())
 		{
-			node.split(crds, crds);
-			node = node.get(crds);
+			n.split(crds, crds);
+			n = n.childAt(crds);
 		}
 		
 		// And remove the final tile's value.
-		node.setValue(null);		
+		n.setValue(null);		
 		return prev;
 	}
 	

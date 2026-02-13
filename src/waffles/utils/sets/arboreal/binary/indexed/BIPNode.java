@@ -2,7 +2,8 @@ package waffles.utils.sets.arboreal.binary.indexed;
 
 import waffles.utils.sets.arboreal.binary.BiNode;
 import waffles.utils.sets.arboreal.binary.indexed.BIPTree.Factory;
-import waffles.utils.sets.indexed.IndexedSet;
+import waffles.utils.sets.arboreal.binary.indexed.iterators.QRYNodes;
+import waffles.utils.sets.utilities.indexed.coords.Coordination;
 import waffles.utils.sets.utilities.indexed.iterators.IndexKeys;
 import waffles.utils.sets.utilities.rooted.indexed.IPQuery;
 import waffles.utils.sets.utilities.rooted.indexed.IPQuery.Axis;
@@ -17,10 +18,10 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  * 
  * 
- * @see IndexedSet
+ * @see Coordination
  * @see BiNode
  */
-public class BIPNode extends BiNode implements IndexedSet<BIPNode>
+public class BIPNode extends BiNode implements Coordination
 {	
 	private int cDim;
 	private int[] cMin, cMax;
@@ -42,6 +43,22 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 		cMin = Array.copy.of(min);
 		cMax = Array.copy.of(max);
 		cDim = -1;
+	}
+	
+	/**
+	 * Queries the {@code BIPNode} for a node sequence.
+	 * 
+	 * @param <N>   a node type
+	 * @param crds  a coordinate
+	 * @return  a node iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 * @see BIPNode
+	 */
+	public <N extends BIPNode> Iterable<N> Nodes(int... crds)
+	{
+		return () -> new QRYNodes<>(this, crds);
 	}
 	
 	/**
@@ -93,35 +110,32 @@ public class BIPNode extends BiNode implements IndexedSet<BIPNode>
 		setLChild(lChild);
 		setRChild(rChild);
 	}
-
+		
 	/**
-	 * Finds a child of the {@code BIPNode} which
-	 * is the closest to a given index.
+	 * Returns a child at a coordinate in the {@code BIPNode}.
 	 * 
-	 * @param coords  an index coordinate
+	 * @param crds  a coordinate
 	 * @return  a child node
 	 * 
 	 * 
 	 * @see BIPNode
 	 */
-	@Override
-	public BIPNode get(int... coords)
+	public BIPNode childAt(int... crds)
 	{
-		// If it has no children...
-		if(isLeaf())
+		if(!isLeaf() && defines(crds))
 		{
-			// Bail.
-			return null;
+			int d = DimSplit();
+			int c = RChild().Minimum()[d];
+			
+			if(crds[d] < c)
+				return LChild();
+			
+			return RChild();
 		}
 		
-		// Otherwise, find the cutoff value....
-		int cut = RChild().Minimum()[cDim];
-		// And return the correct child node.
-		if(coords[cDim] < cut)
-			return LChild();
-		return RChild();
+		return null;
 	}
-		
+	
 	/**
 	 * Iterates the coordinates in the {@code BIPNode}.
 	 * 
