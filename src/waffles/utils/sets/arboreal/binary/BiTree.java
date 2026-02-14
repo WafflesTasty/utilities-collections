@@ -2,9 +2,6 @@ package waffles.utils.sets.arboreal.binary;
 
 import waffles.utils.sets.arboreal.Arboreal;
 import waffles.utils.sets.arboreal.Tree;
-import waffles.utils.sets.utilities.rooted.iterators.binary.InOrder;
-import waffles.utils.sets.utilities.rooted.iterators.binary.PostOrder;
-import waffles.utils.sets.utilities.rooted.iterators.binary.PreOrder;
 
 /**
  * The {@code BiTree} class defines a generic binary tree structure.
@@ -14,9 +11,10 @@ import waffles.utils.sets.utilities.rooted.iterators.binary.PreOrder;
  * @version 1.0
  * 
  * 
+ * @see BiArboreal
  * @see Tree
  */
-public class BiTree extends Tree
+public class BiTree extends Tree implements BiArboreal.Mutable
 {
 	/**
 	 * A {@code BiTree.Factory} generates {@code BiNode} objects.
@@ -40,53 +38,7 @@ public class BiTree extends Tree
 		public abstract BiTree Tree();
 	}
 	
-		
-	/**
-	 * Performs post-order iteration of the {@code BiTree}.
-	 * 
-	 * @param <B>  a node type
-	 * @return  a post-order iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 * @see BiNodal
-	 */
-	public <B extends BiNodal> Iterable<B> postorder()
-	{
-		return () -> new PostOrder<>(Root());
-	}
-	
-	/**
-	 * Performs pre-order iteration of the {@code BiTree}.
-	 * 
-	 * @param <B>  a node type
-	 * @return  a pre-order iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 * @see BiNodal
-	 */
-	public <B extends BiNodal> Iterable<B> preorder()
-	{
-		return () -> new PreOrder<>(Root());
-	}
-
-	/**
-	 * Performs in-order iteration of the {@code BiTree}.
-	 * 
-	 * @param <B>  a node type
-	 * @return  an in-order iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 * @see BiNodal
-	 */
-	public <B extends BiNodal> Iterable<B> inorder()
-	{
-		return () -> new InOrder<>(Root());
-	}
-	
-	
+			
 	@Override
 	public Factory Factory()
 	{

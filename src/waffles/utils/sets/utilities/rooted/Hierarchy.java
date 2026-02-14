@@ -94,16 +94,16 @@ public class Hierarchy extends Collector implements Hierarchical
 	 */
 	public <P extends Hierarchy> Deque<P> Branch()
 	{
-		Deque<P> queue = new JavaDeque<>();
+		Deque<P> q = new JavaDeque<>();
 
 		P node = (P) Root();
 		while(node != null)
 		{
-			queue.pushFirst(node);
+			q.pushFirst(node);
 			node = (P) node.Parent();
 		}
 		
-		return queue;
+		return q;
 	}
 	
 	/**

@@ -20,31 +20,31 @@ public class BiNode extends Node implements BiNodal
 	/**
 	 * Creates a new {@code BiNode}.
 	 * 
-	 * @param t  a parent tree
-	 * @param n  a source object
+	 * @param a  a parent arboreal
 	 * 
 	 * 
-	 * @see BiNodal
-	 * @see BiTree
+	 * @see BiArboreal
 	 */
-	public BiNode(BiTree t, BiNodal n)
+	public BiNode(BiArboreal a)
 	{
-		super(t, n);
+		super(a);
 	}
 	
 	/**
 	 * Creates a new {@code BiNode}.
 	 * 
-	 * @param t  a parent tree
+	 * @param a  a parent arboreal
+	 * @param n  a source object
 	 * 
 	 * 
-	 * @see BiTree
+	 * @see BiArboreal
+	 * @see BiNodal
 	 */
-	public BiNode(BiTree t)
+	public BiNode(BiArboreal a, BiNodal n)
 	{
-		super(t);
+		super(a, n);
 	}
-			
+		
 	
 	/**
 	 * Changes the  left child of the {@code BiNode}.
@@ -290,7 +290,13 @@ public class BiNode extends Node implements BiNodal
 		
 		return null;
 	}
+
 	
+	@Override
+	public BiArboreal.Mutable Set()
+	{
+		return (BiArboreal.Mutable) super.Set();
+	}
 		
 	@Override
 	public BiNodal Delegate()
@@ -314,11 +320,5 @@ public class BiNode extends Node implements BiNodal
 	public BiNode Arch()
 	{
 		return this;
-	}
-
-	@Override
-	public BiTree Set()
-	{
-		return (BiTree) super.Set();
 	}
 }
