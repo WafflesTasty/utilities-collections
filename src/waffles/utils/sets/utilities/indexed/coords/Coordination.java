@@ -1,7 +1,7 @@
 package waffles.utils.sets.utilities.indexed.coords;
 
 /**
- * A {@code Coordination} represents a chunk of an {@code IndexedSet}.
+ * A {@code Coordination} represents an n-dimensional chunk of an {@code IndexedSet}.
  * 
  * @author Waffles
  * @since 13 Feb 2026
