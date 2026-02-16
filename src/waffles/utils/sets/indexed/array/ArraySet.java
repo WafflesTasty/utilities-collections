@@ -1,5 +1,7 @@
 package waffles.utils.sets.indexed.array;
 
+import waffles.utils.sets.indexed.AtomicIndex;
+
 /**
  * An {@code ArraySet} object maintains a one-dimensional {@code ArrayLike} object.
  *
@@ -10,9 +12,10 @@ package waffles.utils.sets.indexed.array;
  *
  * @param <A>  an array type
  * @param <O>  an object type
+ * @see AtomicIndex
  * @see ArrayLike
  */
-public interface ArraySet<A, O> extends ArrayLike<A, O>
+public interface ArraySet<A, O> extends ArrayLike<A, O>, AtomicIndex<O>
 {	
 	@Override
 	public default int[] Dimensions()

@@ -1,6 +1,7 @@
 package waffles.utils.sets.countable.wrapper;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import waffles.utils.sets.countable.AtomicSet;
 import waffles.utils.sets.indexed.AtomicIndex;
@@ -102,6 +103,12 @@ public class JavaList<O> implements AtomicIndex.Java<O>, AtomicSet.Java<O>, Obje
 		return data;
 	}
 
+	@Override
+	public Iterator<O> iterator()
+	{
+		return data.iterator();
+	}
+	
 	@Override
 	public int[] indexOf(O val)
 	{

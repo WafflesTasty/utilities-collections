@@ -1,7 +1,10 @@
 package waffles.utils.sets.indexed.array.set;
 
+import java.util.Iterator;
+
 import waffles.utils.sets.indexed.array.ArraySet;
 import waffles.utils.sets.indexed.array.like.LongArray;
+import waffles.utils.sets.utilities.indexed.iterators.arrays.ArrayValues;
 
 /**
  * A {@code LongSet} maintains a primitive long array as an {@code ArraySet} object.
@@ -26,6 +29,27 @@ public interface LongSet extends ArraySet<long[], Long>, LongArray
 	public static LongSet of(long... set)
 	{
 		return () -> set;
+	}
+	
+	
+	@Override
+	public default Iterator<Long> iterator()
+	{
+		return new ArrayValues<>(this);
+	}
+	
+	@Override
+	public default int[] indexOf(Long l)
+	{
+		for(int k = 0; k < Count(); k++)
+		{
+			if(Array()[k] == l)
+			{
+				return new int[]{k};
+			}
+		}
+		
+		return null;
 	}
 	
 	@Override

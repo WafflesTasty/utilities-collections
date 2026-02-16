@@ -1,7 +1,10 @@
 package waffles.utils.sets.indexed.array.set;
 
+import java.util.Iterator;
+
 import waffles.utils.sets.indexed.array.ArraySet;
 import waffles.utils.sets.indexed.array.like.ShortArray;
+import waffles.utils.sets.utilities.indexed.iterators.arrays.ArrayValues;
 
 /**
  * A {@code ShortSet} maintains a primitive short array as an {@code ArraySet} object.
@@ -26,6 +29,27 @@ public interface ShortSet extends ArraySet<short[], Short>, ShortArray
 	public static ShortSet of(short... set)
 	{
 		return () -> set;
+	}
+	
+	
+	@Override
+	public default Iterator<Short> iterator()
+	{
+		return new ArrayValues<>(this);
+	}
+	
+	@Override
+	public default int[] indexOf(Short s)
+	{
+		for(int k = 0; k < Count(); k++)
+		{
+			if(Array()[k] == s)
+			{
+				return new int[]{k};
+			}
+		}
+		
+		return null;
 	}
 	
 	@Override

@@ -1,7 +1,10 @@
 package waffles.utils.sets.indexed.array.set;
 
+import java.util.Iterator;
+
 import waffles.utils.sets.indexed.array.ArraySet;
 import waffles.utils.sets.indexed.array.like.ObjectArray;
+import waffles.utils.sets.utilities.indexed.iterators.arrays.ArrayValues;
 
 /**
  * An {@code ObjectSet} maintains an object array as an {@code ArraySet} object.
@@ -27,6 +30,27 @@ public interface ObjectSet<O> extends ArraySet<Object[], O>, ObjectArray<O>
 	public static <O> ObjectSet<O> of(Object... set)
 	{
 		return () -> set;
+	}
+	
+	
+	@Override
+	public default Iterator<O> iterator()
+	{
+		return new ArrayValues<>(this);
+	}
+	
+	@Override
+	public default int[] indexOf(O o)
+	{
+		for(int k = 0; k < Count(); k++)
+		{
+			if(Array()[k] == o)
+			{
+				return new int[]{k};
+			}
+		}
+		
+		return null;
 	}
 	
 	@Override

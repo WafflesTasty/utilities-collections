@@ -1,7 +1,10 @@
 package waffles.utils.sets.indexed.array.set;
 
+import java.util.Iterator;
+
 import waffles.utils.sets.indexed.array.ArraySet;
 import waffles.utils.sets.indexed.array.like.FloatArray;
+import waffles.utils.sets.utilities.indexed.iterators.arrays.ArrayValues;
 
 /**
  * A {@code FloatSet} maintains a primitive float array as an {@code ArraySet} object.
@@ -26,6 +29,27 @@ public interface FloatSet extends ArraySet<float[], Float>, FloatArray
 	public static FloatSet of(float... set)
 	{
 		return () -> set;
+	}
+	
+	
+	@Override
+	public default Iterator<Float> iterator()
+	{
+		return new ArrayValues<>(this);
+	}
+	
+	@Override
+	public default int[] indexOf(Float f)
+	{
+		for(int k = 0; k < Count(); k++)
+		{
+			if(Array()[k] == f)
+			{
+				return new int[]{k};
+			}
+		}
+		
+		return null;
 	}
 	
 	@Override
