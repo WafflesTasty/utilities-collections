@@ -3,7 +3,7 @@ package waffles.utils.sets.utilities.indexed.coords;
 import waffles.utils.sets.utilities.Ordered;
 
 /**
- * A {@code Coordinated} object defines its own {@link #Coordinates()}.
+ * A {@code Coordinated} object defines its own {@link #Coords()}.
  *
  * @author Waffles
  * @since 12 May 2024
@@ -19,12 +19,12 @@ public interface Coordinated extends Ordered
 	 * 
 	 * @return  a coordinate set
 	 */
-	public abstract int[] Coordinates();
+	public abstract int[] Coords();
 	
 	
 	@Override
 	public default int Order()
 	{
-		return Coordinates().length;
+		return Coords().length;
 	}
 }

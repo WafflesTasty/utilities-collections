@@ -120,7 +120,7 @@ public class Sentinel<O> implements Indexed, IndexedSet<O>
 		int[] iParent = new int[Order()];
 		for(int i = 0; i < Order(); i++)
 		{
-			iParent[i] = Coordinates()[i] + iBuffer[i];
+			iParent[i] = Coords()[i] + iBuffer[i];
 		}
 		
 		// Fetch a value from the parent.
@@ -141,7 +141,7 @@ public class Sentinel<O> implements Indexed, IndexedSet<O>
 	}
 	
 	@Override
-	public int[] Coordinates()
+	public int[] Coords()
 	{
 		return offset;
 	}

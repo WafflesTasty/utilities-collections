@@ -28,7 +28,7 @@ public interface Indexed extends Coordinated
 	 */
 	public default void moveFor(int... crds)
 	{
-		int[] curr = Coordinates();
+		int[] curr = Coords();
 		for(int i = 0; i < Order(); i++)
 		{
 			curr[i] += crds[i];

@@ -19,7 +19,7 @@ public interface Coordinated3D extends Coordinated
 	 */
 	public default int Row()
 	{
-		return Coordinates()[0];
+		return Coords()[0];
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public interface Coordinated3D extends Coordinated
 	 */
 	public default int Aisle()
 	{
-		return Coordinates()[2];
+		return Coords()[2];
 	}
 	
 	/**
@@ -39,7 +39,7 @@ public interface Coordinated3D extends Coordinated
 	 */
 	public default int Column()
 	{
-		return Coordinates()[1];
+		return Coords()[1];
 	}
 	
 	

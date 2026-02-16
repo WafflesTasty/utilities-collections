@@ -19,7 +19,7 @@ public interface Coordinated2D extends Coordinated
 	 */
 	public default int Row()
 	{
-		return Coordinates()[0];
+		return Coords()[0];
 	}
 	
 	/**
@@ -29,7 +29,7 @@ public interface Coordinated2D extends Coordinated
 	 */
 	public default int Column()
 	{
-		return Coordinates()[1];
+		return Coords()[1];
 	}
 	
 	
