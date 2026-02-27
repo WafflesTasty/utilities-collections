@@ -2,7 +2,7 @@
  * A definition of the module {@code Utilities: Collections}.
  */
 module waffles.utils.sets
-{
+{	
 	exports waffles.utils.sets.utilities.rooted.iterators.binary;
 	exports waffles.utils.sets.countable.wrapper;
 	exports waffles.utils.sets.arboreal;
@@ -38,6 +38,6 @@ module waffles.utils.sets
 	exports waffles.utils.sets.countable.keymaps.wrapper;
 	exports waffles.utils.sets.utilities.rooted;
 	exports waffles.utils.sets.arboreal.binary.indexed;
-
+	
 	requires transitive waffles.utils.tools;
 }
