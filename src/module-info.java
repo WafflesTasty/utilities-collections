@@ -39,5 +39,5 @@ module waffles.utils.sets
 	exports waffles.utils.sets.utilities.rooted;
 	exports waffles.utils.sets.arboreal.binary.indexed;
 
-	requires waffles.utils.tools;
+	requires transitive waffles.utils.tools;
 }
