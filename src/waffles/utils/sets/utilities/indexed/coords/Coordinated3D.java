@@ -10,6 +10,7 @@ package waffles.utils.sets.utilities.indexed.coords;
  * 
  * @see Coordinated
  */
+@FunctionalInterface
 public interface Coordinated3D extends Coordinated
 {
 	/**

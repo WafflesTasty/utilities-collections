@@ -12,6 +12,7 @@ import waffles.utils.sets.utilities.Ordered;
  * 
  * @see Ordered
  */
+@FunctionalInterface
 public interface Coordinated extends Ordered
 {
 	/**
