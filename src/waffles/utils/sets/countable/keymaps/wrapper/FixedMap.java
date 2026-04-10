@@ -41,18 +41,22 @@ public class FixedMap<E extends Enum<E>, V> implements KeyMap.Java<E, V>
 	Class<E> Type()
 	{
 		ParameterizedType p;
-		Type mapType = getClass().getGenericSuperclass();
-		if(mapType instanceof ParameterizedType)
+		
+		// Fetch the dynamic type of the FixedMap.
+		Type type = getClass().getGenericSuperclass();
+		if(type instanceof ParameterizedType)
 		{
-			p = (ParameterizedType) mapType;
-			Type enumType = p.getActualTypeArguments()[0];
-			if(enumType instanceof ParameterizedType)
+			p = (ParameterizedType) type;
+			
+			// Fetch the dynamic type of the generic E.
+			type = p.getActualTypeArguments()[0];
+			if(type instanceof ParameterizedType)
 			{
-				p = (ParameterizedType) enumType;
-				enumType = p.getRawType();
+				p = (ParameterizedType) type;
+				type = p.getRawType();
 			}
 			
-			return (Class<E>) enumType;
+			return (Class<E>) type;
 		}
 		
 		return null;
