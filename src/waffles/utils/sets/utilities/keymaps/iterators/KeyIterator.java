@@ -2,8 +2,8 @@ package waffles.utils.sets.utilities.keymaps.iterators;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.countable.keymaps.KeyMap;
 import waffles.utils.sets.utilities.keymaps.Pair;
+import waffles.utils.sets.utilities.keymaps.queries.MapQuery;
 
 /**
  * A {@code KeyIterator} iterates the keys in a {@code KeyMap}.
@@ -19,19 +19,19 @@ import waffles.utils.sets.utilities.keymaps.Pair;
  */
 public class KeyIterator<K, V> implements Iterator<K>
 {
-	private Iterator<Pair<K, V>> source;
+	private Iterator<? extends Pair<?, ?>> source;
 	
 	/**
 	 * Creates a new {@code KeyIterator}.
 	 * 
-	 * @param map  a key map
+	 * @param qry  a map query
 	 * 
 	 * 
-	 * @see KeyMap
+	 * @see MapQuery
 	 */
-	public KeyIterator(KeyMap<K, V> map)
+	public KeyIterator(MapQuery<K, V> qry)
 	{
-		source = map.Pairs().iterator();
+		source = qry.Pairs();
 	}
 	
 	
@@ -44,6 +44,6 @@ public class KeyIterator<K, V> implements Iterator<K>
 	@Override
 	public K next()
 	{
-		return source.next().Key();
+		return (K) source.next().Key();
 	}
 }

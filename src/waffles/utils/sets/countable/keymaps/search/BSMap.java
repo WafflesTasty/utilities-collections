@@ -6,6 +6,7 @@ import waffles.utils.sets.arboreal.binary.search.BSNode;
 import waffles.utils.sets.arboreal.binary.search.BSTree;
 import waffles.utils.sets.countable.keymaps.KeyMap;
 import waffles.utils.sets.utilities.keymaps.Pair;
+import waffles.utils.sets.utilities.keymaps.queries.MapQuery;
 
 /**
  * A {@code BSMap} implements a {@code KeyMap} by internally storing data in a {@code BSTree}.
@@ -70,11 +71,11 @@ public class BSMap<K, V> implements KeyMap<K,V>
 		return null;
 	}
 	
-	
+
 	@Override
-	public Iterable<Pair<K, V>> Pairs()
+	public MapQuery<K, V> Query()
 	{
-		return data;
+		return () -> data.iterator();
 	}
 
 	@Override

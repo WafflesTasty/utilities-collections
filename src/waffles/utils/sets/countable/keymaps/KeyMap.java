@@ -4,9 +4,10 @@ import java.util.Map;
 
 import waffles.utils.sets.CountableSet;
 import waffles.utils.sets.utilities.keymaps.Pair;
-import waffles.utils.sets.utilities.keymaps.iterators.KeyIterator;
 import waffles.utils.sets.utilities.keymaps.iterators.PairGenerator;
-import waffles.utils.sets.utilities.keymaps.iterators.ValueIterator;
+import waffles.utils.sets.utilities.keymaps.queries.MapQuery;
+import waffles.utils.sets.utilities.keymaps.queries.MapQueryable;
+import waffles.utils.tools.collections.iterators.CastIterator;
 import waffles.utils.tools.patterns.properties.values.Decorator;
 
 /**
@@ -20,8 +21,9 @@ import waffles.utils.tools.patterns.properties.values.Decorator;
  * @param <K>  a key type
  * @param <V>  a value type
  * @see CountableSet
+ * @see MapQueryable
  */
-public interface KeyMap<K, V> extends CountableSet
+public interface KeyMap<K, V> extends CountableSet, MapQueryable<K, V>
 {	
 	/**
 	 * A {@code Wrapper} defines a wrapper around another {@code KeyMap}.
@@ -42,9 +44,9 @@ public interface KeyMap<K, V> extends CountableSet
 		public abstract KeyMap<K, V> Delegate();
 				
 		@Override
-		public default <P extends Pair<K, V>> Iterable<P> Pairs()
+		public default MapQuery<K, V> Query()
 		{
-			return Delegate().Pairs();
+			return Delegate().Query();
 		}
 		
 		
@@ -96,16 +98,17 @@ public interface KeyMap<K, V> extends CountableSet
 		{
 			return new Pair.Base<>(k, v);
 		}
+
+
+		@Override
+		public abstract Map<K, V> Delegate();
 		
 		@Override
-		public default <P extends Pair<K, V>> Iterable<P> Pairs()
+		public default MapQuery<K, V> Query()
 		{
 			return () -> new PairGenerator<>(this);
 		}
 		
-		@Override
-		public abstract Map<K, V> Delegate();
-						
 		
 		@Override
 		public default int Count()
@@ -139,46 +142,16 @@ public interface KeyMap<K, V> extends CountableSet
 	}
 	
 	
-	/**
-	 * Iterates the key-value pairs of the {@code KeyMap}.
-	 * This method is made generic to allow iteration of subtypes.
-	 * 
-	 * @return  a pair iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 * @see Pair
-	 */
-	public abstract <P extends Pair<K, V>> Iterable<P> Pairs();
-
-	
-	/**
-	 * Returns the values of the {@code KeyMap}.
-	 * 
-	 * @return  a value iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 */
-	public default Iterable<V> Values()
+	@Override
+	public default Iterable<? extends Pair<K, V>> Pairs()
 	{
-		return () -> new ValueIterator<>(this);
-	}
-
-	/**
-	 * Returns the keys of the {@code KeyMap}.
-	 * 
-	 * @return  a key iterable
-	 * 
-	 * 
-	 * @see Iterable
-	 */
-	public default Iterable<K> Keys()
-	{
-		return () -> new KeyIterator<>(this);
+		return () -> new CastIterator<>(Query().Pairs());
 	}
 	
+	@Override
+	public abstract MapQuery<K, V> Query();
 	
+		
 	/**
 	 * Puts a key-value pair into the {@code KeyMap}.
 	 * 
