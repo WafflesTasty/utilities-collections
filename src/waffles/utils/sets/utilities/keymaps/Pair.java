@@ -17,7 +17,7 @@ import waffles.utils.tools.patterns.properties.values.Valuable;
  * @see Valuable
  */
 public interface Pair<K, V> extends Immutable, Valuable<V>
-{
+{		
 	/**
 	 * A {@code Pair.Mutable} is a mutable implementation of a {@code Pair}.
 	 *
