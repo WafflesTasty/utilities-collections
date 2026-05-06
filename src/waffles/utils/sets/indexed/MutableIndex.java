@@ -16,7 +16,7 @@ package waffles.utils.sets.indexed;
 public interface MutableIndex<O> extends IndexedSet<O>
 {
 	/**
-	 * An {@code Order} defines two ways of converting coordinates
+	 * An {@code Ordered} defines two ways of converting coordinates
 	 * to a unique integer value, generalizing the concept of
 	 * row-major and col-major ordering for matrices.
 	 *
