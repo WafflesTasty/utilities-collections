@@ -2,7 +2,6 @@ package waffles.utils.sets.utilities.ordered.nodal;
 
 import waffles.utils.sets.utilities.ordered.Ordered;
 import waffles.utils.sets.utilities.rooted.Node;
-import waffles.utils.tools.primitives.Integers;
 
 /**
  * An {@code OrderedNode} defines a basic node for an {@code OrderedNodal}.
@@ -29,7 +28,7 @@ public class OrderedNode extends Node implements OrderedNodal, Ordered.Mutable
 	 */
 	public OrderedNode(OrderedNodal n)
 	{
-		super(n); order = Integers.MAX_VALUE;
+		super(n);
 	}	
 	
 	/**
@@ -37,7 +36,7 @@ public class OrderedNode extends Node implements OrderedNodal, Ordered.Mutable
 	 */
 	public OrderedNode()
 	{
-		this(null);
+		order = 0;
 	}
 
 	
