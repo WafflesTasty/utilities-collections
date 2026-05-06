@@ -79,4 +79,18 @@ public interface OrderedNodal extends Ordered, Nodal
 			return curr;
 		}
 	}
+
+	/**
+	 * Iterates over the nodes in the {@code OrderedNodal} in increasing order.
+	 * 
+	 * @param <N>  a nodal type
+	 * @return  a node iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 */
+	public default <N extends OrderedNodal> Iterable<N> OrderedNodes()
+	{
+		return () -> new Order<>((N) this);
+	}
 }
