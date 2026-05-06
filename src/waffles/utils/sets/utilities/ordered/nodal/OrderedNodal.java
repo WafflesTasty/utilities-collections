@@ -2,7 +2,6 @@ package waffles.utils.sets.utilities.ordered.nodal;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.utilities.ordered.Ordered;
 import waffles.utils.sets.utilities.rooted.Nodal;
 import waffles.utils.sets.utilities.rooted.Node;
 import waffles.utils.tools.collections.iterators.SingleIterator;
@@ -17,10 +16,9 @@ import waffles.utils.tools.collections.iterators.SingleIterator;
  * @version 1.1
  *
  * 
- * @see Ordered
  * @see Nodal
  */
-public interface OrderedNodal extends Ordered, Nodal
+public interface OrderedNodal extends Nodal
 {
 	/**
 	 * An {@code Order} defines an ordered iterator for an {@code OrderedNodal}.
@@ -89,8 +87,12 @@ public interface OrderedNodal extends Ordered, Nodal
 	 * 
 	 * @see Iterable
 	 */
-	public default <N extends OrderedNodal> Iterable<N> OrderedNodes()
+	public default <N extends OrderedNodal> Iterable<N> NodeOrder()
 	{
 		return () -> new Order<>((N) this);
 	}
+	
+	
+	@Override
+	public abstract OrderedNode Arch();
 }

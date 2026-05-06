@@ -21,12 +21,31 @@ public class OrderedNode extends Node implements OrderedNodal, Ordered.Mutable
 	
 	/**
 	 * Creates a new {@code OrderedNode}.
+	 * 
+	 * @param n  a source nodal
+	 * 
+	 * 
+	 * @see OrderedNodal
+	 */
+	public OrderedNode(OrderedNodal n)
+	{
+		super(n); order = Integers.MAX_VALUE;
+	}	
+	
+	/**
+	 * Creates a new {@code OrderedNode}.
 	 */
 	public OrderedNode()
 	{
-		order = Integers.MAX_VALUE;
+		this(null);
 	}
 
+	
+	@Override
+	public OrderedNode Arch()
+	{
+		return this;
+	}
 	
 	@Override
 	public void setOrder(int ord)

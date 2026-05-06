@@ -1,7 +1,6 @@
 package waffles.utils.sets.utilities.ordered.nodal;
 
 import waffles.utils.sets.queues.search.BSQueue;
-import waffles.utils.sets.utilities.ordered.Ordered;
 
 /**
  * An {@code OrderedQueue} defines a {@code BSQueue} for {@code Ordered} objects.
@@ -12,16 +11,16 @@ import waffles.utils.sets.utilities.ordered.Ordered;
  *
  * 
  * @param <O>  an object type
+ * @see OrderedNodal
  * @see BSQueue
- * @see Ordered
  */
-public class OrderedQueue<O extends Ordered> extends BSQueue<O>
+public class OrderedQueue<O extends OrderedNodal> extends BSQueue<O>
 {
 	/**
 	 * Creates a new {@code OrderedQueue}.
 	 */
 	public OrderedQueue()
 	{
-		super((n1, n2) -> n2.Order() - n1.Order());
+		super((n1, n2) -> n2.Arch().Order() - n1.Arch().Order());
 	}
 }
