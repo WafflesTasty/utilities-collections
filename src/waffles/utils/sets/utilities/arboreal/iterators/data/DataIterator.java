@@ -60,9 +60,14 @@ public class DataIterator<O> implements Iterator<O>
 			return data.next();
 		}
 		
-		DataNodal<O> n = nodes.next();
-		data = n.Data().iterator();
-		return findNext();
+		if(nodes.hasNext())
+		{
+			DataNodal<O> n = nodes.next();
+			data = n.Data().iterator();
+			return findNext();			
+		}
+
+		return null;
 	}
 
 	@Override

@@ -20,7 +20,7 @@ public class Tree implements Arboreal.Mutable
 	/**
 	 * Creates a new {@code Tree}.
 	 * 
-	 * @param r  a root node
+	 * @param r  a root nodal
 	 * 
 	 * 
 	 * @see Nodal

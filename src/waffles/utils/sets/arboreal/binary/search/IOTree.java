@@ -41,9 +41,9 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N
 	 *
 	 * 
 	 * @param <O>  an object type
-	 * @see BiTree
+	 * @see BiArboreal
 	 */
-	public static interface Factory<O> extends BiTree.Factory
+	public static interface Factory<O> extends BiArboreal.Factory
 	{			
 		@Override
 		public default IONode<O> node(Object... data)

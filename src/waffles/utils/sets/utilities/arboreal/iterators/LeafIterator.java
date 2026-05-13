@@ -6,7 +6,7 @@ import waffles.utils.sets.utilities.arboreal.Nodal;
 import waffles.utils.sets.utilities.arboreal.Node;
 
 /**
- * A {@code LeafIterator} iterates over all leaves of a {@code Rooted}.
+ * A {@code LeafIterator} iterates over all leaves of an {@code Arboreal}.
  *
  * @author Waffles
  * @since 21 Mar 2025

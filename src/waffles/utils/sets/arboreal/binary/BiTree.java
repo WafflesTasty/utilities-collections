@@ -1,6 +1,5 @@
 package waffles.utils.sets.arboreal.binary;
 
-import waffles.utils.sets.arboreal.Arboreal;
 import waffles.utils.sets.arboreal.Tree;
 
 /**
@@ -17,27 +16,23 @@ import waffles.utils.sets.arboreal.Tree;
 public abstract class BiTree extends Tree implements BiArboreal
 {
 	/**
-	 * A {@code BiTree.Factory} generates {@code BiNode} objects.
-	 *
-	 * @author Waffles
-	 * @since 25 Jan 2026
-	 * @version 1.1
-	 *
-	 * 
-	 * @see Arboreal
+	 * Creates a new {@code BiTree}.
 	 */
-	public static interface Factory extends Arboreal.Factory
-	{			
-		@Override
-		public default BiNode node(Object... data)
-		{
-			return new BiNode(Tree());
-		}
-		
-		@Override
-		public abstract BiTree Tree();
+	public BiTree()
+	{
+		super();
 	}
 	
+	/**
+	 * Creates a new {@code BiTree}.
+	 * 
+	 * @param r  a root nodal
+	 */
+	public BiTree(BiNodal r)
+	{
+		super(r);
+	}
+
 	
 	@Override
 	@Deprecated
@@ -45,13 +40,7 @@ public abstract class BiTree extends Tree implements BiArboreal
 	{
 		return null;
 	}
-			
-	@Override
-	public Factory Factory()
-	{
-		return () -> this;
-	}
-	
+				
 	@Override
 	public BiNodal Root()
 	{

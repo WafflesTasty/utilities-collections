@@ -92,6 +92,28 @@ public interface BiArboreal extends Arboreal
 		}		
 	}
 
+	/**
+	 * A {@code BiArboreal.Factory} generates {@code BiNode} objects.
+	 *
+	 * @author Waffles
+	 * @since 25 Jan 2026
+	 * @version 1.1
+	 *
+	 * 
+	 * @see Arboreal
+	 */
+	public static interface Factory extends Arboreal.Factory
+	{			
+		@Override
+		public default BiNode node(Object... data)
+		{
+			return new BiNode(Tree());
+		}
+		
+		@Override
+		public abstract BiArboreal Tree();
+	}
+	
 		
 	/**
 	 * Performs pre-order iteration of the {@code BiTree}.
@@ -138,6 +160,12 @@ public interface BiArboreal extends Arboreal
 		return () -> Query().InOrder((B) Root());
 	}
 
+	
+	@Override
+	public default Factory Factory()
+	{
+		return () -> this;
+	}
 	
 	@Override
 	public abstract Query<?> Query();

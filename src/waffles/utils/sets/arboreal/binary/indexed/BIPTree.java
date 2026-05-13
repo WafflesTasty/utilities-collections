@@ -1,5 +1,6 @@
 package waffles.utils.sets.arboreal.binary.indexed;
 
+import waffles.utils.sets.arboreal.binary.BiArboreal;
 import waffles.utils.sets.arboreal.binary.BiTree;
 import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.utilities.arboreal.iterators.binary.indexed.BIPNodes;
@@ -28,9 +29,9 @@ public abstract class BIPTree<O> extends BiTree implements IndexedSet<O>
 	 * @version 1.1
 	 *
 	 * 
-	 * @see BiTree
+	 * @see BiArboreal
 	 */
-	public static interface Factory extends BiTree.Factory
+	public static interface Factory extends BiArboreal.Factory
 	{
 		@Override
 		public abstract BIPTree<?> Tree();

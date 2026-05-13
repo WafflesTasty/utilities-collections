@@ -55,7 +55,7 @@ public class PairIterator<O> implements Iterator<Pair<O, O>>
 		if(keys.hasNext())
 		{
 			next = new Pair.Base<>(keys.next(), null);
-			vals = new LocalIterator<>(curr, ++idx);
+			vals = new LocalIterator<>(curr, idx++);
 			return findNext();
 		}
 		
@@ -64,7 +64,7 @@ public class PairIterator<O> implements Iterator<Pair<O, O>>
 			idx = 0;
 			curr = nodes.next();
 			keys = curr.Data().iterator();
-			vals = new LocalIterator<>(curr, idx);
+			return findNext();
 		}
 		
 		return null;
