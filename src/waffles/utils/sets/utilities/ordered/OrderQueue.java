@@ -1,9 +1,10 @@
-package waffles.utils.sets.utilities.ordered.nodal;
+package waffles.utils.sets.utilities.ordered;
 
+import waffles.utils.sets.arboreal.arborus.order.nodal.OrderNodal;
 import waffles.utils.sets.queues.search.BSQueue;
 
 /**
- * An {@code OrderedQueue} defines a {@code BSQueue} for {@code Ordered} objects.
+ * An {@code OrderQueue} defines a {@code BSQueue} for {@code Ordered} objects.
  *
  * @author Waffles
  * @since May 6, 2026
@@ -11,15 +12,15 @@ import waffles.utils.sets.queues.search.BSQueue;
  *
  * 
  * @param <O>  an object type
- * @see OrderedNodal
+ * @see OrderNodal
  * @see BSQueue
  */
-public class OrderedQueue<O extends OrderedNodal> extends BSQueue<O>
+public class OrderQueue<O extends OrderNodal> extends BSQueue<O>
 {
 	/**
-	 * Creates a new {@code OrderedQueue}.
+	 * Creates a new {@code OrderQueue}.
 	 */
-	public OrderedQueue()
+	public OrderQueue()
 	{
 		super((n1, n2) -> 
 		{

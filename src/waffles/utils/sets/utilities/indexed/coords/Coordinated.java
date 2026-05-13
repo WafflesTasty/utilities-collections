@@ -1,6 +1,6 @@
 package waffles.utils.sets.utilities.indexed.coords;
 
-import waffles.utils.sets.utilities.ordered.Ordered;
+import waffles.utils.sets.utilities.Ordered;
 
 /**
  * A {@code Coordinated} object defines its own {@link #Coords()}.

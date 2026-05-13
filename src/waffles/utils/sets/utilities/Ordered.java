@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.ordered;
+package waffles.utils.sets.utilities;
 
 import waffles.utils.tools.patterns.properties.Immutable;
 
