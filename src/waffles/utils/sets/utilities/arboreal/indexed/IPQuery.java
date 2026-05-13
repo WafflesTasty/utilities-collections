@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.rooted.indexed;
+package waffles.utils.sets.utilities.arboreal.indexed;
 
 import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.utilities.indexed.coords.Coordination;

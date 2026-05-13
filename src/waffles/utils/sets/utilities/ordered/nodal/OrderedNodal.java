@@ -2,8 +2,8 @@ package waffles.utils.sets.utilities.ordered.nodal;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.utilities.rooted.Nodal;
-import waffles.utils.sets.utilities.rooted.Node;
+import waffles.utils.sets.utilities.arboreal.Nodal;
+import waffles.utils.sets.utilities.arboreal.Node;
 import waffles.utils.tools.collections.iterators.SingleIterator;
 
 /**

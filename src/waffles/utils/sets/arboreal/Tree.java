@@ -1,10 +1,10 @@
 package waffles.utils.sets.arboreal;
 
-import waffles.utils.sets.utilities.rooted.Nodal;
-import waffles.utils.sets.utilities.rooted.Node;
+import waffles.utils.sets.utilities.arboreal.Nodal;
+import waffles.utils.sets.utilities.arboreal.Node;
 
 /**
- * A {@code Tree} implements a basic {@code Rooted}.
+ * A {@code Tree} implements a basic {@code Arboreal}.
  *
  * @author Waffles
  * @since 08 Aug 2023

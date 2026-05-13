@@ -5,7 +5,7 @@ import waffles.utils.sets.arboreal.binary.BiNode;
 import waffles.utils.sets.utilities.Iterables;
 
 /**
- * A {@code Balance} manages the balancing algorithm of a {@code BalanceTree}.
+ * A {@code Balance} manages the balancing algorithm of a {@code Balanced}.
  *
  * @author Waffles
  * @since 02 Aug 2020

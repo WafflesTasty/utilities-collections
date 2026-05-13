@@ -3,11 +3,11 @@ package waffles.utils.sets.utilities;
 import waffles.utils.sets.arboreal.binary.BiNode;
 import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.indexed.array.ArraySet;
+import waffles.utils.sets.utilities.arboreal.iterators.binary.InOrder;
+import waffles.utils.sets.utilities.arboreal.iterators.binary.PostOrder;
+import waffles.utils.sets.utilities.arboreal.iterators.binary.PreOrder;
 import waffles.utils.sets.utilities.indexed.iterators.IndexValues;
 import waffles.utils.sets.utilities.indexed.iterators.arrays.ReverseIterator;
-import waffles.utils.sets.utilities.rooted.iterators.binary.InOrder;
-import waffles.utils.sets.utilities.rooted.iterators.binary.PostOrder;
-import waffles.utils.sets.utilities.rooted.iterators.binary.PreOrder;
 
 /**
  * The {@code Iterables} class provides static utility methods to generate {@code Iterable} objects.

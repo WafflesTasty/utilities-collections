@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.rooted;
+package waffles.utils.sets.utilities.arboreal;
 
 import waffles.utils.sets.Set;
 import waffles.utils.tools.patterns.properties.values.Decorator;

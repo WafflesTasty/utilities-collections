@@ -3,10 +3,10 @@ package waffles.utils.sets.arboreal.binary.indexed;
 import waffles.utils.sets.arboreal.binary.BiNode;
 import waffles.utils.sets.arboreal.binary.indexed.BIPTree.Factory;
 import waffles.utils.sets.arboreal.binary.indexed.iterators.QRYNodes;
+import waffles.utils.sets.utilities.arboreal.indexed.IPQuery;
+import waffles.utils.sets.utilities.arboreal.indexed.IPQuery.Axis;
 import waffles.utils.sets.utilities.indexed.coords.Coordination;
 import waffles.utils.sets.utilities.indexed.iterators.IndexKeys;
-import waffles.utils.sets.utilities.rooted.indexed.IPQuery;
-import waffles.utils.sets.utilities.rooted.indexed.IPQuery.Axis;
 import waffles.utils.tools.primitives.Array;
 
 /**

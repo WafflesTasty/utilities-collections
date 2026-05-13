@@ -119,7 +119,6 @@ public class BSTree<O> extends IOTree<BSNode<O>, O> implements AtomicSet<O>
 		{
 			// Set it as root.
 			setRoot(child);
-			onInsert(child);
 			return;
 		}
 

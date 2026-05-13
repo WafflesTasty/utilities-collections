@@ -1,7 +1,7 @@
 package waffles.utils.sets.utilities.ordered.nodal;
 
+import waffles.utils.sets.utilities.arboreal.Node;
 import waffles.utils.sets.utilities.ordered.Ordered;
-import waffles.utils.sets.utilities.rooted.Node;
 
 /**
  * An {@code OrderedNode} defines a basic node for an {@code OrderedNodal}.

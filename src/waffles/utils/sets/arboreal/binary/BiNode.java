@@ -1,6 +1,6 @@
 package waffles.utils.sets.arboreal.binary;
 
-import waffles.utils.sets.utilities.rooted.Node;
+import waffles.utils.sets.utilities.arboreal.Node;
 
 /**
  * A {@code BiNode} defines the atomic structure of a binary tree.
@@ -292,11 +292,11 @@ public class BiNode extends Node implements BiNodal
 	}
 
 	
-	@Override
-	public BiArboreal.Mutable Set()
-	{
-		return (BiArboreal.Mutable) super.Set();
-	}
+//	@Override
+//	public BiArboreal<?> Set()
+//	{
+//		return (BiArboreal<?>) super.Set();
+//	}
 		
 	@Override
 	public BiNodal Delegate()

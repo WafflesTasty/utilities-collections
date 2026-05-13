@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.rooted.iterators.binary.indexed;
+package waffles.utils.sets.utilities.arboreal.iterators.binary.indexed;
 
 import java.util.Iterator;
 

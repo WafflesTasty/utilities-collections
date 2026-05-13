@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.rooted;
+package waffles.utils.sets.utilities.arboreal;
 
 /**
  * A {@code Hierarchical} object defines its own {@code Hierarchy}.

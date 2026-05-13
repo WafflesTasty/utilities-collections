@@ -4,12 +4,14 @@ import java.util.Comparator;
 import java.util.Iterator;
 
 import waffles.utils.sets.IterableSet;
+import waffles.utils.sets.arboreal.binary.BiArboreal;
 import waffles.utils.sets.arboreal.binary.BiTree;
 import waffles.utils.sets.arboreal.binary.balance.Balance;
-import waffles.utils.sets.arboreal.binary.balance.BalanceTree;
-import waffles.utils.sets.utilities.rooted.Nodal;
+import waffles.utils.sets.arboreal.binary.balance.Balanced;
+import waffles.utils.sets.utilities.arboreal.Nodal;
 import waffles.utils.tools.collections.iterators.EmptyIterator;
 import waffles.utils.tools.collections.iterators.ValueIterator;
+import waffles.utils.tools.patterns.properties.Queryable;
 
 /**
  * An {@code IOTree} defines a binary tree which keeps a set of values in order.
@@ -24,11 +26,11 @@ import waffles.utils.tools.collections.iterators.ValueIterator;
  * 
  * @param <O>  an object type
  * @param <N>  a node type
- * @see BalanceTree
+ * @see Balanced
  * @see IterableSet
  * @see Comparator
  */
-public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTree<N>, Comparator<O>, IterableSet<O>
+public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N>, Comparator<O>, Queryable<O>, IterableSet<O>
 {
 	/**
 	 * An {@code IOTree.Factory} generates {@code IONode} objects.
@@ -51,6 +53,34 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 		
 		@Override
 		public abstract IOTree<?, O> Tree();
+	}
+	
+	/**
+	 * An {@code IOTree.Query} defines queries for an {@code IOTree}.
+	 *
+	 * @author Waffles
+	 * @since May 10, 2026
+	 * @version 1.1
+	 *
+	 *
+	 * @param <O>  an object type
+	 * @see BiArboreal
+	 */
+	public static interface Query<O> extends BiArboreal.Query<O>
+	{
+		@Override
+		public abstract IOTree<?, O> Tree();
+		
+		@Override
+		public default Iterator<O> All()
+		{
+			if(Tree().Root() == null)
+			{
+				return new EmptyIterator<>();
+			}
+			
+			return new ValueIterator<>(Tree().inorder());
+		}
 	}
 	
 	
@@ -216,25 +246,19 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements BalanceTre
 	{
 		return () -> this;
 	}
-	
-	@Override
-	public Iterator<O> iterator()
-	{
-		if(Root() == null)
-		{
-			return new EmptyIterator<>();
-		}
 		
-		Iterable<IONode<O>> nodes = inorder();
-		return new ValueIterator<>(nodes);
-	}
-	
 	@Override
 	public Balance<N> Balance()
 	{
 		return balance;
 	}
 
+	@Override
+	public Query<O> Query()
+	{
+		return () -> this;
+	}
+	
 	
 	@Override
 	public void clear()

@@ -1,10 +1,9 @@
-package waffles.utils.sets.utilities.rooted.iterators;
+package waffles.utils.sets.utilities.arboreal.iterators;
 
 import java.util.Iterator;
 
-import waffles.utils.sets.arboreal.Arboreal;
-import waffles.utils.sets.utilities.rooted.Nodal;
-import waffles.utils.sets.utilities.rooted.Node;
+import waffles.utils.sets.utilities.arboreal.Nodal;
+import waffles.utils.sets.utilities.arboreal.Node;
 
 /**
  * A {@code LeafIterator} iterates over all leaves of a {@code Rooted}.
@@ -26,14 +25,11 @@ public class LeafIterator<N extends Nodal> implements Iterator<N>
 	/**
 	 * Creates a new {@code LeafIterator}.
 	 * 
-	 * @param tree  a source tree
-	 * 
-	 * 
-	 * @see Arboreal
+	 * @param root  a root node
 	 */
-	public LeafIterator(Arboreal tree)
+	public LeafIterator(N root)
 	{
-		nodes = tree.BFSearch().iterator();
+		nodes = new DepthFirst<>(root);
 		next = findNext();
 	}
 

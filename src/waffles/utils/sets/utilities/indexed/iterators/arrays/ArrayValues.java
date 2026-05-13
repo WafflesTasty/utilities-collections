@@ -4,7 +4,7 @@ import waffles.utils.sets.indexed.array.ArraySet;
 import waffles.utils.sets.utilities.indexed.iterators.IndexValues;
 
 /**
- * An {@code ArrayKeys} iterates over an {@code ArraySet} and returns non-null values.
+ * An {@code ArrayValues} iterates over an {@code ArraySet} and returns non-null values.
  *
  * @author Waffles
  * @since 12 Feb 2026

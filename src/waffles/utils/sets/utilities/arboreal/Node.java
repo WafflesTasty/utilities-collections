@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.rooted;
+package waffles.utils.sets.utilities.arboreal;
 
 import waffles.utils.sets.arboreal.Arboreal;
 import waffles.utils.tools.patterns.basic.Clearable;
@@ -178,7 +178,13 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	public void replace(Nodal n)
 	{
 		if(isRoot())
-			Set().setRoot(n);
+		{
+			Arboreal.Mutable s = Set().Mutator();
+			if(s != null)
+			{
+				s.setRoot(n);
+			}
+		}
 		else
 		{
 			Node p = Parent().Arch();
@@ -203,7 +209,13 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	public void detach()
 	{
 		if(isRoot())
-			Set().setRoot(null);
+		{
+			Arboreal.Mutable s = Set().Mutator();
+			if(s != null)
+			{
+				s.setRoot(null);
+			}
+		}
 		else
 		{
 			int idx = TreeIndex();
@@ -336,7 +348,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	}
 
 	@Override
-	public Arboreal.Mutable Set()
+	public Arboreal Set()
 	{
 		return super.Set();
 	}

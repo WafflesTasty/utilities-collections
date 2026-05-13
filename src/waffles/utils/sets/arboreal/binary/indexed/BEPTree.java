@@ -4,9 +4,9 @@ import waffles.utils.sets.indexed.IndexedSet;
 import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.queues.Queue;
 import waffles.utils.sets.queues.wrapper.FIFOQueue;
-import waffles.utils.sets.utilities.rooted.iterators.binary.indexed.BEPKeys;
-import waffles.utils.sets.utilities.rooted.iterators.binary.indexed.BEPNodes;
-import waffles.utils.sets.utilities.rooted.iterators.binary.indexed.BEPObjects;
+import waffles.utils.sets.utilities.arboreal.iterators.binary.indexed.BEPKeys;
+import waffles.utils.sets.utilities.arboreal.iterators.binary.indexed.BEPNodes;
+import waffles.utils.sets.utilities.arboreal.iterators.binary.indexed.BEPObjects;
 
 /**
  * A {@code BEPTree} defines a binary index partition tree for {@code Enum} values.

@@ -1,6 +1,6 @@
 package waffles.utils.sets.arboreal.binary;
 
-import waffles.utils.sets.utilities.rooted.Nodal;
+import waffles.utils.sets.utilities.arboreal.Nodal;
 
 /**
  * A {@code BiNodal} object defines its own {@code BiNode}.

@@ -1,13 +1,13 @@
-package waffles.utils.sets.utilities.rooted.iterators;
+package waffles.utils.sets.utilities.arboreal.iterators;
 
 import java.util.Iterator;
 
 import waffles.utils.sets.queues.Deque;
 import waffles.utils.sets.queues.wrapper.JavaDeque;
-import waffles.utils.sets.utilities.rooted.Nodal;
+import waffles.utils.sets.utilities.arboreal.Nodal;
 
 /**
- * A {@code DepthFirst} iterator traverses a tree in a depth-first manner.
+ * A {@code BreadthFirst} iterator traverses a tree in a breadth-first manner.
  *
  * @author Waffles
  * @since 29 Jul 2020
@@ -18,16 +18,16 @@ import waffles.utils.sets.utilities.rooted.Nodal;
  * @see Iterator
  * @see Nodal
  */
-public class DepthFirst<N extends Nodal> implements Iterator<N>
+public class BreadthFirst<N extends Nodal> implements Iterator<N>
 {	
 	private Deque<Nodal> queue;
 
 	/**
-	 * Creates a new {@code DepthFirst}.
+	 * Creates a new {@code BreadthFirst}.
 	 * 
 	 * @param base  a base node
 	 */
-	public DepthFirst(N base)
+	public BreadthFirst(N base)
 	{
 		queue = new JavaDeque<>();
 		queue.pushFirst(base);
@@ -42,13 +42,13 @@ public class DepthFirst<N extends Nodal> implements Iterator<N>
 
 	@Override
 	public N next()
-	{
+	{		
 		Nodal next = queue.popFirst();
 		for(Nodal c : next.Arch().Children())
 		{
 			if(c != null)
 			{
-				queue.pushFirst(c);
+				queue.pushLast(c);
 			}
 		}
 		

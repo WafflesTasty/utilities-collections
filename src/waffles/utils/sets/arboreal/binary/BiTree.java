@@ -4,7 +4,7 @@ import waffles.utils.sets.arboreal.Arboreal;
 import waffles.utils.sets.arboreal.Tree;
 
 /**
- * The {@code BiTree} class defines a generic binary tree structure.
+ * A {@code BiTree} implements a basic {@code BiArboreal}.
  *
  * @author Waffles
  * @since 03 Aug 2020
@@ -14,7 +14,7 @@ import waffles.utils.sets.arboreal.Tree;
  * @see BiArboreal
  * @see Tree
  */
-public class BiTree extends Tree implements BiArboreal.Mutable
+public abstract class BiTree extends Tree implements BiArboreal
 {
 	/**
 	 * A {@code BiTree.Factory} generates {@code BiNode} objects.
@@ -38,6 +38,13 @@ public class BiTree extends Tree implements BiArboreal.Mutable
 		public abstract BiTree Tree();
 	}
 	
+	
+	@Override
+	@Deprecated
+	public BiArboreal.Query<?> Query()
+	{
+		return null;
+	}
 			
 	@Override
 	public Factory Factory()

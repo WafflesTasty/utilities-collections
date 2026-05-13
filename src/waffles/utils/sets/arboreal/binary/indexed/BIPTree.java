@@ -2,7 +2,7 @@ package waffles.utils.sets.arboreal.binary.indexed;
 
 import waffles.utils.sets.arboreal.binary.BiTree;
 import waffles.utils.sets.indexed.IndexedSet;
-import waffles.utils.sets.utilities.rooted.iterators.binary.indexed.BIPNodes;
+import waffles.utils.sets.utilities.arboreal.iterators.binary.indexed.BIPNodes;
 
 /**
  * The {@code BIPTree} class defines a binary index partition tree.

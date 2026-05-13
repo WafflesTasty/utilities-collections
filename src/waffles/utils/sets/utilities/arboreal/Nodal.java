@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.rooted;
+package waffles.utils.sets.utilities.arboreal;
 
 /**
  * A {@code Nodal} object defines its own {@code Node}.

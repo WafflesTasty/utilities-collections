@@ -1,4 +1,4 @@
-package waffles.utils.sets.utilities.rooted.iterators.binary;
+package waffles.utils.sets.utilities.arboreal.iterators.binary;
 
 import java.util.ArrayDeque;
 import java.util.Deque;
