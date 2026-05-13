@@ -1,6 +1,7 @@
 package waffles.utils.sets.arboreal.arborus.order.nodal;
 
 import waffles.utils.sets.utilities.arboreal.Nodal;
+import waffles.utils.tools.patterns.properties.checks.Visibility;
 
 /**
  * An {@code OrderNodal} defines a {@code Nodal} with an integer order.
@@ -12,9 +13,10 @@ import waffles.utils.sets.utilities.arboreal.Nodal;
  * @version 1.1
  *
  * 
+ * @see Visibility
  * @see Nodal
  */
-public interface OrderNodal extends Nodal
+public interface OrderNodal extends Nodal, Visibility
 {
 	@Override
 	public abstract OrderNode Arch();

@@ -29,6 +29,7 @@ public class OrderNode extends Node implements OrderNodal, Ordered.Mutable
 	public OrderNode(OrderNodal n)
 	{
 		super(n);
+		order = 0;
 	}	
 	
 	/**
@@ -44,6 +45,12 @@ public class OrderNode extends Node implements OrderNodal, Ordered.Mutable
 	public OrderNode Arch()
 	{
 		return this;
+	}
+	
+	@Override
+	public boolean isVisible()
+	{
+		return true;
 	}
 	
 	@Override

@@ -35,7 +35,11 @@ public class OrderIterator<N extends OrderNodal> implements Iterator<N>
 		queue = new OrderQueue<>();
 		for(Nodal c : node.Children())
 		{
-			queue.push((N) c);
+			N child = (N) c;
+			if(child.isVisible())
+			{
+				queue.push(child);
+			}
 		}
 		
 		set = new SingleIterator<>(root);
