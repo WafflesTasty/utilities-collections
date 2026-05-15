@@ -26,14 +26,14 @@ public class OrderQueue<O extends OrderNodal> extends BSQueue<O>
 		{
 			int o1 = n1.Arch().Order();
 			int o2 = n2.Arch().Order();
-			int od = o2 - o1;
+			int od = o1 - o2;
 			
 			if(od == 0)
 			{
 				int i1 = n1.Arch().TreeIndex();
 				int i2 = n2.Arch().TreeIndex();
 				
-				return i2 - i1;
+				return i1 - i2;
 			}
 			
 			return od;

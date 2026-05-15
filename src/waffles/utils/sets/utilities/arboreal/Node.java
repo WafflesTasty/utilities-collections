@@ -168,7 +168,7 @@ public class Node extends Hierarchy implements Clearable, Nodal
 	}
 
 	/**
-	 * Replaces this node with a {@code Nodal}.
+	 * Replaces this node with a {@code Node}.
 	 * 
 	 * @param n  a replacement nodal
 	 * 
