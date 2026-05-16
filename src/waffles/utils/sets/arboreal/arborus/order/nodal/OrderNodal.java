@@ -1,5 +1,6 @@
 package waffles.utils.sets.arboreal.arborus.order.nodal;
 
+import waffles.utils.sets.utilities.Ordered;
 import waffles.utils.sets.utilities.arboreal.Nodal;
 import waffles.utils.tools.patterns.properties.checks.Visibility;
 
@@ -16,8 +17,20 @@ import waffles.utils.tools.patterns.properties.checks.Visibility;
  * @see Visibility
  * @see Nodal
  */
-public interface OrderNodal extends Nodal, Visibility
+public interface OrderNodal extends Nodal, Ordered.Mutable, Visibility
 {
 	@Override
 	public abstract OrderNode Arch();
+	
+	@Override
+	public default void setOrder(int ord)
+	{
+		Arch().setOrder(ord);
+	}
+	
+	@Override
+	public default int Order()
+	{
+		return Arch().Order();
+	}
 }
