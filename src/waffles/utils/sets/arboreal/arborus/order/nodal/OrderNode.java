@@ -14,7 +14,7 @@ import waffles.utils.sets.utilities.arboreal.Node;
  * @see OrderNodal
  * @see Ordered
  */
-public class OrderNode extends Node implements OrderNodal, Ordered.Mutable
+public class OrderNode extends Node implements OrderNodal
 {
 	private int order;
 	
