@@ -1,7 +1,7 @@
 package waffles.utils.sets;
 
 import waffles.utils.tools.patterns.basic.Clearable;
-import waffles.utils.tools.patterns.properties.counters.Countable;
+import waffles.utils.tools.patterns.properties.Countable;
 
 /**
  * A {@code CountableSet} contains a countable number of objects.
