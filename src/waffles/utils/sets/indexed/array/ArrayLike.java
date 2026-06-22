@@ -3,6 +3,7 @@ package waffles.utils.sets.indexed.array;
 import waffles.utils.sets.indexed.MutableIndex;
 import waffles.utils.sets.utilities.indexed.iterators.IndexKeys;
 import waffles.utils.sets.utilities.indexed.iterators.IndexValues;
+import waffles.utils.tools.patterns.properties.counters.data.Data;
 
 /**
  * An {@code ArrayLike} defines a generic array-like structure.
@@ -15,8 +16,9 @@ import waffles.utils.sets.utilities.indexed.iterators.IndexValues;
  * @param <A>  an array type
  * @param <O>  an object type
  * @see MutableIndex
+ * @see Data
  */
-public interface ArrayLike<A, O> extends MutableIndex<O>
+public interface ArrayLike<A, O> extends Data, MutableIndex<O>
 {	
 	/**
 	 * A {@code Wrapper} defines a wrapper around another {@code ArrayLike}.
@@ -100,6 +102,12 @@ public interface ArrayLike<A, O> extends MutableIndex<O>
 		return () -> new IndexValues<>(this, Ordering());
 	}
 	
+	
+	@Override
+	public default int DataSize()
+	{
+		return Count();
+	}
 	
 	@Override
 	public default void clear()
