@@ -5,6 +5,7 @@ import java.util.Iterator;
 import waffles.utils.sets.arboreal.arborus.order.nodal.OrderNodal;
 import waffles.utils.sets.utilities.arboreal.Nodal;
 import waffles.utils.sets.utilities.arboreal.Node;
+import waffles.utils.sets.utilities.ordered.OrderQueue.Route;
 import waffles.utils.tools.collections.iterators.SingleIterator;
 
 /**
@@ -28,11 +29,15 @@ public class OrderIterator<N extends OrderNodal> implements Iterator<N>
 	 * Creates a new {@code OrderIterator}.
 	 * 
 	 * @param root  a root nodal
+	 * @param r   an order route
+	 * 
+	 * 
+	 * @see Route
 	 */
-	public OrderIterator(N root)
-	{			
+	public OrderIterator(N root, Route r)
+	{
 		Node node = root.Arch();
-		queue = new OrderQueue<>();
+		queue = new OrderQueue<>(r);
 		for(Nodal c : node.Children())
 		{
 			N child = (N) c;
@@ -43,6 +48,16 @@ public class OrderIterator<N extends OrderNodal> implements Iterator<N>
 		}
 		
 		set = new SingleIterator<>(root);
+	}
+	
+	/**
+	 * Creates a new {@code OrderIterator}.
+	 * 
+	 * @param root  a root nodal
+	 */
+	public OrderIterator(N root)
+	{			
+		this(root, Route.INCREASING);
 	}
 
 	

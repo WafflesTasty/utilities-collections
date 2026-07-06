@@ -5,6 +5,7 @@ import java.util.Iterator;
 import waffles.utils.sets.arboreal.arborus.Arborus;
 import waffles.utils.sets.arboreal.arborus.order.nodal.OrderNodal;
 import waffles.utils.sets.utilities.ordered.OrderIterator;
+import waffles.utils.sets.utilities.ordered.OrderQueue.Route;
 
 /**
  * An {@code OrderBoreal} defines an {@code Arborus} with manual node ordering.
@@ -37,17 +38,32 @@ public interface OrderBoreal<N extends OrderNodal> extends Arborus<N>
 	public static interface Query<N extends OrderNodal> extends Arborus.Query<N>
 	{
 		/**
-		 * Iterates over the order of an {@code OrderBoreal}.
+		 * Iterates over the reverse of an {@code OrderBoreal}.
 		 * 
-		 * @param r  a root nodal
+		 * @param n  a root nodal
 		 * @return   a node iterator
 		 * 
 		 * 
 		 * @see Iterator
 		 */
-		public default Iterator<N> Order(N r)
+		public default Iterator<N> Reverse(N n)
 		{
-			return new OrderIterator<>(r);
+			return Order(n, Route.DECREASING);
+		}
+		
+		/**
+		 * Iterates over the order of an {@code OrderBoreal}.
+		 * 
+		 * @param n  a root nodal
+		 * @param r  an order route
+		 * @return   a node iterator
+		 * 
+		 * 
+		 * @see Iterator
+		 */
+		public default Iterator<N> Order(N n, Route r)
+		{
+			return new OrderIterator<>(n, r);
 		}
 		
 		
@@ -57,7 +73,7 @@ public interface OrderBoreal<N extends OrderNodal> extends Arborus<N>
 		@Override
 		public default Iterator<N> All()
 		{
-			return Order((N) Tree().Root());
+			return Order((N) Tree().Root(), Route.INCREASING);
 		}
 	}
 	
