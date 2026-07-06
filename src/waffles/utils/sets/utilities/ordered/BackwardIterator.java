@@ -6,10 +6,10 @@ import waffles.utils.sets.arboreal.arborus.order.nodal.OrderNodal;
 import waffles.utils.sets.utilities.arboreal.Nodal;
 import waffles.utils.sets.utilities.arboreal.Node;
 import waffles.utils.sets.utilities.ordered.OrderQueue.Route;
-import waffles.utils.tools.collections.iterators.SingleIterator;
+import waffles.utils.tools.collections.iterators.EmptyIterator;
 
 /**
- * An {@code OrderIterator} iterates over an {@code OrderBoreal} ascending.
+ * A {@code BackwardIterator} iterates over an {@code OrderNodal} in descending order.
  *
  * @author Waffles
  * @since May 6, 2026
@@ -20,24 +20,25 @@ import waffles.utils.tools.collections.iterators.SingleIterator;
  * @see OrderNodal
  * @see Iterator
  */
-public class OrderIterator<N extends OrderNodal> implements Iterator<N>
+public class BackwardIterator<N extends OrderNodal> implements Iterator<N>
 {
+	private N last, next;
 	private Iterator<N> set;
 	private OrderQueue<N> queue;
 	
 	/**
-	 * Creates a new {@code OrderIterator}.
+	 * Creates a new {@code BackwardIterator}.
 	 * 
 	 * @param root  a root nodal
-	 * @param r   an order route
 	 * 
 	 * 
 	 * @see Route
 	 */
-	public OrderIterator(N root, Route r)
+	public BackwardIterator(N root)
 	{
+		last = root;
 		Node node = root.Arch();
-		queue = new OrderQueue<>(r);
+		queue = new OrderQueue<>(Route.DECREASING);
 		for(Nodal c : node.Children())
 		{
 			N child = (N) c;
@@ -46,40 +47,46 @@ public class OrderIterator<N extends OrderNodal> implements Iterator<N>
 				queue.push(child);
 			}
 		}
-		
-		set = new SingleIterator<>(root);
-	}
-	
-	/**
-	 * Creates a new {@code OrderIterator}.
-	 * 
-	 * @param root  a root nodal
-	 */
-	public OrderIterator(N root)
-	{			
-		this(root, Route.INCREASING);
+
+		set = new EmptyIterator<>();
+		next = findNext();
 	}
 
+	
+	private N findNext()
+	{
+		if(set.hasNext())
+		{
+			return set.next();
+		}
+		
+		if(!queue.isEmpty())
+		{
+			N node = queue.pop();
+			set = new BackwardIterator<>(node);
+			return findNext();
+		}
+		
+		if(next != last)
+		{
+			next = last;
+			return next;
+		}
+		
+		return null;
+	}
 	
 	@Override
 	public boolean hasNext()
 	{
-		return set.hasNext();
+		return next != null;
 	}
 
 	@Override
 	public N next()
 	{
-		N curr = set.next();
-		if(!set.hasNext())
-		{
-			if(!queue.isEmpty())
-			{
-				N next = queue.pop();
-				set = new OrderIterator<>(next);
-			}
-		}
-		
+		N curr = next;
+		next = findNext();
 		return curr;
 	}
 }

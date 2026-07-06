@@ -67,19 +67,29 @@ public class OrderQueue<O extends OrderNodal> extends BSQueue<O>
 	{
 		super((n1, n2) -> 
 		{
-			int o1 = n1.Arch().Order();
-			int o2 = n2.Arch().Order();
+			int d1 = n1.Arch().Depth();
+			int d2 = n2.Arch().Depth();
 			
-			int od = r.Sign() * (o1 - o2);
-			if(od == 0)
+			int dd = r.Sign() * (d1 - d2);
+			
+			if(dd == 0)
 			{
-				int i1 = n1.Arch().TreeIndex();
-				int i2 = n2.Arch().TreeIndex();
+				int o1 = n1.Arch().Order();
+				int o2 = n2.Arch().Order();
 				
-				return r.Sign() * (i1 - i2);
+				int od = r.Sign() * (o1 - o2);
+				if(od == 0)
+				{
+					int i1 = n1.Arch().TreeIndex();
+					int i2 = n2.Arch().TreeIndex();
+					
+					return r.Sign() * (i1 - i2);
+				}
+				
+				return od;
 			}
 			
-			return od;
+			return dd;
 		});
 	}
 	

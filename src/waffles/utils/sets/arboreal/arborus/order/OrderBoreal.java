@@ -4,8 +4,8 @@ import java.util.Iterator;
 
 import waffles.utils.sets.arboreal.arborus.Arborus;
 import waffles.utils.sets.arboreal.arborus.order.nodal.OrderNodal;
-import waffles.utils.sets.utilities.ordered.OrderIterator;
-import waffles.utils.sets.utilities.ordered.OrderQueue.Route;
+import waffles.utils.sets.utilities.ordered.BackwardIterator;
+import waffles.utils.sets.utilities.ordered.ForwardIterator;
 
 /**
  * An {@code OrderBoreal} defines an {@code Arborus} with manual node ordering.
@@ -38,6 +38,20 @@ public interface OrderBoreal<N extends OrderNodal> extends Arborus<N>
 	public static interface Query<N extends OrderNodal> extends Arborus.Query<N>
 	{
 		/**
+		 * Iterates over the order of an {@code OrderBoreal}.
+		 * 
+		 * @param n  a root nodal
+		 * @return   a node iterator
+		 * 
+		 * 
+		 * @see Iterator
+		 */
+		public default Iterator<N> Order(N n)
+		{
+			return new ForwardIterator<>(n);
+		}
+		
+		/**
 		 * Iterates over the reverse of an {@code OrderBoreal}.
 		 * 
 		 * @param n  a root nodal
@@ -48,24 +62,9 @@ public interface OrderBoreal<N extends OrderNodal> extends Arborus<N>
 		 */
 		public default Iterator<N> Reverse(N n)
 		{
-			return Order(n, Route.DECREASING);
+			return new BackwardIterator<>(n);
 		}
-		
-		/**
-		 * Iterates over the order of an {@code OrderBoreal}.
-		 * 
-		 * @param n  a root nodal
-		 * @param r  an order route
-		 * @return   a node iterator
-		 * 
-		 * 
-		 * @see Iterator
-		 */
-		public default Iterator<N> Order(N n, Route r)
-		{
-			return new OrderIterator<>(n, r);
-		}
-		
+				
 		
 		@Override
 		public abstract OrderBoreal<N> Tree();
@@ -73,8 +72,21 @@ public interface OrderBoreal<N extends OrderNodal> extends Arborus<N>
 		@Override
 		public default Iterator<N> All()
 		{
-			return Order((N) Tree().Root(), Route.INCREASING);
+			return Order((N) Tree().Root());
 		}
+	}
+	
+	/**
+	 * Iterates over nodes in decreasing order.
+	 * 
+	 * @return  a reverse iterable
+	 * 
+	 * 
+	 * @see Iterable
+	 */
+	public default Iterable<N> ReverseOrder()
+	{
+		return () -> Query().Reverse((N) Root());
 	}
 	
 	
