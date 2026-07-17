@@ -17,4 +17,15 @@ public enum Activity
 	 * An idle object remains unused.
 	 */
 	IDLE;
+	
+	
+	/**
+	 * Toggles the {@code Activity}.
+	 * 
+	 * @return  an activity
+	 */
+	public Activity toggle()
+	{
+		return this == IDLE ? ACTIVE : IDLE;
+	}
 }
