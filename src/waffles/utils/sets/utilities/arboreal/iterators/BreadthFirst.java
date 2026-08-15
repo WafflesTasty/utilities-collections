@@ -30,7 +30,7 @@ public class BreadthFirst<N extends Nodal> implements Iterator<N>
 	public BreadthFirst(N base)
 	{
 		queue = new JavaDeque<>();
-		queue.pushFirst(base);
+		queue.pushHead(base);
 	}
 
 	
@@ -43,12 +43,12 @@ public class BreadthFirst<N extends Nodal> implements Iterator<N>
 	@Override
 	public N next()
 	{		
-		Nodal next = queue.popFirst();
+		Nodal next = queue.popHead();
 		for(Nodal c : next.Arch().Children())
 		{
 			if(c != null)
 			{
-				queue.pushLast(c);
+				queue.pushTail(c);
 			}
 		}
 		

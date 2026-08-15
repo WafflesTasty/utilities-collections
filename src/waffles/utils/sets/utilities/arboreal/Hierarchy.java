@@ -99,7 +99,7 @@ public class Hierarchy extends Collector implements Hierarchical
 		P node = (P) Root();
 		while(node != null)
 		{
-			q.pushFirst(node);
+			q.pushHead(node);
 			node = (P) node.Parent();
 		}
 		

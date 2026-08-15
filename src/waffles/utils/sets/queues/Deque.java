@@ -43,39 +43,39 @@ public interface Deque<O> extends IterableSet<O>
 		}
 		
 		@Override
-		public default void pushFirst(O obj)
+		public default void pushHead(O obj)
 		{
-			Delegate().pushFirst(obj);
+			Delegate().pushHead(obj);
 		}
 		
 		@Override
-		public default void pushLast(O obj)
+		public default void pushTail(O obj)
 		{
-			Delegate().pushLast(obj);
+			Delegate().pushTail(obj);
 		}
 		
 		@Override
-		public default O peekFirst()
+		public default O Head()
 		{
-			return Delegate().peekFirst();
+			return Delegate().Head();
 		}
 		
 		@Override
-		public default O peekLast()
+		public default O Tail()
 		{
-			return Delegate().peekLast();
+			return Delegate().Tail();
 		}
 		
 		@Override
-		public default O popFirst()
+		public default O popHead()
 		{
-			return Delegate().popFirst();
+			return Delegate().popHead();
 		}
 		
 		@Override
-		public default O popLast()
+		public default O popTail()
 		{
-			return Delegate().popLast();
+			return Delegate().popTail();
 		}
 		
 		@Override
@@ -110,37 +110,37 @@ public interface Deque<O> extends IterableSet<O>
 		}
 		
 		@Override
-		public default void pushFirst(O obj)
+		public default void pushHead(O obj)
 		{
 			Delegate().addFirst(obj);
 		}
 		
 		@Override
-		public default void pushLast(O obj)
+		public default void pushTail(O obj)
 		{
 			Delegate().addLast(obj);
 		}
 		
 		@Override
-		public default O peekFirst()
+		public default O Head()
 		{
 			return Delegate().peekFirst();
 		}
 		
 		@Override
-		public default O peekLast()
+		public default O Tail()
 		{
 			return Delegate().peekLast();
 		}
 		
 		@Override
-		public default O popFirst()
+		public default O popHead()
 		{
 			return Delegate().pollFirst();
 		}
 		
 		@Override
-		public default O popLast()
+		public default O popTail()
 		{
 			return Delegate().pollLast();
 		}
@@ -154,45 +154,46 @@ public interface Deque<O> extends IterableSet<O>
 	
 	
 	/**
-	 * Pushes an object to the start of the {@code Deque}.
+	 * Pushes an object to the head of the {@code Deque}.
 	 * 
 	 * @param obj  a queue object
 	 */
-	public abstract void pushFirst(O obj);
+	public abstract void pushHead(O obj);
 	
 	/**
-	 * Pushes an object to the end of the {@code Deque}.
+	 * Pushes an object to the tail of the {@code Deque}.
 	 * 
 	 * @param obj  a queue object
 	 */
-	public abstract void pushLast(O obj);
+	public abstract void pushTail(O obj);
 		
-	
+			
 	/**
-	 * Peeks at the start of the {@code Deque}.
+	 * Pops from the head of the {@code Deque}.
 	 * 
 	 * @return  the first queue object
 	 */
-	public abstract O peekFirst();
+	public abstract O popHead();
 	
 	/**
-	 * Peeks at the end of the {@code Deque}.
+	 * Pops from the tail of the {@code Deque}.
 	 * 
 	 * @return  the last queue object
 	 */
-	public abstract O peekLast();
-		
+	public abstract O popTail();
+
+
 	/**
-	 * Pops from the start of the {@code Deque}.
+	 * Returns the head of the {@code Deque}.
 	 * 
 	 * @return  the first queue object
 	 */
-	public abstract O popFirst();
+	public abstract O Head();
 	
 	/**
-	 * Pops from the end of the {@code Deque}.
+	 * Returns the tail of the {@code Deque}.
 	 * 
 	 * @return  the last queue object
 	 */
-	public abstract O popLast();
+	public abstract O Tail();
 }

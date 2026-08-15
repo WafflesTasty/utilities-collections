@@ -30,7 +30,7 @@ public class DepthFirst<N extends Nodal> implements Iterator<N>
 	public DepthFirst(N base)
 	{
 		queue = new JavaDeque<>();
-		queue.pushFirst(base);
+		queue.pushHead(base);
 	}
 
 	
@@ -43,12 +43,12 @@ public class DepthFirst<N extends Nodal> implements Iterator<N>
 	@Override
 	public N next()
 	{
-		Nodal next = queue.popFirst();
+		Nodal next = queue.popHead();
 		for(Nodal c : next.Arch().Children())
 		{
 			if(c != null)
 			{
-				queue.pushFirst(c);
+				queue.pushHead(c);
 			}
 		}
 		
