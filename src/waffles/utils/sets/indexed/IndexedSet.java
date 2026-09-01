@@ -19,6 +19,7 @@ import waffles.utils.tools.primitives.Array;
  * @see Coordination
  * @see CountableSet
  */
+@FunctionalInterface
 public interface IndexedSet<O> extends CountableSet, Coordination, DimensionalSet<O>
 {	
 	/**
