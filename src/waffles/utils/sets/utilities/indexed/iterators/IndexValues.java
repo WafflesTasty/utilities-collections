@@ -14,7 +14,7 @@ import waffles.utils.tools.primitives.Array;
  * @version 1.1
  *
  *
- * @param <O>  an index object type
+ * @param <O>  an object type
  * @see Iterator
  */
 public class IndexValues<O> implements Iterator<O>
@@ -27,90 +27,138 @@ public class IndexValues<O> implements Iterator<O>
 	/**
 	 * Creates a new {@code IndexValues}.
 	 * 
-	 * @param index  a target index
-	 * @param order  an index order
+	 * @param set  an indexed set
+	 * @param ord  an index order
 	 * 
 	 * 
 	 * @see IndexedSet
 	 */
-	public IndexValues(IndexedSet<O> index, Order order)
+	public IndexValues(IndexedSet<O> set, Order ord)
 	{
-		this(index, order, index.Minimum(), index.Maximum());
+		this(set, ord, set.Minimum(), set.Maximum());
 	}
 	
 	/**
 	 * Creates a new {@code IndexValues}.
 	 * 
-	 * @param index  a target index
-	 * @param order  an index order
+	 * @param set  an indexed set
+	 * @param ord  an index order
 	 * @param min  a minimum coordinate
 	 * @param max  a maximum coordinate
 	 * 
 	 * 
 	 * @see IndexedSet
 	 */
-	public IndexValues(IndexedSet<O> index, Order order, int[] min, int[] max)
+	public IndexValues(IndexedSet<O> set, Order ord, int[] min, int[] max)
 	{
-		this.index = index;
-		this.order = order;
-		
+		this.index = set;
+		this.order = ord;
+
 		this.min = min;
 		this.max = max;
 
-		validate();
-		if(next != null)
+		if(validate())
 		{
 			if(index.get(next) == null)
 			{
-				find();
-			}
+				next = findNext();
+			}			
 		}
 	}
 	
 	/**
 	 * Creates a new {@code IndexValues}.
 	 * 
-	 * @param index  a target index
+	 * @param set  an indexed set
 	 * @param min  a minimum coordinate
 	 * @param max  a maximum coordinate
 	 * 
 	 * 
 	 * @see IndexedSet
 	 */
-	public IndexValues(IndexedSet<O> index, int[] min, int[] max)
+	public IndexValues(IndexedSet<O> set, int[] min, int[] max)
 	{
-		this(index, Order.COL_MAJOR, min, max);
+		this(set, Order.COL_MAJOR, min, max);
 	}
 	
 	/**
 	 * Creates a new {@code IndexValues}.
 	 * 
-	 * @param index  a target index
+	 * @param set  an indexed set
 	 * 
 	 * 
 	 * @see IndexedSet
 	 */
-	public IndexValues(IndexedSet<O> index)
+	public IndexValues(IndexedSet<O> set)
 	{
-		this(index, Order.COL_MAJOR);
+		this(set, Order.COL_MAJOR);
 	}
 	
+
+	private int[] findNext()
+	{
+		switch(order)
+		{
+		case COL_MAJOR:
+			return findColMajor();
+		case ROW_MAJOR:
+			return findRowMajor();
+		default:
+			return null;
+		}
+	}
+	
+	private int[] findColMajor()
+	{
+		O obj = null;
+		while(obj == null)
+		{
+			for(int i = 0; i < index.Order(); i++)
+			{
+				next[i]++;
+				if(next[i] <= max[i])
+					break;
+				else
+				{
+					next[i] = min[i];
+					if(i == index.Order() - 1)
+					{
+						return null;
+					}
+				}
+			}
+			
+			obj = index.get(next);			
+		}
+
+		return next;
+	}
+	
+	private int[] findRowMajor()
+	{
+		O obj = null;
+		while(obj == null)
+		{
+			for(int i = index.Order()-1; i >= 0; i--)
+			{
+				next[i]++;
+				if(next[i] <= max[i])
+					break;
+				else
+				{
+					next[i] = min[i];
+					if(i == 0)
+					{
+						return null;
+					}
+				}
+			}
+			
+			obj = index.get(next);			
+		}
 		
-	@Override
-	public boolean hasNext()
-	{
-		return next != null;
+		return next;
 	}
-	
-	@Override
-	public O next()
-	{
-		O val = index.get(next);
-		find();
-		
-		return val;
-	}
-	
 	
 	private boolean validate()
 	{
@@ -126,65 +174,18 @@ public class IndexValues<O> implements Iterator<O>
 		next = Array.copy.of(min);
 		return true;
 	}
-	
-	private void findColMajor()
-	{
-		for(int i = 0; i < index.Order(); i++)
-		{
-			next[i]++;
-			if(next[i] <= max[i])
-				break;
-			else
-			{
-				next[i] = min[i];
-				if(i == index.Order() - 1)
-				{
-					next = null;
-					return;
-				}
-			}
-		}
 		
-		if(index.get(next) == null)
-		{
-			findColMajor();
-		}
+	@Override
+	public boolean hasNext()
+	{
+		return next != null;
 	}
 	
-	private void findRowMajor()
+	@Override
+	public O next()
 	{
-		for(int i = index.Order()-1; i >= 0; i--)
-		{
-			next[i]++;
-			if(next[i] <= max[i])
-				break;
-			else
-			{
-				next[i] = min[i];
-				if(i == 0)
-				{
-					next = null;
-					return;
-				}
-			}
-		}
-		
-		if(index.get(next) == null)
-		{
-			findRowMajor();
-		}
-	}
-	
-	private void find()
-	{
-		switch(order)
-		{
-		case COL_MAJOR:
-			findColMajor(); break;
-		case ROW_MAJOR:
-			findRowMajor(); break;
-		default:
-			break;
-		}
+		O obj = index.get(next);
+		next = findNext();
+		return obj;
 	}
 }
