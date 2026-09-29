@@ -118,7 +118,28 @@ public class BiNode extends Node implements BiNodal
 			replace(next);
 		}
 	}
-		
+
+	/**
+	 * Descends the {@code BiNode}.
+	 */
+	public void descend()
+	{
+		while(!isLeaf())
+		{
+			if(LChild() != null)
+			{
+				LChild().Arch().rotate();
+				continue;
+			}
+			
+			if(RChild() != null)
+			{
+				RChild().Arch().rotate();
+				continue;
+			}
+		}
+	}
+	
 	/**
 	 * Rotates the {@code BiNode}.
 	 */
@@ -129,16 +150,20 @@ public class BiNode extends Node implements BiNodal
 			return;
 		}
 
-		BiNode p = Parent().Arch();
-		if(Delegate().equals(p.LChild()))
-		{
-			replace(Parent());
+		BiNode p =   Parent().Arch();
+		BiNode g = p.Parent().Arch();
+		if(p == g.LChild())
+			g.setLChild(this);
+		else
+			g.setRChild(this);
+		
+		if(Delegate() == p.LChild())
+		{			
 			p.setLChild(RChild());
 			setRChild(Parent());
 			return;
 		}
-				
-		replace(Parent());
+		
 		p.setRChild(LChild());
 		setLChild(Parent());
 		return;

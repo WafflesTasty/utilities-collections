@@ -124,11 +124,11 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N
 			return null;
 		}
 				
-		IONode<O> node = Root();
+		N node = Root();
 		// Start checking from root...
 		while(node != null)
 		{
-			int comp = compare(obj, node.Value());
+			int comp = compare(obj, node);
 			
 			// The value has been found.
 			if(comp == 0)
@@ -146,7 +146,7 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N
 				}
 				
 				// ...so continue with its left child.
-				node = node.LChild();
+				node = (N) node.LChild();
 				continue;
 			}
 			
@@ -160,7 +160,7 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N
 				}
 				
 				// ...so continue with its right child.
-				node = node.RChild();
+				node = (N) node.RChild();
 				continue;
 			}
 		}
@@ -179,7 +179,22 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N
 	public void setBalance(Balance<N> bal)
 	{
 		balance = bal;
-	}	
+	}
+	
+	/**
+	 * Compares an object with a node in the {@code IOTree}.
+	 * Returns a negative integer, zero, or a positive
+	 * integer as the first argument is less than,
+	 * equal to, or greater than the second.
+	 * 
+	 * @param o1  a tree object
+	 * @param n2  a tree node
+	 * @return  a comparator
+	 */
+	public int compare(O o1, N n2)
+	{
+		return compare(o1, n2.Value());
+	}
 	
 	/**
 	 * Compares two nodes in the {@code IOTree}.
@@ -190,13 +205,10 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N
 	 * @param n1  a tree node
 	 * @param n2  a tree node
 	 * @return  a comparator
-	 * 
-	 * 
-	 * @see IONode
 	 */
-	public int compare(IONode<O> n1, IONode<O> n2)
+	public int compare(N n1, N n2)
 	{
-		return compare(n1.Value(), n2.Value());
+		return compare(n1.Value(), n2);
 	}
 	
 			
@@ -222,9 +234,9 @@ public class IOTree<N extends IONode<O>, O> extends BiTree implements Balanced<N
 			return false;
 		}
 		
+		N node = search(obj);
 		// Search the closest node...
-		IONode<O> node = search(obj);
-		int comp = compare(obj, node.Value());
+		int comp = compare(obj, node);
 		// And check if its value is equal.
 		return comp == 0;
 	}

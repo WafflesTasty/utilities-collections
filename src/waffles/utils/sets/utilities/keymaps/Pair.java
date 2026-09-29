@@ -1,6 +1,5 @@
 package waffles.utils.sets.utilities.keymaps;
 
-import waffles.utils.tools.patterns.properties.Immutable;
 import waffles.utils.tools.patterns.properties.values.Valuable;
 
 /**
@@ -13,10 +12,9 @@ import waffles.utils.tools.patterns.properties.values.Valuable;
  *
  * @param <K>  a key type
  * @param <V>  a value type
- * @see Immutable
  * @see Valuable
  */
-public interface Pair<K, V> extends Immutable, Valuable<V>
+public interface Pair<K, V> extends Valuable<V>
 {		
 	/**
 	 * A {@code Pair.Mutable} is a mutable implementation of a {@code Pair}.
@@ -28,9 +26,10 @@ public interface Pair<K, V> extends Immutable, Valuable<V>
 	 *
 	 * @param <K>  a key type
 	 * @param <V>  a value type
+	 * @see Valuable
 	 * @see Pair
 	 */
-	public static class Mutable<K, V> implements Immutable.Mutable, Pair<K, V>
+	public static class Mutable<K, V> implements Valuable.Mutable<V>, Pair<K, V>
 	{
 		private K key;
 		private V value;
@@ -52,6 +51,7 @@ public interface Pair<K, V> extends Immutable, Valuable<V>
 		 * 
 		 * @param v  a value object
 		 */
+		@Override
 		public void setValue(V v)
 		{
 			value = v;

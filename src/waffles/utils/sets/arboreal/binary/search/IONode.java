@@ -15,7 +15,7 @@ import waffles.utils.tools.patterns.properties.values.Valuable;
  * @see Valuable
  * @see BiNode
  */
-public class IONode<V> extends BiNode implements Valuable<V>
+public class IONode<V> extends BiNode implements Valuable.Mutable<V>
 {
 	private V value;
 
@@ -30,10 +30,35 @@ public class IONode<V> extends BiNode implements Valuable<V>
 	 */
 	public IONode(IOTree<?, V> tree, V val)
 	{
+		super(tree); setValue(val);
+	}
+
+	/**
+	 * Creates a new {@code IOTree}.
+	 * 
+	 * @param tree  a source tree
+	 * 
+	 * 
+	 * @see IOTree
+	 */
+	public IONode(IOTree<?, V> tree)
+	{
 		super(tree);
+	}
+	
+	
+	@Override
+	public void setValue(V val)
+	{
 		value = val;
 	}
 
+	@Override
+	public V Value()
+	{
+		return value;
+	}
+	
 
 	@Override
 	public IOTree<?, V> Set()
@@ -93,11 +118,5 @@ public class IONode<V> extends BiNode implements Valuable<V>
 	public IONode<V> Arch()
 	{
 		return this;
-	}
-
-	@Override
-	public V Value()
-	{
-		return value;
 	}
 }
