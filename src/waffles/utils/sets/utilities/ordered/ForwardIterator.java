@@ -40,9 +40,12 @@ public class ForwardIterator<N extends OrderNodal> implements Iterator<N>
 		for(Nodal c : node.Children())
 		{
 			N child = (N) c;
-			if(child.isVisible())
+			if(child != null)
 			{
-				queue.push(child);
+				if(child.isVisible())
+				{
+					queue.push(child);
+				}				
 			}
 		}
 		

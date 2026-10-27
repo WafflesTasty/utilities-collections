@@ -22,15 +22,11 @@ public class LongIndex implements LongArray
 	/**
 	 * Creates a new {@code LongIndex}.
 	 * 
-	 * @param ord  an index order
 	 * @param dat  an index data
-	 * @param dim  an index dimension
 	 */
-	public LongIndex(Order ord, long[] dat, int... dim)
+	public LongIndex(long... dat)
 	{
-		dimension = dim;
-		order = ord;
-		data = dat;
+		this(dat, dat.length);
 	}
 	
 	/**
@@ -44,6 +40,20 @@ public class LongIndex implements LongArray
 		this(Order.COL_MAJOR, dat, dim);
 	}
 	
+	/**
+	 * Creates a new {@code LongIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public LongIndex(Order ord, long[] dat, int... dim)
+	{
+		dimension = dim;
+		order = ord;
+		data = dat;
+	}
+		
 	/**
 	 * Creates a new {@code LongIndex}.
 	 * 

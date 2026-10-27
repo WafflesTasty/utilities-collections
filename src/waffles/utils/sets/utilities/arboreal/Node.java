@@ -106,18 +106,18 @@ public class Node extends Hierarchy implements Clearable, Nodal
 		{
 			Node a = n.Arch();
 			Nodal d = Delegate();
+			a.setParent(d);
+			
 			for(int k = 0; k < chld.length; k++)
 			{
 				if(chld[k] == null)
 				{
-					a.setParent(d);
 					chld[k] = n;
 					return;
 				}
 			}
 			
 			chld = Array.add.to(chld, n);
-			a.setParent(d);
 		}
 	}
 		

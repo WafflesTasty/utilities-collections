@@ -22,15 +22,11 @@ public class FloatIndex implements FloatArray
 	/**
 	 * Creates a new {@code FloatIndex}.
 	 * 
-	 * @param ord  an index order
 	 * @param dat  an index data
-	 * @param dim  an index dimension
 	 */
-	public FloatIndex(Order ord, float[] dat, int... dim)
+	public FloatIndex(float... dat)
 	{
-		order = ord;
-		dimension = dim;
-		data = dat;
+		this(dat, dat.length);
 	}
 	
 	/**
@@ -44,6 +40,20 @@ public class FloatIndex implements FloatArray
 		this(Order.COL_MAJOR, dat, dim);
 	}
 	
+	/**
+	 * Creates a new {@code FloatIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public FloatIndex(Order ord, float[] dat, int... dim)
+	{
+		order = ord;
+		dimension = dim;
+		data = dat;
+	}
+		
 	/**
 	 * Creates a new {@code FloatIndex}.
 	 * 

@@ -18,6 +18,17 @@ public class IntegerIndex implements IntegerArray
 	private Order order;
 	private int[] dimension;
 	private int[] data;
+
+	/**
+	 * Creates a new {@code IntegerIndex}.
+	 * 
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public IntegerIndex(int[] dat, int... dim)
+	{
+		this(Order.COL_MAJOR, dat, dim);
+	}
 	
 	/**
 	 * Creates a new {@code IntegerIndex}.
@@ -32,18 +43,7 @@ public class IntegerIndex implements IntegerArray
 		order = ord;
 		data = dat;
 	}
-	
-	/**
-	 * Creates a new {@code IntegerIndex}.
-	 * 
-	 * @param dat  an index data
-	 * @param dim  an index dimension
-	 */
-	public IntegerIndex(int[] dat, int... dim)
-	{
-		this(Order.COL_MAJOR, dat, dim);
-	}
-	
+		
 	/**
 	 * Creates a new {@code IntegerIndex}.
 	 * 

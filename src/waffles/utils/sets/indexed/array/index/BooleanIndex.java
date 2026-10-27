@@ -22,15 +22,11 @@ public class BooleanIndex implements BooleanArray
 	/**
 	 * Creates a new {@code BooleanIndex}.
 	 * 
-	 * @param ord  an index order
 	 * @param dat  an index data
-	 * @param dim  an index dimension
 	 */
-	public BooleanIndex(Order ord, boolean[] dat, int... dim)
+	public BooleanIndex(boolean... dat)
 	{
-		dimension = dim;
-		order = ord;
-		data = dat;
+		this(dat, dat.length);
 	}
 	
 	/**
@@ -44,6 +40,20 @@ public class BooleanIndex implements BooleanArray
 		this(Order.COL_MAJOR, dat, dim);
 	}
 	
+	/**
+	 * Creates a new {@code BooleanIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public BooleanIndex(Order ord, boolean[] dat, int... dim)
+	{
+		dimension = dim;
+		order = ord;
+		data = dat;
+	}
+		
 	/**
 	 * Creates a new {@code BooleanIndex}.
 	 * 

@@ -22,6 +22,17 @@ public class ObjectIndex<O> implements ObjectArray<O>
 	/**
 	 * Creates a new {@code ObjectIndex}.
 	 * 
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public ObjectIndex(Object[] dat, int... dim)
+	{
+		this(Order.COL_MAJOR, dat, dim);
+	}
+	
+	/**
+	 * Creates a new {@code ObjectIndex}.
+	 * 
 	 * @param ord  an index order
 	 * @param dat  an index data
 	 * @param dim  an index dimension
@@ -32,18 +43,7 @@ public class ObjectIndex<O> implements ObjectArray<O>
 		order = ord;
 		data = dat;
 	}
-	
-	/**
-	 * Creates a new {@code ObjectIndex}.
-	 * 
-	 * @param dat  an index data
-	 * @param dim  an index dimension
-	 */
-	public ObjectIndex(Object[] dat, int... dim)
-	{
-		this(Order.COL_MAJOR, dat, dim);
-	}
-	
+		
 	/**
 	 * Creates a new {@code ObjectIndex}.
 	 * 

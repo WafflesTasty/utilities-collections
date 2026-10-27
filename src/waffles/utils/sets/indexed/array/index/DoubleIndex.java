@@ -22,15 +22,11 @@ public class DoubleIndex implements DoubleArray
 	/**
 	 * Creates a new {@code DoubleIndex}.
 	 * 
-	 * @param ord  an index order
 	 * @param dat  an index data
-	 * @param dim  an index dimension
 	 */
-	public DoubleIndex(Order ord, double[] dat, int... dim)
+	public DoubleIndex(double... dat)
 	{
-		dimension = dim;
-		order = ord;
-		data = dat;
+		this(dat, dat.length);
 	}
 	
 	/**
@@ -44,6 +40,20 @@ public class DoubleIndex implements DoubleArray
 		this(Order.COL_MAJOR, dat, dim);
 	}
 	
+	/**
+	 * Creates a new {@code DoubleIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public DoubleIndex(Order ord, double[] dat, int... dim)
+	{
+		dimension = dim;
+		order = ord;
+		data = dat;
+	}
+		
 	/**
 	 * Creates a new {@code DoubleIndex}.
 	 * 

@@ -22,15 +22,11 @@ public class ShortIndex implements ShortArray
 	/**
 	 * Creates a new {@code ShortIndex}.
 	 * 
-	 * @param ord  an index order
 	 * @param dat  an index data
-	 * @param dim  an index dimension
 	 */
-	public ShortIndex(Order ord, short[] dat, int... dim)
+	public ShortIndex(short... dat)
 	{
-		dimension = dim;
-		order = ord;
-		data = dat;
+		this(dat, dat.length);
 	}
 	
 	/**
@@ -44,6 +40,20 @@ public class ShortIndex implements ShortArray
 		this(Order.COL_MAJOR, dat, dim);
 	}
 	
+	/**
+	 * Creates a new {@code ShortIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public ShortIndex(Order ord, short[] dat, int... dim)
+	{
+		dimension = dim;
+		order = ord;
+		data = dat;
+	}
+		
 	/**
 	 * Creates a new {@code ShortIndex}.
 	 * 

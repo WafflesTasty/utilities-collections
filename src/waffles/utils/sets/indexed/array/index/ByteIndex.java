@@ -22,15 +22,11 @@ public class ByteIndex implements ByteArray
 	/**
 	 * Creates a new {@code ByteIndex}.
 	 * 
-	 * @param ord  an index order
 	 * @param dat  an index data
-	 * @param dim  an index dimension
 	 */
-	public ByteIndex(Order ord, byte[] dat, int... dim)
+	public ByteIndex(byte... dat)
 	{
-		dimension = dim;
-		order = ord;
-		data = dat;
+		this(dat, dat.length);
 	}
 	
 	/**
@@ -44,6 +40,20 @@ public class ByteIndex implements ByteArray
 		this(Order.COL_MAJOR, dat, dim);
 	}
 	
+	/**
+	 * Creates a new {@code ByteIndex}.
+	 * 
+	 * @param ord  an index order
+	 * @param dat  an index data
+	 * @param dim  an index dimension
+	 */
+	public ByteIndex(Order ord, byte[] dat, int... dim)
+	{
+		dimension = dim;
+		order = ord;
+		data = dat;
+	}
+		
 	/**
 	 * Creates a new {@code ByteIndex}.
 	 * 
